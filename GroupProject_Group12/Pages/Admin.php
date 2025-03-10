@@ -27,23 +27,23 @@
                 <div class="panel-heading" style = "text-decoration-line: underline">Create New User:</div>
                 <div class="panel-body" style = "color: white;">
                     
-                    <form style = "text-align: left;" action = "#">
+                    <form style = "text-align: left; height: 300px" action = "#">
                         <div style = "float : left; flex-direction: column; display: flex">
-                            <div style = "float : left; margin-top: 10px">
+                            <div style = "float : left; margin-top: 25px">
                                 <label for = "Email">Email Address:</label>
                                 <input type="text" id = "email"  name = "Email">
                             </div>
-                            <div style = "float : left; margin-top: 10px">
+                            <div style = "float : left; margin-top: 25px">
                                 <label for = "Password">Password:</label>
                                 <input type="password" id = "Password"  name = "Password">
                             </div>
-                            <div style = "float : left; margin-top: 10px; margin-bottom: 10px">
+                            <div style = "float : left; margin-top: 25px; margin-bottom: 25px">
                                 <label for = "ConPass">Confirm Password:</label>
                                 <input type="password" id = "ConPass"  name = "ConPass">
                             </div>                           
                         </div>
 
-                        <div style = "float : right; flex-direction: column; display: flex">
+                        <div style = "float : right; flex-direction: column; display: flex; height: 295px; position: relative;">
                             <div style = "float : left; margin-top: 10px">
                                 <input class = "form-check-input" type = "radio" id = "Network User" value = "Network User">
                                 <label class = "form-check-label" for = "Network User">Network User </label> 
@@ -54,15 +54,14 @@
                                 <label class = "form-check-label" for = "City Council User">City Council User </label> 
                             </div> 
                             
-                            <div>
-                                <button class = "btn"  type = "Submit">Add User</button> 
+                            <div style = "position: absolute; bottom: 0; right: 0">
+                                <button class = "btn btn-light"  type = "Submit">Add User</button> 
                             </div>                             
                         </div>
                         
                         
 
                     </form>
-
                 </div>
         
             
