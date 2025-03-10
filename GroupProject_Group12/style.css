@@ -1,5 +1,4 @@
 /* ================= GENERAL FORMATTING ================= */
-
 body {
     letter-spacing: 0.5px;
     color: #ffffff;
@@ -8,62 +7,29 @@ body {
 }
 
 h2 {
-  color: #ffffff;
-  text-decoration-line: underline;
+    color: #ffffff;
+    text-decoration-line: underline;
 }
 
 .navbar {
-    color: #363b9e
+    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
+    z-index: 2;
+    width: 100%;
 }
 
 /* Panel styling */
-.panel {
-  margin-bottom: 20px;
-  background: linear-gradient(to top right, #2a2d5b7b, rgba(82, 51, 99, 0.42));
-  border: 1px solid transparent;
-  border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  width: 40%;
-  float: left;
-  margin-left: 16px
-}
-
-.panel-body {
-  padding: 15px;
-}
-
-.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.panel-title {
-  margin: 0;
-  font-size: 16px;
-  color: inherit;
-}
-
-.panel-footer {
-  padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.container {
-  margin: 16px
+.card {
+    margin: 12px;
+    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
 }
 
 /* Responsive Styling */
 @media (max-width: 768px) {
-  .panel-body { padding: 10px; }
-  .panel-heading, .panel-footer { padding: 8px 12px; }
+    .panel-body { padding: 10px; }
+    .panel-heading, .panel-footer { padding: 8px 12px; }
 }
 
-/* Sidebar */
+/* ================= SIDEBAR ================= */
 .sidebar {
     height: 100%;
     width: 0;
@@ -71,7 +37,7 @@ h2 {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     overflow-x: hidden;
     padding-top: 60px;
 }
@@ -84,11 +50,10 @@ h2 {
     display: block;
     transition: 0.3s;
 }
-  
 .sidebar a:hover {
     color: #f1f1f1;
 }
-  
+
 .sidebar .closebtn {
     position: absolute;
     top: 0;
@@ -96,34 +61,21 @@ h2 {
     font-size: 36px;
     margin-left: 48px;
 }
-  
+
 .openbtn {
     font-size: 20px;
     cursor: pointer;
-    background-color: #111;
-    color: white;
     padding: 10px 15px;
     border: none;
-}
-  
-.openbtn:hover {
-    background-color: #444;
-}
-  
-#main {
-    transition: margin-left 5s;
-    padding: 16px;
-}
-
-#testing {
-    transition: 0.5s;
-    padding: 16px;
-
 }
 
 #mySidebar {
     transition: 0.5s;
-    
-    margin-top: 48px;
 }
 
+/* ================= OTHER STUFF ================= */
+
+#testing {
+    transition: 0.5s;
+    margin: 48px;
+}

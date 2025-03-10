@@ -12,7 +12,7 @@
 
 
 
-<nav class="navbar" style="z-index: 2; background-color: #363b9e; width: 100%;">           
+<nav class="navbar">           
     <button style="float: left; margin-left: 15px" 
         class="navbar-toggler" 
         onclick="toggleNav()">
@@ -32,16 +32,16 @@
     <div class="sidebar" id="mySidebar">
         <ul style="list-style-type: none; width: 30px;">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="../index.php">Dashboard</a>
+                <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/index.php">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Pages\City.php">City</a>
+                <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/pages/city.php">City</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Pages\Network.php">Network</a>
+                <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/pages/network.php">Network</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Pages\Admin.php">Admin</a>
+                <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/pages/admin.php">Admin</a>
             </li>
         </ul>
 
