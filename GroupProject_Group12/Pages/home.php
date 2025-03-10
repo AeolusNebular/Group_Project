@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../javascripts/sidebar.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>  
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
@@ -14,9 +12,11 @@
     <!-- Navbar -->
     <?php include("navbar.php"); ?>
     
-    <script>drawChart()</script>
-    
-    
+    <script>
+        drawChart();
+    </script>
+
+         
     <div id="leftwallanim"></div>
     <div id="rightwallanim"></div>
     
@@ -29,7 +29,7 @@
             <h2>Panels with Contextual Classes</h2>
         </div>
 
-
+        
         <div class="panel-group">
 
             <div class="panel panel-default">
@@ -66,9 +66,7 @@
 
         </div>
     </div>
-
-</div>
-
+   
 </body>
 
 </html>
