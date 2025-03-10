@@ -28,8 +28,8 @@
 </nav>
 
 
-<nav id="main">
-    <div class="sidebar" id="mySidebar">
+<nav id="main" style = "position: relative">
+    <div class="sidebar" id="mySidebar"  >
         <ul style="list-style-type: none; width: 30px;">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/index.php">Dashboard</a>
@@ -44,12 +44,12 @@
                 <a class="nav-link active" aria-current="page" href="/GroupProject_Group12/pages/admin.php">Admin</a>
             </li>
         </ul>
-
-        <button style='position: absolute; bottom: 0' type='Button' onclick="Login()">Login</button>
+        
+        <div style="position: absolute; bottom: 50px; right: 15px;">
+            <button  type='button' class = "btn btn-outline-light" style = "border-radius: 25px" onclick="Login()">Login</button>
+        </div>
     </div>
 </nav>
-
-
 
 </body>
 </html>

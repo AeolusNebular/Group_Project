@@ -23,7 +23,8 @@
         
 
         <div style = "color" class="panel-group">
-            <div  style = "margin-top: 25px; text-align: center; color: white"class="panel panel-default">
+
+            <div  style = "margin-top: 25px; text-align: center; color: white; width: 45%"class="panel panel-default">
                 <div class="panel-heading" style = "text-decoration-line: underline">Create New User:</div>
                 <div class="panel-body" style = "color: white;">
                     
