@@ -7,6 +7,11 @@ body {
     transition: background 0.4s, color 0.4s;
 }
 
+h2 {
+  color: #ffffff;
+  text-decoration-line: underline;
+}
+
 .navbar {
     color: #363b9e
 }

@@ -11,7 +11,7 @@
 
 <body>
 
-    <!-- Navbar -->
+    <!-- Loads Home.php AKA Root File -->
     <?php include("pages/home.php"); ?>
     
 </body>
