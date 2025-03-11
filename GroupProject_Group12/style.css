@@ -17,6 +17,11 @@ h2 {
     text-decoration-line: underline;
 }
 
+.dark-mode h2 {
+    color: #000000;
+    text-decoration-line: underline;
+}
+
 .navbar {
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     z-index: 2;
@@ -28,7 +33,7 @@ h2 {
     margin: 12px;
     width: 100%;
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
-    color: #ffd8d8;
+    color: #ffffff;
 }
 .dark-mode .card {
     color: #1f073f;
@@ -49,21 +54,39 @@ h2 {
     z-index: 1;
     top: 0;
     left: 0;
-    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
+    background: linear-gradient(to top right, #2a2d5bdb, rgba(80, 50, 100, 0.863));
     overflow-x: hidden;
     padding-top: 60px;
+}
+
+.dark-mode .sidebar {
+    
+    background: linear-gradient(to top right, #c3c3e7cb, #e6c7e6bd);
+    
+    
 }
   
 .sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #e2e2e2;
     display: block;
     transition: 0.3s;
 }
+
+.dark-mode .sidebar a {
+    
+    color: #414141;
+    
+}
 .sidebar a:hover {
-    color: #f1f1f1;
+    text-decoration-line: underline;
+    color: #e2e2e2;
+}
+
+.dark-mode .sidebar a:hover {
+    color: #414141;
 }
 
 .sidebar .closebtn {
