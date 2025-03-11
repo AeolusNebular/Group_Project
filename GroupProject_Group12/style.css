@@ -6,6 +6,12 @@ body {
     transition: background 0.4s, color 0.4s;
 }
 
+.dark-mode {
+    background: linear-gradient(to top right, #c6f2b3, #1e0025);
+    color: #000000;
+}
+
+
 h2 {
     color: #ffffff;
     text-decoration-line: underline;
