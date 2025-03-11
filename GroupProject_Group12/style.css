@@ -28,10 +28,11 @@ h2 {
     margin: 12px;
     width: 100%;
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
+    color: #ffd8d8;
 }
-.card.dark-mode {
-    background: linear-gradient(to top right, #e1e3ff, #fbebff);
-    color: #000000;
+.dark-mode .card {
+    color: #1f073f;
+    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
 }
 
 /* Responsive Styling */
