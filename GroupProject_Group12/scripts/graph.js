@@ -27,8 +27,8 @@ function drawChart() {
             datasets: [{
                 label: "Energy Usage",
                 data: [1000, 1170, 660, 1030],
-                borderColor: "#42A5F5",
-                backgroundColor: "rgba(66, 165, 245, 0.2)",
+                borderColor: "rgba(150, 90, 225, 1)",
+                backgroundColor: "rgba(150, 90, 225, 1)",
                 tension: 0.4
             }]
         },
