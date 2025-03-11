@@ -50,7 +50,7 @@
                     <div class="card-header">Create New User</div>
                     <div class="card-body">
                         <form id = "AdminPanelForm" action = "#">
-
+                            
                             <div id = "AdminPanelFormContent">
                                 <div id = "AdminPanelFormContentInputs">
                                     <label for = "Email">Email Address:</label>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
     
