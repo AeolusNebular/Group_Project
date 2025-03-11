@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
 
     <title>Admin - Smart Energy Dashboard</title>
 </head>
@@ -17,34 +24,34 @@
     
     <div id="testing">
     
-        <div style = "text-align: center">
+        <div id = "AdminHeading">
             <h2>Admin Page:</h2>
         </div>
         
-        <div style = "color" class="panel-group">
+        <div class="panel-group">
         
-            <div  style = "margin-top: 25px; text-align: center; color: white; width: 45%"class="panel panel-default">
-                <div class="panel-heading" style = "text-decoration-line: underline">Create New User:</div>
-                <div class="panel-body" style = "color: white;">
+            <div  id = "AdminPanel" class="panel panel-default">
+                <div class="panel-heading" id = "AdminPanelHeading">Create New User:</div>
+                <div class="panel-body" id = "AdminPanelBody">
                     
-                    <form style = "text-align: left; height: 300px" action = "#">
-                        <div style = "float : left; flex-direction: column; display: flex">
-                            <div style = "float : left; margin-top: 25px">
+                    <form id = "AdminPanelForm" action = "#">
+                        <div id = "AdminPanelFormContent">
+                            <div id = "AdminPanelFormContentInputs">
                                 <label for = "Email">Email Address:</label>
                                 <input type="text" id = "email"  name = "Email">
                             </div>
-                            <div style = "float : left; margin-top: 25px">
+                            <div id = "AdminPanelFormContentInputs">
                                 <label for = "Password">Password:</label>
                                 <input type="password" id = "Password"  name = "Password">
                             </div>
-                            <div style = "float : left; margin-top: 25px; margin-bottom: 25px">
+                            <div id = "AdminPanelFormContentInputs" style = "margin-bottom: 25px;">
                                 <label for = "ConPass">Confirm Password:</label>
                                 <input type="password" id = "ConPass"  name = "ConPass">
                             </div>
                         </div>
                         
-                        <div style = "float : right; flex-direction: column; display: flex; height: 295px; position: relative;">
-                            <div style = "float : left; margin-top: 10px">
+                        <div id = "AdminPanelFormRigth">
+                            <div style = "margin-top: 10px">
                                 <input class = "form-check-input" type = "radio" id = "Network User" value = "Network User">
                                 <label class = "form-check-label" for = "Network User">Network User </label> 
                             </div>
@@ -54,7 +61,7 @@
                                 <label class = "form-check-label" for = "City Council User">City Council User </label> 
                             </div> 
                             
-                            <div style = "position: absolute; bottom: 0; right: 0">
+                            <div id = "AdminPanelAddUserBtn">
                                 <button class = "btn btn-light"  type = "Submit">Add User</button> 
                             </div>
                         </div>

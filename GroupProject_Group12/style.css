@@ -114,9 +114,56 @@ h2 {
     height: 400px; /* Ensure it has height */
 }
 
+/* ================= Admin styles ================= */
 
+#AdminHeading {
+    text-align: center;
+}
 
+#AdminPanel {
+    margin-top: 25px;
+    text-align: center;
+    color: white; 
+    width: 45%;
+}
 
+#AdminPanelHeading {
+    text-decoration-line: underline;
+}
+
+#AdminPanelBody {
+    color: white;
+}
+
+#AdminPanelFormLeft {
+    text-align: left;
+    height: 300px;
+}
+
+#AdminPanelFormContent {
+    float : left;
+    flex-direction: column;
+    display: flex;
+}
+
+#AdminPanelFormContentInputs {
+    float : left;
+    margin-top: 25px;
+}
+
+#AdminPanelFormRigth {
+    float : right;
+    flex-direction: column; 
+    display: flex; 
+    height: 295px; 
+    position: relative;
+}
+
+#AdminPanelAddUserBtn {
+    position: absolute; 
+    bottom: 0; 
+    right: 0;
+}
 /* ================= Network styles ================= */
 
 #citychart {

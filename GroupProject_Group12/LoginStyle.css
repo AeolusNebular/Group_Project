@@ -1,0 +1,20 @@
+#Login_Body {
+    margin: auto;
+    background-image: url('../GroupProject_Group12/Images/Login_BackgroundV2.jpg');
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center; 
+}
+
+#Login_Content {
+    width: 100%;
+    height: 100%; 
+    background-color:rgba(255,255,255,0.5); 
+    color: black; border: 1px solid gray; 
+    border-radius: 16px; 
+    padding: 25px; 
+}
+
+#LoginDiv {
+    align-content: center;
+}
