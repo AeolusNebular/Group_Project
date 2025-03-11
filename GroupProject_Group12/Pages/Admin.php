@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <script src="../scripts/sidebar.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <title>Admin Page</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Admin - Smart Energy Dashboard</title>
+    
+    <script src="../GroupProject_Group12/scripts/sidebar.js"></script>
+    <script src="../GroupProject_Group12/scripts/graph.js"></script>
 </head>
+
 <body>
-  
+    
     <!-- Navbar -->
     <?php include("../navbar.php"); ?>
     
-
-    <div id="testing" style="margin-left: 48px;">
-
+    <div id="testing">
+    
         <div style = "text-align: center">
-            <h2 style = "color: white">Admin Page:</h2>
+            <h2>Admin Page:</h2>
         </div>
-
         
-
         <div style = "color" class="panel-group">
-
+        
             <div  style = "margin-top: 25px; text-align: center; color: white; width: 45%"class="panel panel-default">
                 <div class="panel-heading" style = "text-decoration-line: underline">Create New User:</div>
                 <div class="panel-body" style = "color: white;">
@@ -41,15 +48,15 @@
                             <div style = "float : left; margin-top: 25px; margin-bottom: 25px">
                                 <label for = "ConPass">Confirm Password:</label>
                                 <input type="password" id = "ConPass"  name = "ConPass">
-                            </div>                           
+                            </div>
                         </div>
-
+                        
                         <div style = "float : right; flex-direction: column; display: flex; height: 295px; position: relative;">
                             <div style = "float : left; margin-top: 10px">
                                 <input class = "form-check-input" type = "radio" id = "Network User" value = "Network User">
                                 <label class = "form-check-label" for = "Network User">Network User </label> 
-                            </div> 
-
+                            </div>
+                            
                             <div>
                                 <input class = "form-check-input" type = "radio" id = "City Council User" value = "City Council User"> 
                                 <label class = "form-check-label" for = "City Council User">City Council User </label> 
@@ -57,22 +64,16 @@
                             
                             <div style = "position: absolute; bottom: 0; right: 0">
                                 <button class = "btn btn-light"  type = "Submit">Add User</button> 
-                            </div>                             
+                            </div>
                         </div>
                         
-                        
-
                     </form>
                 </div>
-        
-            
+                
             </div>
         </div>
-
-
+        
     </div>
-
+    
 </body>
-
-
 </html>
