@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Admin - Smart Energy Dashboard</title>
-    
-    <script src="../GroupProject_Group12/scripts/sidebar.js"></script>
-    <script src="../GroupProject_Group12/scripts/graph.js"></script>
 </head>
 
 <body>
@@ -76,8 +68,8 @@
             <div style = "position: absolute; bottom: 345px; right: 0; height: 325px; margin-top: 25px; text-align: center; color: white; width: 45%; border: 1px solid; border-radius: 16px;" class="panel panel-default">
                 <div class="panel-heading" style = "text-decoration-line: underline">Delete User:</div>
                 <div class="panel-body"></div>
+            </div>
 
-        
         </div>
         
     </div>
