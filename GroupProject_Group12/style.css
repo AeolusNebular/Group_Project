@@ -39,6 +39,9 @@ h2 {
     color: #1f073f;
     background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
 }
+.dark-mode h2 {
+    color: #1f073f;
+}
 
 /* Responsive Styling */
 @media (max-width: 768px) {
