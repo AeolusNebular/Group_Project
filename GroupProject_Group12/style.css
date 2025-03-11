@@ -11,12 +11,10 @@ body {
     color: #000000;
 }
 
-
 h2 {
     color: #ffffff;
     text-decoration-line: underline;
 }
-
 .dark-mode h2 {
     color: #000000;
     text-decoration-line: underline;
@@ -61,12 +59,8 @@ h2 {
     overflow-x: hidden;
     padding-top: 60px;
 }
-
 .dark-mode .sidebar {
-    
     background: linear-gradient(to top right, #c3c3e7cb, #e6c7e6bd);
-    
-    
 }
   
 .sidebar a {
@@ -77,17 +71,14 @@ h2 {
     display: block;
     transition: 0.3s;
 }
-
 .dark-mode .sidebar a {
-    
     color: #414141;
-    
 }
+
 .sidebar a:hover {
     text-decoration-line: underline;
     color: #e2e2e2;
 }
-
 .dark-mode .sidebar a:hover {
     color: #414141;
 }
@@ -112,12 +103,13 @@ h2 {
 }
 
 /* ================= OTHER STUFF ================= */
-
 #testing {
     transition: 0.5s;
     margin: 48px;
 }
 
-
-
-/* ================= FOOTER ================= */
+/* ================= CHART ================= */
+#myChart {
+    width: 100%;
+    height: 400px; /* Ensure it has height */
+}
