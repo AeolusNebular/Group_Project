@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Google Charts -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>  
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Home - Smart Energy Dashboard</title>
 
@@ -38,17 +38,17 @@
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">📊 Energy Chart</div>
-                    <div class="card-body">
-                        <div id="myChart" style="width:100%; height:350px;"></div>
+                    <div class="card-body" style="height:350px;">
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Side panel (thin) -->
             <div class="col-12 col-md-4">
-                <div class="card" style="height:95%;">
+                <div class="card">
                     <div class="card-header">⚡ Latest Energy Stats</div>
-                    <div class="card-body">
+                    <div class="card-body" style="height:350px;">
                         <p><strong>Usage:</strong> 1,250 kWh</p>
                         <p><strong>Efficiency:</strong> 85%</p>
                         <p><strong>Cost:</strong> £120</p>

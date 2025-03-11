@@ -1,4 +1,7 @@
 function toggledarklight() {
-    var element = document.body;
-    element.classList.toggle("dark-mode");
-  }
+    document.body.classList.toggle("dark-mode");
+    isDarkMode = document.body.classList.contains("dark-mode");
+    setTimeout(() => {
+        drawChart(); // 🔄 Ensure chart updates AFTER state change
+    }, 10);
+}
