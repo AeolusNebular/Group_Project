@@ -23,9 +23,7 @@
     <!-- Navbar -->
     <?php include("navbar.php"); ?>
 
-    <!-- Unsure what these are? (MARK??) -->
-    <div class="sidebar" id="leftwallanim"></div>
-    <div class="sidebar" id="rightwallanim"></div>
+   
 
     <!-- Dashboard Content -->
     <div class="container mt-4" id="testing">
