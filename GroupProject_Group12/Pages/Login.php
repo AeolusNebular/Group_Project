@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" style = "height: 100%; display: grid;">
+<html lang="en-gb" style = "height: 100%; display: grid;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
-    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/Loginstyle.css">
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/login.css">
 
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/Login_Modal.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
 
-    <title>Login Page</title>
+    <title>Login - Smart Energy Dashboard</title>
 </head>
+
 <body id = "Login_Body">
     
-
-  <!-- Modal content -->
-  <div class = "container-fluid" id = "Login_Content">
+    <!-- Modal content -->
+    <div class = "container-fluid" id = "Login_Content">
         <div id = "LoginDiv">
             <!--Form to complete on submit to push to Db -->
             <form> 
-                 <div class="mb-4">
+                <div class="mb-4">
                     <h3>Login</h3>
-                 </div>
+                </div>
                 <div class = "mb-3">
                     <label for = "Login_Email" class="form-label">Email Address: </label>
                     <input type="email" class="form-control" id = "Login_Email" placeholder = "Example@gmail.com">
@@ -46,7 +48,6 @@
             </form>  
         </div>
     </div>
-
 
 </body>
 </html>
