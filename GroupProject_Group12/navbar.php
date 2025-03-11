@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../GroupProject_Group12/style.css">
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
+    <script src= "/Group_Project/GroupProject_Group12/scripts/Login_Modal.js"></script>
+
     <title>Home - Smart Energy Dashboard</title>
 
-    <script src="/GroupProject_Group12/scripts/sidebar.js"></script>
-    <script src="/GroupProject_Group12/scripts/graph.js"></script>
-    <script src="scripts/darkmode.js"></script>
 </head>
 <body>
 
@@ -54,7 +56,7 @@
         </ul>
         
         <div style="position: absolute; bottom: 50px; right: 15px;">
-            <button  type='button' class = "btn btn-outline-light" style = "border-radius: 25px" onclick="login()">Login</button>
+            <button  type='button' class = "btn btn-outline-light" style = "border-radius: 25px" onclick = "window.location.href = '/Group_Project/GroupProject_Group12/Pages/Login.php'">Login</button>
         </div>
     </div>
 </nav>
