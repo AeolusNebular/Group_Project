@@ -24,7 +24,7 @@
 
         <div style = "color" class="panel-group">
 
-            <div  style = "margin-top: 25px; text-align: center; color: white; width: 45%"class="panel panel-default">
+            <div  style = "margin-top: 25px; text-align: center; color: white; width: 45%; border: 1px solid; border-radius: 16px;"class="panel panel-default">
                 <div class="panel-heading" style = "text-decoration-line: underline">Create New User:</div>
                 <div class="panel-body" style = "color: white;">
                     
@@ -67,6 +67,13 @@
         
             
             </div>
+        
+            <!-- Second Panel -->
+            <div style = "position: absolute; bottom: 345px; right: 0; height: 325px; margin-top: 25px; text-align: center; color: white; width: 45%; border: 1px solid; border-radius: 16px;" class="panel panel-default">
+                <div class="panel-heading" style = "text-decoration-line: underline">Delete User:</div>
+                <div class="panel-body"></div>
+
+        
         </div>
 
 
