@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>Home - Smart Energy Dashboard</title>
-
+    
     <script src="../GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="../GroupProject_Group12/scripts/graph.js"></script>
 </head>
