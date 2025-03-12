@@ -29,17 +29,17 @@
     <?php include("../navbar.php"); ?>
     
     <!-- Dashboard Content -->
-    <div class="container mt-4" id="testing">
+    <div class="container-lg mt-4" id="testing">
         <div class="text-center">
             <h2>Admin</h2>
         </div>
     
 
-        <div class="row">
+        <div class="row" >
             <!-- Big chart panel (fat) -->
 
 
-            
+
             <div class="col-12  col-md-5">
                 <div class="card" style="height:370px;">
                     <div class="card-header">📊 Create a New User:</div>
@@ -107,13 +107,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-12  col-md-7">
+                <div class="card" style="height:600px;">
+                    <div class="card-header">📊 Network Users</div>
+                    <div class="card-body" >
+                        <canvas id = "NetworkCanvas" width="400" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+
             
         </div>
     </div>
 </body>
 
 
-
+<script>
+    
+</script>
 
 
 </html>
