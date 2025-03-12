@@ -18,6 +18,7 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
 
     <title>Admin - Smart Energy Dashboard</title>
 </head>
@@ -36,6 +37,9 @@
 
         <div class="row">
             <!-- Big chart panel (fat) -->
+
+
+            
             <div class="col-12  col-md-5">
                 <div class="card" style="height:370px;">
                     <div class="card-header">📊 Create a New User:</div>
@@ -45,18 +49,18 @@
                             <div id = "AdminPanelFormContent">
                                 <div id = "AdminPanelFormContentInputs">
                                     <label for = "Email">Email Address:</label><br>
-                                    <input type="text" id = "email"  name = "Email">
+                                    <input type="email" id = "Email"  name = "Email" placeholder = "example@email.com">
                                 </div>
                                 <div id = "AdminPanelFormContentInputs">
                                     <label for = "Password">Password:</label><br>
-                                    <input type="password" id = "Password"  name = "Password">
+                                    <input type="password" id = "Password"  name = "Password"   >
                                 </div>
                                 <div id = "AdminPanelFormContentInputs" style = "margin-bottom: 25px;">
                                     <label for = "ConPass">Confirm Password:</label><br>
                                     <input type="password" id = "ConPass"  name = "ConPass">
                                 </div>
                             </div>
-                            
+                                <!-- Network and City assignment Code -->
                             <div id = "AdminPanelFormRigth">
                                 <div style = "margin-top: 10px">
                                     <input class = "form-check-input" type = "checkbox" id = "Network User" value = "Network User" onChange="UserType()">
@@ -67,8 +71,8 @@
                                     <input class = "form-check-input" type = "checkbox" id = "City Council User" value = "City Council User" onChange="UserType()"> 
                                     <label class = "form-check-label" for = "City Council User">City Council User </label> 
                                 </div> 
-
-                                <div id = "Network_Select"  style = "margin-top: 10px; display: none">
+                                    <!-- Network and City select statements -->
+                                <div id = "Network_Select"  style = "margin-top: 10px; display: none;">
                                     <label for="Networks">Which Network Is The User In:</label> <br>
                                     <select class = "form-select" name="Networks" id="Networks">
                                         <option value = "Coteq"> Coteq </option>
@@ -81,7 +85,7 @@
                                     </select>
                                 </div> 
 
-                                <div id = "City_Select"  style = "margin-top: 10px; display: none">
+                                <div id = "City_Select"  style = "margin-top: 10px; display: none;">
                                     <label for="Cities">Which City Is The User In: </label> <br>
                                     <select class = "form-select" name="Cities" id="Cities">
                                         <option value = "Coteq"> Coteq </option>
@@ -95,7 +99,7 @@
                                 </div> 
                                 
                                 <div id = "AdminPanelAddUserBtn">
-                                    <button class = "btn btn-light"  type = "Submit">Add User</button> 
+                                    <button class = "btn btn-light"  type = "Submit" onClick = "Create_New_User()">Add User</button> 
                                 </div>
                             </div>
                             
@@ -106,35 +110,6 @@
             
         </div>
     </div>
-<script>
-
-    function UserType() {
-        var NetworkUser = document.getElementById("Network User").checked; 
-        var CityUser = document.getElementById("City Council User").checked;
-
-        if (NetworkUser) {
-            document.getElementById("City Council User").checked = false;
-            document.getElementById("Network_Select").style.display = "block";
-            document.getElementById("City_Select").style.display = "none";
-        } else {
-            document.getElementById("Network_Select").style.display = "none"; 
-        }
-
-        if (CityUser) {
-            document.getElementById("Network User").checked = false;
-            document.getElementById("City_Select").style.display = "block";
-            document.getElementById("Network_Select").style.display = "none";          
-        } else {
-            document.getElementById("City_Select").style.display = "none";
-        }
-
-    
-     
-    }
-    
-
-    
-</script>
 </body>
 
 
