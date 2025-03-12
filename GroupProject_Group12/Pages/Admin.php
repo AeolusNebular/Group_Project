@@ -36,7 +36,7 @@
 
         <div class="row">
             <!-- Big chart panel (fat) -->
-            <div class="col-12  col-md-4">
+            <div class="col-12  col-md-5">
                 <div class="card" style="height:370px;">
                     <div class="card-header">📊 Create a New User:</div>
                     <div class="card-body" >
@@ -59,13 +59,39 @@
                             
                             <div id = "AdminPanelFormRigth">
                                 <div style = "margin-top: 10px">
-                                    <input class = "form-check-input" type = "radio" id = "Network User" value = "Network User">
+                                    <input class = "form-check-input" type = "checkbox" id = "Network User" value = "Network User" onChange="UserType()">
                                     <label class = "form-check-label" for = "Network User">Network User </label> 
                                 </div>
                                 
-                                <div>
-                                    <input class = "form-check-input" type = "radio" id = "City Council User" value = "City Council User"> 
+                                <div style = "margin-top: 10px">
+                                    <input class = "form-check-input" type = "checkbox" id = "City Council User" value = "City Council User" onChange="UserType()"> 
                                     <label class = "form-check-label" for = "City Council User">City Council User </label> 
+                                </div> 
+
+                                <div id = "Network_Select"  style = "margin-top: 10px; display: none">
+                                    <label for="Networks">Which Network Is The User In:</label> <br>
+                                    <select class = "form-select" name="Networks" id="Networks">
+                                        <option value = "Coteq"> Coteq </option>
+                                        <option value = "Enduris"> Enduris </option>
+                                        <option value = "Rendo"> Rendo </option>
+                                        <option value = "Westlandia"> Westlandia </option>
+                                        <option value = "Enexis"> Enexis </option>
+                                        <option value = "Stedin"> Stedin </option>
+                                        <option value = "Liander"> Liander </option>
+                                    </select>
+                                </div> 
+
+                                <div id = "City_Select"  style = "margin-top: 10px; display: none">
+                                    <label for="Cities">Which City Is The User In: </label> <br>
+                                    <select class = "form-select" name="Cities" id="Cities">
+                                        <option value = "Coteq"> Coteq </option>
+                                        <option value = "Enduris"> Enduris </option>
+                                        <option value = "Rendo"> Rendo </option>
+                                        <option value = "Westlandia"> Westlandia </option>
+                                        <option value = "Enexis"> Enexis </option>
+                                        <option value = "Stedin"> Stedin </option>
+                                        <option value = "Liander"> Liander </option>
+                                    </select>
                                 </div> 
                                 
                                 <div id = "AdminPanelAddUserBtn">
@@ -81,7 +107,33 @@
         </div>
     </div>
 <script>
-    document.getElementByID    
+
+    function UserType() {
+        var NetworkUser = document.getElementById("Network User").checked; 
+        var CityUser = document.getElementById("City Council User").checked;
+
+        if (NetworkUser) {
+            document.getElementById("City Council User").checked = false;
+            document.getElementById("Network_Select").style.display = "block";
+            document.getElementById("City_Select").style.display = "none";
+        } else {
+            document.getElementById("Network_Select").style.display = "none"; 
+        }
+
+        if (CityUser) {
+            document.getElementById("Network User").checked = false;
+            document.getElementById("City_Select").style.display = "block";
+            document.getElementById("Network_Select").style.display = "none";          
+        } else {
+            document.getElementById("City_Select").style.display = "none";
+        }
+
+    
+     
+    }
+    
+
+    
 </script>
 </body>
 
