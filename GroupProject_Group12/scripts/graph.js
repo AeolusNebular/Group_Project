@@ -1,5 +1,5 @@
-let isDarkMode = false; // Track dark mode state
-let chartInstance = null; // Store chart instance
+var isDarkMode = false; // Track dark mode state
+var chartInstance = null; // Store chart instance
 
 document.addEventListener("DOMContentLoaded", function () {
     drawChart();

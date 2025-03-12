@@ -1,4 +1,4 @@
-let isopen = false;
+var isopen = false;
 
 function toggleNav() {
     if (isopen) {
