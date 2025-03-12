@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create chart
 function drawChart() {
-    const canvas = document.getElementById("myChart");
+    const canvas = document.getElementById("testChart");
     
     // ✅ Ensure the canvas context is fresh
     if (!canvas) return; // Exit if canvas is missing

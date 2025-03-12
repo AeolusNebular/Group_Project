@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
 
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
-
-
+    
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
@@ -25,26 +26,24 @@
 
     <!-- Navbar -->
     <?php include("navbar.php"); ?>
-
-   
-
+    
     <!-- Dashboard Content -->
     <div class="container mt-4" id="testing">
         <div class="text-center">
             <h2>Energy Usage Overview</h2>
         </div>
-
+        
         <div class="row">
             <!-- Big chart panel (fat) -->
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">📊 Energy Chart</div>
                     <div class="card-body" style="height:350px;">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="testChart"></canvas>
                     </div>
                 </div>
             </div>
-
+            
             <!-- Side panel (thin) -->
             <div class="col-12 col-md-4">
                 <div class="card">
@@ -56,7 +55,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Two even cards -->
             <div class="col-12 col-md-6">
                 <div class="card">
@@ -66,7 +65,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-12 col-md-6">
                 <div class="card">
                     <div class="card-header">⚙️ Recommendations</div>
@@ -79,7 +78,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Full-width bottom card -->
             <div class="col-12">
                 <div class="card">

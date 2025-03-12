@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-gb">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
 
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
@@ -25,10 +27,10 @@
     <!-- Navbar -->
     <?php include("../navbar.php"); ?>
     
-    <div id="testing">
-    
-        <div id = "AdminHeading">
-            <h2>Admin Page:</h2>
+    <!-- Dashboard Content -->
+    <div class="container mt-4" id="testing">
+        <div class="text-center">
+            <h2>Admin</h2>
         </div>
     
 
@@ -75,9 +77,8 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
-        
     </div>
 <script>
     document.getElementByID    
