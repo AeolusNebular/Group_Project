@@ -1,14 +1,47 @@
 /* ================= GENERAL FORMATTING ================= */
 body {
+    position: relative;
     letter-spacing: 0.5px;
     color: #fff;
+    transition: color 0.4s ease;
+    overflow: hidden;
+}
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+body::before {
     background: linear-gradient(to top right, #010326, #1e0025);
-    transition: background 0.4s, color 0.4s;
+    opacity: 1;
+}
+body::after {
+    background: linear-gradient(to top right, #e1e3ff, #fbebff);
+    opacity: 0;
+}
+
+body, .card, .navbar, h2 {
+    transition: background 0.4s ease, color 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0.4; }
 }
 
 .dark-mode {
     background: linear-gradient(to top right, #e1e3ff, #fbebff);
-    color: #000;
+    color: #1f073f;
+    animation: fadeIn 0.4s ease-in-out;
+}
+.dark-mode::before {
+    opacity: 0;
+}
+.dark-mode::after {
+    opacity: 1;
 }
 
 h2 {
@@ -16,10 +49,29 @@ h2 {
     text-decoration-line: underline;
 }
 .dark-mode h2 {
-    color: #000;
-    text-decoration-line: underline;
+    color: #1f073f;
 }
 
+/* Panel styling */
+.card {
+    margin: 12px;
+    width: 100%;
+    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
+    color: #fff;
+}
+.dark-mode .card {
+    color: #1f073f;
+    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .col-12 { max-width: 90%; }
+    .panel-body { padding: 10px; }
+    .panel-heading, .panel-footer { padding: 8px 12px; }
+}
+
+/* ================= NAVBAR ================= */
 .navbar {
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     z-index: 2;
@@ -41,29 +93,22 @@ h2 {
     color: #fff;
 }
 
-/* Panel styling */
-.card {
-    margin: 12px;
-    width: 100%;
-    background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
-    color: #fff;
+.icon-container {
+    display: inline-block;
+    cursor: pointer;
 }
-.dark-mode .card {
-    color: #1f073f;
-    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
+.sun-icon, .moon-icon {
+    fill: white;
+    stroke: white;
+    transition: fill 0.2s ease, stroke 0.5s ease;
 }
-.dark-mode h2 {
-    color: #1f073f;
+.icon-container:hover .sun-icon {
+    fill: yellow;
+    stroke: yellow;
 }
-
-.col-12 {
-    max-width: 90%;
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-    .panel-body { padding: 10px; }
-    .panel-heading, .panel-footer { padding: 8px 12px; }
+.icon-container:hover .moon-icon {
+    fill: #FFB366;
+    stroke: #FFB366;
 }
 
 /* ================= SIDEBAR ================= */
@@ -132,7 +177,7 @@ h2 {
     color: #fff;
 }
 
-/* ================= Admin styles ================= */
+/* ================= Admin ================= */
 #AdminPanel {
     margin-top: 25px;
     text-align: center;
@@ -178,10 +223,7 @@ h2 {
     right: 0;
 }
 
-
-/* ================= Personal Information styles ================= */
-
-
+/* ================= Account ================= */
 #Content_Inputs {
     margin-top: 25px;
 }

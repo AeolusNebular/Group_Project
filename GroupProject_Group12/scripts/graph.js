@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create chart
 function drawChart() {
+    let isDarkMode = document.body.classList.contains("dark-mode");
+
+    let textColor = isDarkMode ? "#000" : "#fff";
+    let lineColor = isDarkMode ? "#888" : "#ccc";
+
     const canvas = document.getElementById("testChart");
     
     // ✅ Ensure the canvas context is fresh
@@ -23,10 +28,10 @@ function drawChart() {
     chartInstance = new Chart(ctx, {
         type: "line",
         data: {
-            labels: ["2020", "2021", "2022", "2023"],
+            labels: ["2017","2018","2019","2020", "2021", "2022", "2023"],
             datasets: [{
-                label: "Energy Usage",
-                data: [1000, 1170, 660, 1030],
+                label: "Energy Usage (kWh)",
+                data: [564, 585, 649, 1170, 990, 760, 830],
                 borderColor: "rgba(150, 90, 225, 1)",
                 backgroundColor: "rgba(150, 90, 225, 1)",
                 tension: 0.4
@@ -38,17 +43,23 @@ function drawChart() {
             plugins: {
                 legend: {
                     position: "bottom",
-                    labels: { color: isDarkMode ? "#000" : "#fff" }
+                    labels: { color: textColor }
                 },
                 title: {
                     display: true,
                     text: "Energy Usage Over Time",
-                    color: isDarkMode ? "#000" : "#fff"
+                    color: textColor
                 }
             },
             scales: {
-                x: { ticks: { color: isDarkMode ? "#000" : "#fff" } },
-                y: { ticks: { color: isDarkMode ? "#000" : "#fff" } }
+                x: {
+                    ticks: { color: textColor },
+                    grid: { color: lineColor }
+                },
+                y: {
+                    ticks: { color: textColor },
+                    grid: { color: lineColor }
+                }
             }
         }
     });
@@ -79,7 +90,7 @@ function drawDoughnut() {
             datasets: [{
                 label: "Networks",
                 data: [1230,1213,530,455,1290,750,942],
-                borderColor: "rgba(150, 90, 225, 1)",
+                borderColor: "rgba(151, 90, 225, 0)",
                 backgroundColor: [
                     '#003f5c',
                     '#374c80',
@@ -110,6 +121,3 @@ function drawDoughnut() {
         }
     });
 }
-
-
-
