@@ -24,6 +24,22 @@ h2 {
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     z-index: 2;
     width: 100%;
+    border-color: #e2e2e2;
+    
+}
+
+.navbar-toggler {
+    border-color: #e2e2e2;
+    color: #e2e2e2;
+}
+
+.dark-mode .navbar-toggler {
+    border-color: #1f073f;
+    color: #1f073f;
+}
+
+.navbar-toggler-icon {
+    color: #e2e2e2;
 }
 
 /* Panel styling */
@@ -92,7 +108,7 @@ h2 {
     top: 0;
     right: 25px;
     font-size: 36px;
-    margin-left: 48px;
+    margin-left: 10%;
 }
 
 .openbtn {
@@ -118,13 +134,11 @@ h2 {
     height: 400px; /* Ensure it has height */
 }
 
-/* ================= Admin styles ================= */
-
-#AdminHeading {
-    text-align: center;
-    color: #ffffff !important;
+#citychart {
+    color: #ffffff;
 }
 
+/* ================= Admin styles ================= */
 #AdminPanel {
     margin-top: 25px;
     text-align: center;
@@ -168,11 +182,4 @@ h2 {
     position: absolute; 
     bottom: 0; 
     right: 0;
-}
-/* ================= Network styles ================= */
-
-#citychart {
-
-    color: #ffffff;
-
 }
