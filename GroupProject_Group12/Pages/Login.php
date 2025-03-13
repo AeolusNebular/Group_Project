@@ -6,7 +6,7 @@
 
     <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
 
-    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/login.css">
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/login.css">
 
     <title>Login - Smart Energy Dashboard</title>
 </head>
