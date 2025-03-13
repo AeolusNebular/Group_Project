@@ -7,11 +7,10 @@
 </head>
 
 <body>
-  
-    <!-- Navbar -->
-    <?php include("../navbar.php"); ?>
     
-
+    <!-- Navbar -->
+    <?php include("../modules/navbar.php"); ?>
+    
     <div id="testing">
 
         <div style="text-align: center">

@@ -9,7 +9,7 @@
 <body>
 
     <!-- Navbar -->
-    <?php include("navbar.php"); ?>
+    <?php include("modules/navbar.php"); ?>
     
     <!-- Dashboard Content -->
     <div class="container mt-4" id="testing">
