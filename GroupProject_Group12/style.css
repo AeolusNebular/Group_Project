@@ -41,6 +41,10 @@ h2 {
     color: #1f073f;
 }
 
+.col-12 {
+    max-width: 90%;
+}
+
 /* Responsive Styling */
 @media (max-width: 768px) {
     .panel-body { padding: 10px; }

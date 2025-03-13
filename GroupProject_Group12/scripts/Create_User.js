@@ -33,16 +33,12 @@ function Create_New_User() {
     if (CorrectInfo) {
         //Posts Information above into DB if CorrectInfo is true 
     }
-
 }
-
-
 
 function UserType() {
     var NetworkUser = document.getElementById("Network User").checked; 
     var CityUser = document.getElementById("City Council User").checked;
-
-
+    
     if (NetworkUser) {
         document.getElementById("City Council User").checked = false;
         document.getElementById("Network_Select").style.display = "block";
@@ -50,7 +46,7 @@ function UserType() {
     } else {
         document.getElementById("Network_Select").style.display = "none"; 
     }
-
+    
     if (CityUser) {
         document.getElementById("Network User").checked = false;
         document.getElementById("City_Select").style.display = "block";
@@ -58,7 +54,5 @@ function UserType() {
     } else {
         document.getElementById("City_Select").style.display = "none";
     }
-
-
- 
+    
 }
