@@ -1,8 +1,7 @@
 //Assign Databse Credentials here can be further discussed how when DB is connected
-var DBEmail = "";
-var DBPassword = "";
 
-function Login_User() {
+
+function Login_User(DBEmail,DBPassword) {
 
     var Email =  document.getElementById("Login_Email");
     var Password = document.getElementById("Login_Password");
@@ -23,8 +22,8 @@ function Login_User() {
     }
 
     if (Email.value == DBEmail && Password.value == DBPassword) {
-        // Write whatever code we want to happen after login is successful
-
+       
+        
 
     }
 
