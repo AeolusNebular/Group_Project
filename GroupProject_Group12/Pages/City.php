@@ -27,57 +27,12 @@
             <button type = "button" class="btn btn-primary">Enexis</button>
         </div>
         
-        <div style="color: white" class="panel-group">
-            <div style="margin-top: 25px;" class="panel panel-default">
-
-                <div class="panel-heading">Panel</div>
-                <div class="panel-body"><canvas id="testChart" style="width:100%;max-width:700px"></canvas></div>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        var xyValues = [
-        {x:50, y:7},
-        {x:60, y:8},
-        {x:70, y:8},
-        {x:80, y:14},
-        {x:90, y:9},
-        {x:100, y:9},
-        {x:110, y:10},
-        {x:120, y:11},
-        {x:130, y:14},
-        {x:140, y:14},
-        {x:150, y:15}
-        ];
-
-        const data = {
-            labels: ["2014","2015","2016","2017","2018"],
-            datasets: [{
-                label: "Electricity Usage (kWh)",
-                data: xyValues,
-                fill: "false",
-                borderColor: "rgb(75,192,192)",
-                tension: 0.1,
-            }]
-        };
-
-        new Chart("testChart", {
-        type: "line",
-        data: data,
-        options: {
-            legend: {display: false},
-            scales: {
-            xAxes: [{ticks: {min: 40, max:160}}],
-            yAxes: [{ticks: {min: 6, max:16}}],
-            }
-        }
-        });
-
 
         
-</script>
+      
+    </div>
+
+    
 </body>
 
 

@@ -59,7 +59,7 @@
                 <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/Personal_Information.php">Personal Info</a>
+                <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/Pages/Personal_Information.php">Personal Info</a>
             </li>
         </ul>
         
