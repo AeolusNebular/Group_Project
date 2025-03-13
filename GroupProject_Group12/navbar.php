@@ -7,8 +7,9 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/login.css">
     
@@ -28,17 +29,40 @@
 
 
 <nav class="navbar">           
-    <button style="float: left; margin-left: 15px" 
+    <button class="fa fa-bars" style="float: left; margin-left: 15px" 
         class="navbar-toggler" 
         onclick="toggleNav()">
-        <span class="navbar-toggler-icon"></span>
+        <span class=""></span>
     </button>
 
-    <button onclick="toggledarklight()" class = "btn" style = "float: right; margin-right: 15px; background-color: transparent; "> 
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
-            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
-            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
-        </svg>  
+    <button onclick="toggledarklight()" class = "btn theme-toggle theme-toggle--toggled theme-toggle--force-motion" style = "float: right; margin-right: 15px; background-color: transparent; "> 
+    <svg
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    width="1em"
+    height="1em"
+    fill="currentColor"
+    stroke-linecap="round"
+    class="theme-toggle__classic"
+    viewBox="0 0 32 32"
+  >
+    <clipPath id="theme-toggle__classic__cutout">
+      <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
+    </clipPath>
+    <g clip-path="url(#theme-toggle__classic__cutout)">
+      <circle cx="16" cy="16" r="9.34" />
+      <g stroke="currentColor" stroke-width="1.5">
+        <path d="M16 5.5v-4" />
+        <path d="M16 30.5v-4" />
+        <path d="M1.5 16h4" />
+        <path d="M26.5 16h4" />
+        <path d="m23.4 8.6 2.8-2.8" />
+        <path d="m5.7 26.3 2.9-2.9" />
+        <path d="m5.8 5.8 2.8 2.8" />
+        <path d="m23.4 23.4 2.9 2.9" />
+      </g>
+    </g>
+  </svg> 
     </button>
 </nav>
 
