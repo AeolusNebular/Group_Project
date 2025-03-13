@@ -10,7 +10,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/style.css">
-    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/login.css">
+  
     
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -57,6 +57,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/Personal_Information.php">Personal Info</a>
             </li>
         </ul>
         
