@@ -38,15 +38,6 @@ h2 {
     color: #1f073f;
 }
 
-.fa  {
-    font-size: 25px;
-    cursor: pointer;
-    padding: 10px 15px;
-    border: none;
-    background-color: transparent;
-    color: #e2e2e2;
-}
-
 .navbar-toggler-icon {
     color: #e2e2e2;
 }
@@ -117,7 +108,7 @@ h2 {
     top: 0;
     right: 25px;
     font-size: 36px;
-    margin-left: 48px;
+    margin-left: 10%;
 }
 
 .openbtn {
@@ -143,13 +134,11 @@ h2 {
     height: 400px; /* Ensure it has height */
 }
 
-/* ================= Admin styles ================= */
-
-#AdminHeading {
-    text-align: center;
-    color: #ffffff !important;
+#citychart {
+    color: #ffffff;
 }
 
+/* ================= Admin styles ================= */
 #AdminPanel {
     margin-top: 25px;
     text-align: center;
@@ -193,11 +182,4 @@ h2 {
     position: absolute; 
     bottom: 0; 
     right: 0;
-}
-/* ================= Network styles ================= */
-
-#citychart {
-
-    color: #ffffff;
-
 }

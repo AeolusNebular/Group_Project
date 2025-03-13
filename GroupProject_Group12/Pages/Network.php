@@ -7,12 +7,11 @@
 </head>
 
 <body>
-  
-    <!-- Navbar -->
-    <?php include("../navbar.php"); ?>
     
-
-    <div id="testing" style="margin-left: 48px;">
+    <!-- Navbar -->
+    <?php include("../modules/navbar.php"); ?>
+    
+    <div id="testing">
 
         <div style="text-align: center">
             <h2 style="color: white">Network:</h2>
@@ -33,7 +32,7 @@
             </select>
         </div>
 
-        <canvas id="cityChart" width="400" height="150"></canvas>
+        <canvas id="cityChart" width="400px" height="150px"></canvas>
 
         <script>
             const cityData = {
