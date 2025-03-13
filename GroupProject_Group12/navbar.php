@@ -21,7 +21,7 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
 
     <title>Home - Smart Energy Dashboard</title>
-
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
 </head>
 <body>
 
