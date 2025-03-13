@@ -3,22 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
-
-    <!-- chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Scripts -->
-    <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
-
     <title>City Council - Smart Energy Dashboard</title>
 </head>
 
@@ -30,7 +14,7 @@
     <div id="testing" style="margin-left: 48px;">
 
         <div style="text-align: center">
-            <h2 style="color: white">City Name:</h2>
+            <h2>City Name:</h2>
         </div>
 
         <div class="btn-group" style = "margin-top: 25px; margin-left: 15px;" role = "group" >

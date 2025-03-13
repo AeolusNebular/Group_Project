@@ -3,23 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/style.css">
-
-    <!-- chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Scripts -->
-    <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
-
     <title>Admin - Smart Energy Dashboard</title>
 </head>
 
@@ -29,19 +12,15 @@
     <?php include("../navbar.php"); ?>
     
     <!-- Dashboard Content -->
-    <div class="container-lg mt-4" id="testing">
+    <div class="container-lg mt-4" id="testing" style="min-height: 700px;">
         <div class="text-center">
             <h2>Admin</h2>
         </div>
-    
-
+        
         <div class="row" >
             <!-- Big chart panel (fat) -->
-
-
-
             <div class="col-12  col-md-5">
-                <div class="card" style="height:370px;">
+                <div class="card" style="height: 90%">
                     <div class="card-header">📊 Create a New User:</div>
                     <div class="card-body" >
                        
@@ -109,23 +88,17 @@
             </div>
 
             <div class="col-12  col-md-7">
-                <div class="card" style="height:600px;">
+                <div class="card" style="height: 90%">
                     <div class="card-header">📊 Network Users</div>
                     <div class="card-body" >
                         <canvas id = "NetworkCanvas" width="400" height="150"></canvas>
                     </div>
                 </div>
             </div>
-
             
         </div>
     </div>
-</body>
-
-
-<script>
     
-</script>
-
+</body>
 
 </html>
