@@ -4,7 +4,7 @@ body {
     letter-spacing: 0.5px;
     color: #fff;
     transition: color 0.4s ease;
-    overflow: hidden;
+    overflow: auto;
 }
 body::before, body::after {
     content: "";
@@ -62,6 +62,10 @@ h2 {
 .dark-mode .card {
     color: #1f073f;
     background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
+}
+
+#SummaryContent {
+    margin-top: 25px;
 }
 
 /* Responsive Styling */
