@@ -99,8 +99,8 @@
 
             <div class="col-12  col-md-7">
                 <div class="card" style="height: 90%">
-                    <div class="card-header" >Additional Information:</div>
-                    <div class="card-body" >
+                    <div class="card-header">Additional Information:</div>
+                    <div class="card-body">
                         <div id = "SummaryContent">Number of Connections:</div>
                         <div id = "SummaryContent">Amount of Electricity Used(kWh):</div>
                         <div id = "SummaryContent">Amount of Gas Used (m3):</div>
@@ -115,8 +115,9 @@
             
             <div class="col-12  col-md-5">
                 <div class="card" style="height: 90%">
-                    <div class="card-header" >Filter Options:</div>
+                    <div class="card-header">Filter Options:</div>
                     <div class="card-body">
+
                         <div id = "SummaryContent">Filter report to City:
                             <select id = "ReportCityFilterNetwork"> 
                                 <option value="all">All</option>
@@ -130,20 +131,17 @@
                             </select>
                         </div>
 
-                        <div id = "SummaryContent">Gas/Electricity/Both:
+                        <div id = "SummaryContent"> Gas/Electricity/Both:
                             <select id = "Gas_Electricity_Both"> 
                                 <option value="Both">Both</option>
                                 <option value="Gas">Gas</option>
-                                <option value="Electricity">Electricity</option>
-                                
+                                <option value="Electricity">Electricity</option>                                
                             </select>
                         </div> 
                         
                         <div id = "SummaryContent">
                             <button type = "button" class = "btn" style = "color: white; float: right">Print Summary</button>
-                        </div>
-
-                        
+                        </div>                        
                     </div>
                 </div> 
             </div>

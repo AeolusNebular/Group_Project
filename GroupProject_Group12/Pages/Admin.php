@@ -96,6 +96,74 @@
                     </div>
                 </div>
             </div>
+
+            
+            <div id = "SummaryContent">Filter by City:
+                <select id = "AdminCityFilter"> 
+                    <option value="all">All</option>
+                    <?php 
+                            $db = new SQLite3('users.db');
+                            $select_query = "SELECT * FROM " . $Table ." ORDER BY BookingID";
+                            $result = $db -> query($select_query);
+                        
+
+                       
+                        ?>
+                </select>
+            </div>
+
+            <div class="col-12  col-md-12">
+                <div class="card" style="height: 90%">
+                    <div class="card-header"> City Council Diagram:</div>
+                    <div class="card-body">
+                        <canvas id = "AdminCityCoucilCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12  col-md-8">
+                
+                    <div class="card" style="height: 90%">
+                        <div class="card-header">Report Details: </div>
+                        <div class="card-body">
+                            <div style = "float : left">                            
+                                <div class="SummaryContent">Filter Options:</div>                                                                             
+                            </div>
+                            <table>
+                                <?php
+                                    $filter = array('GOOR','ENTER');
+                                    $words = array_map('preg_quote', $filter);                               
+                                    $regex = '/'.implode('|', $words).'/i';
+                                    $NoOfCities = array();
+
+                                    foreach ($filter as $x) {
+                                        $NoOfCities[$x] = [];
+                                    }
+
+                                    $fp = fopen ( "../CSV_Files/coteq_electricity_2013.csv" , "r" );
+                                    while (( $data = fgetcsv( $fp , 1000 , "," )) !== FALSE ) {
+                                        list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
+                                        
+                                        if (preg_match($regex, $city)) {                                         
+                                            $NoOfCities[$city][] = $data;
+                                        }
+                                    }
+                                    
+                                    foreach ($NoOfCities as $city => $DataForCity) {
+                                        $AnnualCostForCities = 0;
+                                        foreach ($DataForCity as $cities) {
+                                            $AnnualCostForCities += $cities[11];
+                                        }
+                                        echo "$city $AnnualCostForCities ";
+                                    }
+                                    
+                                    fclose ( $fp );
+                                    ?>
+                                </table>
+                        </div>
+                    </div>
+                
+            </div>
             
         </div>
     </div>
