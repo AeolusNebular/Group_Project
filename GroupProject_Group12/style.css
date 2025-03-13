@@ -24,6 +24,22 @@ h2 {
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     z-index: 2;
     width: 100%;
+    border-color: #e2e2e2;
+    
+}
+
+.navbar-toggler {
+    border-color: #e2e2e2;
+    color: #e2e2e2;
+}
+
+.dark-mode .navbar-toggler {
+    border-color: #1f073f;
+    color: #1f073f;
+}
+
+.navbar-toggler-icon {
+    color: #e2e2e2;
 }
 
 /* Panel styling */
