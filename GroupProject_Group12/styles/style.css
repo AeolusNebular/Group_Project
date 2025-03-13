@@ -90,15 +90,10 @@ h2 {
     display: block;
     transition: 0.3s;
 }
-.dark-mode .sidebar a {
-    color: #414141;
-}
-
 .sidebar a:hover {
     text-decoration-line: underline;
-    color: #fff;
 }
-.dark-mode .sidebar a:hover {
+.dark-mode .sidebar a {
     color: #414141;
 }
 
