@@ -1,22 +1,22 @@
 /* ================= GENERAL FORMATTING ================= */
 body {
     letter-spacing: 0.5px;
-    color: #ffffff;
+    color: #fff;
     background: linear-gradient(to top right, #010326, #1e0025);
     transition: background 0.4s, color 0.4s;
 }
 
 .dark-mode {
     background: linear-gradient(to top right, #e1e3ff, #fbebff);
-    color: #000000;
+    color: #000;
 }
 
 h2 {
-    color: #ffffff;
+    color: #fff;
     text-decoration-line: underline;
 }
 .dark-mode h2 {
-    color: #000000;
+    color: #000;
     text-decoration-line: underline;
 }
 
@@ -24,13 +24,12 @@ h2 {
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
     z-index: 2;
     width: 100%;
-    border-color: #e2e2e2;
-    
+    border-color: #fff;
 }
 
 .navbar-toggler {
-    border-color: #e2e2e2;
-    color: #e2e2e2;
+    border-color: #fff;
+    color: #fff;
 }
 
 .dark-mode .navbar-toggler {
@@ -39,7 +38,7 @@ h2 {
 }
 
 .navbar-toggler-icon {
-    color: #e2e2e2;
+    color: #fff;
 }
 
 /* Panel styling */
@@ -47,7 +46,7 @@ h2 {
     margin: 12px;
     width: 100%;
     background: linear-gradient(to top right, #2a2d5b7b, rgba(80, 50, 100, 0.5));
-    color: #ffffff;
+    color: #fff;
 }
 .dark-mode .card {
     color: #1f073f;
@@ -87,7 +86,7 @@ h2 {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #e2e2e2;
+    color: #fff;
     display: block;
     transition: 0.3s;
 }
@@ -97,7 +96,7 @@ h2 {
 
 .sidebar a:hover {
     text-decoration-line: underline;
-    color: #e2e2e2;
+    color: #fff;
 }
 .dark-mode .sidebar a:hover {
     color: #414141;
@@ -135,14 +134,14 @@ h2 {
 }
 
 #citychart {
-    color: #ffffff;
+    color: #fff;
 }
 
 /* ================= Admin styles ================= */
 #AdminPanel {
     margin-top: 25px;
     text-align: center;
-    color: white; 
+    color: #fff; 
     width: 45%;
 }
 
@@ -151,7 +150,7 @@ h2 {
 }
 
 #AdminPanelBody {
-    color: white;
+    color: #fff;
 }
 
 #AdminPanelFormLeft {
