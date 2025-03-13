@@ -11,7 +11,7 @@
     <!-- Navbar -->
     <?php include("../navbar.php"); ?>
 
-    <div id="testing" style="margin-left: 48px;">
+    <div id="testing">
 
         <div style="text-align: center">
             <h2>City Name:</h2>

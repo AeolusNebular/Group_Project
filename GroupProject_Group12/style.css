@@ -92,7 +92,7 @@ h2 {
     top: 0;
     right: 25px;
     font-size: 36px;
-    margin-left: 48px;
+    margin-left: 10%;
 }
 
 .openbtn {
@@ -169,10 +169,8 @@ h2 {
     bottom: 0; 
     right: 0;
 }
+
 /* ================= Network styles ================= */
-
 #citychart {
-
     color: #ffffff;
-
 }
