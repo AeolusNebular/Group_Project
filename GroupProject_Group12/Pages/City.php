@@ -7,12 +7,12 @@
 </head>
 
 <body>
-  
+    
     <!-- Navbar -->
-    <?php include("../navbar.php"); ?>
-
+    <?php include("../modules/navbar.php"); ?>
+    
     <div id="testing">
-
+        
         <div style="text-align: center">
             <h2>City Name:</h2>
         </div>
@@ -32,7 +32,6 @@
 
                 <div class="panel-heading">Panel</div>
                 <div class="panel-body"><canvas id="testChart" style="width:100%;max-width:700px"></canvas></div>
-            
             </div>
         </div>
 
