@@ -99,7 +99,7 @@
 
             
             <div id = "SummaryContent">Filter by City:
-                <form action = "/Group_Project/GroupProject_Group12/Pages/Admin.php" method = "POST" >
+                <form action = "/Group_Project/GroupProject_Group12/Pages/Admin.php" method = "GET" >
                     <select name = "AdminCityFilter" onChange = "this.form.submit()"> 
                         <option value="all">All</option>
                         <?php 
@@ -116,9 +116,9 @@
                                     $db = new SQLite3('../database/users.db');
                                 
                                     if ($db) {
-                                        echo "<script> alert('Database Opened Successfully') </script>";
+                                        echo "<script> console.log('Database Opened Successfully') </script>";
                                     } else {
-                                        echo "<script> alert('Failed to open Database : " . $db -> lastErrorMsg() ."') </script>";
+                                        echo "<script> console.log('Failed to open Database : " . $db -> lastErrorMsg() ."') </script>";
                                         exit;
                                     }
                                 } catch (Exception $e) {
@@ -162,52 +162,53 @@
             </div>
 
             <div class="col-12  col-md-8">
-                
-                    <div class="card" style="height: 90%">
-                        <div class="card-header">Report Details: </div>
-                        <div class="card-body">
-                            <div style = "float : left">                            
-                                <div class="SummaryContent">Filter Options:</div>                                                                             
-                            </div>
-                            <table>
-                                <?php
+            
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Report Details: </div>
+                    <div class="card-body">
+                        <div style = "float : left">                            
+                            <div class="SummaryContent">Filter Options:</div>                                                                             
+                        </div>
+                        <table>
+                            <?php
 
-                                    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                                        $CityFilter = $_POST['AdminCityFilter'];
-                                        $CityFilter = strtoupper($CityFilter);
+                                if ($_SERVER['REQUEST_METHOD'] == "GET" && (isset($_GET['AdminCityFilter']))) {
+                                    $CityFilter = $_GET['AdminCityFilter'];
+                                    $CityFilter = strtoupper($CityFilter);
 
-                                        $filter = array($CityFilter);
-                                        $words = array_map('preg_quote', $filter);                               
-                                        $regex = '/'.implode('|', $words).'/';
-                                        $NoOfCities = array();
+                                    $filter = array($CityFilter);
+                                    $words = array_map('preg_quote', $filter);                               
+                                    $regex = '/'.implode('|', $words).'/';
+                                    $NoOfCities = array();
 
-                                        foreach ($filter as $x) {
-                                            $NoOfCities[$x] = [];
-                                        }
+                                    foreach ($filter as $x) {
+                                        $NoOfCities[$x] = [];
+                                    }
 
-                                        $fp = fopen ( "../CSV_Files/coteq_electricity_2013.csv" , "r" );
-                                        while (( $data = fgetcsv( $fp )) !== FALSE ) {
-                                            list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
-                                            
-                                            if (preg_match($regex, $city)) {                                         
-                                                $NoOfCities[$city][] = $data;
-                                            }
-                                        }
+                                    $fp = fopen ( "../CSV_Files/coteq_electricity_2013.csv" , "r" );
+                                    while (( $data = fgetcsv( $fp )) !== FALSE ) {
+                                        list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
                                         
-                                        foreach ($NoOfCities as $city => $DataForCity) {
-                                            $AnnualCostForCities = 0;
-                                            foreach ($DataForCity as $cities) {
-                                                $AnnualCostForCities += $cities[11];
-                                            }
-                                            echo "$city $AnnualCostForCities ";
+                                        if (preg_match($regex, $city)) {                                         
+                                            $NoOfCities[$city][] = $data;
                                         }
                                     }
+                                    
+                                    foreach ($NoOfCities as $city => $DataForCity) {
+                                        $AnnualCostForCities = 0;
+                                        foreach ($DataForCity as $cities) {
+                                            $AnnualCostForCities += $cities[11];
+                                        }
+                                        echo "$city $AnnualCostForCities ";
+                                    } 
                                     fclose ( $fp );
-                                    ?>
-                                </table>
-                        </div>
+                                }
+                               
+                                ?>
+                            </table>
                     </div>
-                
+                </div>
+            
             </div>
             
         </div>
