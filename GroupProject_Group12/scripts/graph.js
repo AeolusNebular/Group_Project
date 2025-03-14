@@ -1,4 +1,4 @@
-var isDarkMode = false; // Track dark mode state
+var theme = false; // Track dark mode state
 var chartInstance = null; // Store chart instance
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -8,10 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Create chart
 function drawChart() {
-    let isDarkMode = document.body.classList.contains("dark-mode");
+    let theme = document.body.classList.contains("light-mode");
 
-    let textColor = isDarkMode ? "#000" : "#fff";
-    let lineColor = isDarkMode ? "#888" : "#ccc";
+    let font = { family: "Space Grotesk"};
+    let textColor = theme ? "#000" : "#fff";
+    let lineColor = theme ? "#aaa" : "#777";
 
     const canvas = document.getElementById("testChart");
     
@@ -43,21 +44,22 @@ function drawChart() {
             plugins: {
                 legend: {
                     position: "bottom",
-                    labels: { color: textColor }
+                    labels: { color: textColor, font: font },
                 },
-                title: {
-                    display: true,
-                    text: "Energy Usage Over Time",
-                    color: textColor
+                title: { 
+                    display: true, 
+                    text: "Energy Usage Over Time", 
+                    color: textColor, 
+                    font: font 
                 }
             },
             scales: {
                 x: {
-                    ticks: { color: textColor },
+                    ticks: { color: textColor, font: font },
                     grid: { color: lineColor }
                 },
                 y: {
-                    ticks: { color: textColor },
+                    ticks: { color: textColor, font: font },
                     grid: { color: lineColor }
                 }
             }
@@ -71,6 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function drawDoughnut() {
+    let font = { family: "Space Grotesk"};
+    let textColor = theme ? "#000" : "#fff";
+
     const canvas = document.getElementById("NetworkCanvas");
     
     // ✅ Ensure the canvas context is fresh
@@ -109,12 +114,13 @@ function drawDoughnut() {
             plugins: {
                 legend: {
                     position: "bottom",
-                    labels: { color: isDarkMode ? "#000" : "#fff" }
+                    labels: { color: textColor, font: font }
                 },
                 title: {
                     display: true,
                     text: "Networks Annual Usage",
-                    color: isDarkMode ? "#000" : "#fff"
+                    color: textColor, 
+                    font: font 
                 }
             },
           

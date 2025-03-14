@@ -11,12 +11,11 @@
     <!-- Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
-    <div id="testing">
-
-        <div style="text-align: center">
-            <h2 style="color: white">Network:</h2>
+    <div class="container mt-4">
+        <div class="text-center">
+            <h2>Network:</h2>
         </div>
-
+        
         <div style="text-align: center; margin-bottom: 20px;">
             <label for="cityFilter" style="color: white;">Filter by City:</label>
             <select id="cityFilter" onchange="filterData()">
@@ -31,9 +30,9 @@
                 <!-- Add more cities as needed -->
             </select>
         </div>
-
+        
         <canvas id="cityChart" width="400px" height="150px"></canvas>
-
+        
         <script>
             const cityData = {
                 all: [12, 19, 3, 5, 2, 3, 7],
@@ -46,7 +45,7 @@
                 Coteq: [6, 11, 7, 10, 14, 18, 9]
                 // Add more city data as needed
             };
-
+            
             const ctx = document.getElementById('cityChart').getContext('2d');
             let cityChart = new Chart(ctx, {
                 type: 'bar',
@@ -83,15 +82,15 @@
                     }
                 }
             });
-
+            
             function filterData() {
                 const selectedCity = document.getElementById('cityFilter').value;
                 cityChart.data.datasets[0].data = cityData[selectedCity];
                 cityChart.update();
             }
         </script>
-
+        
     </div>
-
+    
 </body>
 </html>

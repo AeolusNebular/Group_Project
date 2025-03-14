@@ -2,26 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const icon = document.getElementById("darkModeIcon");
 
     // Check and apply theme on page load
-    const isDarkMode = localStorage.getItem("theme") === "dark";
+    const theme = localStorage.getItem("theme") === "dark";
     
     // Apply relevant icon
-    document.body.classList.toggle("dark-mode", isDarkMode);
-    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+    document.body.classList.toggle("light-mode", theme);
+    icon.innerHTML = theme ? sunIcon() : moonIcon();
 });
 
 // Redrawn javascript charts to match toggled mode
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
-    const isDarkMode = !body.classList.contains("dark-mode");
+    const theme = !body.classList.contains("light-mode");
 
-    body.classList.toggle("dark-mode", isDarkMode);
+    body.classList.toggle("light-mode", theme);
 
     // Store selected mode
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    localStorage.setItem("theme", theme ? "dark" : "light");
 
     // Apply relevant icon
-    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+    icon.innerHTML = theme ? sunIcon() : moonIcon();
 
     // Redraw charts
     requestAnimationFrame(drawChart);

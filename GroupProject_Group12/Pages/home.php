@@ -7,21 +7,21 @@
 </head>
 
 <body>
-
+    
     <!-- Navbar -->
     <?php include("modules/navbar.php"); ?>
-    
+
     <!-- Dashboard Content -->
-    <div class="container mt-4" id="testing">
+    <div class="container mt-4">
         <div class="text-center">
-            <h2>Energy Usage Overview</h2>
+            <h2>Dashboard</h2>
         </div>
         
         <div class="row">
             <!-- Big chart panel (fat) -->
             <div class="col-12 col-md-8">
                 <div class="card">
-                    <div class="card-header">📊 Energy Chart</div>
+                    <div class="card-header">📊 Energy Usage Overview</div>
                     <div class="card-body" style="height:350px;">
                         <canvas id="testChart"></canvas>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="card-header">⚙️ Recommendations</div>
                     <div class="card-body">
                         <ul>
-                            <li>Switch to LED lighting.</li>
+                            <li>Switch to <strong>LED lighting</strong>.</li>
                             <li>Optimise heating settings.</li>
                             <li>Use smart plugs.</li>
                         </ul>
@@ -68,7 +68,7 @@
                 <div class="card">
                     <div class="card-header">⚠️ Warning</div>
                     <div class="card-body">
-                        Your energy consumption is **15% above** the expected range this month. Holy guacamole!!
+                        Your energy consumption is <strong>15% above</strong> the expected range this month. Holy guacamole!!
                     </div>
                 </div>
             </div>
