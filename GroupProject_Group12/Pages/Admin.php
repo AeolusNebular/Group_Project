@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
     <title>Admin - Smart Energy Dashboard</title>
 </head>
 
@@ -94,6 +95,120 @@
                         <canvas id = "NetworkCanvas" width="400" height="150"></canvas>
                     </div>
                 </div>
+            </div>
+
+            
+            <div id = "SummaryContent">Filter by City:
+                <form action = "/Group_Project/GroupProject_Group12/Pages/Admin.php" method = "GET" >
+                    <select name = "AdminCityFilter" onChange = "this.form.submit()"> 
+                        <option value="all">All</option>
+                        <?php 
+                            function debug_to_console($data) {
+                                $output = $data;
+                                if (is_array($output))
+                                    $output = implode(',', $output);                        
+                                echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+                            }
+
+                            
+                            function Open_Database() {
+                                try  { 
+                                    $db = new SQLite3('../database/users.db');
+                                
+                                    if ($db) {
+                                        echo "<script> console.log('Database Opened Successfully') </script>";
+                                    } else {
+                                        echo "<script> console.log('Failed to open Database : " . $db -> lastErrorMsg() ."') </script>";
+                                        exit;
+                                    }
+                                } catch (Exception $e) {
+                                    debug_to_console(  $e->getMessage());
+                                }
+                                return $db;
+                            }
+
+                            $db = Open_Database();
+
+                            $result = $db -> query("SELECT * FROM City ORDER BY City_Name");
+                            
+
+                            while ($row = $result -> fetchArray(SQLITE3_ASSOC)){
+                                $CityName = $row['City_Name'];
+                                
+                                echo "<option value='$CityName' > " . $CityName . "</option>";
+
+                                debug_to_console($row);
+                            }
+                            $db -> close();
+                        ?>
+
+                        <script> 
+                            function GetAdminCityFilter(selectObject) {
+                                var filter = selectObject.value;
+                                console.log(filter);
+                            }
+                        </script>
+                    </select>
+                </form>
+            </div>
+
+            <div class="col-12  col-md-12">
+                <div class="card" style="height: 90%">
+                    <div class="card-header"> City Council Diagram:</div>
+                    <div class="card-body">
+                        <canvas id = "AdminCityCoucilCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12  col-md-8">
+            
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Report Details: </div>
+                    <div class="card-body">
+                        <div style = "float : left">                            
+                            <div class="SummaryContent">Filter Options:</div>                                                                             
+                        </div>
+                        <table>
+                            <?php
+
+                                if ($_SERVER['REQUEST_METHOD'] == "GET" && (isset($_GET['AdminCityFilter']))) {
+                                    $CityFilter = $_GET['AdminCityFilter'];
+                                    $CityFilter = strtoupper($CityFilter);
+
+                                    $filter = array($CityFilter);
+                                    $words = array_map('preg_quote', $filter);                               
+                                    $regex = '/'.implode('|', $words).'/';
+                                    $NoOfCities = array();
+
+                                    foreach ($filter as $x) {
+                                        $NoOfCities[$x] = [];
+                                    }
+
+                                    $fp = fopen ( "../CSV_Files/coteq_electricity_2013.csv" , "r" );
+                                    while (( $data = fgetcsv( $fp )) !== FALSE ) {
+                                        list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
+                                        
+                                        if (preg_match($regex, $city)) {                                         
+                                            $NoOfCities[$city][] = $data;
+                                        }
+                                    }
+                                    
+                                    foreach ($NoOfCities as $city => $DataForCity) {
+                                        $AnnualCostForCities = 0;
+                                        foreach ($DataForCity as $cities) {
+                                            $AnnualCostForCities += $cities[11];
+                                        }
+                                        echo "$city $AnnualCostForCities ";
+                                    } 
+                                    fclose ( $fp );
+                                }
+                               
+                                ?>
+                            </table>
+                    </div>
+                </div>
+            
             </div>
             
         </div>

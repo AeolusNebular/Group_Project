@@ -22,7 +22,7 @@
             <!-- User summary panel (fat) -->
             <div class="col-12 col-md-8">
                 <div class="card">
-                    <div class="card-header">📊 User Summary</div>
+                    <div class="card-header">📊 User Summary </div>
                     <div class="card-body" style="height:350px;">
                         <canvas id="testChart"></canvas>
                     </div>
