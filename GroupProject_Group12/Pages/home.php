@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/Images/smart-meter.png">
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <?php include("modules/navbar.php"); ?>
-
+    
     <!-- Dashboard Content -->
     <div class="container mt-4">
         <div class="text-center">
@@ -19,7 +20,7 @@
         </div>
         
         <div class="row">
-            <!-- Big chart panel (fat) -->
+            <!-- 📈 Big chart panel (fat) -->
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">📊 Energy Usage Overview</div>
@@ -73,8 +74,17 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 🗺️ Heatmap -->
+            <div class="col-12 col-md-12">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">🗺️ Energy Use Heatmap</div>
+                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                </div>
+            </div>
+            
         </div>
     </div>
-
+    
 </body>
 </html>

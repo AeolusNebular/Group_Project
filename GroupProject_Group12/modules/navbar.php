@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Group_Project/GroupProject_Group12/Images/favicon.ico">
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -18,12 +19,21 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <!-- Heatmap.js -->
+    <script src="https://unpkg.com/heatmap.js"></script>
+    <script src="https://unpkg.com/leaflet-heatmap/leaflet-heatmap.js"></script>
+    
     <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     
     <title>Navbar Module - Smart Energy Dashboard</title>
 </head>

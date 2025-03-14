@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    
     <title>Admin - Smart Energy Dashboard</title>
 </head>
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
     <!-- Dashboard Content -->

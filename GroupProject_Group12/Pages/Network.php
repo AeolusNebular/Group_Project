@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    
     <title>Network - Smart Energy Dashboard</title>
 </head>
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
     <div class="container mt-4">
@@ -95,19 +97,18 @@
             
             <div class="col-12  col-md-7">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Additional Information:</div>
+                    <div class="card-header">Additional Information</div>
                     <div class="card-body">
-                        <div id = "SummaryContent">Number of Connections:</div>
-                        <div id = "SummaryContent">Amount of Electricity Used(kWh):</div>
-                        <div id = "SummaryContent">Amount of Gas Used (m3):</div>
+                        <div id = "SummaryContent">Number of Connections: </div>
+                        <div id = "SummaryContent">Amount of Electricity Used (kWh): </div>
+                        <div id = "SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
                         <div id = "SummaryContent">Delivery Percentage: </div>
                         <div id = "SummaryContent">Types of Connections: </div>
                         <div id = "SummaryContent">Types Connections Percentage: </div>
-                        
+                        <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                     </div>
                 </div> 
             </div>
-            
             
             <div class="col-12  col-md-5">
                 <div class="card" style="height: 90%">
@@ -141,6 +142,15 @@
                     </div>
                 </div> 
             </div>
+            
+            <!-- 🗺️ Heatmap -->
+            <div class="col-12 col-md-12">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">🗺️ Energy Use Heatmap</div>
+                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                </div>
+            </div>
+
         </div>
     </div>
     

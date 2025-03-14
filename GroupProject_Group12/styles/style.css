@@ -1,4 +1,4 @@
-/* ================= GENERAL FORMATTING ================= */
+/* ================= 🌐 GENERAL FORMATTING ================= */
 * {
     transition: background 0.2s ease, color 0.3s ease;
 }
@@ -68,10 +68,10 @@ h2, .card-header {
     .panel-heading, .panel-footer { padding: 8px 12px; }
 }
 
-/* ================= NAVBAR ================= */
+/* ================= 📍 NAVBAR ================= */
 .navbar {
     background: linear-gradient(to top right, #2a2d5b7b, #50326480);
-    z-index: 2;
+    z-index: 3;
     width: 100%;
 }
 
@@ -114,7 +114,7 @@ h2, .card-header {
     transform: rotate(45deg);
 }
 
-/* ================= SIDEBAR ================= */
+/* ================= 📑 SIDEBAR ================= */
 .sidebar, #mySidebar {
     transition: 0.5s ease;
 }
@@ -123,7 +123,7 @@ h2, .card-header {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     background: linear-gradient(to top right, #2a2d5bdb, #503264dc);
@@ -163,8 +163,9 @@ h2, .card-header {
     border: none;
 }
 
-/* ================= Button ================= */
+/* ================= 🕹️ Button ================= */
 .fancy-button {
+    color: #fff;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
@@ -179,7 +180,7 @@ h2, .card-header {
     box-shadow: 4px 4px 20px #ff7e64;
 }
 
-/* ================= Chart ================= */
+/* ================= 📈 Chart ================= */
 #testChart {
     width: 100%;
     height: 400px;
@@ -189,7 +190,7 @@ h2, .card-header {
     color: #fff;
 }
 
-/* ================= Admin ================= */
+/* ================= 🛡️ Admin ================= */
 #AdminPanel, #AdminPanelBody {
     color: #fff;
 }
@@ -233,12 +234,12 @@ h2, .card-header {
     right: 0;
 }
 
-/* ================= Account ================= */
+/* ================= 👤 Account ================= */
 #Content_Inputs {
     margin-top: 25px;
 }
 
-/* ================= Sparks ================= */
+/* ================= ✨ Sparks ================= */
 .spark {
     position: fixed;
     width: 5px;
@@ -261,4 +262,16 @@ h2, .card-header {
         transform: translate(var(--x), var(--y)) scale(0);
         opacity: 0;
     }
+}
+
+/* ================= 🗺️ HEATMAP ================= */
+#heatmap {
+    height: 500px;
+    border-radius: 0 0 16px 16px;
+    background: linear-gradient(to top right, #2a2d5b7b, #50326480);
+    transition: background 0.6s ease, color 0.3s ease;
+    z-index: 1;
+}
+.light-mode #heatmap {
+    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
 }

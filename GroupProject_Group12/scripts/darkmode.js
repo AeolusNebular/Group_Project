@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     const icon = document.getElementById("darkModeIcon");
 
-    // Check and apply theme on page load
+    // 🎨 Check and apply theme on page load
     const theme = localStorage.getItem("theme") === "dark";
     
-    // Apply relevant icon
+    // ⚙️ Apply relevant icon
     document.body.classList.toggle("light-mode", theme);
     icon.innerHTML = theme ? sunIcon() : moonIcon();
 });
 
-// Redrawn javascript charts to match toggled mode
+// 📊 Redrawn javascript charts to match toggled mode
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
@@ -17,17 +17,17 @@ function toggleDarkLight() {
 
     body.classList.toggle("light-mode", theme);
 
-    // Store selected mode
+    // ⚙️ Store selected mode
     localStorage.setItem("theme", theme ? "dark" : "light");
 
-    // Apply relevant icon
+    // ⚙️ Apply relevant icon
     icon.innerHTML = theme ? sunIcon() : moonIcon();
 
-    // Redraw charts
+    // 📊 Redraw charts
     requestAnimationFrame(drawChart);
 }
 
-// Sun Icon SVG
+// ☀️ Sun Icon SVG
 function sunIcon() {
     return `
     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="sun-icon">
@@ -45,7 +45,7 @@ function sunIcon() {
     </svg>
     `;
 }
-// Moon Icon SVG
+// 🌙 Moon Icon SVG
 function moonIcon() {
     return `
         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="-4 -2 30 30" class="moon-icon">
