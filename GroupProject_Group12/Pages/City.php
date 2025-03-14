@@ -27,6 +27,41 @@
             <button type = "button" class="btn btn-primary">Enexis</button>
         </div>
         
+        <div class="row">
+            <div class="col-12  col-md-7">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">📊 Network Graph:</div>
+                        <div class="card-body" >
+                            <canvas id = "testChart"></canvas>
+                        </div>
+                </div>
+            </div>
+            <div class="col-12  col-md-5" >
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Year Summary:</div>
+                    <div class="card-body" >
+                        <div id = "SummaryContent">Number of Connections:</div>
+                        <div id = "SummaryContent">Amount of Electricity Used(kWh):</div>
+                        <div id = "SummaryContent">Amount of Gas Used (m3):</div>
+                        <div id = "SummaryContent">Delivery Percentage: </div>
+                        <div id = "SummaryContent">Types of Connections: </div>
+                        <div id = "SummaryContent">Types Connections Percentage: </div>
+                        
+                        <div id = "SummaryContent">
+                            <button type = "button" class = "btn" style = "color: white; float: right">Print Summary</button>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            <div class="col-12  col-md-12" >
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Potential Heatmap:</div>
+                    <img src="/Group_Project/GroupProject_Group12/Images/Placeholder_Heatmap.jpg" alt="PotentialHeatmap">
+                </div>
+            </div>
+        </div>
 
         
       

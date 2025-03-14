@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/Images/smart-meter.png">
     <title>Home - Smart Energy Dashboard</title>
 </head>
 

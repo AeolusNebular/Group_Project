@@ -1,4 +1,4 @@
-/** CREATE TABLE "Assignations" (
+x/** CREATE TABLE "Assignations" (
 	"UserID"	INTEGER NOT NULL UNIQUE,
 	"CityID"	TEXT,
 	"NetworkID"	TEXT,
