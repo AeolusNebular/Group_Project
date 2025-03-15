@@ -1,10 +1,10 @@
 x/** CREATE TABLE "Assignations" (
 	"UserID"	INTEGER NOT NULL UNIQUE,
-	"CityID"	TEXT,
-	"NetworkID"	TEXT,
+	"City_Name"	TEXT,
+	"NetworkName"	TEXT,
 	PRIMARY KEY("UserID" AUTOINCREMENT),
-	FOREIGN KEY("CityID") REFERENCES "City"("CityID"),
-	FOREIGN KEY("NetworkID") REFERENCES "Network"("NetworkID"),
+	FOREIGN KEY("City_Name") REFERENCES "City"("CityID"),
+	FOREIGN KEY("NetworkName") REFERENCES "Network"("NetworkID"),
 	FOREIGN KEY("UserID") REFERENCES "User_Details"("User_ID")
 );
 
@@ -47,14 +47,23 @@ CREATE TABLE "User_Details" (
 	"SName"	TEXT NOT NULL,
 	"RoleID"	INTEGER NOT NULL,
 	"Email"	TEXT NOT NULL UNIQUE,
-	"PhoneNo"	INTEGER NOT NULL UNIQUE,
+	"PhoneNo"	INTEGER UNIQUE,
 	"HouseNo"	TEXT NOT NULL,
-	"StreetName"	TEXT NOT NULL,
+	"StreetName"	NUMERIC NOT NULL,
 	"Zipcode"	TEXT NOT NULL,
 	"Gender"	TEXT NOT NULL,
-	"EC_Name"	TEXT NOT NULL,
-	"EC_Phone_No"	TEXT NOT NULL,
-	"EC_Email"	TEXT NOT NULL,
+	"EmergencyContact"	INTEGER NOT NULL,
 	PRIMARY KEY("User_ID" AUTOINCREMENT),
 	FOREIGN KEY("RoleID") REFERENCES "Roles"("RoleID")
-); 
+);
+
+/*  INSERT FOR NETWORK TABLE */
+
+INSERT INTO Network(NetworkID,NetworkName) VALUES 
+('01','Coteq'),
+('02','Enduris'),
+('03','Stedin'),
+('04','Enexis'),
+('05','Liander'),
+('06','Westlandinfra'),
+('07','Rendo');

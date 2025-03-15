@@ -11,8 +11,10 @@
 
 <body>
     
-    <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <!--📍 Navbar -->
+    
+    <?php include("../modules/navbar.php");
+    include('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
     <!-- Dashboard Content -->
     <div class="container-lg mt-4" id="testing" style="min-height: 700px;">
@@ -27,7 +29,7 @@
                     <div class="card-header">📊 Create a New User:</div>
                     <div class="card-body" >
                        
-                        <form id = "AdminPanelForm" action = "#">
+                        <form id = "AdminPanelForm" action = "../Database_Php_Interactions/Create_New_User.php" method ="POST">
                             <div id = "AdminPanelFormContent">
                                 <div id = "AdminPanelFormContentInputs">
                                     <label for = "Email">Email Address:</label><br>
@@ -35,7 +37,7 @@
                                 </div>
                                 <div id = "AdminPanelFormContentInputs">
                                     <label for = "Password">Password:</label><br>
-                                    <input type="password" id = "Password"  name = "Password"   >
+                                    <input type="password" id = "Password"  name = "Password">
                                 </div>
                                 <div id = "AdminPanelFormContentInputs" style = "margin-bottom: 25px;">
                                     <label for = "ConPass">Confirm Password:</label><br>
@@ -45,12 +47,12 @@
                                 <!-- Network and City assignment Code -->
                             <div id = "AdminPanelFormRigth">
                                 <div style = "margin-top: 10px">
-                                    <input class = "form-check-input" type = "checkbox" id = "Network User" value = "Network User" onChange="UserType()">
+                                    <input class = "form-check-input" type = "checkbox" id = "Network User" name = "Network_User" onChange="UserType()">
                                     <label class = "form-check-label" for = "Network User">Network User </label> 
                                 </div>
                                 
                                 <div style = "margin-top: 10px">
-                                    <input class = "form-check-input" type = "checkbox" id = "City Council User" value = "City Council User" onChange="UserType()"> 
+                                    <input class = "form-check-input" type = "checkbox" id = "City Council User" name = "City_Council_User" onChange="UserType()"> 
                                     <label class = "form-check-label" for = "City Council User">City Council User </label> 
                                 </div> 
                                     <!-- Network and City select statements -->
@@ -70,18 +72,23 @@
                                 <div id = "City_Select"  style = "margin-top: 10px; display: none;">
                                     <label for="Cities">Which City Is The User In: </label> <br>
                                     <select class = "form-select" name="Cities" id="Cities">
-                                        <option value = "Coteq"> Coteq </option>
-                                        <option value = "Enduris"> Enduris </option>
-                                        <option value = "Rendo"> Rendo </option>
-                                        <option value = "Westlandia"> Westlandia </option>
-                                        <option value = "Enexis"> Enexis </option>
-                                        <option value = "Stedin"> Stedin </option>
-                                        <option value = "Liander"> Liander </option>
+                                            <?php 
+                                                include('../Database_Php_Interactions/CitySelect.php'); 
+                                            ?>
                                     </select>
                                 </div> 
-                                
+
+                                <?php 
+                                    if (isset($_GET['CreateUser'])) {
+                                        if( $_GET['CreateUser']) {
+                                            echo"<div Style = 'color: Green'> Account Successfully Created </div>";
+                                        } else {
+                                            echo"<div Style = 'color: Red'> Account Creation Failed </div>";
+                                        }
+                                    }  
+                                ?>
                                 <div id = "AdminPanelAddUserBtn">
-                                    <button class = "btn btn-light"  type = "Submit" onClick = "Create_New_User()">Add User</button> 
+                                    <button class = "btn" style = "color: white; margin-bottom: 15px"  type = "Submit" >Add User</button> 
                                 </div>
                             </div>
                             
@@ -105,51 +112,8 @@
                     <select name = "AdminCityFilter" onChange = "this.form.submit()"> 
                         <option value="all">All</option>
                         <?php 
-                            function debug_to_console($data) {
-                                $output = $data;
-                                if (is_array($output))
-                                    $output = implode(',', $output);                        
-                                echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-                            }
-
-                            
-                            function Open_Database() {
-                                try  { 
-                                    $db = new SQLite3('../database/users.db');
-                                
-                                    if ($db) {
-                                        echo "<script> console.log('Database Opened Successfully') </script>";
-                                    } else {
-                                        echo "<script> console.log('Failed to open Database : " . $db -> lastErrorMsg() ."') </script>";
-                                        exit;
-                                    }
-                                } catch (Exception $e) {
-                                    debug_to_console(  $e->getMessage());
-                                }
-                                return $db;
-                            }
-
-                            $db = Open_Database();
-
-                            $result = $db -> query("SELECT * FROM City ORDER BY City_Name");
-                            
-
-                            while ($row = $result -> fetchArray(SQLITE3_ASSOC)){
-                                $CityName = $row['City_Name'];
-                                
-                                echo "<option value='$CityName' > " . $CityName . "</option>";
-
-                                debug_to_console($row);
-                            }
-                            $db -> close();
+                          include('../Database_Php_Interactions/CitySelect.php'); 
                         ?>
-
-                        <script> 
-                            function GetAdminCityFilter(selectObject) {
-                                var filter = selectObject.value;
-                                console.log(filter);
-                            }
-                        </script>
                     </select>
                 </form>
             </div>
