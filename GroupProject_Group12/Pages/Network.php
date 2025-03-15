@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     
-
     <title>Network - Smart Energy Dashboard</title>
 </head>
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
-    <div id="testing">
-
-        <div style="text-align: center">
-            <h2 style="color: white">Network:</h2>
+    <div class="container mt-4">
+        <div class="text-center">
+            <h2>Network:</h2>
         </div>
         <div class ="row">
             <div style="text-align: center; margin-bottom: 20px;">
@@ -50,7 +48,7 @@
                             Coteq: [6, 11, 7, 10, 14, 18, 9]
                             // Add more city data as needed
                         };
-
+                        
                         const ctx = document.getElementById('cityChart').getContext('2d');
                         let cityChart = new Chart(ctx, {
                             type: 'bar',
@@ -87,7 +85,7 @@
                                 }
                             }
                         });
-
+                        
                         function filterData() {
                             const selectedCity = document.getElementById('cityFilter').value;
                             cityChart.data.datasets[0].data = cityData[selectedCity];
@@ -96,28 +94,27 @@
                     </script>
                 </div>
             </div>
-
+            
             <div class="col-12  col-md-7">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Additional Information:</div>
+                    <div class="card-header">Additional Information</div>
                     <div class="card-body">
-                        <div id = "SummaryContent">Number of Connections:</div>
-                        <div id = "SummaryContent">Amount of Electricity Used(kWh):</div>
-                        <div id = "SummaryContent">Amount of Gas Used (m3):</div>
+                        <div id = "SummaryContent">Number of Connections: </div>
+                        <div id = "SummaryContent">Amount of Electricity Used (kWh): </div>
+                        <div id = "SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
                         <div id = "SummaryContent">Delivery Percentage: </div>
                         <div id = "SummaryContent">Types of Connections: </div>
                         <div id = "SummaryContent">Types Connections Percentage: </div>
-                        
+                        <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                     </div>
                 </div> 
             </div>
-
             
             <div class="col-12  col-md-5">
                 <div class="card" style="height: 90%">
                     <div class="card-header">Filter Options:</div>
                     <div class="card-body">
-
+                        
                         <div id = "SummaryContent">Filter report to City:
                             <select id = "ReportCityFilterNetwork"> 
                                 <option value="all">All</option>
@@ -130,7 +127,7 @@
                                 <option value="City 7">City 7</option>
                             </select>
                         </div>
-
+                        
                         <div id = "SummaryContent"> Gas/Electricity/Both:
                             <select id = "Gas_Electricity_Both"> 
                                 <option value="Both">Both</option>
@@ -145,8 +142,17 @@
                     </div>
                 </div> 
             </div>
+            
+            <!-- 🗺️ Heatmap -->
+            <div class="col-12 col-md-12">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">🗺️ Energy Use Heatmap</div>
+                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                </div>
+            </div>
+
         </div>
     </div>
-
+    
 </body>
 </html>

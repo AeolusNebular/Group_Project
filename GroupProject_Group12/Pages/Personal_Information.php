@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    
     <title>Personal Information:</title>
 </head>
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
 
     <!-- Accoun page content -->

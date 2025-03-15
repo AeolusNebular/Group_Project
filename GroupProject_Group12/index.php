@@ -6,6 +6,7 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="scripts/sidebar.js"></script>
+    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
