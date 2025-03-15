@@ -1,16 +1,11 @@
 <?php 
     include('Database_Utilities.php');
 
-
-
     if (($_SERVER["REQUEST_METHOD"] == "POST")) {
-
         $Password = $_POST['Password'];
         $ConPassword = $_POST['ConPass'];
-       
         
-
-        $db = Open_Database(); 
+        $db = Open_Database();
 
         if ($Password === $ConPassword) {
             $Pass = $Password;
@@ -55,7 +50,6 @@
             
         $db -> exec('COMMIT');
 
-
         $db->exec('BEGIN TRANSACTION');
 
             $User_Query = $db-> prepare("SELECT USER_ID FROM User_Details WHERE Email = :Email");
@@ -86,7 +80,7 @@
                 $db->close();
                 exit;
             }
-
+            
             $Ass_Query = $db -> prepare("INSERT INTO Assignations(UserID,NetworkName,City_Name) VALUES (:UserAID,:NetworkName,:CityName)");
             $Ass_Query->bindValue(':NetworkName', $Network);
             $Ass_Query->bindValue(':CityName', $City);
@@ -104,7 +98,6 @@
             }
 
         $db->exec('COMMIT');
-        
         $db->close();
 
         echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "') </script>";

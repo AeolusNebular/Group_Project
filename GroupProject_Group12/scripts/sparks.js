@@ -1,8 +1,11 @@
-document.addEventListener("mousedown", (e) => {
+function handleMouseEvent(e) {
     if (isInteractive(e.target)) {
         createSparks(e.clientX, e.clientY);
     }
-});
+}
+
+document.addEventListener("mousedown", handleMouseEvent);
+document.addEventListener("mouseup", handleMouseEvent);
 
 function isInteractive(element) {
     return (

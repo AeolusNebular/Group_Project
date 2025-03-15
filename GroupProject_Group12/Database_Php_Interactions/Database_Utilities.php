@@ -1,4 +1,3 @@
-  
 <?php  
     function debug_to_console($data) {
         $output = $data;
@@ -43,10 +42,10 @@
             $Q_Res = $db-> exec('COMMIT');
 
             if ($Q_Res) {
-                ebug_to_console("Commited Successfully");
+                debug_to_console("Commited Successfully");
                 
             }   else {
-                ebug_to_console("Failed to Commit");
+                debug_to_console("Failed to Commit");
             }
             
         } while (!$Q_Res);

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     
-    <title>Personal Information:</title>
+    <title>Account - Smart Energy Dashboard</title>
 </head>
 
 <body>
@@ -14,10 +14,12 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
 
-    <!-- Accoun page content -->
-    <div class="container mt-4" id="testing">
+    <!-- Account page content -->
+    <div class="container mt-4">
+
+        <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Personal Information</h2>
+            <h2>Account</h2>
         </div>
         
         <div class="row">
