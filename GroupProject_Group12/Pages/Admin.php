@@ -11,7 +11,7 @@
 
 <body>
     
-    <!-- Navbar -->
+    <!--📍 Navbar -->
     
     <?php include("../modules/navbar.php");
     include('../Database_Php_Interactions/Database_Utilities.php'); ?>
