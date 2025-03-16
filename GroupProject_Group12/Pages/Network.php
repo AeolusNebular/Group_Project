@@ -11,7 +11,8 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <?php include("../modules/navbar.php"); 
+    include('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
     <div class="container mt-4">
         <div class="text-center">
@@ -118,13 +119,9 @@
                         <div id = "SummaryContent">Filter report to City:
                             <select id = "ReportCityFilterNetwork"> 
                                 <option value="all">All</option>
-                                <option value="City 1">City 1</option>
-                                <option value="City 2">City 2</option>
-                                <option value="City 3">City 3</option>
-                                <option value="City 4">City 4</option>
-                                <option value="City 5">City 5</option>
-                                <option value="City 6">City 6</option>
-                                <option value="City 7">City 7</option>
+                                <?php 
+                                    include('../Database_Php_Interactions/CitySelect.php');
+                                ?>
                             </select>
                         </div>
                         

@@ -6,14 +6,16 @@
     if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 
         $Password = $_POST['Password'];
-        $ConPassword = $_POST['ConPass'];
-       
-        
-
+        $ConPassword = $_POST['ConPass'];       
         $db = Open_Database(); 
 
-        if ($Password === $ConPassword) {
-            $Pass = $Password;
+        if (isset($Password) && isset($ConPassword)) {
+            if ($Password === $ConPassword) {
+                $Pass = $Password;
+            }
+        } else {
+            debug_to_console('Password Cannot Be Null');
+            exit;
         }
 
         if (isset($_POST['City_Council_User'])) {
