@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 📢 Header -->
+    <?php include("../modules/header.php"); ?>
+    
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
-    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     
     <title>Admin - Smart Energy Dashboard</title>
 </head>
@@ -113,7 +113,7 @@
                     <div class="card-header">🌃 City Council Diagram</div>
                     <div class="card-body">
                     
-                    <!-- 🌃 City filter -->
+                        <!-- 🌃 City filter -->
                         <div id = "SummaryContent">Filter by city:
                             <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET">
                                 <select name="AdminCityFilter" onChange="this.form.submit()"> 

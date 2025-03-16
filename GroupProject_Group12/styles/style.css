@@ -75,15 +75,65 @@ h2, .card-header {
     width: 100%;
 }
 
+/* Sidebar toggle */
 .navbar-toggler {
     border: none;
-    color: #fff;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    color: #ffffff00;
 }
-.light-mode .navbar-toggler {
-    border-color: #1f073f;
-    color: #1f073f;
+.navbar-toggle-icon {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: white;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+.navbar-toggle-icon::before,
+.navbar-toggle-icon::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+.navbar-toggle-icon::before {
+    left: 0px;
+    top: -8px;
+}
+.navbar-toggle-icon::after {
+    top: 8px;
+    left: 0px;
 }
 
+/* Toggle button animation */
+.navbar-toggler.active .navbar-toggle-icon {
+    background: transparent;
+}
+.navbar-toggler.active .navbar-toggle-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+.navbar-toggler.active .navbar-toggle-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* Toggle button light mode */
+.light-mode .navbar-toggle-icon::before, 
+.light-mode .navbar-toggle-icon::after, 
+.light-mode .navbar-toggle-icon {
+    background-color: #1f073f;
+}
+
+/* Light mode button */
 .icon-container {
     display: inline-block;
     cursor: pointer;

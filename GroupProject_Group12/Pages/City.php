@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
+    <!-- 📢 Header -->
+    <?php include("../modules/header.php"); ?>
     
     <title>City Council - Smart Energy Dashboard</title>
 </head>
@@ -13,7 +12,7 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
-    <!-- City page content -->
+    <!-- 🌃 City page content -->
     <div class="container mt-4">
         
         <!-- 📛 Title -->

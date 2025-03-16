@@ -9,4 +9,8 @@ function toggleNav() {
         document.getElementById("main").style.marginLeft = "250px";
     }
     isopen = !isopen; // Toggle state
+
+    // Icon transformation
+    const toggler = document.querySelector(".navbar-toggler");
+    toggler.classList.toggle("active");
 }

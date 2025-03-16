@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 📢 Header -->
+    <?php include("../modules/header.php"); ?>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     
     <title>Account - Smart Energy Dashboard</title>
 </head>
@@ -38,22 +38,22 @@
                 <div class="card">
                     <div class="card-header">⚡ Additional User Information</div>
                     <div class="card-body" style="height:350px;">
-                        <div style = "float: left" >
-                            <div id = "Content_Inputs">
-                                <label for="UserFName">Enter First Name:</label><br>
-                                <input type="text" name = "UserFName" >
+                        <div style="float: left" >
+                            <div id="Content_Inputs">
+                                <label for="UserFName">First name:</label><br>
+                                <input type="text" name="UserFName">
                             </div>
-                            <div id = "Content_Inputs">
-                                <label for="UserLName">Enter Last Name:</label><br>
-                                <input type="text" name = "UserLName" >
+                            <div id="Content_Inputs">
+                                <label for="UserLName">Last name:</label><br>
+                                <input type="text" name="UserLName">
                             </div>
-                            <div id = "Content_Inputs">
-                                <label for="UserPhoneNo">Enter Phone Number:</label><br>
-                                <input type="tel" name = "UserPhoneNo" >
+                            <div id="Content_Inputs">
+                                <label for="UserPhoneNo">Phone number:</label><br>
+                                <input type="tel" name="UserPhoneNo">
                             </div>
-                            <div id = "Content_Inputs">
-                                <label for="UserHomeNo">Enter Home Address:</label><br>
-                                <input type="text" name = "UserHomeNo" >
+                            <div id="Content_Inputs">
+                                <label for="UserHomeNo">Home address:</label><br>
+                                <input type="text" name="UserHomeNo">
                             </div>
                         </div>
                     </div>

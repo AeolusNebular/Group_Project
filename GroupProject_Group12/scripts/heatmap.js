@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ✅ Ensure the div exists before initializing
+    // ✅ Ensure the div exists before initialising
     const heatmapContainer = document.getElementById("heatmap");
     if (!heatmapContainer) return;
 
-    // ✅ Initialize map
-    var map = L.map("heatmap", { zoomControl: false }).setView([52.3676, 4.9041], 7);
+    // ✅ Initialise map over modified Dutch centre point
+    var map = L.map("heatmap", { zoomControl: false }).setView([52.1, 5.2], 7);
 
     // 🗺️ Mapbox tile layer URL
     L.tileLayer("https://api.mapbox.com/styles/v1/bryzerse/cm88xjf8h00ds01sbeevxgzhz/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYnJ5emVyc2UiLCJhIjoiY2traWNsZWhmMG13MzJvcGdiZ3hkbjlodyJ9.BV94uCu_hACQrqEbO74A8w", {
