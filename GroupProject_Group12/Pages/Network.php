@@ -14,7 +14,10 @@
     <?php include("../modules/navbar.php"); 
     include('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
+    <!-- Network page content -->
     <div class="container mt-4">
+
+        <!-- 📛 Title -->
         <div class="text-center">
             <h2>Network:</h2>
         </div>
@@ -96,7 +99,7 @@
                 </div>
             </div>
             
-            <div class="col-12  col-md-7">
+            <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
                     <div class="card-header">Additional Information</div>
                     <div class="card-body">
@@ -111,12 +114,12 @@
                 </div> 
             </div>
             
-            <div class="col-12  col-md-5">
+            <div class="col-12 col-md-5">
                 <div class="card" style="height: 90%">
                     <div class="card-header">Filter Options:</div>
                     <div class="card-body">
                         
-                        <div id = "SummaryContent">Filter report to City:
+                        <div id = "SummaryContent">Filter report by city: 
                             <select id = "ReportCityFilterNetwork"> 
                                 <option value="all">All</option>
                                 <?php 
@@ -125,17 +128,17 @@
                             </select>
                         </div>
                         
-                        <div id = "SummaryContent"> Gas/Electricity/Both:
+                        <div id = "SummaryContent">Filter report by utility: 
                             <select id = "Gas_Electricity_Both"> 
-                                <option value="Both">Both</option>
+                                <option value="Both">All</option>
                                 <option value="Gas">Gas</option>
-                                <option value="Electricity">Electricity</option>                                
+                                <option value="Electricity">Electricity</option>
                             </select>
                         </div> 
                         
                         <div id = "SummaryContent">
-                            <button type = "button" class = "btn" style = "color: white; float: right">Print Summary</button>
-                        </div>                        
+                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                        </div>
                     </div>
                 </div> 
             </div>

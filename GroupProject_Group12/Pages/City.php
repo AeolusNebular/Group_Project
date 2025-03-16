@@ -13,38 +13,41 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); ?>
     
+    <!-- City page content -->
     <div class="container mt-4">
+        
+        <!-- 📛 Title -->
         <div class="text-center">
             <h2>City</h2>
         </div>
 
         <!-- 🧭 City selection -->
-        <div class="btn-group" style = "margin-top: 25px; margin-left: 15px;" role = "group" >
-            <button type = "button" class="btn btn-primary">Stedin</button>
-            <button type = "button" class="btn btn-primary">Liander</button>
-            <button type = "button" class="btn btn-primary">Coteq</button>
-            <button type = "button" class="btn btn-primary">Enduris</button>
-            <button type = "button" class="btn btn-primary">Rendo</button>
-            <button type = "button" class="btn btn-primary">Westlandinfra</button>
-            <button type = "button" class="btn btn-primary">Enexis</button>
+        <div class="btn-group" style="margin-top: 25px; margin-left: 15px;" role="group" >
+            <button type="button" class="btn btn-primary">Stedin</button>
+            <button type="button" class="btn btn-primary">Liander</button>
+            <button type="button" class="btn btn-primary">Coteq</button>
+            <button type="button" class="btn btn-primary">Enduris</button>
+            <button type="button" class="btn btn-primary">Rendo</button>
+            <button type="button" class="btn btn-primary">Westlandinfra</button>
+            <button type="button" class="btn btn-primary">Enexis</button>
         </div>
         
         <!-- 📈 Network graph -->
         <div class="row">
-            <div class="col-12  col-md-7">
+            <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
                     <div class="card-header">📊 Network Graph</div>
-                        <div class="card-body" >
-                            <canvas id = "testChart"></canvas>
-                        </div>
+                    <div class="card-body">
+                        <canvas id="testChart"></canvas>
+                    </div>
                 </div>
             </div>
             
             <!-- 📅 Annual summary -->
-            <div class="col-12  col-md-5" >
+            <div class="col-12 col-md-5">
                 <div class="card" style="height: 90%">
                     <div class="card-header">📅 Annual Summary</div>
-                    <div class="card-body" >
+                    <div class="card-body">
                         <div id = "SummaryContent">Number of Connections: </div>
                         <div id = "SummaryContent">Amount of Electricity Used (kWh): </div>
                         <div id = "SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>

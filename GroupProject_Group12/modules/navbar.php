@@ -19,13 +19,13 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Leaflet CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <!-- Heatmap.js -->
-    <script src="https://unpkg.com/heatmap.js"></script>
-    <script src="https://unpkg.com/leaflet-heatmap/leaflet-heatmap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heatmap.js@2.0.0"></script> <!-- STILL SEEMINGLY BROKEN -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap/leaflet-heatmap.js"></script>
     
     <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
@@ -61,7 +61,7 @@
     
     <!-- Navbar - vertical -->
     <nav id="main" style = "position: relative">
-        <div class="sidebar" id="mySidebar"  >
+        <div class="sidebar" id="mySidebar">
             <ul style="list-style-type: none; width: 30px;">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/index.php">Dashboard</a>

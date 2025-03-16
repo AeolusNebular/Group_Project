@@ -1,5 +1,5 @@
 function Element_Empty(Param) {
-    if (Param.value === "") {
+    if (!Param || Param.value.trim() === "") {
         Param.classList.add("border-danger")
         Param.focus();
         return true;        
@@ -15,44 +15,38 @@ function ConfirmedPass(Param1,Param2) {
         return true;
         
     } else {
-       alert("Passwords do not match!!!!!!!")
-       return false;
+        document.getElementById("passwordError").innerText = "Passwords do not match!";
+        return false;
     }
 }
 
 function Create_New_User() {
-    var Networks = document.getElementById("Networks").value;
-    var City = document.getElementById("Cities").value;
     var Email = document.getElementById("Email");
     var Password = document.getElementById("Password");
     var ConPass = document.getElementById("ConPass");
+    var Networks = document.getElementById("Networks") ? document.getElementById("Networks").value : "";
+    var City = document.getElementById("Cities") ? document.getElementById("Cities").value : "";
+
     var CorrectInfo = !Element_Empty(Email) && !Element_Empty(Password) && !Element_Empty(ConPass) && ConfirmedPass(Password,ConPass);
 
-    console.log(CorrectInfo)
+    console.log("Form valid:", CorrectInfo);
     
     if (CorrectInfo) {
-        //Posts Information above into DB if CorrectInfo is true 
+        // Posts information above into DB if CorrectInfo is true 
     }
 }
 
 function UserType() {
-    var NetworkUser = document.getElementById("Network User").checked; 
-    var CityUser = document.getElementById("City Council User").checked;
-    
+    var NetworkUser = document.getElementById("NetworkUser").checked;
+    var CityUser = document.getElementById("CityCouncilUser").checked;
+
+    document.getElementById("Network_Select").style.display = NetworkUser ? "block" : "none";
+    document.getElementById("City_Select").style.display = CityUser ? "block" : "none";
+
     if (NetworkUser) {
-        document.getElementById("City Council User").checked = false;
-        document.getElementById("Network_Select").style.display = "block";
-        document.getElementById("City_Select").style.display = "none";
-    } else {
-        document.getElementById("Network_Select").style.display = "none"; 
+        document.getElementById("CityCouncilUser").checked = false;
     }
-    
     if (CityUser) {
-        document.getElementById("Network User").checked = false;
-        document.getElementById("City_Select").style.display = "block";
-        document.getElementById("Network_Select").style.display = "none";          
-    } else {
-        document.getElementById("City_Select").style.display = "none";
+        document.getElementById("NetworkUser").checked = false;
     }
-    
 }

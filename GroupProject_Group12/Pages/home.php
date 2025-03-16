@@ -13,8 +13,10 @@
     <!-- 📍 Navbar -->
     <?php include("modules/navbar.php"); ?>
     
-    <!-- Dashboard Content -->
+    <!-- Home page content (dashboard) -->
     <div class="container mt-4">
+
+        <!-- 📛 Title -->
         <div class="text-center">
             <h2>Dashboard</h2>
         </div>
