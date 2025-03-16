@@ -153,7 +153,7 @@
                                         $NoOfCities[$x] = [];
                                     }
 
-                                    $fp = fopen ( "../CSV_Files/coteq_electricity_2013.csv" , "r" );
+                                    $fp = fopen ( "../CSV_Files/Electricity/coteq_electricity_2016.csv" , "r" );
                                     while (( $data = fgetcsv( $fp )) !== FALSE ) {
                                         list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
                                         
