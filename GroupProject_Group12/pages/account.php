@@ -94,12 +94,12 @@
                                 </select>
                             </li>
                             <li>
-                                <input type="checkbox" id="contrastMode" class="form-check-input">
-                                <label for="contrastMode">High contrast</label>
+                                <input type="checkbox" id="highContrast" class="form-check-input">
+                                <label for="highContrast">High contrast</label>
                             </li>
                             <li>
                                 <input type="checkbox" id="limitAnimations" class="form-check-input">
-                                <label for="animations">Limit screen animations</label>
+                                <label for="limitAnimations">Limit screen animations</label>
                             </li>
                             <li>
                                 <label for="theme">Theme selection:</label>

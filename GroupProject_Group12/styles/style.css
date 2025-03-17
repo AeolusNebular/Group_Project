@@ -401,3 +401,49 @@ h2, .card-header {
 .light-mode #heatmap {
     background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
 }
+
+/* ================= ✅ CHECKBOXES ================= */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+input[type="checkbox"] {
+    margin: 8px 0;
+    font-size: 16px;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-radius: 8px !important;
+    position: relative;
+    outline: none;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+input[type="checkbox"]::before {
+    content: "✔";
+    font-size: 16px;
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.2s ease;
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0px 0px 8px #ff7e64;
+}
+
+input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #ff7e64, #ff46b3);
+    border-color: #ff46b3;
+}
+input[type="checkbox"]:checked::before {
+    color: white;
+}
