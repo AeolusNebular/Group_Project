@@ -28,7 +28,7 @@ body::after {
 }
 
 .light-mode {
-    color: #1f073f;
+    color: #103;
 }
 .light-mode::before {
     opacity: 0;
@@ -53,7 +53,7 @@ h2, .card-header {
     transition: background 0.4s ease, color 0.3s ease;
 }
 .light-mode .card {
-    color: #1f073f;
+    color: #103;
     background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
 }
 
@@ -130,7 +130,7 @@ h2, .card-header {
 .light-mode .navbar-toggle-icon::before, 
 .light-mode .navbar-toggle-icon::after, 
 .light-mode .navbar-toggle-icon {
-    background-color: #1f073f;
+    background-color: #103;
 }
 
 /* Light mode button */
@@ -150,7 +150,7 @@ h2, .card-header {
     fill: yellow;
     stroke: yellow;
     transform: rotate(45deg);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 .icon-container:hover .moon-icon {
     fill: #ff7e64;
@@ -162,6 +162,82 @@ h2, .card-header {
 }
 .light-mode #lightModeIcon {
     transform: rotate(45deg);
+}
+
+/* Account menu container */
+.account-menu {
+    position: relative;
+    display: inline-block;
+}
+
+/* Account button */
+.account-btn {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+    display: block;
+}
+.light-mode .account-btn {
+    color: #103;
+}
+.account-btn:hover {
+    box-shadow: 4px 4px 16px #ff7e64;
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background: linear-gradient(to top right, #424687, #764082);
+    border-radius: 16px;
+    width: 140px;
+    box-shadow: 0px 4px 8px #00000033;
+    opacity: 0;
+    transform: translateY(-8px);
+    z-index: 10;
+    pointer-events: none; /* This prevents interaction when invisible */
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Dropdown menu links */
+.dropdown a {
+    display: block;
+    border-radius: 16px;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s ease-in-out;
+}
+
+.dropdown a:hover {
+    background: #ffffff33;
+}
+
+.account-menu:hover .dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Show dropdown on hover */
+.account-menu:hover .dropdown,
+.account-menu .dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto; /* Ensure interactivity */
+}
+
+/* Add a transition delay for smoother effect */
+.dropdown {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 /* ================= 📑 SIDEBAR ================= */
@@ -296,7 +372,7 @@ h2, .card-header {
     height: 3px;
     background: yellow;
     border-radius: 40%;
-    box-shadow: 0 0 10px orange;
+    box-shadow: 0 0 8px orange;
     pointer-events: none;
     animation: spark-fly 1s ease-out forwards;
     transform-origin: center;

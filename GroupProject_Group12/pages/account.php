@@ -16,7 +16,7 @@
 
     <!-- Account page content -->
     <div class="container mt-4">
-
+        
         <!-- 📛 Title -->
         <div class="text-center">
             <h2>Account</h2>
@@ -60,6 +60,62 @@
                 </div>
             </div>
 
+            <!-- 📛 Title -->
+            <div class="text-center">
+                <h2>Settings</h2>
+            </div>
+            
+            <!-- Side panel (thin) -->
+            <div class="col-12 col-md-6">
+                <!-- 🎨 Customisability options -->
+                <div class="card">
+                    <div class="card-header">⚙️ User Settings</div>
+                    <div class="card-body">
+                        <ul>
+                            
+                            <li>
+                                <label for="darkMode">Dark mode:</label>
+                                <select id="darkMode" class="form-select">
+                                    <option value="auto">Auto</option>
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="darkModeNavbar" class="form-check-input">
+                                <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
+                            </li>
+                            <li>
+                                <label for="fontSize">Font size:</label>
+                                <select id="fontSize" class="form-select">
+                                    <option value="default">Default</option>
+                                    <option value="large">Large</option>
+                                    <option value="extra-large">Extra large</option>
+                                </select>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="contrastMode" class="form-check-input">
+                                <label for="contrastMode">High contrast</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="limitAnimations" class="form-check-input">
+                                <label for="animations">Limit screen animations</label>
+                            </li>
+                            <li>
+                                <label for="theme">Theme selection:</label>
+                                <select id="theme" class="form-select">
+                                    <option value="default">Default</option>
+                                    <option value="deuteranopia">Deuteranopia</option>
+                                    <option value="tritanopia">Tritanopia</option>
+                                    <option value="achromatopsia">Achromatopsia</option>
+                                </select>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 

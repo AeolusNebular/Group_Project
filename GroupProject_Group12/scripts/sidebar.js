@@ -1,16 +1,13 @@
 var isopen = false;
 
 function toggleNav() {
-    if (isopen) {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    } else {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-    isopen = !isopen; // Toggle state
-
+    const sidebar = document.getElementById("mySidebar");
+    const main = document.getElementById("main");
+    const isOpen = sidebar.style.width === "250px";
+    
+    sidebar.style.width = isOpen ? "0" : "250px";
+    main.style.marginLeft = isOpen ? "0" : "250px";
+    
     // Icon transformation
-    const toggler = document.querySelector(".navbar-toggler");
-    toggler.classList.toggle("active");
+    document.querySelector(".navbar-toggler").classList.toggle("active");
 }

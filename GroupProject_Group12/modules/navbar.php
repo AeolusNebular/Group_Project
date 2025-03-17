@@ -3,17 +3,17 @@
 
 <body>
     
-    <!-- Navbar -->
+    <!-- 📍 Navbar -->
     <nav class="navbar">
         
-        <!-- Vertical navbar toggle button with aria controls for accessibility -->
+        <!-- Vertical navbar toggle button (with aria controls for accessibility) -->
         <button class="navbar-toggler" type="button" onclick="toggleNav()" aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span> 
         </button>
         
         <h2>Smart Energy Dashboard</h2>
         
-        <div class="icon-container">
+        <div>
             <div class="icon-container">
                 <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" 
                     style="margin-right: 8px;" 
@@ -23,10 +23,31 @@
                     </svg>
                 </button>
             </div>
+            
+            <div class="icon-container">
+                <!-- 👤 Account button with dropdown -->
+                <div class="account-menu">
+                    <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
+                        </svg>
+                    </button>
+                    
+                    <!-- 🚨 TBA: NEW USER VARIANT -->
+
+                    <!-- 🔽 Dropdown menu -->
+                    <div id="accountDropdown" class="dropdown">
+                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
+                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Settings</a>
+                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Logout</a>
+                    </div>
+                </div>
+            </div>
+        
         </div>
     </nav>
     
-    <!-- Sidebar -->
+    <!-- 📍 Sidebar -->
     <nav id="main">
         <div class="sidebar" id="mySidebar">
             <ul style="list-style-type: none; width: 30px;">

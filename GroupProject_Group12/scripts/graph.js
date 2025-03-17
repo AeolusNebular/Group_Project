@@ -11,7 +11,7 @@ function drawChart() {
     let theme = document.body.classList.contains("light-mode");
 
     let font = { family: "Space Grotesk"};
-    let textColor = theme ? "#000" : "#fff";
+    let textColor = theme ? "#103" : "#fff";
     let lineColor = theme ? "#aaa" : "#777";
 
     const canvas = document.getElementById("testChart");
@@ -95,7 +95,7 @@ function drawDoughnut() {
             datasets: [{
                 label: "Networks",
                 data: [1230,1213,530,455,1290,750,942],
-                borderColor: "rgba(151, 90, 225, 0)",
+                borderColor: "#975ae100",
                 backgroundColor: [
                     '#003f5c',
                     '#374c80',
