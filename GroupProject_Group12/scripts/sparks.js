@@ -1,4 +1,4 @@
-/*function handleMouseEvent(e) {
+function handleMouseEvent(e) {
     if (isInteractive(e.target)) {
         createSparks(e.clientX, e.clientY);
     }
@@ -53,4 +53,4 @@ function createSparks(x, y) {
             }
         }, 16); 
     }
-} */
+} 
