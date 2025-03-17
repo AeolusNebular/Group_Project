@@ -1,11 +1,26 @@
-function handleMouseEvent(e) {
-    if (isInteractive(e.target)) {
-        createSparks(e.clientX, e.clientY);
-    }
-}
+let holdTimer;
+let heldLongEnough = false;
 
-document.addEventListener("mousedown", handleMouseEvent);
-document.addEventListener("mouseup", handleMouseEvent);
+document.addEventListener("mousedown", (e) => {
+    if (isInteractive(e.target)) {
+        createSparks(e.clientX, e.clientY); // Normal click = sparks
+    }
+
+    // Start hold timer
+    holdTimer = setTimeout(() => {
+        heldLongEnough = true;
+    }, 500); // 0.5 second hold time
+});
+
+document.addEventListener("mouseup", (e) => {
+    clearTimeout(holdTimer); // Stop countdown if released early
+
+    if (heldLongEnough && isInteractive(e.target)) {
+        createSparks(e.clientX, e.clientY); // Long press = another spark
+    }
+
+    heldLongEnough = false; // Reset flag
+});
 
 function isInteractive(element) {
     return (
