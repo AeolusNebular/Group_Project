@@ -13,7 +13,9 @@
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
-    include('../Database_Php_Interactions/Database_Utilities.php'); ?>
+    include('../Database_Php_Interactions/Database_Utilities.php');
+    include('../Database_Php_Interactions/CSVDataFilter.php');
+    ?>
     
     <!-- Admin page content -->
     <div class="container-lg mt-4" style="min-height: 800px;">
@@ -48,12 +50,12 @@
                             <!-- Network and city assignment code -->
                             <div id="AdminPanelFormRigth">
                                 <div style="margin-top: 10px">
-                                    <input class="form-check-input" type="checkbox" id="Network User" name="Network_User" onChange="UserType()">
+                                    <input class="form-check-input" type="checkbox" id="Network_User" name="Network_User" onChange="UserType()">
                                     <label class="form-check-label" for="Network User">Network user</label> 
                                 </div>
                                 
                                 <div style="margin-top: 10px">
-                                    <input class="form-check-input" type="checkbox" id="City Council User" name="City_Council_User" onChange="UserType()"> 
+                                    <input class="form-check-input" type="checkbox" id="City_Council_User" name="City_Council_User" onChange="UserType()"> 
                                     <label class="form-check-label" for="City Council User">City council user</label> 
                                 </div> 
                                     <!-- Network and city select statements -->
@@ -103,6 +105,95 @@
                     <div class="card-header">📊 Network Users</div>
                     <div class="card-body">
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
+                        
+                        <?php 
+                            $Type = 'electricity';
+                            $Years = ['2020']; 
+                            $Networks = ["coteq", "stedin", "liander", "westland-infra", "enexis"];
+                            $Filter = $_GET['AdminCityFilter'];
+                            $UpFilter = strtoupper($Filter);
+                            $NetworkConsumeTotals = [];
+
+                            foreach ($Years as $Year) { 
+                                foreach ($Networks as $Network) {
+                                    $NetworkConsume = 0;
+                                    $InNetworkCityConsumeValues = FilterCSV($UpFilter,$Type,$Year,$Network);
+
+                                    foreach ($InNetworkCityConsumeValues as $CityConsume) {
+                                        $NetworkConsume += $CityConsume;
+                                    }
+                                    $NetworkConsumeTotals[$Network] = $NetworkConsume; 
+                                }
+                            }
+                            debug_to_console($NetworkConsumeTotals);
+                        ?>
+
+
+                        
+                        <script> 
+                            var data = <?php echo json_encode($NetworkConsumeTotals); ?>; 
+                            console.log(data)
+                            document.addEventListener("DOMContentLoaded", function () {
+                            drawDoughnut();
+                            window.addEventListener("resize", drawDoughnut); // ✅ Attach resize event once
+                            });
+
+                        function drawDoughnut() {
+                            let font = { family: "Space Grotesk"};
+                            let textColor = theme ? "#000" : "#fff";
+
+                            const canvas = document.getElementById("NetworkCanvas");
+                            
+                            // ✅ Ensure the canvas context is fresh
+                            if (!canvas) return; // Exit if canvas is missing
+                            const ctx = canvas.getContext("2d");
+
+                            // ✅ Destroy existing chart properly
+                            if (chartInstance) {
+                                chartInstance.destroy();
+                                chartInstance = null; // Clear instance reference
+                            }
+
+                            chartInstance = new Chart(ctx, {
+                                type: "doughnut",
+                                data: {
+                                    labels: ["Coteq", "Stedin", "Liander", "Westlandinfra", "Enexis"],
+                                    datasets: [{
+                                        label: "Networks",
+                                        data: Object.values(data),
+                                        borderColor: "#975ae100",
+                                        backgroundColor: [
+                                            '#003f5c',
+                                            '#374c80',
+                                            '#58508d',
+                                            '#7a5195',                    
+                                            '#bc5090',
+                                            '#ff6361',
+                                            '#ffa600'
+                                        ],
+                                    
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        legend: {
+                                            position: "bottom",
+                                            labels: { color: textColor, font: font }
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: "Networks Annual Usage",
+                                            color: textColor, 
+                                            font: font 
+                                        }
+                                    },
+                                
+                                }
+                            });
+                        }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -139,39 +230,38 @@
                             <div class="SummaryContent">Filter options:</div>
                         </div>
                         <table>
-                            <?php
+                               <?php 
                                 if ($_SERVER['REQUEST_METHOD'] == "GET" && (isset($_GET['AdminCityFilter']))) {
-                                    $CityFilter = $_GET['AdminCityFilter'];
-                                    $CityFilter = strtoupper($CityFilter);
-
-                                    $filter = array($CityFilter);
-                                    $words = array_map('preg_quote', $filter);
-                                    $regex = '/'.implode('|', $words).'/';
-                                    $NoOfCities = array();
-
-                                    foreach ($filter as $x) {
-                                        $NoOfCities[$x] = [];
-                                    }
-
-                                    $fp = fopen ( "../CSV_Files/Electricity/coteq_electricity_2016.csv" , "r" );
-                                    while (( $data = fgetcsv( $fp )) !== FALSE ) {
-                                        list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;
-                                        
-                                        if (preg_match($regex, $city)) {
-                                            $NoOfCities[$city][] = $data;
-                                        }
-                                    }
+                                    $Type = 'electricity';
+                                    $Year = '2016';
+                                    $Network = 'coteq';
+                                    $Filter = $_GET['AdminCityFilter'];
+                                    $UpFilter = strtoupper($Filter);
                                     
-                                    foreach ($NoOfCities as $city => $DataForCity) {
-                                        $AnnualCostForCities = 0;
-                                        foreach ($DataForCity as $cities) {
-                                            $AnnualCostForCities += $cities[11];
+
+
+                                    $Values = FilterCSV($Filter,$Type,$Year,$Network);
+                                    
+                                    
+                                  
+                                    
+                                    if (isset($Values) && (!$Values == [])){
+                                        echo 
+                                        '<tr>
+                                        <th>city</th>
+                                        <th>annual Cost</th>
+                                        </tr>';
+                                        
+                                        foreach ($Values as $city => $AnnualConsume) {
+                                            echo ' <tr>                                         
+                                            <td>' . $city .'</td>
+                                            <td>' . $AnnualConsume . '</td>
+                                            </tr>';
                                         }
-                                        echo "$city $AnnualCostForCities ";
-                                    } 
-                                    fclose ( $fp );
+                                    }
                                 }
-                            ?>
+                                ?>
+                                
                         </table>
                     </div>
                 </div>

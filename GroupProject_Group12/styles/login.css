@@ -1,6 +1,6 @@
 #Login_Body {
     margin: auto;
-    background-image: url('/Group_Project/GroupProject_Group12/Images/Login_BackgroundV2.jpg');
+    background-image: url('/Group_Project/GroupProject_Group12/Images/Login_BackgroundV2.jpg') !important;
     background-size:     cover;
     background-repeat:   no-repeat;
     background-position: center center; 
