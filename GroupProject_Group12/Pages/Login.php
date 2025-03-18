@@ -12,6 +12,8 @@
 
 <body id = "Login_Body">
     
+    <?php include('../Database_Php_Interactions/Database_Utilities.php'); ?>
+    
     <!-- Modal content -->
     <div class = "container-fluid" id = "Login_Content">
         <div id = "LoginDiv">
@@ -29,7 +31,7 @@
                     <input type="password" class="form-control" name = "Login_Password"  placeholder = "Password" >
                 </div>
                 <div class = "mb-4">
-                    <button class="btn btn-primary" style = "float: right" onClick= "Login_User()" >Login</button>
+                    <button class="btn btn-primary" style = "float: right" onClick= "" >Login</button>
                 </div>
             </form>  
         </div>

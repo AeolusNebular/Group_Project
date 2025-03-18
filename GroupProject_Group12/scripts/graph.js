@@ -67,66 +67,7 @@ function drawChart() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    drawDoughnut();
-    window.addEventListener("resize", drawDoughnut); // ✅ Attach resize event once
-});
 
-function drawDoughnut() {
-    let font = { family: "Space Grotesk"};
-    let textColor = theme ? "#000" : "#fff";
-
-    const canvas = document.getElementById("NetworkCanvas");
-    
-    // ✅ Ensure the canvas context is fresh
-    if (!canvas) return; // Exit if canvas is missing
-    const ctx = canvas.getContext("2d");
-
-    // ✅ Destroy existing chart properly
-    if (chartInstance) {
-        chartInstance.destroy();
-        chartInstance = null; // Clear instance reference
-    }
-
-    chartInstance = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: ["Coteq", "Enduris", "Stedin", "Liander","Rendo","Westlandinfra","Enexis"],
-            datasets: [{
-                label: "Networks",
-                data: [1230,1213,530,455,1290,750,942],
-                borderColor: "#975ae100",
-                backgroundColor: [
-                    '#003f5c',
-                    '#374c80',
-                    '#58508d',
-                    '#7a5195',                    
-                    '#bc5090',
-                    '#ff6361',
-                    '#ffa600'
-                  ],
-               
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: "bottom",
-                    labels: { color: textColor, font: font }
-                },
-                title: {
-                    display: true,
-                    text: "Networks Annual Usage",
-                    color: textColor, 
-                    font: font 
-                }
-            },
-          
-        }
-    });
-}
 /*
 document.addEventListener("DOMContentLoaded", function () {
     drawCouncilChart();

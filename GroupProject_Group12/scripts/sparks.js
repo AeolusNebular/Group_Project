@@ -68,4 +68,4 @@ function createSparks(x, y) {
             }
         }, 16); 
     }
-}
+} 
