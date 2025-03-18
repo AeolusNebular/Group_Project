@@ -75,23 +75,27 @@
                             
                             <li>
                                 <label for="darkMode">Dark mode:</label>
-                                <select id="darkMode" class="form-select">
-                                    <option value="auto">Auto</option>
-                                    <option value="light">Light</option>
-                                    <option value="dark">Dark</option>
-                                </select>
+                                <div class="themed-dropdown">
+                                    <select id="darkMode" class="form-select">
+                                        <option value="auto">Auto</option>
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                    </select>
+                                </div>
                             </li>
                             <li>
-                                <input type="checkbox" id="darkModeNavbar" class="form-check-input">
+                                <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
                                 <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
                             </li>
                             <li>
                                 <label for="fontSize">Font size:</label>
-                                <select id="fontSize" class="form-select">
-                                    <option value="default">Default</option>
-                                    <option value="large">Large</option>
-                                    <option value="extra-large">Extra large</option>
-                                </select>
+                                <div class="themed-dropdown">
+                                    <select id="fontSize" class="form-select">
+                                        <option value="default">Default</option>
+                                        <option value="large">Large</option>
+                                        <option value="extra-large">Extra large</option>
+                                    </select>
+                                </div>
                             </li>
                             <li>
                                 <input type="checkbox" id="highContrast" class="form-check-input">
@@ -103,12 +107,14 @@
                             </li>
                             <li>
                                 <label for="theme">Theme selection:</label>
-                                <select id="theme" class="form-select">
-                                    <option value="default">Default</option>
-                                    <option value="deuteranopia">Deuteranopia</option>
-                                    <option value="tritanopia">Tritanopia</option>
-                                    <option value="achromatopsia">Achromatopsia</option>
-                                </select>
+                                <div class="themed-dropdown">
+                                    <select id="theme" class="form-select">
+                                        <option value="default">Default</option>
+                                        <option value="deuteranopia">Deuteranopia</option>
+                                        <option value="tritanopia">Tritanopia</option>
+                                        <option value="achromatopsia">Achromatopsia</option>
+                                    </select>
+                                </div>
                             </li>
                             
                         </ul>

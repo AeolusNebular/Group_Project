@@ -38,7 +38,7 @@ body::after {
 }
 
 h2, .card-header {
-    text-shadow: 0 0 20px #904784;
+    text-shadow: 0 0 18px #904784;
     font-weight: bold;
 }
 
@@ -54,7 +54,7 @@ h2, .card-header {
 }
 .light-mode .card {
     color: #103;
-    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
+    background: linear-gradient(to top right, #cce, #ece);
 }
 
 #SummaryContent {
@@ -64,7 +64,7 @@ h2, .card-header {
 /* Responsive Styling */
 @media (max-width: 768px) {
     .col-12 { max-width: 90%; }
-    .panel-body { padding: 10px; }
+    .panel-body { padding: 12px; }
     .panel-heading, .panel-footer { padding: 8px 12px; }
 }
 
@@ -153,8 +153,8 @@ h2, .card-header {
     transition: all 0.2s ease;
 }
 .icon-container:hover .moon-icon {
-    fill: #ff7e64;
-    stroke: #ff7e64;
+    fill: #f76;
+    stroke: #f76;
 }
 
 #lightModeIcon {
@@ -168,6 +168,7 @@ h2, .card-header {
 .account-menu {
     position: relative;
     display: inline-block;
+    padding: 4px;
 }
 
 /* Account button */
@@ -186,7 +187,7 @@ h2, .card-header {
     color: #103;
 }
 .account-btn:hover {
-    box-shadow: 4px 4px 16px #ff7e64;
+    box-shadow: 4px 4px 16px #f76;
 }
 
 /* Dropdown menu */
@@ -201,7 +202,7 @@ h2, .card-header {
     opacity: 0;
     transform: translateY(-8px);
     z-index: 10;
-    pointer-events: none; /* This prevents interaction when invisible */
+    pointer-events: none; /* Prevents interaction when invisible */
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -230,7 +231,6 @@ h2, .card-header {
 .account-menu:hover .dropdown,
 .account-menu .dropdown:hover {
     opacity: 1;
-    visibility: visible;
     transform: translateY(0);
     pointer-events: auto; /* Ensure interactivity */
 }
@@ -271,7 +271,7 @@ h2, .card-header {
 .sidebar a:hover {
     text-decoration-line: underline;
     transition: all 0.3s ease;
-    text-shadow: 4px 4px 20px #ff7e64;
+    text-shadow: 4px 4px 20px #f76;
 }
 
 .sidebar .closebtn {
@@ -303,7 +303,7 @@ h2, .card-header {
     transition: all 0.3s ease;
 }
 .fancy-button:hover {
-    box-shadow: 4px 4px 20px #ff7e64;
+    box-shadow: 4px 4px 20px #f76;
 }
 
 /* ================= 📈 Chart ================= */
@@ -399,7 +399,7 @@ h2, .card-header {
     z-index: 1;
 }
 .light-mode #heatmap {
-    background: linear-gradient(to top right, #c3c3e7, #e6c7e6);
+    background: linear-gradient(to top right, #cce, #ece);
 }
 
 /* ================= ✅ CHECKBOXES ================= */
@@ -413,18 +413,23 @@ h2, .card-header {
 }
 
 input[type="checkbox"] {
+    vertical-align: middle;
+    margin-right: 6px;
     margin: 8px 0;
     font-size: 16px;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #fff;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ece;
     border-radius: 8px !important;
     position: relative;
+    cursor: pointer;
     outline: none;
+    background: linear-gradient(to top right, #225, #536);
     transition: all 0.2s ease;
-    background: transparent;
 }
+
+/* Checkbox tick */
 input[type="checkbox"]::before {
     content: "✔";
     font-size: 16px;
@@ -437,13 +442,74 @@ input[type="checkbox"]::before {
 }
 
 input[type="checkbox"]:hover {
-    box-shadow: 0px 0px 8px #ff7e64;
+    box-shadow: 0px 0px 8px #f76;
 }
 
 input[type="checkbox"]:checked {
-    background: linear-gradient(135deg, #ff7e64, #ff46b3);
+    background: linear-gradient(135deg, #f76, #ff46b3);
     border-color: #ff46b3;
 }
 input[type="checkbox"]:checked::before {
     color: white;
+}
+
+/* ================= 🔽 DROPDOWN SELECTORS ================= */
+.themed-dropdown {
+    position: relative;
+    width: 200px;
+}
+
+.themed-dropdown select {
+    appearance: none;
+    background: linear-gradient(to top right, #225, #536);
+    color: white;
+    border: 2px solid #ece;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.themed-dropdown select option {
+    background: #225;
+}
+.themed-dropdown select:hover {
+    box-shadow: 0px 0px 12px #f76;
+}
+.themed-dropdown select:focus {
+    border-color: #f76;
+    box-shadow: 0px 0px 12px #ff46b3;
+}
+
+/* Dropdown arrow */
+.themed-dropdown::after {
+    content: "▼";
+    font-size: 14px;
+    color: #ece;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.themed-dropdown select:focus + ::after {
+    color: #f76;
+}
+
+/* Light mode adjustments */
+.light-mode .themed-dropdown select {
+    background: linear-gradient(to top right, #cce, #ece);
+    color: #103;
+    border-color: #103;
+}
+.light-mode .themed-dropdown::after {
+    color: #103;
+}
+.light-mode .themed-dropdown select option {
+    background: #cce;
 }
