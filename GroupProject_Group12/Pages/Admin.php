@@ -51,12 +51,12 @@
                             <div id="AdminPanelFormRigth">
                                 <div style="margin-top: 10px">
                                     <input class="form-check-input" type="checkbox" id="Network_User" name="Network_User" onChange="UserType()">
-                                    <label class="form-check-label" for="Network User">Network user</label> 
+                                    <label class="form-check-label" for="Network_User">Network user</label> 
                                 </div>
                                 
                                 <div style="margin-top: 10px">
                                     <input class="form-check-input" type="checkbox" id="City_Council_User" name="City_Council_User" onChange="UserType()"> 
-                                    <label class="form-check-label" for="City Council User">City council user</label> 
+                                    <label class="form-check-label" for="City_Council_User">City council user</label> 
                                 </div> 
                                     <!-- Network and city select statements -->
                                 <div id="Network_Select" style="display: none;" class="themed-dropdown">
@@ -101,7 +101,7 @@
             </div>
             
             <div class="col-12 col-md-7">
-                <div class="card" style="height: 90%">
+                <div class="card">
                     <div class="card-header">📊 Network Users</div>
                     <div class="card-body">
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
@@ -200,7 +200,7 @@
             
             <!-- 🌃 City councils diagram -->
             <div class="col-12 col-md-12">
-                <div class="card" style="height: 90%">
+                <div class="card">
                     <div class="card-header">🌃 City Council Diagram</div>
                     <div class="card-body">
                     

@@ -513,3 +513,29 @@ input[type="checkbox"]:checked::before {
 .light-mode .themed-dropdown select option {
     background: #cce;
 }
+
+/* ================= 🔲 Modal ================= */
+.modal-content {
+    background: linear-gradient(to top right, rgba(34, 34, 85, 0.7), rgba(85, 51, 102, 0.7));
+    backdrop-filter: blur(3px);
+    border-radius: 16px;
+}
+.light-mode .modal-content {
+    background: linear-gradient(to top right, rgba(204, 204, 238, 0.7), rgba(238, 204, 238, 0.7));
+}
+
+input {
+    background-color: #222 !important;
+}
+.light-mode input {
+    background-color: #fff !important;
+}
+.light-mode input::placeholder {
+    color: #555;
+}
+.light-mode textarea:focus, .light-mode input:focus {
+  color: #103;
+}
+.light-mode input {
+    color: #103;
+}
