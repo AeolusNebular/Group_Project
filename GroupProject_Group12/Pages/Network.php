@@ -18,11 +18,11 @@
 
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Network:</h2>
+            <h2>Network</h2>
         </div>
         <div class ="row">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <label for="cityFilter" style="color: white;">Filter by City:</label>
+            <div class="themed-dropdown">
+                <label for="cityFilter">Filter by city:</label>
                 <select id="cityFilter" onchange="filterData()">
                     <option value="all">All</option>
                     <option value="Enexis">Enexis</option>
@@ -35,8 +35,8 @@
                     <!-- Add more cities as needed -->
                 </select>
             </div>
-            <div class="card" style="height: 90%">
-                <div class="card-header" style = "text-align: center">City Chart for Network:</div>
+            <div class="card">
+                <div class="card-header">City Chart for Network</div>
                 <div class="card-body">
                     <canvas id="cityChart" width="400px" height="150px"></canvas>
                     <script>
@@ -118,8 +118,8 @@
                     <div class="card-header">Filter Options:</div>
                     <div class="card-body">
                         
-                        <div id = "SummaryContent">Filter report by city: 
-                            <select id = "ReportCityFilterNetwork"> 
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
+                            <select id="ReportCityFilterNetwork"> 
                                 <option value="all">All</option>
                                 <?php 
                                     include('../Database_Php_Interactions/CitySelect.php');
@@ -127,8 +127,8 @@
                             </select>
                         </div>
                         
-                        <div id = "SummaryContent">Filter report by utility: 
-                            <select id = "Gas_Electricity_Both"> 
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
+                            <select id="Gas_Electricity_Both"> 
                                 <option value="Both">All</option>
                                 <option value="Gas">Gas</option>
                                 <option value="Electricity">Electricity</option>

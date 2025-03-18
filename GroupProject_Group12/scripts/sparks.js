@@ -59,7 +59,7 @@ function createSparks(x, y) {
             spark.style.top = `${y + velocityY * time}px`;
         }, 16); 
 
-        // ✅ Auto-delete after 10 seconds
+        // ✅ Auto-delete after 1 second
         setTimeout(() => {
             clearInterval(move);
             spark.remove();

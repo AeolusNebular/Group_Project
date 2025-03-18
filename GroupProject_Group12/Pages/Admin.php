@@ -28,7 +28,7 @@
         <div class="row" >
             <!-- Big chart panel (fat) -->
             <div class="col-12 col-md-5">
-                <div class="card" style="height: 90%">
+                <div class="card">
                     <div class="card-header">📊 User Creation</div>
                     <div class="card-body">
                         
@@ -40,7 +40,7 @@
                                 </div>
                                 <div id="AdminPanelFormContentInputs">
                                     <label for="Password">Password:</label><br>
-                                    <input type="password" id = "Password" name="Password">
+                                    <input type="password" id="Password" name="Password">
                                 </div>
                                 <div id="AdminPanelFormContentInputs" style="margin-bottom: 25px;">
                                     <label for="ConPass">Confirm Password:</label><br>
@@ -59,7 +59,7 @@
                                     <label class="form-check-label" for="City Council User">City council user</label> 
                                 </div> 
                                     <!-- Network and city select statements -->
-                                <div id="Network_Select" style="margin-top: 10px; display: none;">
+                                <div id="Network_Select" style="display: none;" class="themed-dropdown">
                                     <label for="Networks">Select network:</label> <br>
                                     <select class = "form-select" name="Networks" id="Networks">
                                         <option value="Coteq"> Coteq </option>
@@ -72,7 +72,7 @@
                                     </select>
                                 </div> 
 
-                                <div id="City_Select" style="margin-top: 10px; display: none;">
+                                <div id="City_Select" style="display: none;" class="themed-dropdown">
                                     <label for="Cities">Select city:</label> <br>
                                     <select class="form-select" name="Cities" id="Cities">
                                             <?php 
@@ -206,7 +206,7 @@
                     
                         <!-- 🌃 City filter -->
                         <div id = "SummaryContent">Filter by city:
-                            <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET">
+                            <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET" class="themed-dropdown">
                                 <select name="AdminCityFilter" onChange="this.form.submit()"> 
                                     <option value="all">All</option>
                                     <?php 
@@ -226,7 +226,7 @@
                 <div class="card" style="height: 90%">
                     <div class="card-header">Report Details</div>
                     <div class="card-body">
-                        <div style = "float : left">
+                        <div style="float: left">
                             <div class="SummaryContent">Filter options:</div>
                         </div>
                         <table>
