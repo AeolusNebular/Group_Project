@@ -57,15 +57,12 @@ function createSparks(x, y) {
 
             spark.style.left = `${x + velocityX * time}px`;
             spark.style.top = `${y + velocityY * time}px`;
-
-            // ✅ REMOVE spark immediately when leaving viewport
-            if (
-                newX < 0 || newX > window.innerWidth || 
-                newY < 0 || newY > window.innerHeight
-            ) {
-                clearInterval(move);
-                spark.remove();
-            }
         }, 16); 
+
+        // ✅ Auto-delete after 10 seconds
+        setTimeout(() => {
+            clearInterval(move);
+            spark.remove();
+        }, 1000);
     }
 } 

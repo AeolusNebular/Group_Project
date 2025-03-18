@@ -110,7 +110,7 @@
                             $Type = 'electricity';
                             $Years = ['2020']; 
                             $Networks = ["coteq", "stedin", "liander", "westland-infra", "enexis"];
-                            $Filter = $_GET['AdminCityFilter'];
+                            $Filter = 'GOOR';
                             $UpFilter = strtoupper($Filter);
                             $NetworkConsumeTotals = [];
 
