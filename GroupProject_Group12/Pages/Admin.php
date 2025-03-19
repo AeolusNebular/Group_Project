@@ -131,20 +131,12 @@
                             <?php 
                                 // Checks if the requested method has been run aka A form submit
                                 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-
-                                    // Checks if The Year has been selected or assigns it a default 
-                                    if (!isset($_GET['Admin_Network_Year'])) {
-                                        $Year = '2016';
-                                    } else {
-                                        $Year = $_GET['Admin_Network_Year'];
-                                    }
-                                    // Checks if The Type has been selected or assigns it a default 
-                                    if (!isset($_GET['Admin_Network_Type'])) {
-                                        $Type = 'electricity';
-                                    } else {
-                                        $Type = $_GET['Admin_Network_Type'];
-                                    }
                                     
+                                    // Checks if The Year has been selected or assigns it a default
+                                    $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+                                    // Checks if The Type has been selected or assigns it a default 
+                                    $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
+                                                                      
                                     //Assigns Network variable required for the CSV to display and use in the javascript Graph
                                     $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
                                     $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
@@ -275,7 +267,7 @@
                                     
 
 
-                                    $Values = FilterCSV($Type,$Year,$Network);
+                                    $Values = CSVData($Type,$Year,$Network);
                                     
                                     
                                   
