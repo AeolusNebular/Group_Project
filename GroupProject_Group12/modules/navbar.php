@@ -34,7 +34,7 @@
                     </button>
                     
                     <!-- 🚨 TBA: NEW USER VARIANT -->
-
+                    
                     <!-- 🔽 Dropdown menu -->
                     <div id="accountDropdown" class="dropdown">
                         <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
@@ -69,7 +69,7 @@
                 </li>
             </ul>
             
-            <!-- 🔘 Login Button (Triggers Modal) -->
+            <!-- 🔘 Login button (triggers modal) -->
             <div style="position: absolute; bottom: 64px; right: 48px;">
                 <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal">
                     Login
