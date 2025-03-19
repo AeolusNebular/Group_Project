@@ -69,9 +69,13 @@
                 </li>
             </ul>
             
+            <!-- 🔘 Login Button (Triggers Modal) -->
             <div style="position: absolute; bottom: 64px; right: 48px;">
-                <button type='button' class="fancy-button" onclick="window.location.href='/Group_Project/GroupProject_Group12/pages/login.php'">Login</button>
+                <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal">
+                    Login
+                </button>
             </div>
+            
         </div>
     </nav>
     

@@ -19,7 +19,7 @@
         <div class="text-center">
             <h2>City</h2>
         </div>
-
+        
         <!-- 🧭 City selection -->
         <div class="btn-group" style="margin-top: 25px; margin-left: 15px;" role="group" >
             <button type="button" class="btn btn-primary">Stedin</button>
@@ -34,7 +34,7 @@
         <!-- 📈 Network graph -->
         <div class="row">
             <div class="col-12 col-md-7">
-                <div class="card" style="height: 90%">
+                <div class="card">
                     <div class="card-header">📊 Network Graph</div>
                     <div class="card-body">
                         <canvas id="testChart"></canvas>
@@ -44,15 +44,15 @@
             
             <!-- 📅 Annual summary -->
             <div class="col-12 col-md-5">
-                <div class="card" style="height: 90%">
+                <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
                         <div id = "SummaryContent">Number of Connections: </div>
-                        <div id = "SummaryContent">Amount of Electricity Used (kWh): </div>
-                        <div id = "SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
+                        <div id = "SummaryContent">Electricity Used (kWh): </div>
+                        <div id = "SummaryContent">Gas Used (m<sup>3</sup>): </div>
                         <div id = "SummaryContent">Delivery Percentage: </div>
-                        <div id = "SummaryContent">Types of Connections: </div>
-                        <div id = "SummaryContent">Types Connections Percentage: </div>
+                        <div id = "SummaryContent">Connections Types: </div>
+                        <div id = "SummaryContent">Connection Type Percentages: </div>
                         <div id = "SummaryContent">
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                         </div>
