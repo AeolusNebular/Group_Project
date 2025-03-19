@@ -1,8 +1,4 @@
-<?php
-
-function FilterCSV($GetFilter,$TypeOfCSV,$Year,$Network) {
-     
-        
+<?php      
         $FirstLine = true;
         $CSVfilter = array($GetFilter);
         $words = array_map('preg_quote', $CSVfilter);
@@ -35,7 +31,4 @@ function FilterCSV($GetFilter,$TypeOfCSV,$Year,$Network) {
         //debug_to_console($Values['GOOR']);      
         fclose ( $fp );
         return $Values;
-        
-    
-}
 ?>
