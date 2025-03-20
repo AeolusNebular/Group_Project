@@ -38,6 +38,6 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     
     <!-- 📍 Login -->
-    <?php include("modules/login.php"); ?>
+    <?php include("login.php"); ?>
     
 </head>

@@ -9,10 +9,10 @@
             $Email = $_GET['Login_Email'];
             $db = Open_Database();
             
-            $result = $db -> query("SELECT Email, Password FROM User_Details, LoginDetails WHERE Email = '" . $Email . "'")
+            $result = $db -> query("SELECT Email, Password FROM User_Details, LoginDetails WHERE Email = '" . $Email . "'");
             
             while ($row = $result -> fetcharray(SQLITE3)) {
-                $dbEmail = $row['Email']
+                $dbEmail = $row['Email'];
             }
         }
     }
