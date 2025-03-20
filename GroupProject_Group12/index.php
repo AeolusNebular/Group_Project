@@ -11,9 +11,9 @@
 <body>
 
     <!-- Loads home.php AKA Root File -->
-    <?php session_start();
+    <?php 
     include("pages/home.php"); 
     ?>
-    
+
 </body>
 </html>

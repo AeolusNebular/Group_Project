@@ -2,7 +2,8 @@
 <html lang="en-gb">
 <head>
     <!-- 📢 Header -->
-    <?php include("../modules/header.php"); ?>
+    <?php session_start();
+    include("../modules/header.php"); ?>
     
     <title>Home - Smart Energy Dashboard</title>
 </head>
@@ -10,7 +11,9 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <?php include("../modules/navbar.php");
+    require('../Database_Php_Interactions/Database_Utilities.php');
+    include('../Database_Php_Interactions/CSVData.php'); ?>
     
     <!-- 🏠 Home page content (dashboard) -->
     <div class="container mt-4">
@@ -83,7 +86,7 @@
                     <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
                 </div>
             </div>
-            <?php debug_to_console($_SESSION['UserID']); ?>
+            <?php debug_to_console('Login ID is ' . $_SESSION['UserID']); ?>
         </div>
     </div>
     
