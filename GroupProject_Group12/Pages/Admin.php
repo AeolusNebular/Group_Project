@@ -12,10 +12,7 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php");
-    require('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php');
-    ?>
+    <?php include("../modules/navbar.php"); ?>
     
     <!-- Admin page content -->
     <div class="container-lg mt-4" style="min-height: 800px;">

@@ -15,7 +15,7 @@
     
     <!-- Network page content -->
     <div class="container mt-4">
-
+        
         <!-- 📛 Title -->
         <div class="text-center">
             <h2>Network</h2>
