@@ -9,7 +9,7 @@
 
             <!-- 📝 Login Form -->
             <div class="modal-body">
-                <form action="index.php" method="POST"> 
+                <form action="../modules/login.php" method="POST"> 
                     <div class="mb-3">
                         <label for="Login_Email" class="form-label">Email Address:</label>
                         <input type="email" class="form-control" id="Login_Email" name="Login_Email" placeholder="Example@gmail.com" required>
@@ -27,7 +27,6 @@
     </div>
 </div>
 
-// Database connection
 <?php
 
 
