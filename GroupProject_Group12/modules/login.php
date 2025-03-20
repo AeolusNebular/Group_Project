@@ -1,4 +1,4 @@
-<!-- 🔒 Login Modal -->
+<!-- 🔒 Revamped Login Modal -->
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered"> <!-- Centered Modal -->
         <div class="modal-content">
