@@ -76,7 +76,7 @@
                             <li>
                                 <label for="darkMode">Dark mode:</label>
                                 <div class="themed-dropdown">
-                                    <select id="darkMode" class="form-select">
+                                    <select  id="darkMode" class="form-select">
                                         <option value="auto">Auto</option>
                                         <option value="light">Light</option>
                                         <option value="dark">Dark</option>
