@@ -245,7 +245,95 @@
                         </div>
                         
                         <!-- 📊 City councils chart -->
-                        <canvas id="AdminCityCoucilCanvas"></canvas>
+                        <canvas id="AdminCityCouncilCanvas"></canvas>
+
+                        <?php
+                            $Year = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
+                            $City = isset($_GET['AdminCityFilter']) ? $_GET['AdminCityFilter'] : '';
+                            $Type = 'electricity';
+                            $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra']; 
+                            
+                            $CityValues = [];
+
+                            foreach ($Networks as $Network) {
+                                $CityGraphValues = CSVData($Type,$Year,$Network);
+
+                                foreach ($CityGraphValues as $Key => $City) {                                     
+                                    $CityValues[$Key] =  $City[0];
+                                }                         
+                            }
+
+                            debug_to_console($CityValues);
+                        ?> 
+
+                      <script> 
+                           var citydata = <?php echo json_encode($CityValues); ?>;
+                           console.log(Object.values(data));
+                           document.addEventListener("DOMContentLoaded", function () {
+                                drawBarGraph();
+                                window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
+                            });
+
+                        function drawBarGraph() {
+                            let font = { family: "Space Grotesk"};
+                            let textColor = theme ? "#000" : "#fff";
+
+                            const citycanvas = document.getElementById("AdminCityCouncilCanvas");
+                            
+                            // ✅ Ensure the canvas context is fresh
+                            if (!citycanvas) return; // Exit if canvas is missing
+                            const ctx = citycanvas.getContext("2d");
+
+                            // ✅ Destroy existing chart properly
+                           // if (chartInstance) {
+                           //     chartInstance.destroy();
+                           //     chartInstance = null; // Clear instance reference
+                          //  }
+
+                            chartInstance = new Chart(ctx, {
+                                type: "bar",
+                                data: {
+                                    labels: Object.keys(citydata),
+                                    datasets: [{
+                                        label: "Electricity",
+                                        data: Object.values(citydata) ,
+                                        borderColor: "#975ae100",
+                                        backgroundColor: [
+                                            '#003f5c',
+                                            '#374c80',
+                                            '#58508d',
+                                            '#7a5195',                    
+                                            '#bc5090',
+                                            '#ff6361',
+                                            '#ffa600'
+                                        ],
+                                    
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    plugins: {
+                                        legend: {
+                                            position: "bottom",
+                                            labels: { color: textColor, font: font }
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: "Networks Annual Usage",
+                                            color: textColor, 
+                                            font: font 
+                                        }
+                                    },
+                                
+                                }
+                            });
+                        }
+                        </script>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -263,15 +351,9 @@
                                     $Type = 'electricity';
                                     $Year = '2016';
                                     $Network = 'coteq';
-                                    
-                                    
-
 
                                     $Values = CSVData($Type,$Year,$Network);
-                                    
-                                    
-                                  
-                                    
+                                                            
                                     if (isset($Values) && (!$Values == [])){
                                         echo 
                                         '<tr>
