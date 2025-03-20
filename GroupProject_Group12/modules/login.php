@@ -48,7 +48,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Database connection
-    $conn = new SQLite3('users.db');
+    $conn = new SQLite3('Group_Project/GroupProject_Group12/database/users.db');
     $message = "";
 
     $email = trim($_POST['email']);
