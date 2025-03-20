@@ -11,7 +11,9 @@
 <body>
 
     <!-- Loads home.php AKA Root File -->
-    <?php include("pages/home.php"); ?>
-    
+    <?php 
+    include("pages/home.php"); 
+    ?>
+
 </body>
 </html>

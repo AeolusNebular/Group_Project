@@ -10,7 +10,9 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <?php include("../modules/navbar.php");
+    require('../Database_Php_Interactions/Database_Utilities.php');
+    include('../Database_Php_Interactions/CSVData.php'); ?>
     
     <!-- 🌃 City page content -->
     <div class="container mt-4">

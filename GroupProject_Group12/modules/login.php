@@ -9,7 +9,7 @@
 
             <!-- 📝 Login Form -->
             <div class="modal-body">
-                <form action="../modules/login.php" method="POST"> 
+                <form action="../Database_Php_Interactions/Login_Php_Code.php" method="POST"> 
                     <div class="mb-3">
                         <label for="Login_Email" class="form-label">Email Address:</label>
                         <input type="email" class="form-control" id="Login_Email" name="Login_Email" placeholder="Example@gmail.com" required>
@@ -27,52 +27,3 @@
     </div>
 </div>
 
-<?php
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Database connection
-    $conn = new SQLite3('Group_Project/GroupProject_Group12/database/users.db');
-    $message = "";
-
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    if (!empty($email) && !empty($password)) {
-        // Get user details using email from User_Details and link with LoginDetails
-        $query = "SELECT ld.UserID, ld.Password FROM LoginDetails ld " .
-                 "JOIN User_Details ud ON ld.UserID = ud.UserID " .
-                 "WHERE ud.Email = :email";
-        $stmt = $conn->prepare($query);
-        
-        if ($stmt) {
-            $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-            $result = $stmt->execute();
-            $user = $result->fetchArray(SQLITE3_ASSOC);
-
-            if ($user) {
-                $storedPassword = $user['Password'];
-                if ($password === $storedPassword) {
-                    $_SESSION['UserID'] = $user['UserID'];
-                    header("Location: Group_Project/GroupProject_Group12/Pages/home.php");  // Redirect to home.php after successful login
-                    exit();
-                } else {
-                    $message = "Password does not match. Please try again.";
-                }
-            } else {
-                $message = "No account found with that email.";
-            }
-        } else {
-            $message = "Error";
-        }
-    } else {
-        $message = "All fields are required.";
-    }
-
-    $conn->close();
-
-    if (!empty($message)) {
-        echo "<script>alert('$message');</script>";
-    }
-}
-?>

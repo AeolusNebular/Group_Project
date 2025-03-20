@@ -38,9 +38,6 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     
     <!-- 📍 Login -->
-    <?php 
-    require('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php');
-    include("login.php"); ?>
+    <?php include("login.php"); ?>
     
 </head>
