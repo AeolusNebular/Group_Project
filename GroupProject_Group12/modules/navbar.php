@@ -32,13 +32,15 @@
                             <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
                         </svg>
                     </button>
+
+
                     
                     <!-- 🚨 TBA: NEW USER VARIANT -->
                     
                     <!-- 🔽 Dropdown menu -->
                     <div id="accountDropdown" class="dropdown">
                         <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
-                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Settings</a>
+                        <a href="/Group_Project/GroupProject_Group12/pages/settings.php">Settings</a>
                         <a href="/Group_Project/GroupProject_Group12/pages/account.php">Logout</a>
                     </div>
                 </div>
