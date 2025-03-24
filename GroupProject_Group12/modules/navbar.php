@@ -2,17 +2,17 @@
 <html lang="en-gb">
 
 <body>
-    
+
     <!-- 📍 Navbar -->
     <nav class="navbar">
-        
+
         <!-- Vertical navbar toggle button (with aria controls for accessibility) -->
         <button class="navbar-toggler" type="button" onclick="toggleNav()" aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span> 
         </button>
-        
+
         <h2>Smart Energy Dashboard</h2>
-        
+
         <div>
             <div class="icon-container">
                 <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" 
@@ -23,8 +23,15 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div class="icon-container">
+                <!-- 📍 Notifications Icon -->
+                <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Notifications" style="color: white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-6V7a6 6 0 0 0-12 0v3c0 .839-.472 1.574-1.14 1.962-.688.396-1.514.626-2.36.656v.348a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-.348c-.846-.03-1.672-.26-2.36-.656-.668-.388-1.14-1.123-1.14-1.962z"/>
+                    </svg>
+                </button>
+
                 <!-- 👤 Account button with dropdown -->
                 <div class="account-menu">
                     <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false">
@@ -33,11 +40,7 @@
                         </svg>
                     </button>
 
-
-                    
-                    <!-- 🚨 TBA: NEW USER VARIANT -->
-                    
-                    <!-- 🔽 Dropdown menu -->
+                    <!-- Dropdown -->
                     <div id="accountDropdown" class="dropdown">
                         <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
                         <a href="/Group_Project/GroupProject_Group12/pages/settings.php">Settings</a>
@@ -45,41 +48,35 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+    </nav>
+
+    <!-- 📍 Notifications Dropdown -->
+    <div id="notificationsDropdown" class="dropdown-menu" style="display: none; position: absolute; top: 50px; right: 20px; width: 250px; background-color: #fff; border: 1px solid #ddd; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 8px;">
+        <div id="notificationList" class="notification-list">
+            <!-- Notifications will be injected here dynamically -->
+            <div class="notification unread">This is a notification!</div>
+            <div class="notification">This is another!</div>
         
         </div>
-    </nav>
-    
-    <!-- 📍 Sidebar -->
-    <nav id="main">
-        <div class="sidebar" id="mySidebar">
-            <ul style="list-style-type: none; width: 30px;">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/home.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                </li>
-                <br><br><br>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/account.php">Account</a>
-                </li>
-            </ul>
-            
-            <!-- 🔘 Login button (triggers modal) -->
-            <div style="position: absolute; bottom: 64px; right: 48px;">
-                <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal">
-                    Login
-                </button>
-            </div>
-            
-        </div>
-    </nav>
-    
+        <!-- Button to load more notifications -->
+        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="btn btn-link" style="padding: 0;">Load More</a>
+    </div>
+
+    <!-- 📝 JavaScript to toggle the notifications dropdown -->
+    <script>
+        // Function to toggle the notifications dropdown visibility
+        function toggleNotifications() {
+            var notificationsDropdown = document.getElementById("notificationsDropdown");
+            // Toggle dropdown visibility
+            if (notificationsDropdown.style.display === "none" || notificationsDropdown.style.display === "") {
+                notificationsDropdown.style.display = "block";
+            } else {
+                notificationsDropdown.style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 </html>
