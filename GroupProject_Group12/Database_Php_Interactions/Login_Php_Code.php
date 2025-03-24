@@ -18,13 +18,13 @@
             
             $storedPassword = $row['Password'];
             if ($Password === $storedPassword) {
-                
-                $_SESSION['UserID'] = $row['UserID']; 
-                debug_to_console($_SESSION['U']);     
-                echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/home.php') </script>";;  // Redirect to home.php after successful login
+            
+                $_SESSION['UserID'] = $row['UserID'];     
+                echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/home.php') </script>";  // Redirect to home.php after successful login
                 exit();
             } else {
                 $message = "Password does not match. Please try again.";
+                echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/home.php?Login=" . $message . "' ) </script>";
             }
         
             $message = "No account found with that email.";
