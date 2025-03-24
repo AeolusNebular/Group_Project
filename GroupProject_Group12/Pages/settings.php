@@ -3,7 +3,6 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    <?php include("../modules/navbar.php"); ?>
     
     <title>Settings Smart Energy Dashboard</title>
 
@@ -31,6 +30,9 @@
     </style>
 </head>
 <body>
+    
+    <!-- 📍 Navbar -->
+    <?php include("../modules/navbar.php"); ?>
 
     <div class="text-center">
         <h2>Settings</h2>
