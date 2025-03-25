@@ -36,6 +36,7 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/themes.js"></script>
     
     <!-- 📍 Login -->
     <?php include("login.php"); ?>
