@@ -51,10 +51,10 @@
                         <!-- 🏃‍♂️ Action buttons -->
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-danger">
-                                🗑️ <span class="ms-1">Delete Account</span>
+                                🗑️ Delete Account
                             </button>
                             <button class="btn btn-warning">
-                                🔄 <span class="ms-1">Reset Password</span>
+                                🔄 Reset Password
                             </button>
                         </div>
                     </div>
