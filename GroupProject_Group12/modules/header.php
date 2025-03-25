@@ -16,6 +16,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/style.css">
+    <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/theme.css">
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -31,12 +32,11 @@
     <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/darkmode.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/theme.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/themes.js"></script>
     
     <!-- 📍 Login -->
     <?php include("login.php"); ?>
