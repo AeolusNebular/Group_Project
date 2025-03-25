@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 🎨 Function to apply a selected theme
 function CheckTheme(custtheme) {
-    document.body.classList.remove("purple-theme", "green-theme", "blue-theme");
+    document.body.classList.forEach(cls => {
+        if (cls.endsWith("-theme")) document.body.classList.remove(cls);
+    });
     document.body.classList.add(`${custtheme}-theme`);
 
     // 📝 Store selection

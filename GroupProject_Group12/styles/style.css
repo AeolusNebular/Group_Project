@@ -1,15 +1,35 @@
 /* ================= 🌐 GENERAL FORMATTING ================= */
+:root {
+    /* 🎨 Root theming (AGGRESSIVELY GREY) */
+    --bg-dark: linear-gradient(to bottom right, #333, #000);
+    --bg-light: linear-gradient(to bottom right, #fff, #ddd);
+    --card-dark: linear-gradient(to bottom right, #3f3f3f7b, #65656580);
+    --card-light: linear-gradient(to bottom right, #eee, #ccc);
+    --text-dark: #fff;
+    --text-light: #000;
+    --shadow-main: #888;
+    --text-shadow: #bbb;
+    --hover-dropdown: linear-gradient(to bottom right, #777, #888);
+    --border-colour: #eee;
+}
+
 * {
     transition: background 0.2s ease, color 0.3s ease;
 }
 
 body {
     letter-spacing: 0.5px;
-    color: #fff;
+    color: var(--text-dark);
     font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg-dark);
     transition: background 0.3s ease-in-out;
-    top: 10%;
+    margin-top: 76px;
 }
+body.light-mode {
+    color: var(--text-light);
+    background: var(--bg-light);
+}
+
 body::before, body::after {
     content: "";
     position: fixed;
@@ -21,19 +41,8 @@ body::before, body::after {
     z-index: -1;
 }
 
-
-.light-mode {
-    color: #103;
-}
-.light-mode::before {
-    opacity: 0;
-}
-.light-mode::after {
-    opacity: 1;
-}
-
 h2, .card-header {
-    text-shadow: 0 0 18px #904784;
+    text-shadow: 0 0 18px var(--text-shadow);
     font-weight: bold;
 }
 
@@ -41,15 +50,15 @@ h2, .card-header {
 .card {
     margin: 12px;
     width: 100%;
-    background: linear-gradient(to top right, #2a2d5b7b, #50326480);
-    color: #fff;
-    box-shadow: 0 0 16px #c08ab660;
+    background: var(--card-dark);
+    color: var(--text-dark);
+    box-shadow: 0 0 16px var(--shadow-main);
     border-radius: 16px;
     transition: background 0.4s ease, color 0.3s ease;
 }
 .light-mode .card {
-    color: #103;
-    background: linear-gradient(to top right, #cce, #ece);
+    color: var(--text-light);
+    background: var(--card-light);
 }
 
 #SummaryContent {
@@ -63,34 +72,103 @@ h2, .card-header {
     .panel-heading, .panel-footer { padding: 8px 12px; }
 }
 
+/* ================= 🎨 THEMES ================= */
 
-/* ================= THEMES ================= */
-
-/* 🎨 Default (Light Mode) Backgrounds */
+/* 🟣 Purple (default) */
 .purple-theme {
-    background: linear-gradient(to top right, #010326, #1e0025);
+    --bg-dark: linear-gradient(to bottom right, #010326, #3a0055);
+    --bg-light: linear-gradient(to bottom right, #e1e3ff, #fbebff);
+    --card-dark: linear-gradient(to bottom right, #2a2d5b80, #50326480);
+    --card-light: linear-gradient(to bottom right, #cce, #ece);
+    --text-light: #103;
+    --shadow-main: #c08ab660;
+    --text-shadow: #904784;
+    --hover-dropdown: linear-gradient(to bottom right, #424687, #764082);
+    --border-colour: #ece;
 }
-.purple-theme.light-mode {
-    background: linear-gradient(to top right, #e1e3ff, #fbebff);
-}
-
+/* 🟢 Green */
 .green-theme {
-    background: linear-gradient(to top right, #0c0f0c, #293221);
+    --bg-dark: linear-gradient(to bottom right, #0c0f0c, #293221);
+    --bg-light: linear-gradient(to bottom right, #d5f0de, #bed1b2);
+    --card-dark: linear-gradient(to bottom right, #1f3b1f80, #325d3280);
+    --card-light: linear-gradient(to bottom right, #c8e6c9, #dff2dc);
 }
-.green-theme.light-mode {
-    background: linear-gradient(to top right, #d5f0de, #bed1b2);
+/* 🌊 Marine */
+.marine-theme {
+    --bg-dark: linear-gradient(to bottom right, #003b32, #00665e);
+    --bg-light: linear-gradient(to bottom right, #c2efea, #e7fff9);
+    --card-dark: linear-gradient(to bottom right, #1b4f4680, #207a6d80);
+    --card-light: linear-gradient(to bottom right, #bde4e4, #d6faf5);
+    --text-light: #02403b;
+    --shadow-main: #88ccc060;
+    --text-shadow: #00a896;
+    --hover-dropdown: linear-gradient(to bottom right, #136f63, #009688);
+    --border-colour: #c2efea;
+}
+/* 🔵 Blue */
+.blue-theme {
+    --bg-dark: linear-gradient(to bottom right, #001528, #00155c);
+    --bg-light: linear-gradient(to bottom right, #a7d7f7, #c7e7ff);
+    --card-dark: linear-gradient(to bottom right, #0e3a5c80, #1b558080);
+    --card-light: linear-gradient(to bottom right, #bfe8ff, #e1f4ff);
+    --text-light: #002244;
+    --shadow-main: #80b6f060;
+    --text-shadow: #1091d7;
+    --hover-dropdown: linear-gradient(to bottom right, #004b87, #0088cc);
+    --border-colour: #a7d7f7;
+}
+/* 🟥 Red */
+.red-theme {
+    --bg-dark: linear-gradient(to bottom right, #3b0000, #750000);
+    --bg-light: linear-gradient(to bottom right, #ffb3b3, #ffd6d6);
+    --card-dark: linear-gradient(to bottom right, #5a000080, #92000080);
+    --card-light: linear-gradient(to bottom right, #ffcccc, #ffe6e6);
+}
+/* 🐺 Sigma */
+.sigma-theme {
+    --text-light: #680000;
+    --shadow-main: #56121260;
+    --text-shadow: #520000;
+    --border-colour: #9d2d2d;
+}
+/* 💰 Ridiculously Bling */
+.bling-theme {
+    --bg-dark: linear-gradient(to bottom right, #c18c50, #5d4f00);
+    --bg-light: linear-gradient(to bottom right, #fffae6, #fff0b3);
+    --card-dark: linear-gradient(to bottom right, #e6a90080, #ffd70080);
+    --card-light: linear-gradient(to bottom right, #fff5cc, #ffeb99);
+    --shadow-main: #dbcb8580;
+    --text-shadow: #cadb85;
+}
+/* 🌈 Bonus */
+.bonus-theme {
+    --bg-dark: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet);
+    --bg-light: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
+    --card-dark: linear-gradient(90deg, blue, purple, pink, red);
+    --card-light: linear-gradient(90deg, cyan, lightblue, white);
+    animation: rainbow-animation 5s infinite linear;
 }
 
-.blue-theme {
-    background: linear-gradient(to top right, #002424, #095257);
+@keyframes rainbow-animation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
-.blue-theme.light-mode {
-    background: linear-gradient(to top right, #a8d8f0, #ebfffe);
-}
+
+/* Theme selector  */
+.purple-option { color: #503264; }
+.green-option { color: #325d32; }
+.marine-option { color: #286e6e; }
+.blue-option { color: #1091d7; }
+.red-option { color: #920000; }
+.sigma-option { color: #450000; }
+.bling-option { color: #c48319; }
+.bonus-option { color: violet; }
+.root-option { color: #666; }
 
 /* ================= 📍 NAVBAR ================= */
 .navbar {
-    background: linear-gradient(to top right, #2a2d5b7b, #50326480);
+    background: var(--card-dark);
+    backdrop-filter: blur(3px);
     z-index: 3;
     width: 100%;
     position: fixed;
@@ -152,7 +230,7 @@ h2, .card-header {
 .light-mode .navbar-toggle-icon::before, 
 .light-mode .navbar-toggle-icon::after, 
 .light-mode .navbar-toggle-icon {
-    background-color: #103;
+    background-color: var(--text-light);
 }
 
 /* Light mode button */
@@ -200,13 +278,13 @@ h2, .card-header {
     border: none;
     cursor: pointer;
     padding: 8px;
-    margin-right: 16px;
+    margin: 0 16px;
     border-radius: 50%;
     transition: all 0.2s ease-in-out;
     display: block;
 }
 .light-mode .account-btn {
-    color: #103;
+    color: var(--text-light);
 }
 .account-btn:hover {
     box-shadow: 4px 4px 16px #f76;
@@ -217,7 +295,7 @@ h2, .card-header {
     position: absolute;
     top: 48px;
     right: 0;
-    background: linear-gradient(to top right, #424687, #764082);
+    background: var(--hover-dropdown);
     border-radius: 16px;
     width: 140px;
     box-shadow: 0px 4px 8px #00000033;
@@ -274,13 +352,13 @@ h2, .card-header {
     z-index: 2;
     top: 0;
     left: 0;
-    background: linear-gradient(to top right, #2a2d5bdb, #503264dc);
+    background: linear-gradient(to bottom right, #2a2d5bdb, #503264dc);
     backdrop-filter: blur(3px);
     overflow-x: hidden;
     padding-top: 64px;
 }
 .light-mode .sidebar {
-    background: linear-gradient(to top right, #c3c3e7cb, #e6c7e6bd);
+    background: linear-gradient(to bottom right, #c3c3e7cb, #e6c7e6bd);
 }
 
 .sidebar a {
@@ -320,7 +398,7 @@ h2, .card-header {
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    background: linear-gradient(to top right, #424687, #764082);
+    background: var(--hover-dropdown);
     box-shadow: 2px 2px 20px #424687;
     transition: all 0.3s ease;
 }
@@ -416,12 +494,12 @@ h2, .card-header {
 #heatmap {
     height: 500px;
     border-radius: 0 0 16px 16px;
-    background: linear-gradient(to top right, #2a2d5b7b, #50326480);
+    background: linear-gradient(to bottom right, #2a2d5b7b, #50326480);
     transition: background 0.6s ease, color 0.3s ease;
     z-index: 1;
 }
 .light-mode #heatmap {
-    background: linear-gradient(to top right, #cce, #ece);
+    background: var(--card-light);
 }
 
 /* ================= ✅ CHECKBOXES ================= */
@@ -442,12 +520,10 @@ input[type="checkbox"] {
     appearance: none;
     width: 24px;
     height: 24px;
-    border: 2px solid #ece;
-    border-radius: 8px !important;
     position: relative;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(to top right, #225, #536);
+    background: var(--card-dark);
     transition: all 0.2s ease;
 }
 
@@ -469,7 +545,6 @@ input[type="checkbox"]:hover {
 
 input[type="checkbox"]:checked {
     background: linear-gradient(135deg, #f76, #ff46b3);
-    border-color: #ff46b3;
 }
 input[type="checkbox"]:checked::before {
     color: white;
@@ -483,9 +558,9 @@ input[type="checkbox"]:checked::before {
 
 .themed-dropdown select {
     appearance: none;
-    background: linear-gradient(to top right, #225, #536);
+    background: var(--card-dark);
     color: white;
-    border: 2px solid #ece;
+    border: 2px solid var(--border-colour);
     border-radius: 12px;
     padding: 12px 16px;
     font-size: 16px;
@@ -510,7 +585,7 @@ input[type="checkbox"]:checked::before {
 .themed-dropdown::after {
     content: "▼";
     font-size: 14px;
-    color: #ece;
+    color: var(--border-colour);
     position: absolute;
     top: 50%;
     right: 15px;
@@ -525,39 +600,51 @@ input[type="checkbox"]:checked::before {
 
 /* Light mode adjustments */
 .light-mode .themed-dropdown select {
-    background: linear-gradient(to top right, #cce, #ece);
-    color: #103;
-    border-color: #103;
+    background: var(--card-light);
+    color: var(--text-light);
+    border-color: var(--text-light);
 }
 .light-mode .themed-dropdown::after {
-    color: #103;
+    color: var(--text-light);
 }
 .light-mode .themed-dropdown select option {
     background: #cce;
 }
 
+#dropdown-menu li:hover {
+    filter: brightness(1.2);
+}
+
 /* ================= 🔲 Modal ================= */
 .modal-content {
-    background: linear-gradient(to top right, rgba(34, 34, 85, 0.7), rgba(85, 51, 102, 0.7));
+    background: var(--card-dark);
     backdrop-filter: blur(3px);
     border-radius: 16px;
 }
 .light-mode .modal-content {
-    background: linear-gradient(to top right, rgba(204, 204, 238, 0.7), rgba(238, 204, 238, 0.7));
+    background: var(--card-light);
 }
 
 input {
-    background-color: #222 !important;
+    border: 2px solid var(--border-colour) !important;
+    border-radius: 8px !important;
+    background: var(--bg-dark) ;
+    color: var(--text-dark) !important;
 }
 .light-mode input {
-    background-color: #fff !important;
+    background: var(--bg-light);
+    color: var(--text-light);
+}
+
+input::placeholder {
+    color: #aaa !important;
 }
 .light-mode input::placeholder {
     color: #555;
 }
 .light-mode textarea:focus, .light-mode input:focus {
-  color: #103;
+  color: var(--text-light);
 }
 .light-mode input {
-    color: #103;
+    color: var(--text-light);
 }

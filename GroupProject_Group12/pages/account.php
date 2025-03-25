@@ -97,11 +97,11 @@
                 <h2>Settings</h2>
             </div>
             
-            <!-- ⚙️ Side panel (thin) -->
-            <div class="col-12 ">
+            <!-- ⚙️ Side panel (half-width) -->
+            <div class="col-12 col-md-6">
                 <!-- 🎨 Customisability options -->
                 <div class="card">
-                    <div class="card-header">⚙️ User Settings</div>
+                    <div class="card-header">⚙️ Theme Settings</div>
                     <div class="card-body">
                         <ul>
                             <li>
@@ -118,6 +118,35 @@
                                 <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
                                 <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
                             </li>
+                            <li>
+                                <label for="theme">Theme selection:</label>
+                                <div class="themed-dropdown">
+                                    <select onchange="CheckTheme(this.value)" id="theme" class="form-select">
+                                        <option value="purple" class="purple-option">Purple</option>
+                                        <option value="green" class="green-option">Green</option>
+                                        <option value="marine" class="marine-option">Marine</option>
+                                        <option value="blue" class="blue-option">Blue</option>
+                                        <option value="red" class="red-option">Red</option>
+                                        <option value="sigma" class="sigma-option">Sigma</option>
+                                        <option value="bling" class="bling-option">Bling</option>
+                                        <option value="bonus" class="bonus-option">Bonus</option>
+                                        <option value="root" class="root-option">Root</option>
+                                    </select>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ⚙️ Side panel (half-width) -->
+            <div class="col-12 col-md-6">
+                <!-- 🎨 Accessibility options -->
+                <div class="card">
+                    <div class="card-header">⚙️ Accessibility Settings</div>
+                    <div class="card-body">
+                        <ul>
                             <li>
                                 <label for="fontSize">Font size:</label>
                                 <div class="themed-dropdown">
@@ -137,23 +166,12 @@
                                 <label for="limitAnimations">Limit screen animations</label>
                             </li>
                             <li>
-                                <label for="colorblind">ColourBlind Stuff:</label>
+                                <label for="colorblind">Colour blindness:</label>
                                 <div class="themed-dropdown">
                                     <select id="colorblind" class="form-select">
                                         <option value="default">Default</option>
                                         <option value="deuteranopia">Deuteranopia</option>
                                         <option value="tritanopia">Tritanopia</option>
-                                        <option value="achromatopsia">Achromatopsia</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li>
-                                <label for="theme">Theme selection:</label>
-                                <div class="themed-dropdown">
-                                    <select onchange="CheckTheme(this.value)" id="theme" class="form-select">
-                                        <option value="purple">Purple</option>
-                                        <option value="green">Green</option>
-                                        <option value="blue">Blue</option>
                                         <option value="achromatopsia">Achromatopsia</option>
                                     </select>
                                 </div>
