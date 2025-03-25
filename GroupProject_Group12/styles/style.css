@@ -18,14 +18,7 @@ body::before, body::after {
     transition: opacity 0.2s ease;
     z-index: -1;
 }
-body::before {
-    background: linear-gradient(to top right, #010326, #1e0025);
-    opacity: 1;
-}
-body::after {
-    background: linear-gradient(to top right, #e1e3ff, #fbebff);
-    opacity: 0;
-}
+
 
 .light-mode {
     color: #103;
@@ -67,6 +60,35 @@ h2, .card-header {
     .panel-body { padding: 12px; }
     .panel-heading, .panel-footer { padding: 8px 12px; }
 }
+
+
+/* ================= THEMES ================= */
+
+.purple-theme::after {
+    background: linear-gradient(to top right, #010326, #1e0025);
+}
+
+.purple-theme::before {
+    background: linear-gradient(to top right, #e1e3ff, #fbebff);
+}
+
+.green-theme::before {
+    background: linear-gradient(to top right, #002e00, #002500);
+}
+
+.green-theme::after {
+    background: linear-gradient(to top right, #e1ffe1, #ebffeb);
+}
+
+.blue-theme::before {
+    background: linear-gradient(to top right, #002e2e, #002525);
+}
+
+.blue-theme::after {
+    background: linear-gradient(to top right, #e1f7ff, #ebfdff);
+}
+
+
 
 /* ================= 📍 NAVBAR ================= */
 .navbar {

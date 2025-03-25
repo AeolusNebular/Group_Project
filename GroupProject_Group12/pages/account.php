@@ -1,3 +1,4 @@
+<!-- filepath: c:\xampp\htdocs\Group_Project\GroupProject_Group12\Pages\account.php -->
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
@@ -5,6 +6,7 @@
     <?php include("../modules/header.php"); ?>
     
     <title>Account - Smart Energy Dashboard</title>
+    <script src="../scripts/themes.js"></script> <!-- Include the themes.js file -->
 </head>
 
 <body>
@@ -42,9 +44,9 @@
                         <!-- 💰 Budget summary -->
                         <div>
                             <hr>
-                            <p>💰 <b>Total Budget Tracked:</b> £12,345.67</p>
-                            <p>🛒 <b>Last Transaction:</b> £2.89 at <b>Waitrose and Partners</b> <small>(3 hours ago)</small></p>
-                            <p>📅 <b>Member Since:</b> January 2025 <small>(2 months ago)</small></p>
+                            <p>💰 <b>Phone Number:</b> 06564 885443</p>
+                            <p>🛒 <b>Address:</b> 88446 Waitrose Road</p>
+                            <p>📅 <b>Role:</b> City Council</p>
                             <hr>
                         </div>
                         
@@ -102,11 +104,10 @@
                     <div class="card-header">⚙️ User Settings</div>
                     <div class="card-body">
                         <ul>
-                            
                             <li>
                                 <label for="darkMode">Dark mode:</label>
                                 <div class="themed-dropdown">
-                                    <select  id="darkMode" class="form-select">
+                                    <select id="darkMode" class="form-select">
                                         <option value="auto">Auto</option>
                                         <option value="light">Light</option>
                                         <option value="dark">Dark</option>
@@ -136,12 +137,23 @@
                                 <label for="limitAnimations">Limit screen animations</label>
                             </li>
                             <li>
-                                <label for="theme">Theme selection:</label>
+                                <label for="colorblind">ColourBlind Stuff:</label>
                                 <div class="themed-dropdown">
-                                    <select id="theme" class="form-select">
+                                    <select id="colorblind" class="form-select">
                                         <option value="default">Default</option>
                                         <option value="deuteranopia">Deuteranopia</option>
                                         <option value="tritanopia">Tritanopia</option>
+                                        <option value="achromatopsia">Achromatopsia</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <label for="theme">Theme selection:</label>
+                                <div class="themed-dropdown">
+                                    <select onchange="CheckTheme(this.value)" id="theme" class="form-select">
+                                        <option value="purple">Purple</option>
+                                        <option value="green">Green</option>
+                                        <option value="blue">Blue</option>
                                         <option value="achromatopsia">Achromatopsia</option>
                                     </select>
                                 </div>
