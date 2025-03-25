@@ -41,6 +41,7 @@ function Create_New_User() {
 
   if (CorrectInfo) {
     // Posts information above into DB if CorrectInfo is true
+    alert("User Created");
   }
 }
 
