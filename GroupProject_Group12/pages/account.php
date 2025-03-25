@@ -25,7 +25,7 @@
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <span>📝 User Summary</span>
+                        📝 User Summary
                     </div>
                     <div class="card-body" style="height:350px;">
                         <div class="d-flex align-items-center mb-3">
@@ -50,12 +50,8 @@
                         
                         <!-- 🏃‍♂️ Action buttons -->
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-danger">
-                                🗑️ Delete Account
-                            </button>
-                            <button class="btn btn-warning">
-                                🔄 Reset Password
-                            </button>
+                            <button class="btn btn-danger">🗑️ Delete Account</button>
+                            <button class="btn btn-warning">🔄 Reset Password</button>
                         </div>
                     </div>
                 </div>
@@ -66,24 +62,24 @@
                 <div class="card">
                     <div class="card-header">➕ Additional User Information</div>
                     <div class="card-body" style="height:350px;">
-                        <div style="float: left" >
-                            <div id="Content_Inputs">
-                                <label for="UserFName">First name:</label><br>
-                                <input type="text" name="UserFName">
+                        <form>
+                            <div class="mb-2">
+                                <label for="UserFName" class="form-label">First name:</label>
+                                <input type="text" id="UserFName" class="form-control">
                             </div>
-                            <div id="Content_Inputs">
-                                <label for="UserLName">Last name:</label><br>
-                                <input type="text" name="UserLName">
+                            <div class="mb-2">
+                                <label for="UserLName" class="form-label">Last name:</label>
+                                <input type="text" id="UserLName" class="form-control">
                             </div>
-                            <div id="Content_Inputs">
-                                <label for="UserPhoneNo">Phone number:</label><br>
-                                <input type="tel" name="UserPhoneNo">
+                            <div class="mb-2">
+                                <label for="UserPhoneNo" class="form-label">Phone number:</label>
+                                <input type="tel" id="UserPhoneNo" class="form-control">
                             </div>
-                            <div id="Content_Inputs">
-                                <label for="UserHomeNo">Home address:</label><br>
-                                <input type="text" name="UserHomeNo">
+                            <div class="mb-2">
+                                <label for="UserHomeNo" class="form-label">Home address:</label>
+                                <input type="text" id="UserHomeNo" class="form-control">
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -95,66 +91,66 @@
             </div>
             
             <!-- 📛 Title -->
-             <div class="text-center">
-                 <h2>Settings</h2>
-             </div>
+            <div class="text-center">
+                <h2>Settings</h2>
+            </div>
             
-             <!-- ⚙️ Side panel (thin) -->
-             <div class="col-12 ">
-                 <!-- 🎨 Customisability options -->
-                 <div class="card">
-                     <div class="card-header">⚙️ User Settings</div>
-                     <div class="card-body">
-                         <ul>
-                             
-                             <li>
-                                 <label for="darkMode">Dark mode:</label>
-                                 <div class="themed-dropdown">
-                                     <select  id="darkMode" class="form-select">
-                                         <option value="auto">Auto</option>
-                                         <option value="light">Light</option>
-                                         <option value="dark">Dark</option>
-                                     </select>
-                                 </div>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
-                                 <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
-                             </li>
-                             <li>
-                                 <label for="fontSize">Font size:</label>
-                                 <div class="themed-dropdown">
-                                     <select id="fontSize" class="form-select">
-                                         <option value="default">Default</option>
-                                         <option value="large">Large</option>
-                                         <option value="extra-large">Extra large</option>
-                                     </select>
-                                 </div>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="highContrast" class="form-check-input">
-                                 <label for="highContrast">High contrast</label>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="limitAnimations" class="form-check-input">
-                                 <label for="limitAnimations">Limit screen animations</label>
-                             </li>
-                             <li>
-                                 <label for="theme">Theme selection:</label>
-                                 <div class="themed-dropdown">
-                                     <select id="theme" class="form-select">
-                                         <option value="default">Default</option>
-                                         <option value="deuteranopia">Deuteranopia</option>
-                                         <option value="tritanopia">Tritanopia</option>
-                                         <option value="achromatopsia">Achromatopsia</option>
-                                     </select>
-                                 </div>
-                             </li>
-                             
-                         </ul>
-                     </div>
-                 </div>
-             </div>
+            <!-- ⚙️ Side panel (thin) -->
+            <div class="col-12 ">
+                <!-- 🎨 Customisability options -->
+                <div class="card">
+                    <div class="card-header">⚙️ User Settings</div>
+                    <div class="card-body">
+                        <ul>
+                            
+                            <li>
+                                <label for="darkMode">Dark mode:</label>
+                                <div class="themed-dropdown">
+                                    <select  id="darkMode" class="form-select">
+                                        <option value="auto">Auto</option>
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
+                                <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
+                            </li>
+                            <li>
+                                <label for="fontSize">Font size:</label>
+                                <div class="themed-dropdown">
+                                    <select id="fontSize" class="form-select">
+                                        <option value="default">Default</option>
+                                        <option value="large">Large</option>
+                                        <option value="extra-large">Extra large</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="highContrast" class="form-check-input">
+                                <label for="highContrast">High contrast</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="limitAnimations" class="form-check-input">
+                                <label for="limitAnimations">Limit screen animations</label>
+                            </li>
+                            <li>
+                                <label for="theme">Theme selection:</label>
+                                <div class="themed-dropdown">
+                                    <select id="theme" class="form-select">
+                                        <option value="default">Default</option>
+                                        <option value="deuteranopia">Deuteranopia</option>
+                                        <option value="tritanopia">Tritanopia</option>
+                                        <option value="achromatopsia">Achromatopsia</option>
+                                    </select>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
             
         </div>
     </div>
