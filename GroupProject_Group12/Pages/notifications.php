@@ -26,4 +26,31 @@
     </div>
 
 </body>
+
+
+<?php
+// Fetch notifications for the employee
+$notifStmt = $conn->prepare("SELECT NotifID, User_ID, Notifications
+                             FROM Notifications;
+$notifResult = $notifStmt->execute();
+
+$notifications = [];
+while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
+    $notifications[] = $notif;
+}
+// Handle the deletion of a notification
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
+    $notificationId = $_POST['NotifID'];
+
+    // Delete the notification from the database
+    $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotificationID = :notificationId");
+    $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
+    $deleteStmt->execute();
+
+    // Redirect to home page to refresh the notifications
+    header("Location: notifications.php");
+    exit();
+}
+
+?>
 </html>

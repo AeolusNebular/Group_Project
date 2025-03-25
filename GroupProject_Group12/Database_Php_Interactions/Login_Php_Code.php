@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email']) && isse
     $Email = trim($_POST['Login_Email']);
     $Password = trim($_POST['Login_Password']);
 
-
+$query = "select User_ID, Password FROM User_Details, LoginDetails WHERE Email = '".$Email."'";
     $db = Open_Database();
     $stmt = $db->prepare($query);
     $stmt->bindValue(':email', $Email, SQLITE3_TEXT);
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email']) && isse
     if (!$userFound) {
         $message = "Invalid email or password. Please try again.";
         // Redirect back to login 
-        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/login.php?Login=" . urlencode($message) . "')</script>";
+        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/home.php?Login=" . urlencode($message) . "')</script>";
         exit();
     }
 
