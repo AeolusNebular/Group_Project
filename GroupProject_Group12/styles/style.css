@@ -142,16 +142,29 @@ h2, .card-header {
 }
 /* 🌈 Bonus */
 .bonus-theme {
-    --bg-dark: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet);
-    --bg-light: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
-    --card-dark: linear-gradient(90deg, blue, purple, pink, red);
-    --card-light: linear-gradient(90deg, cyan, lightblue, white);
-    animation: rainbow-animation 5s infinite linear;
+    --bg-dark: linear-gradient(70deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+    --bg-light: linear-gradient(70deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    --card-dark: linear-gradient(130deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+    --card-light: linear-gradient(130deg, violet, indigo, blue, green, yellow, orange, red, violet);
 }
 
-@keyframes rainbow-animation {
+/* 🌈 Apply animation to background - Left to Right */
+body.bonus-theme {
+    background-size: 600% 600%; /* Increased for smoother effect */
+    animation: rainbow-animation-body 8s infinite linear;
+}
+@keyframes rainbow-animation-body {
     0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    100% { background-position: 500% 50%; } /* Extends further for a smooth loop */
+}
+/* 🌈 Apply animation to cards - Right to Left */
+.bonus-theme .card {
+    background-size: 600% 600%; /* Match the body for seamless motion */
+    animation: rainbow-animation-cards 8s infinite linear;
+}
+@keyframes rainbow-animation-cards {
+    0% { background-position: 500% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Theme selector  */
