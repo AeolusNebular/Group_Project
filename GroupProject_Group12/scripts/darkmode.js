@@ -1,27 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
     const icon = document.getElementById("darkModeIcon");
+    const storedTheme = localStorage.getItem("selectedTheme") || "purple"; // Default to purple
+    const isDarkMode = localStorage.getItem("theme") === "dark";
 
-    // 🎨 Check and apply theme on page load
-    const theme = localStorage.getItem("theme") === "dark";
-    
-    // ⚙️ Apply relevant icon
-    document.body.classList.toggle("light-mode", theme);
-    icon.innerHTML = theme ? sunIcon() : moonIcon();
+    // 🎨 Apply stored theme
+    CheckTheme(storedTheme);
+    document.getElementById("theme").value = storedTheme;
+
+    // 🌙 Apply dark mode
+    document.body.classList.toggle("light-mode", isDarkMode);
+    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
 });
 
-// 📊 Redrawn javascript charts to match toggled mode
+// 🎨 Function to apply a selected theme
+function CheckTheme(custtheme) {
+    document.body.classList.remove("purple-theme", "green-theme", "blue-theme");
+    document.body.classList.add(`${custtheme}-theme`);
+
+    // 📝 Store selection
+    localStorage.setItem("selectedTheme", custtheme);
+}
+
+// 🌙 Toggle dark/light mode
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
-    const theme = !body.classList.contains("light-mode");
+    const isDarkMode = !body.classList.contains("light-mode");
 
-    body.classList.toggle("light-mode", theme);
+    // 🌙 Toggle mode
+    body.classList.toggle("light-mode", isDarkMode);
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
 
-    // ⚙️ Store selected mode
-    localStorage.setItem("theme", theme ? "dark" : "light");
-
-    // ⚙️ Apply relevant icon
-    icon.innerHTML = theme ? sunIcon() : moonIcon();
+    // ⚙️ Update icon
+    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
 
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);

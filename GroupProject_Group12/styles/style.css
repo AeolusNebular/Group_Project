@@ -7,6 +7,8 @@ body {
     letter-spacing: 0.5px;
     color: #fff;
     font-family: 'Space Grotesk', sans-serif;
+    transition: background 0.3s ease-in-out;
+    top: 10%;
 }
 body::before, body::after {
     content: "";
@@ -64,37 +66,35 @@ h2, .card-header {
 
 /* ================= THEMES ================= */
 
-.purple-theme::after {
+/* 🎨 Default (Light Mode) Backgrounds */
+.purple-theme {
     background: linear-gradient(to top right, #010326, #1e0025);
 }
-
-.purple-theme::before {
+.purple-theme.light-mode {
     background: linear-gradient(to top right, #e1e3ff, #fbebff);
 }
 
-.green-theme::before {
-    background: linear-gradient(to top right, #002e00, #002500);
+.green-theme {
+    background: linear-gradient(to top right, #0c0f0c, #293221);
+}
+.green-theme.light-mode {
+    background: linear-gradient(to top right, #d5f0de, #bed1b2);
 }
 
-.green-theme::after {
-    background: linear-gradient(to top right, #e1ffe1, #ebffeb);
+.blue-theme {
+    background: linear-gradient(to top right, #002424, #095257);
 }
-
-.blue-theme::before {
-    background: linear-gradient(to top right, #002e2e, #002525);
+.blue-theme.light-mode {
+    background: linear-gradient(to top right, #a8d8f0, #ebfffe);
 }
-
-.blue-theme::after {
-    background: linear-gradient(to top right, #e1f7ff, #ebfdff);
-}
-
-
 
 /* ================= 📍 NAVBAR ================= */
 .navbar {
     background: linear-gradient(to top right, #2a2d5b7b, #50326480);
     z-index: 3;
     width: 100%;
+    position: fixed;
+    top: 0;
 }
 
 /* Sidebar toggle */

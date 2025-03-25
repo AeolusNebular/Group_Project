@@ -27,3 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('theme').value = storedTheme;
     }
 });
+
+function switchdark() {
+
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+    
+}
