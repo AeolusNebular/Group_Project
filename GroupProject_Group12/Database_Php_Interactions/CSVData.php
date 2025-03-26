@@ -32,8 +32,43 @@
         } 
         // Closes File and returns the array Values     
         fclose ( $fp );
-        return $Values;
+        return $Values;     
+    }
+
+
+    function FilterByCityCSV($TypeOfCSV,$Year,$Network,$GetFilter) {
+        $FirstLine = true;
+        $CSVfilter = array(strtoupper($GetFilter));
+        $words = array_map('preg_quote', $CSVfilter);
+        $regex = '/'.implode('|', $words).'/';
+        $NoOfCities = array();
         
+        $fp = fopen ( "../CSV_Files/". $TypeOfCSV ."/". $Network ."_". $TypeOfCSV ."_". $Year .".csv" , "r" );       
+        $Values = [];
+
+        while (( $data = fgetcsv( $fp )) !== FALSE ) {
+            if  ($FirstLine) {
+                $FirstLine = false;
+                continue;
+            }
+            list($net_manager,$purchase_area,$street,$zipcode_from,$zipcode_to,$city,$num_connections,$delivery_perc,$perc_of_active_connections,$type_conn_perc,$type_of_connection,$annual_consume,$annual_consume_lowtarif_perc,$smartmeter_perc) = $data;                    
+            if (preg_match($regex, $city)) {
+                if (!isset($NoOfCities[$city])) {
+                    $NoOfCities[$city] = [];
+                }
+                $NoOfCities[$city] = $data;
+            }   
         
+            
+        }
+
+       /* foreach ($NoOfCities as $Key => $City) {
+            foreach ($City as $Data => $Value) {
+                debug_to_console($Value);
+            }
+            
+        }*/
+        fclose ( $fp );
+        return $NoOfCities;
     }
 ?>
