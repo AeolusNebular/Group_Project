@@ -28,9 +28,14 @@
             <div class="icon-container">
                 <!-- 🔔 Notifications icon -->
                 <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Notifications" style="color: white;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                        <path d="M8 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-6V7a6 6 0 0 0-12 0v3c0 .839-.472 1.574-1.14 1.962-.688.396-1.514.626-2.36.656v.348a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-.348c-.846-.03-1.672-.26-2.36-.656-.668-.388-1.14-1.123-1.14-1.962z"/>
-                    </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 16 16">
+                    <!-- Shorter Bell Body -->
+                    <path d="M8 2C5.5 2 3.5 4.5 3.5 7v3c0 .8-.5 1.5-1.2 2h11.4c-.7-.5-1.2-1.2-1.2-2V7c0-2.5-2-5-4.5-5z"/>
+                    <!-- Bell Rim -->
+                    <path d="M2.5 12c-.8 0-1.5.7-1.5 1.5S1.7 15 2.5 15h11c.8 0 1.5-.7 1.5-1.5S14.3 12 13.5 12h-11z"/>
+                    <!-- Circular, Proportionate Clapper -->
+                    <circle cx="8" cy="14.5" r="1.4" fill="currentColor"/>
+                </svg>
                 </button>
             </div>
             
