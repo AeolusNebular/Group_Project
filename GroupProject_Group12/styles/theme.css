@@ -3,7 +3,7 @@
     /* 🎨 Root theming (AGGRESSIVELY GREY) */
     --bg-dark: linear-gradient(to bottom right, #333, #000);
     --bg-light: linear-gradient(to bottom right, #fff, #ddd);
-    --card-dark: linear-gradient(to bottom right, #3f3f3f7b, #65656580);
+    --card-dark: linear-gradient(to bottom right, #3f3f3fbb, #656565bb);
     --card-light: linear-gradient(to bottom right, #eee, #ccc);
     --text-dark: #fff;
     --text-light: #000;
@@ -19,7 +19,7 @@
 .purple-theme {
     --bg-dark: linear-gradient(to bottom right, #010326, #3a0055);
     --bg-light: linear-gradient(to bottom right, #e1e3ff, #fbebff);
-    --card-dark: linear-gradient(to bottom right, #2a2d5b80, #50326480);
+    --card-dark: linear-gradient(to bottom right, #2a2d5bbb, #503264bb);
     --card-light: linear-gradient(to bottom right, #cce, #ece);
     --text-light: #103;
     --shadow-main: #c08ab660;
@@ -31,14 +31,14 @@
 .green-theme {
     --bg-dark: linear-gradient(to bottom right, #0c0f0c, #293221);
     --bg-light: linear-gradient(to bottom right, #d5f0de, #bed1b2);
-    --card-dark: linear-gradient(to bottom right, #1f3b1f80, #325d3280);
+    --card-dark: linear-gradient(to bottom right, #1f3b1fbb, #325d32bb);
     --card-light: linear-gradient(to bottom right, #c8e6c9, #dff2dc);
 }
 /* 🌊 Marine */
 .marine-theme {
-    --bg-dark: linear-gradient(to bottom right, #003b32, #00665e);
+    --bg-dark: linear-gradient(to bottom right, #00352d, #006166);
     --bg-light: linear-gradient(to bottom right, #c2efea, #e7fff9);
-    --card-dark: linear-gradient(to bottom right, #1b4f4680, #207a6d80);
+    --card-dark: linear-gradient(to bottom right, #0d3139bb, #17584bbb);
     --card-light: linear-gradient(to bottom right, #bde4e4, #d6faf5);
     --text-light: #02403b;
     --shadow-main: #88ccc060;
@@ -50,7 +50,7 @@
 .blue-theme {
     --bg-dark: linear-gradient(to bottom right, #001528, #00155c);
     --bg-light: linear-gradient(to bottom right, #a7d7f7, #c7e7ff);
-    --card-dark: linear-gradient(to bottom right, #0e3a5c80, #1b558080);
+    --card-dark: linear-gradient(to bottom right, #0e3a5cbb, #1b5580bb);
     --card-light: linear-gradient(to bottom right, #bfe8ff, #e1f4ff);
     --text-light: #002244;
     --shadow-main: #80b6f060;
@@ -60,10 +60,12 @@
 }
 /* 🟥 Red */
 .red-theme {
-    --bg-dark: linear-gradient(to bottom right, #3b0000, #750000);
+    --bg-dark: linear-gradient(to bottom right, #1f0000, #441000);
     --bg-light: linear-gradient(to bottom right, #ffb3b3, #ffd6d6);
-    --card-dark: linear-gradient(to bottom right, #5a000080, #92000080);
+    --card-dark: linear-gradient(to bottom right, #5a0000bb, #920000bb);
     --card-light: linear-gradient(to bottom right, #ffcccc, #ffe6e6);
+    --text-light: #300;
+    --shadow-main: #af5b5b60;
 }
 /* 🐺 Sigma */
 .sigma-theme {
@@ -76,7 +78,7 @@
 .bling-theme {
     --bg-dark: linear-gradient(to bottom right, #c18c50, #5d4f00);
     --bg-light: linear-gradient(to bottom right, #fffae6, #fff0b3);
-    --card-dark: linear-gradient(to bottom right, #e6a90080, #ffd70080);
+    --card-dark: linear-gradient(to bottom right, #e6a900bb, #ffd700bb);
     --card-light: linear-gradient(to bottom right, #fff5cc, #ffeb99);
     --shadow-main: #dbcb8580;
     --text-shadow: #cadb85;
@@ -109,7 +111,7 @@ body.bonus-theme {
 }
 
 /* Theme selector  */
-.purple-option { color: #503264; }
+.purple-option { color: #764082; }
 .green-option { color: #325d32; }
 .marine-option { color: #286e6e; }
 .blue-option { color: #1091d7; }
