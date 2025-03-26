@@ -10,18 +10,19 @@
     <title>Notifications - Smart Energy Dashboard</title>
 </head>
 
-<body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <?php include("../modules/navbar.php"); 
+    require('../Database_Php_Interactions/Database_Utilities.php'); ?>
 
     <!-- 🔔 Notifications Page Content -->
     <div class="container mt-4">
         <h2>Notifications</h2>
         <div class="notification-list">
-            <!-- 🔄 Loop through notifications and display them -->
-            <div class="notification">🔔 This is a notification</div>
-            <div class="notification">🔔 This is another notification.</div>
+            
+        <Echo "NotifStmt" />
+
+
         </div>
     </div>
 
@@ -29,28 +30,32 @@
 
 
 <?php
-// Fetch notifications for the employee
-$notifStmt = $conn->prepare("SELECT NotifID, User_ID, Notifications
-                             FROM Notifications;
+
+$conn = Open_Database();
+// Fetch notifications
+$notifStmt = $conn->prepare("SELECT NotifID, User_ID, Notification FROM Notifications");
 $notifResult = $notifStmt->execute();
 
 $notifications = [];
-while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
-    $notifications[] = $notif;
-}
-// Handle the deletion of a notification
+while ($NotifID = $notifResult->fetchArray(SQLITE3_ASSOC)) {
+    $notifications['NotifID'] = $NotifID;
+};
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
     $notificationId = $_POST['NotifID'];
 
-    // Delete the notification from the database
-    $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotificationID = :notificationId");
+
+
+    $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotificationId");
     $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
     $deleteStmt->execute();
 
-    // Redirect to home page to refresh the notifications
     header("Location: notifications.php");
     exit();
 }
+
+
 
 ?>
 </html>

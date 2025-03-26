@@ -92,13 +92,11 @@
     <!-- 📍 Notifications Dropdown -->
     <div id="notificationsDropdown" class="dropdown-menu" style="display: none; position: absolute; top: 50px; right: 20px; width: 250px; background-color: #fff; border: 1px solid #ddd; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 8px;">
         <div id="notificationList" class="notification-list">
-            <!-- Notifications will be injected here dynamically -->
-            <div class="notification unread">This is a notification!</div>
-            <div class="notification">This is another!</div>
+           
         </div>
         
-        <!-- ➕ Button to load more notifications -->
-        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="btn btn-link" style="padding: 0;">Load More</a>
+        <!-- load more notifications -->
+        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="btn btn-link" style="padding: 0;">Load Notifications</a>
     </div>
     
     <!-- 📝 JavaScript to toggle the notifications dropdown -->

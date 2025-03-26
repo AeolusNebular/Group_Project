@@ -1,6 +1,6 @@
 
 const notifications = [
-    { message: "This is a notification.", isRead: false },
+    { message: "Notifications.", isRead: false },
 ];
 
 // toggle notifications dropdown
