@@ -172,13 +172,13 @@
                             const canvas = document.getElementById("NetworkCanvas");
                             
                             // ✅ Ensure the canvas context is fresh
-                            if (!canvas) return; // Exit if canvas is missing
+                            if (!canvas) return; // 👋 Exit if canvas is missing
                             const ctx = canvas.getContext("2d");
-
-                            // ✅ Destroy existing chart properly
+                            
+                            // 💥 Destroy existing chart properly
                             if (chartInstance) {
                                 chartInstance.destroy();
-                                chartInstance = null; // Clear instance reference
+                                chartInstance = null; // 🧹 Clear instance reference
                             }
 
                             chartInstance = new Chart(ctx, {
@@ -283,10 +283,10 @@
                             if (!citycanvas) return; // Exit if canvas is missing
                             const ctx = citycanvas.getContext("2d");
 
-                            // ✅ Destroy existing chart properly
+                            // 💥 Destroy existing chart properly
                            // if (chartInstance) {
                            //     chartInstance.destroy();
-                           //     chartInstance = null; // Clear instance reference
+                           //     chartInstance = null; // 🧹 Clear instance reference
                           //  }
 
                             chartInstance = new Chart(ctx, {

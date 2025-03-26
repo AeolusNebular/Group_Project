@@ -6,10 +6,10 @@ document.addEventListener("mousedown", (e) => {
     if (!window.limitAnimationsEnabled && isInteractive(e.target)) {
         createSparks(e.clientX, e.clientY); // 1️⃣ Normal click = sparks
     }
-
-    // ⌛ Start hold timer
+    
+    // ⌛ Start hold timer (prevents instant clicks from triggering double spark)
     holdTimer = setTimeout(() => {
-        heldLongEnough = true;
+        heldLongEnough = true; // ✅ Eligible for second spark on release
     }, 500); // ⌛ 0.5 second hold time
 });
 
@@ -20,37 +20,35 @@ document.addEventListener("mouseup", (e) => {
         createSparks(e.clientX, e.clientY); // 2️⃣ Long press = another spark
     }
 
-    heldLongEnough = false; // Reset flag
+    heldLongEnough = false; // ⏱️ Reset flag
 });
 
+// 🎯 Define interactive elements
 function isInteractive(element) {
-    return (
-        ["BUTTON", "A", "SELECT", "LABEL", "SVG"].includes(element.tagName) || 
-        element.closest("svg") || // Check if inside an SVG
-        element.hasAttribute("data-interactive") ||
-        (element.tagName === "INPUT" && element.type === "checkbox") // ✅ Allow checkboxes
-    );
+    return element.closest("[data-interactive], button, a, select, label, svg, input[type='checkbox']");
 }
 
 function createSparks(x, y) {
-    for (let i = 0; i < 8; i++) { // ✨ More sparks per click
+    for (let i = 0; i < 8; i++) { // ✨ Sparks per click
         const spark = document.createElement("div");
         spark.classList.add("spark");
 
-        // 💨 Random direction and speed
-        const angle = Math.random() * Math.PI * 2; // 🧭 Random direction
-        const speed = Math.random() * 5 + 2; // Speed range (2 to 7)
-        const velocityX = Math.cos(angle) * speed;
-        let velocityY = Math.sin(angle) * speed;
-        let gravity = 0.2;
-
+        // ☄️ Spark moves in a random direction with physics-based movement:
+        const angle = Math.random() * Math.PI * 2; // 🧭 Random trajectory (0 to 360°)
+        const speed = Math.random() * 5 + 2; // 💨 Speed Random speed (between 2 and 7 pixels per frame)
+        
+        const velocityX = Math.cos(angle) * speed; // ➡️ Horizontal movement
+        let velocityY = Math.sin(angle) * speed; // ⬇️ Vertical movement
+        
+        let gravity = 0.2; // 🔻 Small downward pull emulates gravity
+        
         // 📍 Set initial position
         spark.style.left = `${x}px`;
         spark.style.top = `${y}px`;
         spark.style.transform = `rotate(${Math.random() * 360}deg)`;
-
+        
         document.body.appendChild(spark);
-
+        
         let time = 0;
         const move = setInterval(() => {
             time += 1;
@@ -60,7 +58,7 @@ function createSparks(x, y) {
             spark.style.top = `${y + velocityY * time}px`;
         }, 16);
 
-        // ✅ Auto-delete after 1 second
+        // 🗑️ Auto-delete after 1 second
         setTimeout(() => {
             clearInterval(move);
             spark.remove();
