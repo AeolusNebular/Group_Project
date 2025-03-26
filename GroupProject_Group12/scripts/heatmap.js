@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const heatmapContainer = document.getElementById("heatmap");
     if (!heatmapContainer) return;
 
-    // ✅ Initialise map over modified Dutch centre point
+    // 🗺️ Initialise Leaflet map over slightly modified Dutch centre point
     var map = L.map("heatmap", { zoomControl: false }).setView([52.1, 5.2], 7);
 
-    // 🗺️ Mapbox tile layer URL
+    // 🌍 Mapbox tile layer URL
     L.tileLayer("https://api.mapbox.com/styles/v1/bryzerse/cm88xjf8h00ds01sbeevxgzhz/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYnJ5emVyc2UiLCJhIjoiY2traWNsZWhmMG13MzJvcGdiZ3hkbjlodyJ9.BV94uCu_hACQrqEbO74A8w", {
         attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a>'
     }).addTo(map);
 
-    // 📊 Placeholder heatmap data
+    // 📊 Placeholder heatmap data:
     var heatData = {
         max: 1,
         data: [
@@ -41,19 +41,21 @@ document.addEventListener("DOMContentLoaded", function () {
             { lat: 53.3811, lng: -1.4701, value: 50.0 }
         ]        
     };
-
+    
     // ⚙️ Heatmap config
     var cfg = {
         radius: 0.3,
-        scaleRadius: true,
+        scaleRadius: true, // 🔎 Scaling based on map zoom level
         useLocalExtrema: false,
         latField: "lat",
         lngField: "lng",
         valueField: "value"
     };
 
-    // ⚙️ Heatmap overlay
+    // 🔥 Initialise heatmap overlay using config
     var heatmapLayer = new HeatmapOverlay(cfg);
+    
+    // 📌 Set heatmap data and add to map
     heatmapLayer.setData(heatData);
     heatmapLayer.addTo(map);
 });
