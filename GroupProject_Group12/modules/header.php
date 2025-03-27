@@ -28,7 +28,7 @@
     <!-- Heatmap.js -->
     <script src="https://unpkg.com/heatmap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap/leaflet-heatmap.js"></script>
-    
+   
     <!-- Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
@@ -37,9 +37,10 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
     
-    <!-- 📍 Login -->
-    <?php include("login.php"); ?>
+     <!-- 📍 Login -->
+    <?php include("login.php");?>
     
 </head>
 
