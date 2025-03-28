@@ -2,8 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$conn = new SQLite3('C:\xampp\htdocs\Group_Project\GroupProject_Group12\database\users.db');
-
+$conn = new SQLite3("../database/users.db");
 if (!$conn) {
     die('Connection failed: ' . $conn->lastErrorMsg());
 }
