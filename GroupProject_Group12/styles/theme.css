@@ -1,4 +1,3 @@
-
 :root {
     /* 🎨 Root theming (AGGRESSIVELY GREY) */
     --bg-dark: linear-gradient(to bottom right, #333, #000);
@@ -67,6 +66,7 @@
     --text-light: #300;
     --shadow-main: #af5b5b60;
 }
+
 /* 🐺 Sigma */
 .sigma-theme {
     --text-light: #680000;
@@ -74,6 +74,7 @@
     --text-shadow: #520000;
     --border-colour: #9d2d2d;
 }
+
 /* 💰 Ridiculously Bling */
 .bling-theme {
     --bg-dark: linear-gradient(to bottom right, #c18c50, #5d4f00);
@@ -83,6 +84,7 @@
     --shadow-main: #dbcb8580;
     --text-shadow: #cadb85;
 }
+
 /* 🌈 Bonus */
 .bonus-theme {
     --bg-dark: linear-gradient(70deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
@@ -117,6 +119,10 @@ body.bonus-theme {
 .blue-option { color: #1091d7; }
 .red-option { color: #920000; }
 .sigma-option { color: #450000; }
+.matrix-option { color: #128e24; }
+.sunset-option { color: #d77a59; }
+.cosmic-option { color: #6b3fa4; }
+.desert-option { color: #a36a3c; }
 .bling-option { color: #c48319; }
 .bonus-option { color: violet; }
 .root-option { color: #666; }

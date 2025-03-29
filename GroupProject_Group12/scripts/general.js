@@ -22,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
             limitAnimationsEnabled = checkbox.checked;
             localStorage.setItem("limitAnimations", checkbox.checked);
             window.limitAnimationsEnabled = limitAnimationsEnabled;
+
+            // 🛑 Stop Matrix Effect if limited animations is enabled
+            if (limitAnimationsEnabled) {
+                stopMatrixEffect();
+            } else if (document.body.classList.contains("matrix-theme")) {
+                activateMatrixEffect();
+            }
         });
     }
 

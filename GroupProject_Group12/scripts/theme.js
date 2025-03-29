@@ -13,14 +13,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 🎨 Function to apply a selected theme
-function CheckTheme(custtheme) {
+function CheckTheme(newTheme) {
+    console.log(`🔄 Switching theme to: ${newTheme}`);
+    
+    // 🛑 Stop Matrix effect before applying new theme
+    stopMatrixEffect();
+    
     document.body.classList.forEach(cls => {
         if (cls.endsWith("-theme")) document.body.classList.remove(cls);
     });
-    document.body.classList.add(`${custtheme}-theme`);
+    document.body.classList.add(`${newTheme}-theme`);
 
     // 📝 Store selection
-    localStorage.setItem("selectedTheme", custtheme);
+    localStorage.setItem("selectedTheme", newTheme);
+
+    // ✅ Start Matrix effect if Matrix is selected
+    if (newTheme === "matrix") {
+        activateMatrixEffect();
+    }
 }
 
 // 🌙 Toggle dark/light mode
@@ -28,14 +38,14 @@ function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
     const isDarkMode = !body.classList.contains("light-mode");
-
+    
     // 🌙 Toggle mode
     body.classList.toggle("light-mode", isDarkMode);
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-
+    
     // ⚙️ Update icon
     icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
-
+    
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);
 }

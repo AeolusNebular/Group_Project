@@ -119,18 +119,23 @@
                                 <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
                             </li>
                             <li>
+                                <!-- 🎨 Theme selection menu -->
                                 <label for="theme">Theme selection:</label>
                                 <div class="themed-dropdown">
                                     <select onchange="CheckTheme(this.value)" id="theme" class="form-select">
-                                        <option value="purple" class="purple-option">Purple</option>
-                                        <option value="green" class="green-option">Green</option>
-                                        <option value="marine" class="marine-option">Marine</option>
-                                        <option value="blue" class="blue-option">Blue</option>
-                                        <option value="red" class="red-option">Red</option>
-                                        <option value="sigma" class="sigma-option">Sigma</option>
-                                        <option value="bling" class="bling-option">Bling</option>
-                                        <option value="bonus" class="bonus-option">Bonus</option>
-                                        <option value="root" class="root-option">Root</option>
+                                        <option value="purple" class="purple-option">🟪 Purple (default)</option>
+                                        <option value="green" class="green-option">🟩 Green</option>
+                                        <option value="marine" class="marine-option">🌊 Marine</option>
+                                        <option value="blue" class="blue-option">🟦 Blue</option>
+                                        <option value="red" class="red-option">🟥 Red</option>
+                                        <option value="sigma" class="sigma-option">🐺 Sigma</option>
+                                        <option value="matrix" class="matrix-option">💻 Matrix</option>
+                                        <option value="sunset" class="sunset-option">🌇 Sunset</option>
+                                        <option value="desert" class="desert-option">🏜️ Desert</option>
+                                        <option value="cosmic" class="cosmic-option">🌌 Cosmic</option>
+                                        <option value="bling" class="bling-option">💰 Bling</option>
+                                        <option value="bonus" class="bonus-option">🌈 Bonus</option>
+                                        <option value="root" class="root-option">⚙️ Root</option>
                                     </select>
                                 </div>
                             </li>

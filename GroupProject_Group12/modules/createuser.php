@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <!-- Network and city assignment code -->
-                    <div id="AdminPanelFormRigth">
+                    <div id="AdminPanelFormRight">
                         <div style="margin-top: 10px">
                             <input class="form-check-input" type="checkbox" id="Network_User" name="Network_User" onChange="UserType()">
                             <label class="form-check-label" for="Network_User">Network user</label> 

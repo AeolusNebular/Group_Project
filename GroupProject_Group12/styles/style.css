@@ -10,6 +10,10 @@ body {
     background: var(--bg-dark);
     transition: background 0.3s ease-in-out;
     margin-top: 76px;
+
+    /* 🖥️ Ensure maximal height is filled */
+    min-height: 100vh;
+    height: 100%;
 }
 body.light-mode {
     color: var(--text-light);
@@ -37,6 +41,7 @@ h2, .card-header {
     margin: 12px;
     width: 100%;
     background: var(--card-dark);
+    backdrop-filter: blur(3px);
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main);
     border-radius: 16px;
@@ -245,7 +250,6 @@ h2, .card-header {
     transition: 0.5s ease;
     background: var(--card-dark);
 }
-
 .light-mode .sidebar {
     background: var(--card-light);
 }
@@ -259,6 +263,7 @@ h2, .card-header {
     transition: all 0.3s ease;
 }
 .sidebar a:hover {
+    text-decoration: underline;
     text-shadow: 4px 4px 20px #f76;
 }
 
@@ -314,6 +319,13 @@ h2, .card-header {
     text-align: left;
     height: 300px;
 }
+#AdminPanelFormRight {
+    float : right;
+    flex-direction: column; 
+    display: flex; 
+    height: 295px; 
+    position: relative;
+}
 
 #AdminPanelFormContent {
     float : left;
@@ -324,14 +336,6 @@ h2, .card-header {
 #AdminPanelFormContentInputs {
     float : left;
     margin-top: 25px;
-}
-
-#AdminPanelFormRigth {
-    float : right;
-    flex-direction: column; 
-    display: flex; 
-    height: 295px; 
-    position: relative;
 }
 
 #AdminPanelAddUserBtn {
