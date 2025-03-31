@@ -12,7 +12,10 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); ?>
+    <?php include("../modules/navbar.php");
+    require('../Database_Php_Interactions/Database_Utilities.php');
+    include('../Database_Php_Interactions/CSVData.php'); 
+    debug_to_console($UserID); ?>
     
     <!-- 👤 Account page content -->
     <div class="container mt-4">
@@ -36,17 +39,37 @@
                                 <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
                             </svg>
                             <div class="ms-3">
-                                <h5 class="mb-0">Bob Smith</h5>
-                                <small>bobsmith@boibsmith.com</small>
+                                <h5 class="mb-0">
+                                    <?php   echo isset($UserFName) ? $UserFName : 'Bob';     ?>
+                                    <?php   echo isset($UserSName) ? $UserSName : 'Smith';     ?>
+                                </h5>
+                                <small><?php echo isset($UserEmail) ? $UserEmail : 'bobsmith@boibsmith.com';?></small>
                             </div>
                         </div>
                         
                         <!-- 💰 Budget summary -->
                         <div>
                             <hr>
-                            <p>💰 <b>Phone Number:</b> 06564 885443</p>
+                            <p>💰 <b>Phone Number:</b> <?php isset($UserPhoneNo) ? $UserPhoneNo : '###-###-####';?></p>
                             <p>🛒 <b>Address:</b> 88446 Waitrose Road</p>
-                            <p>📅 <b>Role:</b> City Council</p>
+                            <p>📅 <b>Role:</b> 
+                            <?php 
+                                switch ($RoleID) {
+                                    case 3 : {
+                                        echo 'City Council For ' . $CityFilter;
+                                        break;
+                                    }
+                                    case 2 : {
+                                        echo 'Network User For ' . $RoleNetwork;
+                                        break;
+                                    }
+                                    case 1 : {
+                                        echo 'Admin User';
+                                        break;
+                                    }
+                                } 
+                            ?>
+                            </p>
                             <hr>
                         </div>
                         
@@ -63,24 +86,29 @@
             <div class="col-12 col-md-4">
                 <div class="card">
                     <div class="card-header">➕ Additional User Information</div>
-                    <div class="card-body" style="height:350px;">
-                        <form>
+                    <div class="card-body" style="height:400px;">
+                        <form action = '../Database_Php_Interactions/UpdateUserInfo.php' method = 'POST'>
                             <div class="mb-2">
                                 <label for="UserFName" class="form-label">First name:</label>
-                                <input type="text" id="UserFName" class="form-control">
+                                <input type="text" id="UserFName" name = "UserFName" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="UserLName" class="form-label">Last name:</label>
-                                <input type="text" id="UserLName" class="form-control">
+                                <input type="text" id="UserLName" name = "UserLName" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="UserPhoneNo" class="form-label">Phone number:</label>
-                                <input type="tel" id="UserPhoneNo" class="form-control">
-                            </div>
+                                <input type="tel" id="UserPhoneNo" name = "UserPhoneNo" class="form-control">
+                            </div> 
+                            <input type="hidden" id = 'UserID' value = <?php $UserID ?>/>
                             <div class="mb-2">
                                 <label for="UserHomeNo" class="form-label">Home address:</label>
-                                <input type="text" id="UserHomeNo" class="form-control">
+                                <input type="text" id="UserHomeNo" name = "UserHomeNo" class="form-control">
                             </div>
+                            <button type="Submit" style ='float: right' class="fancy-button" >
+                                Update User Info
+                            </button>
+
                         </form>
                     </div>
                 </div>
