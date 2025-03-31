@@ -3,20 +3,6 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php");
-        session_start();
-        if (!isset($_SESSION['UserID'])) {
-            echo 'Please Login to view this page';    
-        } else {
-            $RoleID = $_SESSION['RoleID'];
-            $UserID = $_SESSION['UserID'];
-            if ($RoleID == '2') {
-                $RoleNetwork = $_SESSION['Network_Name'];
-            } else {
-              $CityFilter = $_SESSION['City_Name'];  
-            }
-            
-            
-        }
     ?>
     
     <title>Home - Smart Energy Dashboard</title>
@@ -27,7 +13,8 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
     require('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php'); ?>
+    include('../Database_Php_Interactions/CSVData.php'); 
+    ?>
     
     <!-- 🏠 Home page content (dashboard) -->
     <div class="container mt-4">

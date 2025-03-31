@@ -1,6 +1,38 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+session_start();
+
+if (!isset($_SESSION['UserID'])) {
+    echo 'Please Login to view this page';    
+} else {
+    $RoleID = $_SESSION['RoleID'];
+    $UserID = $_SESSION['UserID'];
+    $UserEmail = $_SESSION['Email'];
+    
+    if (!is_null($_SESSION['FName'])) {
+        $UserFName = $_SESSION['FName'];
+    }
+    if (!is_null($_SESSION['SName'])) {
+        $UserSName = $_SESSION['SName'];
+    }
+    if (!is_null($_SESSION['PhoneNo'])) {
+        $UserPhoneNo = $_SESSION['PhoneNo'];
+    }
+    if (!is_null($_SESSION['HouseNo'])) {
+        $UserHouseNo = $_SESSION['HouseNo'];
+    }
+    if (!is_null($_SESSION['StreetName'])) {
+        $UserStreetName = $_SESSION['StreetName'];
+    }
+    if ($RoleID == '2') {
+        $RoleNetwork = $_SESSION['Network_Name'];
+    } else {
+    $CityFilter = $_SESSION['City_Name'];  
+    }
+    
+    
+}
 
 $conn = new SQLite3("../database/users.db");
 if (!$conn) {
@@ -50,22 +82,38 @@ if (!$notifResult) {
         
 
             <!-- 👤 Account button with dropdown -->
-            <div class="account-menu">
-                <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
-                    </svg>
-                </button>
-            
-                <!-- 🚨 TBA: NEW USER VARIANT -->
+                <div class="account-menu">
+                        
+                        <?php 
+                            if (isset($UserID)) {
+                                echo '
+                                <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false"  >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
+                                </svg> </button>';
+                            } else {
+                                echo'
+                                <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal" aria-label="Login"  >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
+                                </svg> Login </button>';
+                            }
+                        ?>
+                    
                 
-                <!-- 🔽 Dropdown menu -->
-                <div id="accountDropdown" class="dropdown">
-                    <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
-                    <a href="/Group_Project/GroupProject_Group12/pages/settings.php">Settings</a>
-                    <a href="/Group_Project/GroupProject_Group12/pages/account.php">Logout</a>
+                    <!-- 🚨 TBA: NEW USER VARIANT -->
+                    <?php 
+                    // 🔽 Dropdown menu 
+                    if (isset($UserID)) {
+                        echo '
+                        <div id="accountDropdown" class="dropdown">
+                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
+                        <a href="/Group_Project/GroupProject_Group12/pages/settings.php">Settings</a>
+                        <a href="/Group_Project/GroupProject_Group12/Database_Php_Interactions/Logout.php">Logout</a>
+                        </div>';
+                    }                   
+                    ?>
                 </div>
-            </div>
         
          <!-- 📍 Notifications Dropdown -->
             <div id="notificationsDropdown" class="dropdown-menu" style="display: none; position: absolute; top: 50px; right: 20px; width: 250px; background-color: #fff; border: 1px solid #ddd; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 8px;">
@@ -104,19 +152,26 @@ if (!$notifResult) {
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/home.php">Dashboard</a>
                 </li>
-                <li class="nav-item">
+                <?php 
+                if ($RoleID <= 3) {
+                    echo 
+                    ' <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
-                </li>
-                <li class="nav-item">
+                    </li> ';
+                } 
+                if ($RoleID <= 2) {
+                    echo 
+                    '<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
-                </li>
-                <li class="nav-item">
+                    </li> ';
+                } 
+                if ($RoleID == 1) {
+                    echo '
+                    <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                </li>
-                <br><br><br>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/account.php">Account</a>
-                </li>
+                    </li> ';
+                }
+                ?>
             </ul>
         </div>
     </nav>
