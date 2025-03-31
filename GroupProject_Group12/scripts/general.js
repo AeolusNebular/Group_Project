@@ -22,12 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
             limitAnimationsEnabled = checkbox.checked;
             localStorage.setItem("limitAnimations", checkbox.checked);
             window.limitAnimationsEnabled = limitAnimationsEnabled;
-
-            // 🛑 Stop Matrix Effect if limited animations is enabled
+            
+            // 🛑 Stop Matrix effect if limited animations is enabled
             if (limitAnimationsEnabled) {
-                stopMatrixEffect();
+                stopMatrix();
             } else if (document.body.classList.contains("matrix-theme")) {
-                activateMatrixEffect();
+                startMatrix();
+            }
+            // 🛑 Stop tumbleweeds if limited animations is enabled
+            if (limitAnimationsEnabled) {
+                stopTumbleweeds();
+            } else if (document.body.classList.contains("desert-theme")) {
+                startTumbleweeds();
             }
         });
     }

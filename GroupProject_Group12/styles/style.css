@@ -11,7 +11,7 @@ body {
     transition: background 0.3s ease-in-out;
     margin-top: 76px;
 
-    /* 🖥️ Ensure maximal height is filled */
+    /* 🖥️ Ensure background consistenly fills the full page height */
     min-height: 100vh;
     height: 100%;
 }

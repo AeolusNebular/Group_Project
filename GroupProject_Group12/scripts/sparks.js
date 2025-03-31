@@ -10,7 +10,7 @@ document.addEventListener("mousedown", (e) => {
     // ⌛ Start hold timer (prevents instant clicks from triggering double spark)
     holdTimer = setTimeout(() => {
         heldLongEnough = true; // ✅ Eligible for second spark on release
-    }, 500); // ⌛ 0.5 second hold time
+    }, 400); // ⌛ 0.4 second hold time
 });
 
 document.addEventListener("mouseup", (e) => {
@@ -32,15 +32,15 @@ function createSparks(x, y) {
     for (let i = 0; i < 8; i++) { // ✨ Sparks per click
         const spark = document.createElement("div");
         spark.classList.add("spark");
-
+        
         // ☄️ Spark moves in a random direction with physics-based movement:
-        const angle = Math.random() * Math.PI * 2; // 🧭 Random trajectory (0 to 360°)
-        const speed = Math.random() * 5 + 2; // 💨 Speed Random speed (between 2 and 7 pixels per frame)
+        const angle = Math.random() * Math.PI * 2; // 🧭 Random trajectory (0° to 360°)
+        const speed = Math.random() * 5 + 2; // 💨 Speed Random speed (between 2px and 7px per frame)
         
         const velocityX = Math.cos(angle) * speed; // ➡️ Horizontal movement
         let velocityY = Math.sin(angle) * speed; // ⬇️ Vertical movement
         
-        let gravity = 0.2; // 🔻 Small downward pull emulates gravity
+        let gravity = 0.2; // 🔻 Small downward pull to emulate gravity
         
         // 📍 Set initial position
         spark.style.left = `${x}px`;
@@ -52,12 +52,12 @@ function createSparks(x, y) {
         let time = 0;
         const move = setInterval(() => {
             time += 1;
-            velocityY += gravity; // 🧲 Gravity pulls it down
-
+            velocityY += gravity; // 🧲 Apply gravity
+            
             spark.style.left = `${x + velocityX * time}px`;
             spark.style.top = `${y + velocityY * time}px`;
         }, 16);
-
+        
         // 🗑️ Auto-delete after 1 second
         setTimeout(() => {
             clearInterval(move);
