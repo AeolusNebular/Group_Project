@@ -35,10 +35,6 @@
                             <input class="form-check-input" type="checkbox" id="City_Council_User" name="City_Council_User" onChange="UserType()"> 
                             <label class="form-check-label" for="City_Council_User">City council user</label> 
                         </div> 
-                        <div style="margin-top: 10px">
-                            <input class="form-check-input" type="checkbox" id="AdminUser" name="Admin_User" > 
-                            <label class="form-check-label" for="AdminUser">Admin user</label> 
-                        </div> 
                             <!-- Network and city select statements -->
                         <div id="Network_Select" style="display: none;" class="themed-dropdown">
                             <label for="Networks">Select network:</label> <br>
