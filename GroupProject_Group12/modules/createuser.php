@@ -56,7 +56,7 @@
                         <div id="City_Select" style="display: none;" class="themed-dropdown">
                             <label for="Cities">Select city:</label> <br>
                             <select class="form-select" name="Cities" id="Cities">
-                                <?php include("CitySelect.php");?>
+                                <?php include("../Database_Php_Interactions/CitySelect.php");?>
                             </select>
                         </div> 
 

@@ -3,11 +3,7 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); 
-    try {
-        include("../modules/CreateUser.php"); 
-    } catch (Exception $e) {
-        echo "error loading cities";
-    }
+
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     
@@ -24,7 +20,13 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
     require('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php'); ?>
+    include('../Database_Php_Interactions/CSVData.php');
+    try {
+        include("../modules/CreateUser.php"); 
+    } catch (Exception $e) {
+        echo "error loading cities";
+    } 
+    ?>
     
     <!-- 🛡️ Admin page content -->
     <div class="container-lg mt-4" style="min-height: 800px;">
