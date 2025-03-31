@@ -48,9 +48,9 @@
                         <!-- 👤 User summary -->
                         <div>
                             <hr>
-                            <p>💰 <b>Phone Number:</b> <?php isset($UserPhoneNo) ? $UserPhoneNo : '###-###-####';?></p>
-                            <p>🛒 <b>Address:</b> 88446 Waitrose Road</p>
-                            <p>📅 <b>Role:</b> 
+                            <p> <b>Phone Number:</b> <?php echo isset($UserPhoneNo) ? $UserPhoneNo : '###-###-####';?></p>
+                            <p> <b>Address:</b> <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?></p>
+                            <p> <b>Role:</b> 
                             <?php 
                                 switch ($RoleID) {
                                     case 3 : {

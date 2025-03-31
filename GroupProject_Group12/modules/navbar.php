@@ -9,7 +9,11 @@ if (!isset($_SESSION['UserID'])) {
         Please Login to view this page!
         </div>';    
 } else {
-    $RoleID = $_SESSION['RoleID'];
+    if (isset($_SESSION['RoleID'])) {
+        $RoleID = $_SESSION['RoleID'];
+    } else {
+        $RoleID = null;
+    }
     $UserID = $_SESSION['UserID'];
     $UserEmail = $_SESSION['Email'];
     
@@ -30,9 +34,9 @@ if (!isset($_SESSION['UserID'])) {
     }
     if ($RoleID == '2') {
         $RoleNetwork = $_SESSION['Network_Name'];
-    } else {
-    $CityFilter = $_SESSION['City_Name'];  
-    }
+    } elseif ($RoleID == '3') {
+        $CityFilter = $_SESSION['City_Name'];  
+    } 
     
 }
 
@@ -178,9 +182,6 @@ if (!$notifResult) {
                 }
                 ?>
                 
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                </li> 
             </ul>
         </div>
     </nav>

@@ -1,6 +1,14 @@
 <?php
     //Imports required utilities
     require('Database_Utilities.php');
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+    require ('../PHPMailer/src/Exception.php');
+    require ('../PHPMailer/src/PHPMailer.php');
+    require ('../PHPMailer/src/SMTP.php');
+
     // if correct method is Used aka POST then will Write to DB 
     if (($_SERVER["REQUEST_METHOD"] == "POST")) {
 
@@ -126,9 +134,42 @@
                 $db->close();
                 exit;
             }
+        
+
         //Commits Last 3 transactions and Inserts them into Database
         $db->exec('COMMIT');
         $db->close();
+
+        if ($Success) {
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'user@gmail.com';                     //SMTP username
+                $mail->Password   = 'secret';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                       
+
+                $mail->setFrom('user@gmail.com', 'John Doe');
+                $mail->addAddress($_GET['Email']);               //Name is optional
+                
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'New Account Creation Notification';
+                $mail->Body    = 'An Account has been made for you';
+                
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        } else {
+        }            
+        
+
+
         
         //Sends Success to the Page to allow for confirmation Proof
         echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "') </script>";

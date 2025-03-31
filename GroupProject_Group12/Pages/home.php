@@ -45,8 +45,9 @@
                         <canvas id="DashboardCanvas"></canvas>
 
                         <?php 
-                            debug_to_console('Role ID IS ' . $RoleID);
-                            
+                        
+
+                        if (isset($RoleID)) {                        
                             // Runs Once Year is chosen but also defaults to year 2020 if not given
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 $Year = isset($_GET['Dashboard_Years']) ? $_GET['Dashboard_Years'] : '2020';
@@ -94,7 +95,7 @@
                                     debug_to_console($NetworkValues); 
                                 }
                             }
-                            
+                        }
                         ?>
 
 
@@ -225,7 +226,6 @@
                     <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
                 </div>
             </div>
-            <?php debug_to_console('Login ID is ' . $_SESSION['UserID']); ?>
         </div>
     </div>
     
