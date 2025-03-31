@@ -1,36 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
     const icon = document.getElementById("darkModeIcon");
-    const storedTheme = localStorage.getItem("selectedTheme") || "purple"; // Default to purple
-    const isDarkMode = localStorage.getItem("theme") === "dark";
+    const storedThemeMode = localStorage.getItem("themeMode") || "purple-dark"; // 🟣 Default to purpleark
+    const [storedTheme, storedMode] = storedThemeMode.split("-");
+    const isLightMode = storedMode === "light";
 
     // 🎨 Apply stored theme
     CheckTheme(storedTheme);
     document.getElementById("theme").value = storedTheme;
 
     // 🌙 Apply dark mode
-    document.body.classList.toggle("light-mode", isDarkMode);
-    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+    document.body.classList.toggle("light-mode", isLightMode);
+    icon.innerHTML = isLightMode ? sunIcon() : moonIcon();
 });
 
 // 🎨 Function to apply a selected theme
 function CheckTheme(newTheme) {
     console.log(`🔄 Switching theme to: ${newTheme}`);
     
-    // 🛑 Stop Matrix effect before applying new theme
-    stopMatrixEffect();
-    
+    // 🧹 Clear previous theme
     document.body.classList.forEach(cls => {
         if (cls.endsWith("-theme")) document.body.classList.remove(cls);
     });
     document.body.classList.add(`${newTheme}-theme`);
 
-    // 📝 Store selection
-    localStorage.setItem("selectedTheme", newTheme);
-
-    // ✅ Start Matrix effect if Matrix is selected
-    if (newTheme === "matrix") {
-        activateMatrixEffect();
-    }
+    // 💾 Update theme with existing mode and save persistently
+    const currentMode = document.body.classList.contains("light-mode") ? "light" : "dark";
+    localStorage.setItem("themeMode", `${newTheme}-${currentMode}`);
 }
 
 // 🌙 Toggle dark/light mode

@@ -1,5 +1,5 @@
 :root {
-    /* 🎨 Root theming (AGGRESSIVELY GREY) */
+    /* 🌫️ Root theming (AGGRESSIVELY GREY) */
     --bg-dark: linear-gradient(to bottom right, #333, #000);
     --bg-light: linear-gradient(to bottom right, #fff, #ddd);
     --card-dark: linear-gradient(to bottom right, #3f3f3fbb, #656565bb);
@@ -112,7 +112,7 @@ body.bonus-theme {
     100% { background-position: 0% 50%; }
 }
 
-/* Theme selector  */
+/* 🎨 Theme selector  */
 .purple-option { color: #764082; }
 .green-option { color: #325d32; }
 .marine-option { color: #286e6e; }

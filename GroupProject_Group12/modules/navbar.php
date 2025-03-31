@@ -58,7 +58,7 @@ if (!$notifResult) {
     <!-- 📍 Navbar -->
     <nav class="navbar">
         <button class="navbar-toggler" type="button" onclick="toggleNav()" aria-label="Toggle navigation" aria-controls="mySidebar">
-            <span class="navbar-toggle-icon"></span> 
+            <span class="navbar-toggle-icon"></span>
         </button>
         <h2>Smart Energy Dashboard</h2>
 

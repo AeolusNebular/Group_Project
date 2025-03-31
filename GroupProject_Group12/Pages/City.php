@@ -31,9 +31,9 @@
                         
                             <!-- 🧭 Network selection -->
                             <form action="City.php" method = 'GET'>
-                                <div class="themed-dropdown" style = 'float: left'>
+                                <div class="themed-dropdown" style='float: left'>
                                     <label for="CityNetworks">Select network:</label> <br>
-                                    <select class = "form-select" name="CityNetworks" Onchange = 'this.form.submit(); this.value = ' <?php $CityNetwork; ?>>
+                                    <select class = "form-select" name="CityNetworks" Onchange='this.form.submit(); this.value = ' <?php $CityNetwork; ?>>
                                         <option value="coteq"> Coteq </option>      
                                         <option value="westland-infra"> Westlandia </option>
                                         <option value="enexis"> Enexis </option>
@@ -42,9 +42,9 @@
                                     </select>
                                 </div> 
 
-                                <div class="themed-dropdown" style = 'float: right'>
+                                <div class="themed-dropdown" style='float: right'>
                                     <label for="CityYears">Select network:</label> <br>
-                                    <select class = "form-select" name="CityYears" Onchange = 'this.form.submit();'>
+                                    <select class="form-select" name="CityYears" Onchange='this.form.submit();'>
                                         <option value="2016"> 2016 </option>      
                                         <option value="2017"> 2017 </option>
                                         <option value="2018"> 2018 </option>

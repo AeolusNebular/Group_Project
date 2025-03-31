@@ -1,4 +1,3 @@
-<!-- filepath: c:\xampp\htdocs\Group_Project\GroupProject_Group12\Pages\account.php -->
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
@@ -6,7 +5,6 @@
     <?php include("../modules/header.php"); ?>
     
     <title>Account - Smart Energy Dashboard</title>
-    <script src="../scripts/themes.js"></script> <!-- Include the themes.js file -->
 </head>
 
 <body>
@@ -47,7 +45,7 @@
                             </div>
                         </div>
                         
-                        <!-- 💰 Budget summary -->
+                        <!-- 👤 User summary -->
                         <div>
                             <hr>
                             <p>💰 <b>Phone Number:</b> <?php isset($UserPhoneNo) ? $UserPhoneNo : '###-###-####';?></p>
@@ -133,12 +131,12 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                <label for="darkMode">Dark mode:</label>
+                                <!-- 🌙 Manual dark/light mode controls (updates autmocatically) -->
+                                <label for="darkMode">Dark/light mode:</label>
                                 <div class="themed-dropdown">
                                     <select id="darkMode" class="form-select">
-                                        <option value="auto">Auto</option>
-                                        <option value="light">Light</option>
                                         <option value="dark">Dark</option>
+                                        <option value="light">Light</option>
                                     </select>
                                 </div>
                             </li>
@@ -146,6 +144,7 @@
                                 <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
                                 <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
                             </li>
+                            <br>
                             <li>
                                 <!-- 🎨 Theme selection menu -->
                                 <label for="theme">Theme selection:</label>
