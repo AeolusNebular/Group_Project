@@ -43,6 +43,8 @@
                     } elseif ($row['RoleID'] == '3') {
                         $_SESSION['City_Name'] = $RoleQueryRes->fetchArray(SQLITE3_ASSOC)['City_Name'];
                         debug_to_console($_SESSION['City_Name']); 
+                    } elseif ($row['RoleID'] == '1') {
+                        
                     } else {
                         debug_to_console("Failed to Select Network or City " . $db -> lastErrorMsg());
                         $db->close();
