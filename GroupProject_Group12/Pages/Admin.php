@@ -8,7 +8,13 @@
     } catch (Exception $e) {
         echo "error loading cities";
     }
-     ?>
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    
+    require ('../PHPMailer/src/Exception.php');
+    require ('../PHPMailer/src/PHPMailer.php');
+    require ('../PHPMailer/src/SMTP.php');
+    ?>
     
     <title>Admin - Smart Energy Dashboard</title>
 </head>

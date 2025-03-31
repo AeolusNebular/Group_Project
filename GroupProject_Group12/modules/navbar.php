@@ -4,7 +4,10 @@ error_reporting(E_ALL);
 session_start();
 
 if (!isset($_SESSION['UserID'])) {
-    echo 'Please Login to view this page';    
+    echo'
+        <div class="alert alert-info" role="alert">
+        Please Login to view this page!
+        </div>';    
 } else {
     $RoleID = $_SESSION['RoleID'];
     $UserID = $_SESSION['UserID'];
@@ -108,7 +111,7 @@ if (!$notifResult) {
                         echo '
                         <div id="accountDropdown" class="dropdown">
                         <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
-                        <a href="/Group_Project/GroupProject_Group12/pages/settings.php">Settings</a>
+                        <a href="/Group_Project/GroupProject_Group12/pages/account.php">Settings</a>
                         <a href="/Group_Project/GroupProject_Group12/Database_Php_Interactions/Logout.php">Logout</a>
                         </div>';
                     }                   
@@ -153,25 +156,31 @@ if (!$notifResult) {
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/home.php">Dashboard</a>
                 </li>
                 <?php 
-                if ($RoleID <= 3) {
-                    echo 
-                    ' <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
-                    </li> ';
-                } 
-                if ($RoleID <= 2) {
-                    echo 
-                    '<li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
-                    </li> ';
-                } 
-                if ($RoleID == 1) {
-                    echo '
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                    </li> ';
+                if (isset($RoleID)) {
+                    if ($RoleID <= 3) {
+                        echo 
+                        ' <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
+                        </li> ';
+                    } 
+                    if ($RoleID <= 2) {
+                        echo 
+                        '<li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
+                        </li> ';
+                    } 
+                    if ($RoleID == 1) {
+                        echo '
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
+                        </li> ';
+                    }
                 }
                 ?>
+
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
+                </li> 
             </ul>
         </div>
     </nav>
