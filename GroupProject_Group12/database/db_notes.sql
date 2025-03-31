@@ -1,4 +1,4 @@
-x/** CREATE TABLE "Assignations" (
+CREATE TABLE "Assignations" (
 	"UserID"	INTEGER NOT NULL UNIQUE,
 	"City_Name"	TEXT,
 	"NetworkName"	TEXT,
@@ -16,7 +16,6 @@ CREATE TABLE "City" (
 	PRIMARY KEY("CityID" AUTOINCREMENT)
 );
 
-
 CREATE TABLE "LoginDetails" (
 	"LoginID"	INTEGER NOT NULL UNIQUE,
 	"UserID"	INTEGER NOT NULL UNIQUE,
@@ -25,21 +24,17 @@ CREATE TABLE "LoginDetails" (
 	FOREIGN KEY("UserID") REFERENCES "User_Details"("User_ID")
 );
 
-
 CREATE TABLE "Network" (
 	"NetworkID"	INTEGER NOT NULL UNIQUE,
 	"NetworkName"	TEXT NOT NULL UNIQUE,
 	PRIMARY KEY("NetworkID" AUTOINCREMENT)
 );
 
-
 CREATE TABLE "Roles" (
 	"Role_ID"	INTEGER NOT NULL UNIQUE,
 	"Role"	INTEGER UNIQUE,
 	PRIMARY KEY("Role_ID" AUTOINCREMENT)
 );
-
-
 
 CREATE TABLE "User_Details" (
 	"User_ID"	INTEGER NOT NULL UNIQUE,
@@ -56,6 +51,7 @@ CREATE TABLE "User_Details" (
 	PRIMARY KEY("User_ID" AUTOINCREMENT),
 	FOREIGN KEY("RoleID") REFERENCES "Roles"("RoleID")
 );
+
 
 /*  INSERT FOR NETWORK TABLE */
 
