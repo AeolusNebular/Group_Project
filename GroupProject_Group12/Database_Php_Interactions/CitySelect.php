@@ -1,4 +1,5 @@
 <?php
+    
     //Creates db connection 
     $db = Open_Database();
 
@@ -14,4 +15,5 @@
     }
     //Closes DB
     $db -> close();
+    
 ?>
