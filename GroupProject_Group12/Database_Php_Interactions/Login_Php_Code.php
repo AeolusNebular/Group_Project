@@ -25,7 +25,7 @@
                 $_SESSION['UserID'] = $row['User_ID'];
                 $_SESSION['Email'] = $row['Email'];
                 $_SESSION['RoleID'] = $row['RoleID'];            
-                $_SESSION['FName'] = $row['FName'];         
+                $_SESSION['FName'] = $row['Fname'];         
                 $_SESSION['SName'] = $row['SName'];               
                 $_SESSION['PhoneNo'] = $row['PhoneNo'];
                 $_SESSION['StreetName'] = $row['StreetName'];

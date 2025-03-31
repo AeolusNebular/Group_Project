@@ -40,7 +40,10 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
     
      <!-- 📍 Login -->
-    <?php include("login.php");?>
+    <?php include("login.php");
+  
+    
+    ?>
     
 </head>
 

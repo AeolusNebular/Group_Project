@@ -36,6 +36,9 @@
         } else {
             $Network = null;
         }
+      
+
+
 
 
         //Begin a Transaction so that i can commit all code that is required for other transactions 
