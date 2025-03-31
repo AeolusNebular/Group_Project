@@ -2,10 +2,7 @@
 <html lang="en-gb">
 <head>
     <!-- 📢 Header -->
-    <?php include("../modules/header.php"); 
-
-    
-    ?>
+    <?php include("../modules/header.php"); ?>
     
     <title>Admin - Smart Energy Dashboard</title>
 </head>
@@ -35,7 +32,7 @@
             <!-- 📊 Big chart panel (fat) -->
             <div class="col-12 col-md-5">
                 <div class="card">
-                    <div class="card-header">📊 User Creation</div>
+                    <div class="card-header">👤 User Creation</div>
                     <div class="card-body">
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User
@@ -46,11 +43,11 @@
             
             <div class="col-12 col-md-7">
                 <div class="card">
-                    <div class="card-header">📊 Network Users</div>
+                    <div class="card-header">🌐 Network Users</div>
                     <div class="card-body">
                     
-                        <form action="Admin.php" method = 'GET'>
-                            <div class="themed-dropdown" style = 'float: left'> 
+                        <form action="Admin.php" method='GET'>
+                            <div class="themed-dropdown" style='float: left'> 
                                 <label for="Networks">Select Year:</label> <br>
                                 <select class = "form-select" Onchange = "this.form.submit()" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
@@ -60,9 +57,9 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style = 'float: right'>
+                            <div class="themed-dropdown" style='float: right'>
                                 <label for="Networks">Select Type:</label> <br>
-                                <select class = "form-select" Onchange = "this.form.submit()" name="Admin_Network_Type" id="Admin_Network_Type">
+                                <select class = "form-select" Onchange="this.form.submit()" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>                                      
                                 </select>
@@ -171,13 +168,13 @@
                 </div>
             </div>
             
-            <!-- 🌃 City councils diagram -->
+            <!-- 🏙️ City councils diagram -->
             <div class="col-12 col-md-12">
                 <div class="card">
-                    <div class="card-header">🌃 City Council Diagram</div>
+                    <div class="card-header">🏙️ City Council Diagram</div>
                     <div class="card-body">
-                    
-                        <!-- 🌃 City filter -->
+                        
+                        <!-- 🏙️ City filter -->
                         <div id = "SummaryContent">Filter by city:
                             <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET" class="themed-dropdown">
                                 <select name="AdminCityFilter" onChange="this.form.submit()"> 
@@ -191,7 +188,7 @@
                         
                         <!-- 📊 City councils chart -->
                         <canvas id="AdminCityCouncilCanvas"></canvas>
-
+                        
                         <?php
                             $Year = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
                             $City = isset($_GET['AdminCityFilter']) ? $_GET['AdminCityFilter'] : '';

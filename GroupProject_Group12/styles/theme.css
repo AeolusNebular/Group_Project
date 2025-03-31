@@ -75,6 +75,51 @@
     --border-colour: #9d2d2d;
 }
 
+/* 🌌 Cosmic */
+.cosmic-theme {
+    --bg-dark: radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
+    --bg-light: linear-gradient(to bottom right, #f2d6ff, #ffeaff);
+    --card-dark: linear-gradient(to bottom right, #2c0050bb, #5a0099bb);
+    --card-light: linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
+    --text-dark: #f0e6ff;
+    --text-light: #2d0061;
+    --shadow-main: #d47fff80;
+    --text-shadow: #e09fff;
+    --hover-dropdown: linear-gradient(to bottom right, #7d1ba1, #c04bdd);
+    --border-colour: #f0d4ff;
+}
+/* ⭐ Star container */
+#star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+/* ⭐ Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 4s infinite ease-in-out;
+}
+.cosmic-theme:not(.light-mode) .star {
+    background-color: #fff; /* ⚪ White in dark mode */
+}
+.cosmic-theme.light-mode .star {
+    background-color: #cb0; /* 🟡 Gold in light mode */
+}
+/* ✨ Twinkling effect */
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
 /* 💰 Ridiculously Bling */
 .bling-theme {
     --bg-dark: linear-gradient(to bottom right, #c18c50, #5d4f00);

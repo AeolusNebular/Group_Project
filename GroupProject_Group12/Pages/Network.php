@@ -14,7 +14,7 @@
     require('../Database_Php_Interactions/Database_Utilities.php');
     include('../Database_Php_Interactions/CSVData.php'); ?>
     
-    <!-- Network page content -->
+    <!-- 🌐 Network page content -->
     <div class="container mt-4">
         
         <!-- 📛 Title -->
@@ -71,19 +71,19 @@
                                     y: {
                                         beginAtZero: true,
                                         ticks: {
-                                            color: 'white' // Set y-axis text color to white
+                                            color: 'white' // Y-axis text color
                                         }
                                     },
                                     x: {
                                         ticks: {
-                                            color: 'white' // Set x-axis text color to white
+                                            color: 'white' // X-axis text color
                                         }
                                     }
                                 },
                                 plugins: {
                                     legend: {
                                         labels: {
-                                            color: 'white' // Set legend text color to white
+                                            color: 'white' // Legend text color
                                         }
                                     }
                                 }
@@ -147,10 +147,12 @@
             <div class="col-12 col-md-12">
                 <div class="card" style="height: 90%">
                     <div class="card-header">🗺️ Energy Use Heatmap</div>
-                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                    <div id="heatmap" style="height: 500px;">
+                        <!-- 🗺️ Heatmap container -->
+                    </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
     

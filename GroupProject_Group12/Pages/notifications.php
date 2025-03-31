@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-gb">
-
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <title>Notifications - Smart Energy Dashboard</title>
 
@@ -49,7 +46,7 @@
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); 
     require('../Database_Php_Interactions/Database_Utilities.php'); ?>
-
+    
     <!-- 🔔 Notifications Page Content -->
     <div class="container mt-4">
         <h2>Notifications</h2>

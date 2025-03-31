@@ -1,20 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
     const icon = document.getElementById("darkModeIcon");
-    const storedThemeMode = localStorage.getItem("themeMode") || "purple-dark"; // 🟣 Default to purpleark
+    const defaultTheme = "purple-dark"; // 🟣 Default to purple-dark
+    
+    // 📨 Retrieve stored theme (session-based) and mode (local-based)
+    const storedThemeMode = sessionStorage.getItem("themeMode") || defaultTheme;
     const [storedTheme, storedMode] = storedThemeMode.split("-");
-    const isLightMode = storedMode === "light";
-
+    
+    // 📨 Retrieve mode from localStorage (defaults to "dark")
+    const savedMode = localStorage.getItem("mode") || "dark";
+    const isLightMode = savedMode === "light";
+    
     // 🎨 Apply stored theme
-    CheckTheme(storedTheme);
-    document.getElementById("theme").value = storedTheme;
-
-    // 🌙 Apply dark mode
+    applyTheme(storedTheme);
+    
+    // 🌙 Apply dark/light mode
     document.body.classList.toggle("light-mode", isLightMode);
     icon.innerHTML = isLightMode ? sunIcon() : moonIcon();
+    
+    // 🔽 Set dropdown correctly
+    document.getElementById("theme").value = storedTheme;
+    
+    // 🎛️ Theme dropdown listener
+    document.getElementById("theme").addEventListener("change", function (event) {
+        applyTheme(event.target.value);
+    });
 });
 
 // 🎨 Function to apply a selected theme
-function CheckTheme(newTheme) {
+function applyTheme(newTheme) {
     console.log(`🔄 Switching theme to: ${newTheme}`);
     
     // 🧹 Clear previous theme
@@ -22,27 +35,56 @@ function CheckTheme(newTheme) {
         if (cls.endsWith("-theme")) document.body.classList.remove(cls);
     });
     document.body.classList.add(`${newTheme}-theme`);
-
-    // 💾 Update theme with existing mode and save persistently
+    
+    // 💾 Store theme in session storage
     const currentMode = document.body.classList.contains("light-mode") ? "light" : "dark";
-    localStorage.setItem("themeMode", `${newTheme}-${currentMode}`);
+    sessionStorage.setItem("themeMode", `${newTheme}-${currentMode}`);
 }
 
 // 🌙 Toggle dark/light mode
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
-    const isDarkMode = !body.classList.contains("light-mode");
+    const isCurrentlyDarkMode = !body.classList.contains("light-mode");
     
     // 🌙 Toggle mode
-    body.classList.toggle("light-mode", isDarkMode);
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    body.classList.toggle("light-mode", isCurrentlyDarkMode);
+    
+    // 💾 Store mode in localStorage (persistent) and sessionStorage (temporary)
+    const newMode = isCurrentlyDarkMode ? "light" : "dark";
+    localStorage.setItem("mode", newMode);
+    
+    // 🔄 Update session storage to reflect the mode change
+    const currentTheme = document.body.classList.value.match(/\b(\w+)-theme\b/)?.[1] || "purple";
+    sessionStorage.setItem("themeMode", `${currentTheme}-${newMode}`);
     
     // ⚙️ Update icon
-    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+    icon.innerHTML = isCurrentlyDarkMode ? sunIcon() : moonIcon();
     
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if we are coming from a logout
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("logout")) {
+        resetThemeOnLogout(); // Reset the theme if logged out
+    }
+});
+
+// 🧹 Clear theme when logging out
+function resetThemeOnLogout() {
+    const currentMode = localStorage.getItem("mode") || "dark"; // Keep stored mode
+    sessionStorage.setItem("themeMode", `purple-${currentMode}`); // Reset theme to purple
+    
+    // Remove the 'logout' query parameter from the URL
+    const url = new URL(window.location.href);
+    url.searchParams.delete("logout");
+    window.history.replaceState({}, document.title, url.toString()); // Update the URL without reloading
+    
+    // 🔄 Refresh to apply changes
+    location.reload();
 }
 
 // ☀️ Sun Icon SVG
@@ -71,3 +113,26 @@ function moonIcon() {
         </svg>
     `;
 }
+
+// ⭐ Stars for cosmic theme
+document.addEventListener("DOMContentLoaded", function () {
+    const starContainer = document.createElement('div');
+    starContainer.id = 'star-container';
+    document.body.appendChild(starContainer);
+    
+    // ✨ Total number of stars on the screen
+    const numberOfStars = 300;
+
+    for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 3 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.animationDuration = `${Math.random() * 5 + 3}s`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starContainer.appendChild(star);
+    }
+});

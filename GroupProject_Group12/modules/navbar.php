@@ -36,8 +36,7 @@ if (!isset($_SESSION['UserID'])) {
         $RoleNetwork = $_SESSION['Network_Name'];
     } elseif ($RoleID == '3') {
         $CityFilter = $_SESSION['City_Name'];  
-    } 
-    
+    }
 }
 
 $conn = new SQLite3("../database/users.db");
@@ -58,11 +57,18 @@ if (!$notifResult) {
 <html lang="en-gb">
 
 <body>
-    <!-- 📍 Navbar -->
+    <!-- 📍 Navbar content -->
     <nav class="navbar">
-        <button class="navbar-toggler" type="button" onclick="toggleNav()" aria-label="Toggle navigation" aria-controls="mySidebar">
+        
+        <!-- 🔀 Sidebar toggle -->
+        <button class="navbar-toggler
+            <?php echo isset($_SESSION['RoleID']) ? '' : 'invisible'; ?>" 
+            type="button" onclick="toggleNav()" 
+            aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span>
         </button>
+        
+        <!-- 📛 Title -->
         <h2>Smart Energy Dashboard</h2>
         
         <div>
@@ -74,9 +80,10 @@ if (!$notifResult) {
                     </svg>
                 </button>
             </div>
-
+            
+            <!-- 🔔 Notifications icon -->
+            <?php if (isset($_SESSION['RoleID'])): ?>
             <div class="icon-container">
-                <!-- 🔔 Notifications icon -->
                 <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Notifications" style="color: white;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M8 2C5.5 2 3.5 4.5 3.5 7v3c0 .8-.5 1.5-1.2 2h11.4c-.7-.5-1.2-1.2-1.2-2V7c0-2.5-2-5-4.5-5z"/>
@@ -85,6 +92,7 @@ if (!$notifResult) {
                     </svg>
                 </button>
             </div>
+            <?php endif; ?>
             
             <!-- 👤 Account button with dropdown -->
             <div class="account-menu">
@@ -107,8 +115,6 @@ if (!$notifResult) {
                     }
                 ?>
                 
-                <!-- 🚨 TBA: NEW USER VARIANT -->
-                
                 <?php 
                 // 🔽 Dropdown menu 
                 if (isset($UserID)) {
@@ -116,13 +122,13 @@ if (!$notifResult) {
                     <div id="accountDropdown" class="dropdown">
                     <a href="/Group_Project/GroupProject_Group12/pages/account.php">Profile</a>
                     <a href="/Group_Project/GroupProject_Group12/pages/account.php">Settings</a>
-                    <a href="/Group_Project/GroupProject_Group12/Database_Php_Interactions/Logout.php">Logout</a>
+                    <a href="/Group_Project/GroupProject_Group12/Database_Php_Interactions/logout.php">Logout</a>
                     </div>';
                 }
                 ?>
             </div>
-        
-         <!-- 📍 Notifications dropdown -->
+            
+            <!-- 🔔 Notifications dropdown -->
             <div id="notificationsDropdown" class="dropdown-menu" style="display: none; position: absolute; top: 50px; right: 20px; width: 250px; background-color: #fff; border: 1px solid #ddd; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 8px;">
                 <div id="notificationList" class="notification-list">
                     <?php
@@ -139,7 +145,7 @@ if (!$notifResult) {
         </div>
         
     </nav>
-
+    
     <script>
         function toggleNotifications() {
             var notificationsDropdown = document.getElementById("notificationsDropdown");
@@ -151,8 +157,8 @@ if (!$notifResult) {
             }
         }
     </script>
-
-    <!-- 📍 Sidebar -->
+    
+    <!-- 🔀 Sidebar -->
     <nav id="main">
         <div class="sidebar" id="mySidebar">
             <ul style="list-style-type: none;">
@@ -195,11 +201,11 @@ if (!$notifResult) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="ErrorModalMessage">
-                    <!-- Error message dynamically inserted here -->
+                    <!-- ⚠️ Error message dynamically inserted here -->
                 </div>
             </div>
         </div>
     </div>
-
+    
 </body>
 </html>

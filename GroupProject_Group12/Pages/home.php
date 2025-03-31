@@ -43,10 +43,9 @@
                             </div>
                         </form>
                         <canvas id="DashboardCanvas"></canvas>
-
+                        
                         <?php 
                         
-
                         if (isset($RoleID)) {                        
                             // Runs Once Year is chosen but also defaults to year 2020 if not given
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -54,9 +53,9 @@
                                 $TypesOfCSV = ['Gas','Electricity'];
                                 $AllCSVCityData = array('Gas' => [],'Electricity' => []);
 
-                                // Loops through types of CSV eg Electricity or Gas
+                                // Loops through types of CSV (eg electricity or gas)
                                 foreach ($TypesOfCSV as $TypeOfCSV) {
-                                    //Checks users RoleID to decide which Information to show 
+                                    // Checks user's RoleID to decide which information to show 
                                     if ($RoleID == '2') {
                                         $CityConsumeTotals = [];     
                                         $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$RoleNetwork);
@@ -83,9 +82,8 @@
                            
                                             foreach ($Values as $CityName => $CityData) {
                                                 
-                                                //Assigns Annual Consume to the Selected Network in Loop
+                                                // Assigns annual consume to the selected network in loop
                                                 $NetworkConsumeTotals[$Network] += $CityData['11'];
-                                                
                                             }                                                                                       
                                         }                                                                                   
                                         $AllCSVCityData[$TypeOfCSV] += $NetworkConsumeTotals;                                        
@@ -97,8 +95,6 @@
                             }
                         }
                         ?>
-
-
                        
                         <script> 
                             // Grabs the Network consume from Php code above using JSON Encode function and assigns it to data
