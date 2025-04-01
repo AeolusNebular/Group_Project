@@ -19,7 +19,16 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Network</h2>
+            <h2><?php 
+            debug_to_console($RoleID);
+            switch ($RoleID) {
+            case '2' : 
+                $NetworkName;
+                break;
+            case '1' :
+                echo 'Admin User';
+                break; 
+                }?></h2>
         </div>
         <div class ="row">
             <div class="themed-dropdown">

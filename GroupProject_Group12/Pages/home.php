@@ -139,12 +139,14 @@
                                     borderColor: 'rgb(54, 162, 235)',
                                     backgroundColor: 'rgba(255, 99, 132)'
                                 }]
+                               
                             };
 
                             chartInstance = new Chart(ctx, {
                                 type: "Scatter",
                                 data: data, 
                                 options: {
+                                                                
                                     responsive: true,
                                     maintainAspectRatio: true,
                                     plugins: {
@@ -159,7 +161,8 @@
                                             font: font 
                                         }
                                     },
-                                
+
+                                    
                                 }
                             });
                         }
