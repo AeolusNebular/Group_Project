@@ -91,7 +91,21 @@
                                 // 🔍 Debug output for each Network's values
                                 foreach ($AllCSVCityData as $KEY => $NetworkValues) {
                                     debug_to_console($NetworkValues); 
-                                    BasicTable($NetworkValues, $AllCSVCityData);
+
+                                                                    
+                                //writes pdf
+                                $pdf = new PDF(); //create an object of PDF
+                                $pdf->SetFont('Arial','B',12);
+
+                                $pdf->AddPage();
+                                $pdf->Cell(60,25,'List');
+                                $pdf->Ln(25);
+                                $pdf->SetFont('Arial','',12);
+                                $header = array("Net_Manager","Purchase_Area","Street","Zipcode_From","Zipcode To", "City", "num_connections", "delivery_perc", "perc_of_active_connections","type_conn_perc", "type_of_connection", "annual_consume", "annual_consume_lowtarif_perc", "smartmeter_perc");
+
+                                $pdf->BasicTable($NetworkValues, $AllCSVCityData);
+                                $pdf->Output();
+
                                 }
                                 
                             }
