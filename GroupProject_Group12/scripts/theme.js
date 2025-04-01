@@ -94,14 +94,14 @@ function sunIcon() {
         <!-- ☀️ Sun Core -->
         <circle cx="8" cy="8" r="3"/>
         <!-- 🌞 Sun Rays -->
-        <line x1="8" y1="1" x2="8" y2="3" stroke="white" stroke-width="1" />
-        <line x1="8" y1="13" x2="8" y2="15" stroke="white" stroke-width="1" />
-        <line x1="1" y1="8" x2="3" y2="8" stroke="white" stroke-width="1" />
-        <line x1="13" y1="8" x2="15" y2="8" stroke="white" stroke-width="1" />
-        <line x1="2.5" y1="2.5" x2="4" y2="4" stroke="white" stroke-width="1" />
-        <line x1="12" y1="12" x2="13.5" y2="13.5" stroke="white" stroke-width="1" />
-        <line x1="2.5" y1="13.5" x2="4" y2="12" stroke="white" stroke-width="1" />
-        <line x1="12" y1="4" x2="13.5" y2="2.5" stroke="white" stroke-width="1" />
+        <line x1="8" y1="1" x2="8" y2="3" stroke-width="1" />
+        <line x1="8" y1="13" x2="8" y2="15" stroke-width="1" />
+        <line x1="1" y1="8" x2="3" y2="8" stroke-width="1" />
+        <line x1="13" y1="8" x2="15" y2="8" stroke-width="1" />
+        <line x1="2.5" y1="2.5" x2="4" y2="4" stroke-width="1" />
+        <line x1="12" y1="12" x2="13.5" y2="13.5" stroke-width="1" />
+        <line x1="2.5" y1="13.5" x2="4" y2="12" stroke-width="1" />
+        <line x1="12" y1="4" x2="13.5" y2="2.5" stroke-width="1" />
     </svg>
     `;
 }
@@ -148,7 +148,7 @@ function startMatrix() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "#00ff00";
+        ctx.fillStyle = "#0f0";
         ctx.font = fontSize + "px 'Courier New'";
         
         // 🔄 Loop through each column to draw the falling characters

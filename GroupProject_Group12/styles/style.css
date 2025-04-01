@@ -1,6 +1,6 @@
 /* ================= 🌐 General formatting ================= */
 * {
-    transition: background 0.2s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -8,7 +8,6 @@ body {
     color: var(--text-dark);
     font-family: 'Space Grotesk', sans-serif;
     background: var(--bg-dark);
-    transition: background 0.3s ease-in-out;
     margin-top: 76px;
     min-height: 100vh;
 }
@@ -17,15 +16,21 @@ body.light-mode {
     background: var(--bg-light);
 }
 
-body::before, body::after {
+body::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity 0.2s ease;
+    background: var(--bg-dark);
+    opacity: 0;
     z-index: -1;
+    transition: opacity 0.4s ease;
+}
+body.light-mode::before {
+    background: var(--bg-light);
+    opacity: 0;
 }
 
 h2, .card-header {
@@ -44,7 +49,6 @@ h2, .card-header {
     box-shadow: 0 0 16px var(--shadow-main);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
-    transition: background 0.4s ease, color 0.3s ease;
 }
 .light-mode .card {
     color: var(--text-light);
