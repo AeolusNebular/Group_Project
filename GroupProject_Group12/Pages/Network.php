@@ -21,6 +21,7 @@
         <div class="text-center">
             <h2>Network</h2>
         </div>
+        
         <div class ="row">
             <div class="themed-dropdown">
                 <label for="cityFilter">Filter by city:</label>
