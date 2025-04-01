@@ -75,6 +75,109 @@
     --border-colour: #9d2d2d;
 }
 
+/* 🧑‍💻 Matrix */
+.matrix-theme {
+    --bg-dark: linear-gradient(to bottom right, #004000, #000);
+    --bg-light: #54c454bb;
+    --card-dark: #001a00bb;
+    --card-light: #54c454bb;
+    --text-light: #004000;
+    --shadow-main: #00cc0060;
+    --text-shadow: #004000;
+    --hover-dropdown: #004400;
+    --border-colour: #004000;
+    font-family: 'Courier New', monospace;
+}
+/* 🌀 Falling code effect */
+.matrix-theme .matrix-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+.matrix-theme .matrix-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    list-style: none;
+}
+.matrix-theme .matrix-text li {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 16px;
+    animation: falling 3s infinite linear;
+}
+.matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+@keyframes falling {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 🌇 Sunset */
+.sunset-theme {
+    --bg-dark: linear-gradient(to bottom right, #4a001f, #ff4500, #ffaf00);
+    --bg-light: linear-gradient(to bottom right, #ffdd99, #ffd180, #ffab40);
+    --card-dark: linear-gradient(to bottom right, #8b1c1cbb, #ff5733bb);
+    --card-light: linear-gradient(to bottom right, #ffcc80, #ffeb99);
+    --text-light: #3a100d;
+    --shadow-main: #ff6f5080;
+    --text-shadow: #d73825;
+    --hover-dropdown: linear-gradient(to bottom right, #c0392b, #ff7043);
+    --border-colour: #ffcc80;
+}
+
+/* 🏜️ Desert Theme */
+.desert-theme {
+    --bg-dark: linear-gradient(to bottom right, #5c3b1a, #a86d3c);
+    --bg-light: linear-gradient(to bottom right, #ffdab9, #ffcc99);
+    --card-dark: linear-gradient(to bottom right, #8b5a2bbb, #c79c6bbb);
+    --card-light: linear-gradient(to bottom right, #f5deb3, #ffebcc);
+    --text-light: #4e2c12;
+    --shadow-main: #cc996060;
+    --text-shadow: #a36a3c;
+    --hover-dropdown: linear-gradient(to bottom right, #9c673a, #c78b5f);
+    --border-colour: #ffdab9;
+}
+/* 🍂 Tumbleweed */
+.tumbleweed {
+    position: fixed;
+    bottom: 10px;
+    width: 80px;
+    height: 80px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1171/1171228.png');
+    background-size: cover;
+    animation: tumble 12s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+/* 🔄 Tumble animation */
+@keyframes tumble {
+    0% {
+        transform: translateX(-10vw) rotate(0deg);
+    }
+    100% {
+        transform: translateX(110vw) rotate(2400deg);
+    }
+}
+
 /* 🌌 Cosmic */
 .cosmic-theme {
     --bg-dark: radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
@@ -118,6 +221,15 @@
 @keyframes twinkle {
     0%, 100% { opacity: 0; }
     50% { opacity: 1; }
+}
+/* 🌠 Shooting stars */
+.shooting-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 4s infinite ease-in-out;
 }
 
 /* 💰 Ridiculously Bling */
