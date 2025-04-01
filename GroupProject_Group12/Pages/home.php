@@ -3,7 +3,7 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    
+    <?php include("ReportPDF.php"); ?>  
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
@@ -91,7 +91,9 @@
                                 // 🔍 Debug output for each Network's values
                                 foreach ($AllCSVCityData as $KEY => $NetworkValues) {
                                     debug_to_console($NetworkValues); 
+                                    BasicTable($NetworkValues, $AllCSVCityData);
                                 }
+                                
                             }
                         }
                         ?>
