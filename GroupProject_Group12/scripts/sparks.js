@@ -58,7 +58,7 @@ function createSparks(x, y) {
             let newY = y + velocityY * time;
             
             // ✅ Check if spark is out of bounds
-            if (newX < 0 || newX > window.innerWidth || newY < 0 || newY > window.innerHeight) {
+            if (newX < 4 || newX > window.innerWidth - 4 || newY < 4 || newY > window.innerHeight - 4) {
                 clearInterval(move);
                 spark.remove();
                 return; // 🛑 Stop function early to prevent errors
