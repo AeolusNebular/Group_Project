@@ -33,7 +33,6 @@
                     <option value="Westlandinfra">Westlandinfra</option>
                     <option value="Rendo">Rendo</option>
                     <option value="Coteq">Coteq</option>
-                    <!-- Add more cities as needed -->
                 </select>
             </div>
             <div class="card">
@@ -50,7 +49,6 @@
                             Westlandinfra: [7, 14, 9, 11, 13, 17, 5],
                             Rendo: [4, 8, 6, 9, 12, 15, 10],
                             Coteq: [6, 11, 7, 10, 14, 18, 9]
-                            // Add more city data as needed
                         };
                         
                         const ctx = document.getElementById('cityChart').getContext('2d');
@@ -71,19 +69,19 @@
                                     y: {
                                         beginAtZero: true,
                                         ticks: {
-                                            color: 'white' // Y-axis text color
+                                            color: 'white' // 📏 Y-axis text color
                                         }
                                     },
                                     x: {
                                         ticks: {
-                                            color: 'white' // X-axis text color
+                                            color: 'white' // 📏 X-axis text color
                                         }
                                     }
                                 },
                                 plugins: {
                                     legend: {
                                         labels: {
-                                            color: 'white' // Legend text color
+                                            color: 'white' // 🏷️ Legend text color
                                         }
                                     }
                                 }

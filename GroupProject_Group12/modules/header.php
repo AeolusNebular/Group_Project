@@ -6,44 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
     
-    <!-- Bootstrap -->
+    <!-- 🧰 Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Fonts -->
+    <!-- 🔡 Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
+    <!-- 🎨 Styles -->
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/style.css">
     <link rel="stylesheet" href="/Group_Project/GroupProject_Group12/styles/theme.css">
     
-    <!-- Chart.js -->
+    <!-- 📊 Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Leaflet -->
+    <!-- 🗺️ Leaflet -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Heatmap.js -->
+    <!-- 🔥 Heatmap.js -->
     <script src="https://unpkg.com/heatmap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-heatmap/leaflet-heatmap.js"></script>
    
-    <!-- Scripts -->
+    <!-- 📜 Scripts -->
+    <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/theme.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/login_modal.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/login.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
     
-     <!-- 📍 Login -->
-    <?php include("login.php");
-  
-    
-    ?>
+    <!-- 🐘 PHP -->
+    <?php include("login.php");?>
     
 </head>
 

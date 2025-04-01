@@ -2,8 +2,7 @@
 <html lang="en-gb">
 <head>
     <!-- 📢 Header -->
-    <?php include("../modules/header.php");
-    ?>
+    <?php include("../modules/header.php"); ?>
     
     <title>Home - Smart Energy Dashboard</title>
 </head>
@@ -30,10 +29,10 @@
                 <div class="card">
                     <div class="card-header">📊 Energy Usage Overview</div>
                     <div class="card-body" style="height:500px;">
-                        <form action="home.php" method = 'GET'>
-                            <div class="themed-dropdown" style = 'float: left'> 
-                                <label for="Dashboard_Years">Select Year:</label> <br>
-                                <select class = "form-select" Onchange = "this.form.submit()" name="Dashboard_Years" >
+                        <form action="home.php" method='GET'>
+                            <div class="themed-dropdown" style='float: left'> 
+                                <label for="Dashboard_Years">Select year:</label> <br>
+                                <select class="form-select" Onchange="this.form.submit()" name="Dashboard_Years" >
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
@@ -44,18 +43,18 @@
                         </form>
                         <canvas id="DashboardCanvas"></canvas>
                         
-                        <?php 
+                        <?php
                         
-                        if (isset($RoleID)) {                        
-                            // Runs Once Year is chosen but also defaults to year 2020 if not given
+                        if (isset($RoleID)) {
+                            // 📅 Runs once year is chosen, defaults to 2020
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 $Year = isset($_GET['Dashboard_Years']) ? $_GET['Dashboard_Years'] : '2020';
                                 $TypesOfCSV = ['Gas','Electricity'];
                                 $AllCSVCityData = array('Gas' => [],'Electricity' => []);
 
-                                // Loops through types of CSV (eg electricity or gas)
+                                // 🔄 Loops through types of CSV (eg electricity or gas)
                                 foreach ($TypesOfCSV as $TypeOfCSV) {
-                                    // Checks user's RoleID to decide which information to show 
+                                    // 👤 Checks user's RoleID to decide which information to show 
                                     if ($RoleID == '2') {
                                         $CityConsumeTotals = [];     
                                         $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$RoleNetwork);
@@ -70,25 +69,26 @@
                                         }
                                         
                                         $AllCSVCityData[$TypeOfCSV] += $CityConsumeTotals;  
-                                    
+                                        
                                     } elseif ($RoleID == '3' && isset($CityFilter)) {
 
                                         $RoleNetworks = ['coteq' ,'enexis' ,  'liander' , 'stedin' , 'westland-infra'];                              
                                         debug_to_console($CityFilter);
                                         $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
                                         foreach ($RoleNetworks as $Network) {
-                                            // Runs CSVData with assigned variables and grabs data from said CSV File
+                                            // 📂 Runs CSVData with assigned variables and grabs data from said CSV File
                                             $Values = FilterByCityCSV($TypeOfCSV,$Year,$Network,$CityFilter);
-                           
+                                            
                                             foreach ($Values as $CityName => $CityData) {
                                                 
-                                                // Assigns annual consume to the selected network in loop
+                                                // 🔢 Assigns annual consume to the selected network in loop
                                                 $NetworkConsumeTotals[$Network] += $CityData['11'];
-                                            }                                                                                       
-                                        }                                                                                   
+                                            }
+                                        }
                                         $AllCSVCityData[$TypeOfCSV] += $NetworkConsumeTotals;                                        
-                                    }                                      
-                                } 
+                                    }
+                                }
+                                // 🔍 Debug output for each Network's values
                                 foreach ($AllCSVCityData as $KEY => $NetworkValues) {
                                     debug_to_console($NetworkValues); 
                                 }
@@ -97,7 +97,7 @@
                         ?>
                        
                         <script> 
-                            // Grabs the Network consume from Php code above using JSON Encode function and assigns it to data
+                            // 📝 Grabs the network consume from PHP code above using JSON Encode function and assigns it to data
                             var DashboardData = <?php echo json_encode($AllCSVCityData); ?>; 
                             console.log(DashboardData);
                             document.addEventListener("DOMContentLoaded", function () {

@@ -38,8 +38,8 @@
                             </svg>
                             <div class="ms-3">
                                 <h5 class="mb-0">
-                                    <?php   echo isset($UserFName) ? $UserFName : 'Bob';     ?>
-                                    <?php   echo isset($UserSName) ? $UserSName : 'Smith';     ?>
+                                    <?php echo isset($UserFName) ? $UserFName : 'Bob'; ?>
+                                    <?php echo isset($UserSName) ? $UserSName : 'Smith'; ?>
                                 </h5>
                                 <small><?php echo isset($UserEmail) ? $UserEmail : 'bobsmith@boibsmith.com';?></small>
                             </div>
@@ -48,7 +48,7 @@
                         <!-- 👤 User summary -->
                         <div>
                             <hr>
-                            <p> <b>Phone Number:</b> <?php echo isset($UserPhoneNo) ? $UserPhoneNo : '###-###-####';?></p>
+                            <p> <b>Phone Number:</b> <?php echo isset($UserPhoneNo) ? $UserPhoneNo : '####-###-###';?></p>
                             <p> <b>Address:</b> <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?></p>
                             <p> <b>Role:</b> 
                             <?php 
@@ -85,28 +85,29 @@
                 <div class="card">
                     <div class="card-header">➕ Additional User Information</div>
                     <div class="card-body" style="height:400px;">
-                        <form action = '../Database_Php_Interactions/UpdateUserInfo.php' method = 'POST'>
+                        <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
+
                             <div class="mb-2">
                                 <label for="UserFName" class="form-label">First name:</label>
-                                <input type="text" id="UserFName" name = "UserFName" class="form-control">
+                                <input type="text" id="UserFName" name="UserFName" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="UserLName" class="form-label">Last name:</label>
-                                <input type="text" id="UserLName" name = "UserLName" class="form-control">
+                                <input type="text" id="UserLName" name="UserLName" class="form-control">
                             </div>
                             <div class="mb-2">
                                 <label for="UserPhoneNo" class="form-label">Phone number:</label>
-                                <input type="tel" id="UserPhoneNo" name = "UserPhoneNo" class="form-control">
+                                <input type="tel" id="UserPhoneNo" name="UserPhoneNo" class="form-control">
                             </div> 
-                            <input type="hidden" id = 'UserID' value = <?php $UserID ?>/>
+                            <input type="hidden" id='UserID' value=<?php $UserID ?>/>
                             <div class="mb-2">
                                 <label for="UserHomeNo" class="form-label">Home address:</label>
-                                <input type="text" id="UserHomeNo" name = "UserHomeNo" class="form-control">
+                                <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control">
                             </div>
-                            <button type="Submit" style ='float: right' class="fancy-button" >
+                            <button type="Submit" style='float: right' class="fancy-button">
                                 Update User Info
                             </button>
-
+                            
                         </form>
                     </div>
                 </div>
@@ -198,9 +199,9 @@
                                 <label for="limitAnimations">Limit screen animations</label>
                             </li>
                             <li>
-                                <label for="colorblind">Colour blindness:</label>
+                                <label for="colourblind">Colour blindness:</label>
                                 <div class="themed-dropdown">
-                                    <select id="colorblind" class="form-select">
+                                    <select id="colourblind" class="form-select">
                                         <option value="default">Default</option>
                                         <option value="deuteranopia">Deuteranopia</option>
                                         <option value="tritanopia">Tritanopia</option>

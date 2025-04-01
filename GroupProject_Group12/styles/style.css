@@ -231,7 +231,7 @@ h2, .card-header {
     pointer-events: auto; /* Ensure interactivity */
 }
 
-/* Add a transition delay for smoother effect */
+/* Transition for smoother effect */
 .dropdown {
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }

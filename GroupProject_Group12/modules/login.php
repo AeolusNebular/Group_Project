@@ -20,7 +20,7 @@
                     </div>
                     
                     <!-- ⚠️ Error message area -->
-                    <div class="alert alert-danger" id="LoginErrorMessage"></div>
+                    <div class="alert alert-danger d-none" id="LoginErrorMessage"></div>
                     
                     <div class="modal-footer">
                         <button type="submit" class="fancy-button">Login</button>
