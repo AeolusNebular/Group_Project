@@ -45,7 +45,7 @@
                 <div class="card">
                     <div class="card-header">🌐 Network Users</div>
                     <div class="card-body">
-                    
+                        
                         <form action="Admin.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'> 
                                 <label for="Networks">Select Year:</label> <br>
@@ -65,10 +65,9 @@
                                 </select>
                             </div>
                         </form>
-                            
-
+                        
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
-
+                        
                             <?php 
                                 // ✅ Check if requested method has been run (eg form submit)
                                 if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -77,12 +76,11 @@
                                     $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
                                     // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
                                     $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
-                                                                      
+                                    
                                     // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
                                     $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
                                     $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
-
-
+                                    
                                     // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
                                     foreach ($Networks as $Network) {
                                         // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
@@ -92,13 +90,13 @@
                                         foreach ($Values as $Value) {
                                             // 🔄 Assigns annual consume to the selected network in loop
                                             $NetworkConsumeTotals[$Network] += $Value[0];
-                                        }                                        
+                                        }
                                     }
                                 
                                 }
                             ?>
                         
-                        <script> 
+                        <script>
                             // 📡 Grabs the network consume from PHP code above using JSON encode function and assigns to data
                             var data = <?php echo json_encode($NetworkConsumeTotals); ?>; 
                             
@@ -136,7 +134,7 @@
                                                 '#003f5c',
                                                 '#374c80',
                                                 '#58508d',
-                                                '#7a5195',                    
+                                                '#7a5195',
                                                 '#bc5090',
                                                 '#ff6361',
                                                 '#ffa600'
@@ -246,7 +244,7 @@
                                             '#003f5c',
                                             '#374c80',
                                             '#58508d',
-                                            '#7a5195',                    
+                                            '#7a5195',
                                             '#bc5090',
                                             '#ff6361',
                                             '#ffa600'
@@ -265,8 +263,8 @@
                                         title: {
                                             display: true,
                                             text: "Networks Annual Usage",
-                                            color: textColor, 
-                                            font: font 
+                                            color: textColor,
+                                            font: font
                                         }
                                     },
                                 

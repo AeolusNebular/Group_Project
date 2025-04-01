@@ -162,9 +162,17 @@ if (!$notifResult) {
     <nav id="main">
         <div class="sidebar" id="mySidebar">
             <ul style="list-style-type: none;">
+                
+                <!-- 🛸 Spacer -->
+                <div>
+                    <br>
+                </div>
+                
+                <!-- 🏠 Dashboard (home page) -->
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/home.php">Dashboard</a>
                 </li>
+                
                 <?php 
                 if (isset($RoleID)) {
                     if ($RoleID <= 3) {

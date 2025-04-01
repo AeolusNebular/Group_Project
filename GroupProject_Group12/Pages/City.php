@@ -29,30 +29,30 @@
                     <div class="card-header">📊 Network Graph</div>
                     <div class="card-body">
                         
-                            <!-- 🧭 Network selection -->
-                            <form action="City.php" method = 'GET'>
-                                <div class="themed-dropdown" style='float: left'>
-                                    <label for="CityNetworks">Select network:</label> <br>
-                                    <select class = "form-select" name="CityNetworks" Onchange='this.form.submit(); this.value = ' <?php $CityNetwork; ?>>
-                                        <option value="coteq"> Coteq </option>      
-                                        <option value="westland-infra"> Westlandia </option>
-                                        <option value="enexis"> Enexis </option>
-                                        <option value="stedin"> Stedin </option>
-                                        <option value="liander"> Liander </option>
-                                    </select>
-                                </div> 
-
-                                <div class="themed-dropdown" style='float: right'>
-                                    <label for="CityYears">Select network:</label> <br>
-                                    <select class="form-select" name="CityYears" Onchange='this.form.submit();'>
-                                        <option value="2016"> 2016 </option>      
-                                        <option value="2017"> 2017 </option>
-                                        <option value="2018"> 2018 </option>
-                                        <option value="2019"> 2019 </option>
-                                        <option value="2020"> 2020 </option>
-                                    </select>
-                                </div> 
-                            </form>
+                        <!-- 🧭 Network selection -->
+                        <form action="City.php" method='GET'>
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="CityNetworks">Select network:</label> <br>
+                                <select class="form-select" name="CityNetworks" Onchange='this.form.submit(); this.value=' <?php $CityNetwork; ?>>
+                                    <option value="coteq"> Coteq </option>      
+                                    <option value="westland-infra"> Westlandia </option>
+                                    <option value="enexis"> Enexis </option>
+                                    <option value="stedin"> Stedin </option>
+                                    <option value="liander"> Liander </option>
+                                </select>
+                            </div>
+                            
+                            <div class="themed-dropdown" style='float: right'>
+                                <label for="CityYears">Select network:</label> <br>
+                                <select class="form-select" name="CityYears" Onchange='this.form.submit();'>
+                                    <option value="2016"> 2016 </option>      
+                                    <option value="2017"> 2017 </option>
+                                    <option value="2018"> 2018 </option>
+                                    <option value="2019"> 2019 </option>
+                                    <option value="2020"> 2020 </option>
+                                </select>
+                            </div> 
+                        </form>
                         
                         <canvas id="CityCanvas"></canvas>
                         
@@ -147,13 +147,13 @@
                 <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
-                        <div id = "SummaryContent">Number of Connections: </div>
-                        <div id = "SummaryContent">Electricity Used (kWh): </div>
-                        <div id = "SummaryContent">Gas Used (m<sup>3</sup>): </div>
-                        <div id = "SummaryContent">Delivery Percentage: </div>
-                        <div id = "SummaryContent">Connections Types: </div>
-                        <div id = "SummaryContent">Connection Type Percentages: </div>
-                        <div id = "SummaryContent">
+                        <div id="SummaryContent">Number of Connections: </div>
+                        <div id="SummaryContent">Electricity Used (kWh): </div>
+                        <div id="SummaryContent">Gas Used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent">Delivery Percentage: </div>
+                        <div id="SummaryContent">Connections Types: </div>
+                        <div id="SummaryContent">Connection Type Percentages: </div>
+                        <div id="SummaryContent">
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                         </div>
                     </div>
