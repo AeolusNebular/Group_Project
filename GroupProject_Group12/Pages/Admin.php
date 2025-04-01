@@ -37,6 +37,11 @@
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User
                         </button>
+
+                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'GET'>
+                            <input type="text" id= 'SMTPEmail' name='SMTPEmail'>
+                            <button type="submit" class="fancy-button">Send Email</button>    
+                        </form>
                     </div>
                 </div>
             </div>
