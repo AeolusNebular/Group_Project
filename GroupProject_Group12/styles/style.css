@@ -7,42 +7,58 @@
 }
 
 body {
-    letter-spacing: 0.5px;
-    font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg-dark);
     color: var(--text-dark);
-    margin-top: 76px;
+    font-family: 'Space Grotesk', sans-serif;
+    padding-top: 76px;
     min-height: 100vh;
+    position: relative;
     overflow-x: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: fadeInUp 0.5s ease-out forwards;
 }
 body.light-mode {
-    background: var(--bg-light);
     color: var(--text-light);
 }
 
-/* 🌟 Fancy dark/light transition effect */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth transitions between modes */
 body::before {
     content: "";
     position: fixed;
-    inset: 0;
-    background: inherit; /* Inherits dark/light mode background */
-    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
     z-index: -1;
-    transition: opacity 0.6s ease-in-out;
 }
 body.light-mode::before {
     opacity: 0;
 }
 
-/* 🎭 Headers */
+/* Background applied after fade-out completes */
+body.light-mode.transitioning::before {
+    background: var(--bg-light);
+}
+
+/* 📢 Headers */
 h2, .card-header {
     font-weight: bold;
     margin-bottom: 0;
     text-shadow: 0 0 18px var(--text-shadow);
 }
 
-/* =================== 🏛️ Card & Panels =================== */
-.card {
+/* ================== 🏛️ Card & Panels ================== */
+.card, .notification-item {
     margin: 12px;
     width: 100%;
     background: var(--card-dark);
@@ -61,10 +77,21 @@ h2, .card-header {
     border-color: rgba(0, 0, 0, 0.175);
 }
 
-/* 💡 Card Hover Effect */
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.2);
+/* 📚 Gradient layer */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--card-dark);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+}
+.light-mode .card::before {
+    background: var(--card-light);
+    opacity: 0;
+}
+
 /* 💡 Card hover effect */
 .card:hover, .notification-item:hover {
     transform: translateY(-1px);

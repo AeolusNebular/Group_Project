@@ -254,3 +254,13 @@ function stopTumbleweeds() {
     }
     document.querySelectorAll(".tumbleweed").forEach(el => el.remove());
 }
+
+const body = document.body;
+function toggleMode() {
+    body.classList.add("transitioning"); // Add transition class
+    body.classList.toggle("light-mode"); // Toggle mode
+
+    setTimeout(() => {
+        body.classList.remove("transitioning"); // Remove after fade
+    }, 300); // Match transition duration
+}
