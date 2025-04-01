@@ -10,10 +10,7 @@ body {
     background: var(--bg-dark);
     transition: background 0.3s ease-in-out;
     margin-top: 76px;
-
-    /* 🖥️ Ensure background consistenly fills the full page height */
     min-height: 100vh;
-    height: 100%;
 }
 body.light-mode {
     color: var(--text-light);
@@ -34,6 +31,7 @@ body::before, body::after {
 h2, .card-header {
     text-shadow: 0 0 18px var(--text-shadow);
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 /* =================== 🏛️ Card & Panels =================== */
@@ -44,12 +42,31 @@ h2, .card-header {
     backdrop-filter: blur(3px);
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     transition: background 0.4s ease, color 0.3s ease;
 }
 .light-mode .card {
     color: var(--text-light);
     background: var(--card-light);
+    border: 1px solid rgba(0, 0, 0, 0.175);
+}
+
+.card-header {
+    border-radius: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.light-mode .card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.175);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+hr {
+    border-top: 1px solid #fff;
+}
+.light-mode hr {
+    border-top: 1px solid #000;
 }
 
 #SummaryContent {
@@ -500,7 +517,7 @@ input[type="checkbox"]:checked::before {
     font-size: 14px;
     color: var(--border-colour);
     position: absolute;
-    top: 50%;
+    bottom: 6px;
     right: 15px;
     transform: translateY(-50%);
     pointer-events: none;
