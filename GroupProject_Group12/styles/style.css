@@ -100,7 +100,7 @@ h2, .card-header {
 
 /* 📢 Card header */
 .card-header {
-    border-radius: 16px;
+    border-radius: 16px 16px 0 0 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     background-color: rgba(0, 0, 0, 0.1);
 }
