@@ -224,6 +224,10 @@
             </div>
         </div>
     </div>
+    <div>
+            <a href="ReportPDF.php" target="_blank">Generate PDF</a>
+</div>
+
     
 </body>
 </html>
