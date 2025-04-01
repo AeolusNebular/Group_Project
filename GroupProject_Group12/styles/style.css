@@ -1,6 +1,9 @@
-/* ================= 🌐 General formatting ================= */
+/* ================ 🌐 General formatting ================ */
 * {
     transition: background 0.3s ease, color 0.3s ease;
+}
+.card:hover, button:hover, input:hover, svg:hover {
+    filter: brightness(1.02);
 }
 
 body {
@@ -43,14 +46,16 @@ h2, .card-header {
     margin: 12px;
     width: 100%;
     background: var(--card-dark);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(2px);
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main), 0 0 10px rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
-.light-mode .card {
+.light-mode .card, .light-mode .notification-item {
     background: var(--card-light);
     color: var(--text-light);
     border-color: rgba(0, 0, 0, 0.175);
@@ -60,9 +65,13 @@ h2, .card-header {
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.2);
+/* 💡 Card hover effect */
+.card:hover, .notification-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
-/* 📌 Card Header */
+/* 📢 Card header */
 .card-header {
     border-radius: 16px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -81,12 +90,156 @@ hr {
     border-top: 1px solid #000;
 }
 
-/* 📌 Responsive Design */
-@media (max-width: 768px) {
-    .card {
-        margin: 8px;
-        border-radius: 12px;
-    }
+/* ====================== ✍️ Inputs ====================== */
+input {
+    border: 1px solid var(--border-colour) !important;
+    border-radius: 8px !important;
+    background: var(--bg-dark);
+    color: var(--text-dark) !important;
+}
+.light-mode input {
+    background: var(--bg-light);
+    color: var(--text-light);
+    border-color: var(--text-light) !important;
+}
+
+input::placeholder {
+    color: #aaa !important;
+}
+.light-mode input::placeholder {
+    color: #555;
+}
+.light-mode textarea:focus, .light-mode input:focus {
+  color: var(--text-light);
+}
+.light-mode input {
+    color: var(--text-light);
+}
+
+/* ✅ Checkboxes */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
+    margin-right: 6px;
+    margin: 8px 0;
+    font-size: 16px;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    background: var(--card-dark);
+    transition: all 0.2s ease;
+}
+.light-mode input[type="checkbox"] {
+    background: var(--card-light);
+}
+
+/* ✅ Checkbox tick */
+input[type="checkbox"]::before {
+    content: "✔";
+    font-size: 16px;
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.2s ease;
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0px 0px 8px #f76;
+}
+
+input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #f76, #ff46b3);
+}
+input[type="checkbox"]:checked::before {
+    color: white;
+}
+
+/* ================ 🔽 Dropdown Selectors ================ */
+.themed-dropdown {
+    position: relative;
+    width: 200px;
+}
+
+.themed-dropdown select {
+    appearance: none;
+    background: var(--card-dark);
+    color: white;
+    border: 1px solid var(--border-colour);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.themed-dropdown select option {
+    background: #225;
+}
+.themed-dropdown select:hover {
+    box-shadow: 0px 0px 12px #f76;
+}
+.themed-dropdown select:focus {
+    border-color: #f76;
+    box-shadow: 0px 0px 12px #ff46b3;
+}
+
+/* Dropdown arrow */
+.themed-dropdown::after {
+    content: "▼";
+    font-size: 14px;
+    color: var(--border-colour);
+    position: absolute;
+    bottom: 6px;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.themed-dropdown select:focus + ::after {
+    color: #f76;
+}
+
+/* Light mode adjustments */
+.light-mode .themed-dropdown select {
+    background: var(--card-light);
+    color: var(--text-light);
+    border-color: var(--text-light);
+}
+.light-mode .themed-dropdown::after {
+    color: var(--text-light);
+}
+.light-mode .themed-dropdown select option {
+    background: #cce;
+}
+
+#dropdown-menu li:hover {
+    filter: brightness(1.2);
+}
+
+/* ====================== 🔲 Modals ====================== */
+.modal-content {
+    background: var(--card-dark);
+    backdrop-filter: blur(3px);
+    border-radius: 16px;
+}
+.light-mode .modal-content {
+    background: var(--card-light);
 }
 
 /* ================= 📏 Responsive Design ================= */
@@ -94,6 +247,10 @@ hr {
     .col-12 { max-width: 90%; }
     .panel-body { padding: 12px; }
     .panel-heading, .panel-footer { padding: 8px 12px; }
+    .card {
+        margin: 8px;
+        border-radius: 12px;
+    }
 }
 
 /* ====================== 📍 Navbar ====================== */
@@ -269,7 +426,7 @@ hr {
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* ===================== 📑 Sidebar ===================== */
+/* ====================== 📑 Sidebar ====================== */
 .sidebar {
     position: fixed;
     top: 0;
@@ -307,34 +464,40 @@ hr {
     font-size: 36px;
 }
 
-/* ===================== 🕹️ Buttons ===================== */
+/* ====================== 🕹️ Buttons ====================== */
 .fancy-button {
     color: #fff;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
     background: var(--hover-dropdown);
     box-shadow: 2px 2px 20px #424687;
-    transition: all 0.3s ease;
 }
 .fancy-button:hover {
     box-shadow: 4px 4px 20px #f76;
 }
 
-/* ====================== 📈 Chart ====================== */
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 50px !important;
+    transition: all 0.3s ease;
+    transition: transform 0.2s ease !important;
+}
+button:active {
+    transform: translateY(2px);
+}
+
+/* ======================= 📈 Chart ======================= */
 #testChart {
     width: 100%;
     height: 400px;
 }
-
 #citychart {
     color: #fff;
 }
 
-/* ====================== 🛡️ Admin ====================== */
+/* ======================= 🛡️ Admin ======================= */
 #AdminPanel, #AdminPanelBody {
     color: #fff;
 }
@@ -377,12 +540,12 @@ hr {
     right: 0;
 }
 
-/* ===================== 👤 Account ===================== */
+/* ====================== 👤 Account ====================== */
 #Content_Inputs {
     margin-top: 25px;
 }
 
-/* ===================== ✨ Sparks ===================== */
+/* ====================== ✨ Sparks ====================== */
 .spark {
     position: fixed;
     width: 3px;
@@ -407,7 +570,7 @@ hr {
     }
 }
 
-/* ===================== 🗺️ Heatmap ===================== */
+/* ====================== 🗺️ Heatmap ====================== */
 #heatmap {
     height: 500px;
     border-radius: 0 0 16px 16px;
@@ -419,154 +582,19 @@ hr {
     background: var(--card-light);
 }
 
-/* ===================== ✅ Inputs ===================== */
-input {
-    border: 2px solid var(--border-colour) !important;
-    border-radius: 8px !important;
-    background: var(--bg-dark);
-    color: var(--text-dark) !important;
-}
-.light-mode input {
-    background: var(--bg-light);
-    color: var(--text-light);
-    border-color: var(--text-light) !important;
-}
-
-input::placeholder {
-    color: #aaa !important;
-}
-.light-mode input::placeholder {
-    color: #555;
-}
-.light-mode textarea:focus, .light-mode input:focus {
-  color: var(--text-light);
-}
-.light-mode input {
-    color: var(--text-light);
-}
-
-/* Checkboxes */
-.checkbox-container {
+/* =================== 🔔 Notifications =================== */
+.notification-item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+.notification-text {
+    flex-grow: 1;
 }
 
-input[type="checkbox"] {
-    vertical-align: middle;
-    margin-right: 6px;
-    margin: 8px 0;
-    font-size: 16px;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    position: relative;
-    cursor: pointer;
-    outline: none;
-    background: var(--card-dark);
-    transition: all 0.2s ease;
-}
-.light-mode input[type="checkbox"] {
-    background: var(--card-light);
-}
-
-/* Checkbox tick */
-input[type="checkbox"]::before {
-    content: "✔";
-    font-size: 16px;
-    color: transparent;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: color 0.2s ease;
-}
-
-input[type="checkbox"]:hover {
-    box-shadow: 0px 0px 8px #f76;
-}
-
-input[type="checkbox"]:checked {
-    background: linear-gradient(135deg, #f76, #ff46b3);
-}
-input[type="checkbox"]:checked::before {
-    color: white;
-}
-
-/* ================ 🔽 Dropdown Selectors ================ */
-.themed-dropdown {
-    position: relative;
-    width: 200px;
-}
-
-.themed-dropdown select {
-    appearance: none;
-    background: var(--card-dark);
-    color: white;
-    border: 2px solid var(--border-colour);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 16px;
-    width: 100%;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-.themed-dropdown select option {
-    background: #225;
-}
-.themed-dropdown select:hover {
-    box-shadow: 0px 0px 12px #f76;
-}
-.themed-dropdown select:focus {
-    border-color: #f76;
-    box-shadow: 0px 0px 12px #ff46b3;
-}
-
-/* Dropdown arrow */
-.themed-dropdown::after {
-    content: "▼";
-    font-size: 14px;
-    color: var(--border-colour);
-    position: absolute;
-    bottom: 6px;
-    right: 15px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    transition: color 0.2s ease;
-}
-
-.themed-dropdown select:focus + ::after {
-    color: #f76;
-}
-
-/* Light mode adjustments */
-.light-mode .themed-dropdown select {
-    background: var(--card-light);
-    color: var(--text-light);
-    border-color: var(--text-light);
-}
-.light-mode .themed-dropdown::after {
-    color: var(--text-light);
-}
-.light-mode .themed-dropdown select option {
-    background: #cce;
-}
-
-#dropdown-menu li:hover {
-    filter: brightness(1.2);
-}
-
-/* ================== 🔲 Modals ================== */
-.modal-content {
-    background: var(--card-dark);
-    backdrop-filter: blur(3px);
-    border-radius: 16px;
-}
-.light-mode .modal-content {
-    background: var(--card-light);
+/* ======================= ⚙️ Other ======================= */
+#SummaryContent {
+    margin-top: 25px;
 }

@@ -5,40 +5,6 @@
     <?php include("../modules/header.php"); ?>
     
     <title>Notifications - Smart Energy Dashboard</title>
-
-    <style>
-        .notification-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .notification-text {
-            flex-grow: 1; /* This ensures the text takes available space */
-        }
-
-        .delete-button {
-            margin-left: 15px; /* Space between notification text and the delete button */
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -47,7 +13,7 @@
     <?php include("../modules/navbar.php"); 
     require('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
-    <!-- 🔔 Notifications Page Content -->
+    <!-- 🔔 Notifications page content -->
     <div class="container mt-4">
         <h2>Notifications</h2>
         <div class="notification-list">

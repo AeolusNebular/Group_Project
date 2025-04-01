@@ -49,7 +49,7 @@
                         <form action="Admin.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'> 
                                 <label for="Networks">Select Year:</label> <br>
-                                <select class = "form-select" Onchange = "this.form.submit()" name="Admin_Network_Year" id="Admin_Network_Year">
+                                <select class="form-select" Onchange="this.form.submit()" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="themed-dropdown" style='float: right'>
                                 <label for="Networks">Select Type:</label> <br>
-                                <select class = "form-select" Onchange="this.form.submit()" name="Admin_Network_Type" id="Admin_Network_Type">
+                                <select class="form-select" Onchange="this.form.submit()" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>                                      
                                 </select>
@@ -173,7 +173,7 @@
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
-                        <div id = "SummaryContent">Filter by city:
+                        <div id="SummaryContent">Filter by city:
                             <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET" class="themed-dropdown">
                                 <select name="AdminCityFilter" onChange="this.form.submit()"> 
                                     <option value="all">All</option>

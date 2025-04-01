@@ -24,10 +24,3 @@ class PDF extends FPDF {
         }
     }
 }
-
-
-
-
-
-
-
