@@ -10,18 +10,29 @@ document.addEventListener("DOMContentLoaded", function () {
 // ✅ Limited animations checkbox status
 document.addEventListener("DOMContentLoaded", () => {
     let limitAnimationsEnabled = localStorage.getItem("limitAnimations") === "true";
-
     const checkbox = document.getElementById("limitAnimations");
-
+    
     if (checkbox) {
         // 🔄 Load stored preference
         checkbox.checked = limitAnimationsEnabled;
-
-        // 🔽 Update localStorage and global variable when toggled
+        
+        // ✅ Apply class on load
+        if (limitAnimationsEnabled) {
+            document.body.classList.add("limitAnimations");
+        }
+        
+        // 🔽 Update localStorage, global variable, and body when toggled
         checkbox.addEventListener("change", () => {
             limitAnimationsEnabled = checkbox.checked;
             localStorage.setItem("limitAnimations", checkbox.checked);
             window.limitAnimationsEnabled = limitAnimationsEnabled;
+            
+            // ✅ Toggle the class so styles apply
+            if (limitAnimationsEnabled) {
+                document.body.classList.add("limitAnimations");
+            } else {
+                document.body.classList.remove("limitAnimations");
+            }
             
             // 🛑 Stop Matrix effect if limited animations is enabled
             if (limitAnimationsEnabled) {

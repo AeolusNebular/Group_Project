@@ -4,6 +4,7 @@
 }
 .card:hover, button:hover, input:hover, svg:hover {
     filter: brightness(1.02);
+    transform: scale(1.01);
 }
 
 body {
@@ -13,10 +14,15 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+/* ✅ Add styles when animations are enabled (no limitAnimations class) */
+body:not(.limitAnimations) {
     opacity: 0;
     transform: translateY(-8px);
     animation: fadeInUp 0.5s ease-out forwards;
 }
+
 body.light-mode {
     color: var(--text-light);
 }
@@ -624,4 +630,31 @@ button:active {
 /* ======================= ⚙️ Other ======================= */
 #SummaryContent {
     margin-top: 25px;
+}
+
+/* ================= 🎥 Limited Animations ================ */
+.limitAnimations * {
+    transition: background 0.01s ease, color 0.01s ease !important;
+}
+
+body.limitAnimations {
+    animation: none !important;
+    transition: none !important;
+}
+
+body.limitAnimations .card,
+body.limitAnimations button,
+body.limitAnimations input {
+    transition: none !important;
+}
+
+body.limitAnimations input[type="checkbox"],
+body.limitAnimations .themed-dropdown select {
+    transition: none !important;
+    box-shadow: none !important;
+}
+
+body.limitAnimations .card:hover,
+body.limitAnimations button:hover {
+    transform: none !important;
 }
