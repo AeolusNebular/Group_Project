@@ -34,7 +34,7 @@ body.light-mode {
     }
 }
 
-/* Smooth transitions between modes */
+/* 🎑 Background transition layer */
 body::before {
     content: "";
     position: fixed;
@@ -50,9 +50,7 @@ body::before {
 body.light-mode::before {
     opacity: 0;
 }
-
-/* Background applied after fade-out completes */
-body.light-mode.transitioning::before {
+body.light-mode {
     background: var(--bg-light);
 }
 
