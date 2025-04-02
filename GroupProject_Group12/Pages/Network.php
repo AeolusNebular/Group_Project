@@ -96,7 +96,7 @@
                                     label: 'City Data',
                                     data: Object.values(data),
                                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderColor: 'rgb(75, 192, 192)',
                                     borderWidth: 1
                                 }]
                             },
@@ -137,12 +137,12 @@
                 <div class="card" style="height: 90%">
                     <div class="card-header">Additional Information</div>
                     <div class="card-body">
-                        <div id = "SummaryContent">Number of Connections: </div>
-                        <div id = "SummaryContent">Amount of Electricity Used (kWh): </div>
-                        <div id = "SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
-                        <div id = "SummaryContent">Delivery Percentage: </div>
-                        <div id = "SummaryContent">Types of Connections: </div>
-                        <div id = "SummaryContent">Types Connections Percentage: </div>
+                        <div id="SummaryContent">Number of Connections: </div>
+                        <div id="SummaryContent">Amount of Electricity Used (kWh): </div>
+                        <div id="SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent">Delivery Percentage: </div>
+                        <div id="SummaryContent">Types of Connections: </div>
+                        <div id="SummaryContent">Types Connections Percentage: </div>
                         <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                     </div>
                 </div> 
@@ -170,7 +170,7 @@
                             </select>
                         </div> 
                         
-                        <div id = "SummaryContent">
+                        <div id="SummaryContent">
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                         </div>
                     </div>

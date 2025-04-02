@@ -54,8 +54,18 @@ function createSparks(x, y) {
             time += 1;
             velocityY += gravity; // 🧲 Apply gravity
             
-            spark.style.left = `${x + velocityX * time}px`;
-            spark.style.top = `${y + velocityY * time}px`;
+            let newX = x + velocityX * time;
+            let newY = y + velocityY * time;
+            
+            // ✅ Check if spark is out of bounds
+            if (newX < 4 || newX > window.innerWidth - 4 || newY < 4 || newY > window.innerHeight - 4) {
+                clearInterval(move);
+                spark.remove();
+                return; // 🛑 Stop function early to prevent errors
+            }
+            
+            spark.style.left = `${newX}px`;
+            spark.style.top = `${newY}px`;
         }, 16);
         
         // 🗑️ Auto-delete after 1 second
