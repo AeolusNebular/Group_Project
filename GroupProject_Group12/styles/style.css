@@ -68,7 +68,7 @@ h2, .card-header {
     margin: 12px;
     width: 100%;
     background: var(--card-dark);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px) saturate(120%) contrast(160%);
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main), 0 0 10px rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -106,7 +106,6 @@ h2, .card-header {
 
 /* 📢 Card header */
 .card-header {
-    border-radius: 16px 16px 0 0 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -265,10 +264,15 @@ input[type="checkbox"]:checked::before {
     filter: brightness(1.2);
 }
 
+/* ====================== 🌫️ Blur ====================== */
+.modal-content, .navbar, .sidebar {
+    backdrop-filter: blur(3px);
+}
+
 /* ====================== 🔲 Modals ====================== */
+
 .modal-content {
     background: var(--card-dark);
-    backdrop-filter: blur(3px);
     border-radius: 16px;
 }
 .light-mode .modal-content {
@@ -289,7 +293,6 @@ input[type="checkbox"]:checked::before {
 /* ====================== 📍 Navbar ====================== */
 .navbar {
     background: var(--card-dark);
-    backdrop-filter: blur(3px);
     z-index: 3;
     width: 100%;
     position: fixed;
@@ -469,7 +472,6 @@ input[type="checkbox"]:checked::before {
     padding-top: 64px;
     z-index: 2;
     overflow-x: hidden;
-    backdrop-filter: blur(3px);
     transition: 0.5s ease;
     background: var(--card-dark);
 }
@@ -634,27 +636,7 @@ button:active {
 
 /* ================= 🎥 Limited Animations ================ */
 .limitAnimations * {
-    transition: background 0.01s ease, color 0.01s ease !important;
-}
-
-body.limitAnimations {
     animation: none !important;
     transition: none !important;
-}
-
-body.limitAnimations .card,
-body.limitAnimations button,
-body.limitAnimations input {
-    transition: none !important;
-}
-
-body.limitAnimations input[type="checkbox"],
-body.limitAnimations .themed-dropdown select {
-    transition: none !important;
-    box-shadow: none !important;
-}
-
-body.limitAnimations .card:hover,
-body.limitAnimations button:hover {
     transform: none !important;
 }
