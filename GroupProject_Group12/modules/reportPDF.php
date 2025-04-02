@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
         $data = html_entity_decode($_POST['CityValuesForPDF']);
     }
     
-    $pdf = new PDF(); // Create an object of PDF
+    $pdf = new PDF(); // 📄 Create PDF object
     $pdf->SetFont('Arial','B',12);
     
     $pdf->AddPage();
