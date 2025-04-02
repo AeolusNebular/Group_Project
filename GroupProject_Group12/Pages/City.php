@@ -31,7 +31,7 @@
                         
                         <!-- 🧭 Network selection -->
                         <form action="City.php" method='GET'>
-                            <?php if (!$RoleID == 2) {
+                            <?php if ($RoleID != 2) {
                                 echo '<div class="themed-dropdown" style="float: left">
                                     <label for="CityNetworks">Select network:</label> <br>
                                     <select class="form-select" name="CityNetworks">
@@ -64,8 +64,11 @@
                         
                         <?php 
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-                                $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : $RoleNetwork;
+                                if ($RoleID == 2){
+                                    $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : $RoleNetwork;
+                                } else {
+                                    $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : 'Coteq';
+                                }
                                 $Years = isset($_GET['CityYears']) ? $_GET['CityYears'] : '2016';
                                 $Types = ['Electricity','Gas'];
                                 $CityTypeValues = array('Electricity' => [], 'Gas' => []);
@@ -172,7 +175,7 @@
                 <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
-                        <form action = 'ReportPDF.php' method= 'POST'>
+                        <form action = '../modules/reportPDF.php' method= 'POST'>
                             <div id="SummaryContent">Number of Connections: <?php echo json_encode(($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
                             <div id="SummaryContent">Electricity Used (kWh) <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?></div>
                             <div id="SummaryContent">Gas Used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?></div>

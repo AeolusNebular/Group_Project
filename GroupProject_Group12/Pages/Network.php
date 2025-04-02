@@ -23,44 +23,30 @@
             debug_to_console($RoleID);
             switch ($RoleID) {
             case '1' :
-                echo 'Admin User';
+                echo 'Network Page for Admin User';
                 break; 
             case '2' : 
                 echo $RoleNetwork;
                 break;
             
-                }?></h2>
+            }?></h2>
         </div>
         
 
 
-        <?php 
-            $Network = $RoleNetwork;
-            $Types = ['Gas', 'Electricity'];
-            $Year = '2016';
-            $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
-            
-            foreach ($Types as $Type) {
-                $NetworkValue = CSVData($Type, $Year, $Network);
-
-                foreach ($NetworkValue as $City => $Data) {
-                    debug_to_console($City);
-                    if (!isset($TotalNetworkConsume[$City])) {
-                        $TotalNetworkConsume[$City] = 0;
-                    }
-                    
-                    $TotalNetworkConsume[$City] += $Data[0];
-                }
-                $NetworkValueByType[$Type] = $TotalNetworkConsume;
-            }
-            
-        ?>
+     
 
 
         <div class ="row">
             
             <div class="card">
-                <div class="card-header">City Chart for Network : <?php echo $RoleNetwork ?></div>
+                <div class="card-header">City Chart for Network : <?php 
+                if ($RoleID == 2) {
+                    echo $RoleNetwork;
+                } else {
+                    echo 'Admin User';
+                }
+                ?></div>
                 <div class="card-body">
                     <form action="Network.php" method = 'POST'>
                         <div class="themed-dropdown" style = 'float : left'>
@@ -70,11 +56,60 @@
                                 <option value="Electricity">Electricity</option>
                             </select>
                         </div>
+                        <?php 
+                        if ($RoleID != 2){
+                            echo '<div class="themed-dropdown" style="float: left">
+                                    <label for="NetworkName">Select network:</label> <br>
+                                    <select class="form-select" name="NetworkName">
+                                        <option value="coteq"> Coteq </option>      
+                                        <option value="westland-infra"> Westlandia </option>
+                                        <option value="enexis"> Enexis </option>
+                                        <option value="stedin"> Stedin </option>
+                                        <option value="liander"> Liander </option>
+                                    </select>
+                                </div>';
+                        }?>
+                         <div class="themed-dropdown" style = 'float : left'>
+                            <label for="TypeFilter">Filter by Year:</label>
+                            <select name='NetworkYearFilter'>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2017">2018</option>
+                                <option value="2017">2019</option>
+                                <option value="2017">2020</option>
+                            </select>
+                        </div>
                         <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
                             Apply Filter
                         </button>
                     </form>
-                    <canvas id="cityChart" width="400px" height="150px"></canvas>
+                    <canvas id="cityChart" width="400px" height="150px"></canvas>   
+                        <?php 
+                            if ($RoleID == 2) {
+                                $Network = $RoleNetwork;
+                            } else {
+                                $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
+                            }
+                            
+                            $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
+                            $Year = '2016';
+                            $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
+                            
+                            
+                                $NetworkValue = CSVData($Type, $Year, $Network);
+
+                                foreach ($NetworkValue as $City => $Data) {
+                                    debug_to_console($City);
+                                    if (!isset($TotalNetworkConsume[$City])) {
+                                        $TotalNetworkConsume[$City] = 0;
+                                    }
+                                    
+                                    $TotalNetworkConsume[$City] += $Data[0];
+                                }
+                                $NetworkValueByType[$Type] = $TotalNetworkConsume;
+                            
+                            
+                        ?>
                     <script>
                     
                         

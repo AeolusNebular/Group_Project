@@ -3,7 +3,7 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    <?php include("reportPDF.php"); ?>  
+    
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
