@@ -23,78 +23,81 @@
         </div>
         
         <div class="row">
-            <div class="themed-dropdown">
-                <label for="cityFilter">Filter by city:</label>
-                <select id="cityFilter" onchange="filterData()">
-                    <option value="all">All</option>
-                    <option value="Enexis">Enexis</option>
-                    <option value="Liander">Liander</option>
-                    <option value="Stedin">Stedin</option>
-                    <option value="Enduris">Enduris</option>
-                    <option value="Westlandinfra">Westlandinfra</option>
-                    <option value="Rendo">Rendo</option>
-                    <option value="Coteq">Coteq</option>
-                </select>
-            </div>
-            <div class="card">
-                <div class="card-header">City Chart for Network</div>
-                <div class="card-body">
-                    <canvas id="cityChart" width="400px" height="150px"></canvas>
-                    <script>
-                        const cityData = {
-                            all: [12, 19, 3, 5, 2, 3, 7],
-                            Enexis: [12, 19, 3, 5, 2, 3, 7],
-                            Liander: [2, 3, 20, 5, 1, 4, 6],
-                            Stedin: [3, 10, 13, 15, 22, 30, 8],
-                            Enduris: [5, 12, 8, 6, 9, 10, 11],
-                            Westlandinfra: [7, 14, 9, 11, 13, 17, 5],
-                            Rendo: [4, 8, 6, 9, 12, 15, 10],
-                            Coteq: [6, 11, 7, 10, 14, 18, 9]
-                        };
-                        
-                        const ctx = document.getElementById('cityChart').getContext('2d');
-                        let cityChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                                datasets: [{
-                                    label: 'City Data',
-                                    data: cityData.all,
-                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        ticks: {
-                                            color: 'white' // 📏 Y-axis text color
+            <!-- 📈 Big chart panel (fat) -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">📊 City Chart for Network</div>
+                    <div class="card-body">
+                        <div class="themed-dropdown">
+                            <label for="cityFilter">Filter by city:</label>
+                            <select id="cityFilter" onchange="filterData()">
+                                <option value="all">All</option>
+                                <option value="Enexis">Enexis</option>
+                                <option value="Liander">Liander</option>
+                                <option value="Stedin">Stedin</option>
+                                <option value="Enduris">Enduris</option>
+                                <option value="Westlandinfra">Westlandinfra</option>
+                                <option value="Rendo">Rendo</option>
+                                <option value="Coteq">Coteq</option>
+                            </select>
+                        </div>
+                        <canvas id="cityChart" width="400px" height="150px"></canvas>
+                        <script>
+                            const cityData = {
+                                all: [12, 19, 3, 5, 2, 3, 7],
+                                Enexis: [12, 19, 3, 5, 2, 3, 7],
+                                Liander: [2, 3, 20, 5, 1, 4, 6],
+                                Stedin: [3, 10, 13, 15, 22, 30, 8],
+                                Enduris: [5, 12, 8, 6, 9, 10, 11],
+                                Westlandinfra: [7, 14, 9, 11, 13, 17, 5],
+                                Rendo: [4, 8, 6, 9, 12, 15, 10],
+                                Coteq: [6, 11, 7, 10, 14, 18, 9]
+                            };
+                            
+                            const ctx = document.getElementById('cityChart').getContext('2d');
+                            let cityChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                                    datasets: [{
+                                        label: 'City Data',
+                                        data: cityData.all,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                color: 'white' // 📏 Y-axis text color
+                                            }
+                                        },
+                                        x: {
+                                            ticks: {
+                                                color: 'white' // 📏 X-axis text color
+                                            }
                                         }
                                     },
-                                    x: {
-                                        ticks: {
-                                            color: 'white' // 📏 X-axis text color
-                                        }
-                                    }
-                                },
-                                plugins: {
-                                    legend: {
-                                        labels: {
-                                            color: 'white' // 🏷️ Legend text color
+                                    plugins: {
+                                        legend: {
+                                            labels: {
+                                                color: 'white' // 🏷️ Legend text color
+                                            }
                                         }
                                     }
                                 }
+                            });
+                            
+                            function filterData() {
+                                const selectedCity = document.getElementById('cityFilter').value;
+                                cityChart.data.datasets[0].data = cityData[selectedCity];
+                                cityChart.update();
                             }
-                        });
-                        
-                        function filterData() {
-                            const selectedCity = document.getElementById('cityFilter').value;
-                            cityChart.data.datasets[0].data = cityData[selectedCity];
-                            cityChart.update();
-                        }
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
             
