@@ -3,7 +3,7 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    <?php include("reportPDF.php"); ?>  
+    <?php include("../modules/reportPDF.php"); ?>  
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
@@ -240,10 +240,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- Report button -->
     <div>
-            <a href="ReportPDF.php" target="_blank">Generate PDF</a>
-</div>
-
+        <a href="ReportPDF.php" target="_blank">Generate PDF</a>
+    </div>
     
 </body>
 </html>
