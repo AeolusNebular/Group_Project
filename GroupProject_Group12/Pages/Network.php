@@ -19,7 +19,17 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Network</h2>
+            <h2><?php 
+            debug_to_console($RoleID);
+            switch ($RoleID) {
+            case '1' :
+                echo 'Admin User';
+                break; 
+            case '2' : 
+                echo $RoleNetwork;
+                break;
+            
+                }?></h2>
         </div>
         
         <div class="row">
@@ -118,7 +128,7 @@
             
             <div class="col-12 col-md-5">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Filter Options:</div>
+                    <div class="card-header">Filter options:</div>
                     <div class="card-body">
                         
                         <div id="SummaryContent" class="themed-dropdown">Filter report by city: 

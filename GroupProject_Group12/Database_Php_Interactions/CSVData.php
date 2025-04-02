@@ -8,6 +8,7 @@
                
         // Assigns Values to a empty array
         $Values = [];
+    
         
         // Loops through all lines of CSV while end of file isnt reached
         while (( $data = fgetcsv( $fp )) !== FALSE ) {
@@ -22,11 +23,13 @@
 
             //If Value for the city is not Set set it to the Annual cost and Num of connections *Can implement more if needed*
             if (!isset($Values[$city])) {
-                $Values[$city] = array(intval($annual_consume), $num_connections);
+                $Values[$city] = array(intval($annual_consume), $num_connections, $delivery_perc, $type_conn_perc);
             } else {
                 $TempCity = $Values[$city];
                 $TempCity[0] += intval($annual_consume);
                 $TempCity[1] += intval($num_connections);  
+                $TempCity[2] += intval($delivery_perc);  
+               
                 $Values[$city] = $TempCity;            
             }                
         } 

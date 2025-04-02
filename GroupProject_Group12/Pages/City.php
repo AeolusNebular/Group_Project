@@ -31,20 +31,22 @@
                         
                         <!-- 🧭 Network selection -->
                         <form action="City.php" method='GET'>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="CityNetworks">Select network:</label> <br>
-                                <select class="form-select" name="CityNetworks" Onchange='this.form.submit(); this.value=' <?php $CityNetwork; ?>>
-                                    <option value="coteq"> Coteq </option>      
-                                    <option value="westland-infra"> Westlandia </option>
-                                    <option value="enexis"> Enexis </option>
-                                    <option value="stedin"> Stedin </option>
-                                    <option value="liander"> Liander </option>
-                                </select>
-                            </div>
-                            
+                            <?php if (!$RoleID == 2) {
+                                echo '<div class="themed-dropdown" style="float: left">
+                                    <label for="CityNetworks">Select network:</label> <br>
+                                    <select class="form-select" name="CityNetworks">
+                                        <option value="coteq"> Coteq </option>      
+                                        <option value="westland-infra"> Westlandia </option>
+                                        <option value="enexis"> Enexis </option>
+                                        <option value="stedin"> Stedin </option>
+                                        <option value="liander"> Liander </option>
+                                    </select>
+                                </div>';
+                            }
+                            ?>
                             <div class="themed-dropdown" style='float: right'>
                                 <label for="CityYears">Select network:</label> <br>
-                                <select class="form-select" name="CityYears" Onchange='this.form.submit();'>
+                                <select class="form-select" name="CityYears" >
                                     <option value="2016"> 2016 </option>      
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
@@ -52,6 +54,10 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div> 
+
+                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px'>
+                                Apply Filter
+                            </button>
                         </form>
                         
                         <canvas id="CityCanvas"></canvas>
@@ -59,24 +65,43 @@
                         <?php 
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-                                $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : 'coteq';
+                                $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : $RoleNetwork;
                                 $Years = isset($_GET['CityYears']) ? $_GET['CityYears'] : '2016';
-                                $Types = ['electricity'];
+                                $Types = ['Electricity','Gas'];
+                                $CityTypeValues = array('Electricity' => [], 'Gas' => []);
                                 $CityValues = [];
+                                $AllCityDataForType = array('Electricity' => [], 'Gas' => []);
+                                
 
                                 foreach ($Types as $Type) {
-                                    $CityGraphValues = CSVData($Type,$Years,$Network);
+                                    $CityAdditions = array('Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0);
+                                    $x = 0;
+                                    if (isset($_SESSION['City_Name'])) {
+                                        $CityGraphValues = FilterByCityCSV($Type,$Years,$Network,$_SESSION['City_Name']);
+                                    } else {
+                                        $CityGraphValues = CSVData($Type,$Years,$Network);
+                                    }
 
-                                    foreach ($CityGraphValues as $Key => $City) {                                     
+                                    foreach ($CityGraphValues as $Key => $City) {
+                                        $x += 1;                                  
                                         $CityValues[$Key] =  $City[0];
-                                    }                         
+                                        $CityAdditions['Annual'] += $City[0];
+                                        $CityAdditions['Connection'] += $City[1];
+                                        $CityAdditions['Delivery_Perc'] += $City[2]/100;
+                                       
+                                    } 
+                                    $CityAdditions['Delivery_Perc'] = $CityAdditions['Delivery_Perc']/$x;
+                                    $AllCityDataForType[$Type] = $CityAdditions;   
+                                    $CityTypeValues[$Type] = $CityValues;
+                                    
                                 }
+
                             }        
                         ?>
 
                         <script> 
-                           var data = <?php echo json_encode($CityValues); ?>;
-                           console.log(Object.values(data));
+                           var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+                         
                            document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
@@ -147,15 +172,18 @@
                 <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
-                        <div id="SummaryContent">Number of Connections: </div>
-                        <div id="SummaryContent">Electricity Used (kWh): </div>
-                        <div id="SummaryContent">Gas Used (m<sup>3</sup>): </div>
-                        <div id="SummaryContent">Delivery Percentage: </div>
-                        <div id="SummaryContent">Connections Types: </div>
-                        <div id="SummaryContent">Connection Type Percentages: </div>
-                        <div id="SummaryContent">
-                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
-                        </div>
+                        <form action = 'ReportPDF.php' method= 'POST'>
+                            <div id="SummaryContent">Number of Connections: <?php echo json_encode(($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
+                            <div id="SummaryContent">Electricity Used (kWh) <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?></div>
+                            <div id="SummaryContent">Gas Used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?></div>
+                            <div id="SummaryContent">Delivery Percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?> </div>
+                            <div id="SummaryContent">Connections Types: </div>
+                            <div id="SummaryContent">Connection Type Percentages: </div>
+                            <input type="hidden" id = 'CityValuesForPDF' name = 'CityValuesForPDF' value =" <?php  echo htmlentities(json_encode($CityTypeValues));  ?>">
+                            <div id="SummaryContent">
+                                <button type="Submit" class="fancy-button" style="float: right">Print Summary</button>
+                            </div> 
+                        </form>                                          
                     </div>
                 </div>
             </div>
