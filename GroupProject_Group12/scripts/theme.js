@@ -56,14 +56,22 @@ function applyTheme(newTheme) {
     // 💾 Store theme and mode in sessionStorage
     const currentMode = document.body.classList.contains("light-mode") ? "light" : "dark";
     sessionStorage.setItem("themeMode", `${newTheme}-${currentMode}`);
+    sessionStorage.setItem("themeMode", `${newTheme}-${newMode}`);
     
     // ✅ Start theme-specific effects
-    if (newTheme === "matrix") {
-        startMatrix();
+    if (newTheme === "matrix") startMatrix();
+    if (newTheme === "desert") startTumbleweeds();
+}
+
+// 🌙 Update dark/light mode from dropdown
+function updateDarkMode(mode) {
+    let resolvedMode = mode;
+    if (mode === "auto") {
+        resolvedMode = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
     }
-    if (newTheme === "desert") {
-        startTumbleweeds();
-    }
+    
+    const currentTheme = document.body.classList.value.match(/\b(\w+)-theme\b/)?.[1] || "purple";
+    applyTheme(currentTheme, resolvedMode);
 }
 
 // 🌙 Toggle dark/light mode
@@ -81,8 +89,10 @@ function toggleDarkLight() {
     sessionStorage.setItem("themeMode", `${currentTheme}-${newMode}`);
     
     // ⚙️ Update icon
-    icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
-    
+    if (icon) {
+        icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+    }
+
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);
 }

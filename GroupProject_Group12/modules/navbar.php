@@ -78,7 +78,7 @@ if (!$notifResult) {
         <div>
             <div class="icon-container">
                 <!-- 🌙 Dark mode toggler (icon set by JS) -->
-                <button onclick="updateDarkMode()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle dark mode"> 
+                <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle dark mode"> 
                     <svg id="darkModeIcon" width="24px" height="24px" viewBox="0 0 16 16"></svg>
                 </button>
             </div>
