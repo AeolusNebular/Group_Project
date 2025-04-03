@@ -23,10 +23,10 @@
             debug_to_console($RoleID);
             switch ($RoleID) {
             case '1' :
-                echo 'Network Page for Admin User';
+                echo 'Network Page for : Admin User';
                 break; 
             case '2' : 
-                echo $RoleNetwork;
+                echo 'Network Page for :' . $RoleNetwork;
                 break;
             
             }?></h2>
