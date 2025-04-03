@@ -145,7 +145,7 @@
                                 };
                                 
                                 chartInstance = new Chart(ctx, {
-                                    type: "Scatter",
+                                    type: "scatter",
                                     data: data, 
                                     options: {
                                                                     

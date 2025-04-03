@@ -11,7 +11,7 @@
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
-    require('../Database_Php_Interactions/Database_Utilities.php');
+    require_once('../Database_Php_Interactions/Database_Utilities.php');
     include('../Database_Php_Interactions/CSVData.php'); 
     debug_to_console($UserID); ?>
     

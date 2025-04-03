@@ -11,7 +11,7 @@
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php"); 
-    require('../Database_Php_Interactions/Database_Utilities.php'); ?>
+    require_once('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
     <!-- 🔔 Notifications page content -->
     <div class="container mt-4">
@@ -57,6 +57,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])
     exit();
 }
 ?>
-
 
 </html>
