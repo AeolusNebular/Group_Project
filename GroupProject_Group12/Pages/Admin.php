@@ -37,7 +37,7 @@
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User
                         </button>
-
+                        
                         <form action="../Database_Php_Interactions/EmailSender.php" method = 'GET'>
                             <input type="text" id= 'SMTPEmail' name='SMTPEmail'>
                             <button type="submit" class="fancy-button">Send Email</button>    
@@ -52,7 +52,7 @@
                     <div class="card-body">
                         
                         <form action="Admin.php" method='GET'>
-                            <div class="themed-dropdown" style='float: left'> 
+                            <div class="themed-dropdown" style='float: left'>
                                 <label for="Admin_Network_Year">Select Year:</label> <br>
                                 <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
@@ -66,10 +66,10 @@
                                 <label for="Admin_Network_Type">Select Type:</label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>                                      
+                                    <option value="gas"> Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                            <button type="Submit" class="fancy-button" style='float: right'>
                                 Apply Filter
                             </button>
                         </form>
@@ -181,7 +181,7 @@
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
-                        <form action="Admin.php" method="GET" >                         
+                        <form action="Admin.php" method="GET" >
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminNetwork">Select network:</label> <br>
                                 <select class="form-select" name="AdminNetwork">
@@ -192,7 +192,7 @@
                                     <option value="liander"> Liander </option>
                                 </select>    
                             </div>
-                            <div class="themed-dropdown" style='float: left'> 
+                            <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminNetworkYear">Select Year:</label> <br>
                                 <select class="form-select" name="AdminNetworkYear">
                                     <option value="2016"> 2016 </option>
@@ -209,7 +209,7 @@
                                     <option value="gas"> Gas </option>                                      
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                            <button type="Submit" class="fancy-button" style='float: right'>
                                 Apply Filter
                             </button>
                         </form>
@@ -221,80 +221,79 @@
                             $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'electricity';
                             $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';                             
                             $CityValues = [];
-
+                            
                             $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
-
-                            foreach ($CityGraphValues as $Key => $City) {                                     
+                            
+                            foreach ($CityGraphValues as $Key => $City) {
                                 $CityValues[$Key] =  $City[0];
-                            }                         
+                            }
                             debug_to_console($CityValues);
-                        ?> 
-
-                      <script> 
+                        ?>
+                        
+                        <script> 
                            var citydata = <?php echo json_encode($CityValues); ?>;
                            console.log(Object.values(data));
                            document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
                             });
-
-                        function drawBarGraph() {
-                            let font = { family: "Space Grotesk"};
-                            let textColor = theme ? "#000" : "#fff";
-
-                            const citycanvas = document.getElementById("AdminCityCouncilCanvas");
                             
-                            // ✅ Ensure the canvas context is fresh
-                            if (!citycanvas) return; // Exit if canvas is missing
-                            const ctx = citycanvas.getContext("2d");
-                            
-                            /*
-                            // 💥 Destroy existing chart properly
-                            if (chartInstance) {
-                                chartInstance.destroy();
-                                chartInstance = null; // 🧹 Clear instance reference
-                            }
-                            */
-                            
-                            chartInstance = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: Object.keys(citydata),
-                                    datasets: [{
-                                        label: <?php echo json_encode($Type)?>,
-                                        data: Object.values(citydata) ,
-                                        borderColor: "#975ae100",
-                                        backgroundColor: [
-                                            '#003f5c',
-                                            '#374c80',
-                                            '#58508d',
-                                            '#7a5195',
-                                            '#bc5090',
-                                            '#ff6361',
-                                            '#ffa600'
-                                        ],
-                                    
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: true,
-                                    plugins: {
-                                        legend: {
-                                            position: "bottom",
-                                            labels: { color: textColor, font: font }
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: "Networks Annual Usage",
-                                            color: textColor,
-                                            font: font
-                                        }
-                                    },
+                            function drawBarGraph() {
+                                let font = { family: "Space Grotesk"};
+                                let textColor = theme ? "#000" : "#fff";
                                 
+                                const citycanvas = document.getElementById("AdminCityCouncilCanvas");
+                                
+                                // ✅ Ensure the canvas context is fresh
+                                if (!citycanvas) return; // Exit if canvas is missing
+                                const ctx = citycanvas.getContext("2d");
+                                
+                                /*
+                                // 💥 Destroy existing chart properly
+                                if (chartInstance) {
+                                    chartInstance.destroy();
+                                    chartInstance = null; // 🧹 Clear instance reference
                                 }
-                            });
-                        }
+                                */
+                                
+                                chartInstance = new Chart(ctx, {
+                                    type: "bar",
+                                    data: {
+                                        labels: Object.keys(citydata),
+                                        datasets: [{
+                                            label: <?php echo json_encode($Type)?>,
+                                            data: Object.values(citydata) ,
+                                            borderColor: "#975ae100",
+                                            backgroundColor: [
+                                                '#003f5c',
+                                                '#374c80',
+                                                '#58508d',
+                                                '#7a5195',
+                                                '#bc5090',
+                                                '#ff6361',
+                                                '#ffa600'
+                                            ],
+                                        
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: true,
+                                        plugins: {
+                                            legend: {
+                                                position: "bottom",
+                                                labels: { color: textColor, font: font }
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: "Networks Annual Usage",
+                                                color: textColor,
+                                                font: font
+                                            }
+                                        },
+                                    }
+                                });
+                            }
                         </script>
                         
                     </div>
