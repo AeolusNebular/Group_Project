@@ -147,6 +147,15 @@
                                     }]
                                 },
                                 options: {
+                                     animation: {
+                                        duration: 700,
+                                        easing: 'easeOutQuad',
+                                        onComplete : function(){    
+                                            URI = chartInstance.toBase64Image('image/jpeg',1);
+                                            document.getElementById('ImageURLForPDF').value = URI;
+                                            console.log(URI);
+                                        }
+                                    },               
                                     responsive: true,
                                     maintainAspectRatio: true,
                                     plugins: {
@@ -183,6 +192,7 @@
                             <div id="SummaryContent">Connections Types: </div>
                             <div id="SummaryContent">Connection Type Percentages: </div>
                             <input type="hidden" id = 'CityValuesForPDF' name = 'CityValuesForPDF' value =" <?php  echo htmlentities(json_encode($CityTypeValues));  ?>">
+                            <input type="hidden" id = 'ImageURLForPDF' name = 'ImageURLForPDF'>
                             <div id="SummaryContent">
                                 <button type="Submit" class="fancy-button" style="float: right">Print Summary</button>
                             </div> 

@@ -78,34 +78,33 @@
                              Apply Filter
                          </button>
                      </form>
-                     <canvas id="cityChart" width="400px" height="150px"></canvas>
-                     <canvas id="cityChart" width="400px" height="150px"></canvas>   
-                         <?php 
-                             if ($RoleID == 2) {
-                                 $Network = $RoleNetwork;
-                             } else {
-                                 $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
-                             }
-                             
-                             $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
-                             $Year = '2016';
-                             $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
-                             
-                             
-                                 $NetworkValue = CSVData($Type, $Year, $Network);
- 
-                                 foreach ($NetworkValue as $City => $Data) {
-                                     debug_to_console($City);
-                                     if (!isset($TotalNetworkConsume[$City])) {
-                                         $TotalNetworkConsume[$City] = 0;
-                                     }
-                                     
-                                     $TotalNetworkConsume[$City] += $Data[0];
-                                 }
-                                 $NetworkValueByType[$Type] = $TotalNetworkConsume;
-                             
-                             
-                         ?>
+                     <canvas id="cityChart" width="400px" height="150px"></canvas>  
+                    <?php 
+                        if ($RoleID == 2) {
+                            $Network = $RoleNetwork;
+                        } else {
+                            $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
+                        }
+                        
+                        $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
+                        $Year = '2016';
+                        $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
+                        
+                        
+                            $NetworkValue = CSVData($Type, $Year, $Network);
+
+                            foreach ($NetworkValue as $City => $Data) {
+                                debug_to_console($City);
+                                if (!isset($TotalNetworkConsume[$City])) {
+                                    $TotalNetworkConsume[$City] = 0;
+                                }
+                                
+                                $TotalNetworkConsume[$City] += $Data[0];
+                            }
+                            $NetworkValueByType[$Type] = $TotalNetworkConsume;
+                        
+                        
+                    ?>
                      <script>
  
  

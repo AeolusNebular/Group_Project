@@ -75,14 +75,14 @@
                                             $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$DashboardNetwork);
                                         }
 
-                                        debug_to_console($RoleNetwork);
+                                       
                                         foreach ($RoleNetworkCSVValues as $CityName => $City) {
                                             if (!isset($CityConsumeTotals[$CityName])) {
                                                 $CityConsumeTotals[$CityName] = 0;
                                             }
                                             
                                             $CityConsumeTotals[$CityName] += $City[0];
-                                            debug_to_console($CityName);
+                                          
                                         }
                                         
                                         $AllCSVCityData[$TypeOfCSV] += $CityConsumeTotals;  
@@ -90,7 +90,7 @@
                                     } elseif ($RoleID == '3' && isset($CityFilter)) {
                                         
                                         $RoleNetworks = ['coteq' ,'enexis' ,  'liander' , 'stedin' , 'westland-infra'];                              
-                                        debug_to_console($CityFilter);
+                                        
                                         $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
                                         foreach ($RoleNetworks as $Network) {
                                             // 📂 Runs CSVData with assigned variables and grabs data from said CSV File
@@ -107,7 +107,7 @@
                                 }
                                 // 🔍 Debug output for each Network's values
                                 foreach ($AllCSVCityData as $KEY => $NetworkValues) {
-                                    debug_to_console($NetworkValues); 
+                                
                                 }
                             }
                         }
@@ -115,6 +115,7 @@
                        
                         <script>
                             // 📝 Grabs network consume from PHP code above using JSON Encode function and assigns it to data
+                            var pieChart, URI;
                             var DashboardData = <?php echo json_encode($AllCSVCityData); ?>; 
                             console.log(DashboardData);
                             document.addEventListener("DOMContentLoaded", function () {
@@ -162,8 +163,7 @@
                                 chartInstance = new Chart(ctx, {
                                     type: "scatter",
                                     data: data, 
-                                    options: {
-                                                                    
+                                    options: {       
                                         responsive: true,
                                         maintainAspectRatio: true,
                                         plugins: {
@@ -182,6 +182,9 @@
                                     }
                                 });
                             }
+
+
+
                         </script>
                         
                     </div>
