@@ -182,7 +182,7 @@
 .cosmic-theme {
     --bg-dark: radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
     --bg-light: linear-gradient(to bottom right, #f2d6ff, #ffeaff);
-    --card-dark: linear-gradient(to bottom right, #2c0050bb, #5a0099bb);
+    --card-dark: linear-gradient(to bottom right, #2c005080, #5a009980);
     --card-light: linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
     --text-dark: #fef;
     --text-light: #206;

@@ -202,7 +202,15 @@ if (!$notifResult) {
                 }
                 ?>
                 
+                <!-- 🛸 Spacer -->
+                <div>
                     <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                
+                <!-- 👤 Account page (direct link for redundancy) -->
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/account.php">Account</a>
                 </li>

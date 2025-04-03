@@ -71,15 +71,15 @@
                             <?php 
                                 switch ($RoleID) {
                                     case 3 : {
-                                        echo 'City Council For ' . $CityFilter;
+                                        echo 'City council user for ' . $CityFilter;
                                         break;
                                     }
                                     case 2 : {
-                                        echo 'Network User For ' . $RoleNetwork;
+                                        echo 'Network user for ' . $RoleNetwork;
                                         break;
                                     }
                                     case 1 : {
-                                        echo 'Admin User';
+                                        echo 'Admin user';
                                         break;
                                     }
                                 } 
@@ -88,7 +88,7 @@
                             <hr>
                         </div>
                         
-                        <!-- 🏃‍♂️ Action buttons -->
+                        <!-- 🏃‍♂️ Account action buttons -->
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-danger">🗑️ Delete Account</button>
                             <button class="btn btn-warning">🔄 Reset Password</button>

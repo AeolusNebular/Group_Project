@@ -1,32 +1,35 @@
 /* ================ 🌐 General formatting ================ */
 * {
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
 }
+
+/* Unified corners */
+.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .notification-item {
+    border-radius: 16px;
+}
+
+/* Unified hover activity */
 .card:hover, button:hover, input:hover, svg:hover {
     filter: brightness(1.02);
     transform: scale(1.01);
 }
 
+/* =================== 🎨 Body & Modes =================== */
 body {
+    background: var(--bg-dark);
     color: var(--text-dark);
     font-family: 'Space Grotesk', sans-serif;
     padding-top: 76px;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.6s ease-out, transform 0.4s ease-out, filter 0.3s ease-in-out;
 }
-/* ✅ Add styles when animations are enabled (no limitAnimations class) */
-body:not(.limitAnimations) {
-    opacity: 0;
-    transform: translateY(-8px);
-    animation: fadeInUp 0.5s ease-out forwards;
-}
-
 body.light-mode {
     color: var(--text-light);
 }
 
+/* 🌟 Smooth fade-in effect on page load */
 @keyframes fadeInUp {
     to {
         opacity: 1;
@@ -42,16 +45,21 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-dark);
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    background: var(--bg-light);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+    backdrop-filter: blur(10px) saturate(120%);
     z-index: -1;
 }
+
+/* 🔄 Mode background transitions */
 body.light-mode::before {
-    opacity: 0;
-}
-body.light-mode {
     background: var(--bg-light);
+    opacity: 1;
+    filter: hue-rotate(10deg);
+}
+body:not(.light-mode)::before {
+    filter: hue-rotate(-10deg);
 }
 
 /* 📢 Headers */
@@ -64,16 +72,17 @@ h2, .card-header {
 /* ================== 🏛️ Card & Panels ================== */
 .card, .notification-item {
     margin: 12px;
-    width: 100%;
     background: var(--card-dark);
     backdrop-filter: blur(2px) saturate(120%) contrast(160%);
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main), 0 0 10px rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
+}
+.card {
+    width: 100%;
 }
 .light-mode .card, .light-mode .notification-item {
     background: var(--card-light);
@@ -258,20 +267,14 @@ input[type="checkbox"]:checked::before {
     background: #cce;
 }
 
-#dropdown-menu li:hover {
-    filter: brightness(1.2);
-}
-
 /* ====================== 🌫️ Blur ====================== */
 .modal-content, .navbar, .sidebar {
     backdrop-filter: blur(3px);
 }
 
 /* ====================== 🔲 Modals ====================== */
-
 .modal-content {
     background: var(--card-dark);
-    border-radius: 16px;
 }
 .light-mode .modal-content {
     background: var(--card-light);
@@ -291,7 +294,7 @@ input[type="checkbox"]:checked::before {
 /* ====================== 📍 Navbar ====================== */
 .navbar {
     background: var(--card-dark);
-    z-index: 3;
+    z-index: 5;
     width: 100%;
     position: fixed;
     top: 0;
@@ -362,16 +365,16 @@ input[type="checkbox"]:checked::before {
 .icon-container::after {
     opacity: 0.5;
 }
-.sun-icon, .moon-icon {
-    fill: white;
-    stroke: white;
-    transition: fill 0.2s ease, stroke 0.5s ease;
+.sun-icon, .moon-icon, .bell-icon {
+    fill: #fff;
+    stroke: #fff;
+    color: rgba(0, 0, 0, 0);
+    transition: all 0.2s ease;
 }
 .icon-container:hover .sun-icon {
     fill: yellow;
     stroke: yellow;
     transform: rotate(45deg);
-    transition: all 0.2s ease;
 }
 .icon-container:hover .moon-icon {
     fill: #f76;
@@ -385,6 +388,31 @@ input[type="checkbox"]:checked::before {
     transform: rotate(45deg);
 }
 
+/* =================== 🔔 Notifications =================== */
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
+/* 🔔 Notifications icon and dropdown */
+.icon-container:hover .bell-icon {
+    stroke: #fb0;
+    fill: #fb0;
+}
+
+/* 📄 Dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 56px;
+    right: 80px;
+    background: var(--hover-dropdown);
+    box-shadow: 0px 4px 8px #00000033;
+    z-index: 10;
+}
+
 /* ================= 👤 Account Mini Menu ================= */
 .account-menu {
     position: relative;
@@ -393,7 +421,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .account-btn {
-    color: white;
+    color: #fff;
     background: rgba(255, 255, 255, 0.2);
     border: none;
     cursor: pointer;
@@ -410,34 +438,35 @@ input[type="checkbox"]:checked::before {
     box-shadow: 4px 4px 16px #f76;
 }
 
-/* 🎛️ Dropdown menu */
+/* 📄 Dropdown menu */
 .dropdown {
     position: absolute;
     top: 48px;
-    right: 0;
+    right: 8px;
     background: var(--hover-dropdown);
-    border-radius: 16px;
     width: 140px;
     box-shadow: 0px 4px 8px #00000033;
-    opacity: 0;
+    opacity: 0; /* Ready for fade in on hover */
     transform: translateY(-8px);
     z-index: 10;
     pointer-events: none; /* Prevents interaction when invisible */
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Dropdown menu links */
+/* 🔗 Dropdown menu links */
 .dropdown a {
     display: block;
-    border-radius: 16px;
     padding: 10px;
     color: white;
-    text-decoration: none;
     font-size: 14px;
     transition: background 0.2s ease-in-out;
 }
-
-.dropdown a:hover {
+.dropdown a,
+.dropdown-menu a  {
+text-decoration: none;
+}
+.dropdown a:hover,
+.dropdown-menu a:hover {
     background: #ffffff33;
 }
 
@@ -468,7 +497,7 @@ input[type="checkbox"]:checked::before {
     height: 100%;
     width: 0;
     padding-top: 64px;
-    z-index: 2;
+    z-index: 4;
     overflow-x: hidden;
     transition: 0.5s ease;
     background: var(--card-dark);
@@ -613,18 +642,6 @@ button:active {
 }
 .light-mode #heatmap {
     background: var(--card-light);
-}
-
-/* =================== 🔔 Notifications =================== */
-.notification-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
-}
-.notification-text {
-    flex-grow: 1;
 }
 
 /* ======================= ⚙️ Other ======================= */
