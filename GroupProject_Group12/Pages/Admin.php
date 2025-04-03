@@ -53,8 +53,8 @@
                         
                         <form action="Admin.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'> 
-                                <label for="Networks">Select Year:</label> <br>
-                                <select class="form-select" Onchange="this.form.submit()" name="Admin_Network_Year" id="Admin_Network_Year">
+                                <label for="Admin_Network_Year">Select Year:</label> <br>
+                                <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
@@ -62,13 +62,16 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: right'>
-                                <label for="Networks">Select Type:</label> <br>
-                                <select class="form-select" Onchange="this.form.submit()" name="Admin_Network_Type" id="Admin_Network_Type">
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="Admin_Network_Type">Select Type:</label> <br>
+                                <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>                                      
                                 </select>
                             </div>
+                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                                Apply Filter
+                            </button>
                         </form>
                         
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
@@ -178,36 +181,52 @@
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
-                        <div id="SummaryContent">Filter by city:
-                            <form action="/Group_Project/GroupProject_Group12/Pages/Admin.php" method="GET" class="themed-dropdown">
-                                <select name="AdminCityFilter" onChange="this.form.submit()"> 
-                                    <option value="all">All</option>
-                                    <?php 
-                                        include('../Database_Php_Interactions/CitySelect.php'); 
-                                    ?>
+                        <form action="Admin.php" method="GET" >                         
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="AdminNetwork">Select network:</label> <br>
+                                <select class="form-select" name="AdminNetwork">
+                                    <option value="coteq"> Coteq </option>      
+                                    <option value="westland-infra"> Westlandia </option>
+                                    <option value="enexis"> Enexis </option>
+                                    <option value="stedin"> Stedin </option>
+                                    <option value="liander"> Liander </option>
+                                </select>    
+                            </div>
+                            <div class="themed-dropdown" style='float: left'> 
+                                <label for="AdminNetworkYear">Select Year:</label> <br>
+                                <select class="form-select" name="AdminNetworkYear">
+                                    <option value="2016"> 2016 </option>
+                                    <option value="2017"> 2017 </option>
+                                    <option value="2018"> 2018 </option>
+                                    <option value="2019"> 2019 </option>
+                                    <option value="2020"> 2020 </option>
                                 </select>
-                            </form>
-                        </div>
-                        
+                            </div>
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="Admin_City_Type">Select Type:</label> <br>
+                                <select class="form-select" name="Admin_City_Type">
+                                    <option value="electricity"> Electricity </option>
+                                    <option value="gas"> Gas </option>                                      
+                                </select>
+                            </div>
+                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                                Apply Filter
+                            </button>
+                        </form>
                         <!-- 📊 City councils chart -->
                         <canvas id="AdminCityCouncilCanvas"></canvas>
                         
                         <?php
-                            $Year = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
-                            $City = isset($_GET['AdminCityFilter']) ? $_GET['AdminCityFilter'] : '';
-                            $Type = 'electricity';
-                            $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra']; 
-                            
+                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';                         
+                            $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'electricity';
+                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';                             
                             $CityValues = [];
 
-                            foreach ($Networks as $Network) {
-                                $CityGraphValues = CSVData($Type,$Year,$Network);
+                            $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
 
-                                foreach ($CityGraphValues as $Key => $City) {                                     
-                                    $CityValues[$Key] =  $City[0];
-                                }                         
-                            }
-
+                            foreach ($CityGraphValues as $Key => $City) {                                     
+                                $CityValues[$Key] =  $City[0];
+                            }                         
                             debug_to_console($CityValues);
                         ?> 
 
@@ -242,7 +261,7 @@
                                 data: {
                                     labels: Object.keys(citydata),
                                     datasets: [{
-                                        label: "Electricity",
+                                        label: <?php echo json_encode($Type)?>,
                                         data: Object.values(citydata) ,
                                         borderColor: "#975ae100",
                                         backgroundColor: [

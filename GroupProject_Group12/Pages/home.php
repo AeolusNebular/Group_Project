@@ -3,7 +3,6 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    <?php include("../modules/reportPDF.php"); ?>  
     <title>Home - Smart Energy Dashboard</title>
 </head>
 
@@ -40,7 +39,17 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
+                            <div class="themed-dropdown" style='float: left'> 
+                                <label for="Dashboard_Networks">Select Network:</label> <br>
+                                <select class="form-select" name="Dashboard_Networks" >
+                                    <option value="coteq"> Coteq </option>
+                                    <option value="enexis"> Enexis </option>
+                                    <option value="westland-infra"> Westland Infra </option>
+                                    <option value="stedin"> Stedin </option>
+                                    <option value="liander"> Liander </option>
+                                </select>
+                            </div>
+                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
                                 Apply Filter
                             </button>
                         </form>
@@ -50,16 +59,22 @@
                         if (isset($RoleID)) {
                             // 📅 Runs once year is chosen, defaults to 2020
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                                $Year = isset($_GET['Dashboard_Years']) ? $_GET['Dashboard_Years'] : '2020';
+                                $Year = isset($_GET['Dashboard_Years']) ? $_GET['Dashboard_Years'] : '2016';
                                 $TypesOfCSV = ['Gas','Electricity'];
+                                $DashboardNetwork = isset($_GET['Dashboard_Networks']) ? $_GET['Dashboard_Networks'] : 'coteq';
                                 $AllCSVCityData = array('Gas' => [],'Electricity' => []);
                                 
                                 // 🔄 Loops through types of CSV (eg electricity or gas)
                                 foreach ($TypesOfCSV as $TypeOfCSV) {
                                     // 👤 Checks user's RoleID to decide which information to show 
-                                    if ($RoleID == '2') {
-                                        $CityConsumeTotals = [];     
-                                        $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$RoleNetwork);
+                                    if ($RoleID != '3' ) {
+                                        $CityConsumeTotals = []; 
+                                        if ($RoleID == 2) {  
+                                            $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$RoleNetwork);
+                                        } else {
+                                            $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$DashboardNetwork);
+                                        }
+
                                         debug_to_console($RoleNetwork);
                                         foreach ($RoleNetworkCSVValues as $CityName => $City) {
                                             if (!isset($CityConsumeTotals[$CityName])) {
