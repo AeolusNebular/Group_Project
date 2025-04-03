@@ -32,29 +32,28 @@
                         <!-- 🧭 Network selection -->
                         <form action="City.php" method='GET'>
                             <?php if ($RoleID != 2) {
-                                echo '<div class="themed-dropdown" style="float: left">
-                                    <label for="CityNetworks">Select network:</label> <br>
-                                    <select class="form-select" name="CityNetworks">
-                                        <option value="coteq"> Coteq </option>
-                                        <option value="westland-infra"> Westlandia </option>
-                                        <option value="enexis"> Enexis </option>
-                                        <option value="stedin"> Stedin </option>
-                                        <option value="liander"> Liander </option>
+                                echo "<div class='themed-dropdown' style='float: left'>
+                                    <label for='CityNetworks'>Select network:</label> <br>
+                                    <select class='form-select' name='CityNetworks' >
+                                        <option value='coteq'> Coteq </option>      
+                                        <option value='westland-infra'> Westlandia </option>
+                                        <option value='enexis'> Enexis </option>
+                                        <option value='stedin'> Stedin </option>
+                                        <option value='liander'> Liander </option>
                                     </select>
-                                </div>';
+                                </div>";
                             }
                             ?>
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="CityYears">Select network:</label> <br>
                                 <select class="form-select" name="CityYears">
-                                    <option value="2016"> 2016 </option>
+                                    <option value="2016"> 2016 </option>      
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
                                     <option value="2019"> 2019 </option>
                                     <option value="2020"> 2020 </option>
                                 </select>
-                            </div>
-                            
+                            </div>                         
                             <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right'>
                                 Apply Filter
                             </button>
@@ -144,6 +143,16 @@
                                     }]
                                 },
                                 options: {
+                                     animation: {
+                                        duration: 700,
+                                        easing: 'easeOutQuad',
+                                        onComplete : function(){    
+                                            URI = chartInstance.toBase64Image('image/jpeg',1);
+
+                                            document.getElementById('ImageURLForPDF').value = URI;
+                                            console.log(URI);
+                                        }
+                                    },               
                                     responsive: true,
                                     maintainAspectRatio: true,
                                     plugins: {
@@ -179,7 +188,8 @@
                             <div id="SummaryContent">Delivery Percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?> </div>
                             <div id="SummaryContent">Connections Types: </div>
                             <div id="SummaryContent">Connection Type Percentages: </div>
-                            <input type="hidden" id = 'CityValuesForPDF' name='CityValuesForPDF' value ="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
+                            <input type="hidden" id = 'CityValuesForPDF' name = 'CityValuesForPDF' value =" <?php  echo htmlentities(json_encode($CityTypeValues));  ?>">
+                            <input type="hidden" id = 'ImageURLForPDF' name = 'ImageURLForPDF'>
                             <div id="SummaryContent">
                                 <button type="Submit" class="fancy-button" style="float: right">Print Summary</button>
                             </div>

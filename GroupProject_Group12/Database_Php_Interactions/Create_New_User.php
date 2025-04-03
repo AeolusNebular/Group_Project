@@ -137,37 +137,35 @@
                 exit;
             }
         
+            if ($Success) {
+                $mail = new PHPMailer(true);
+
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                    $mail->isSMTP();                                            //Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                    $mail->Username   = 'smartenergydashboard@gmail.com';                     //SMTP username
+                    $mail->Password   = 'kugg mtgw lvbi fgpq';                               //SMTP password
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                    $mail->Port       = 465;                       
+                    $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard');
+                    $mail->addAddress($_POST['Email']);               //Name is optional               
+                    $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->Subject = 'New Account Creation Notification';
+                    $mail->Body    = 'An Account has been made for you';
+                    
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }            
 
         //Commits Last 3 transactions and Inserts them into Database
         $db->exec('COMMIT');
         $db->close();
 
-        if ($Success) {
-            $mail = new PHPMailer(true);
-
-            try {
-                //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'smartenergydashboard@gmail.com';                     //SMTP username
-                $mail->Password   = 'kugg mtgw lvbi fgpq';                               //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                       
-
-                $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard');
-                $mail->addAddress($_GET['Email']);               //Name is optional
-                
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'New Account Creation Notification';
-                $mail->Body    = 'An Account has been made for you';
-                
-                $mail->send();
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-        }            
         
 
 

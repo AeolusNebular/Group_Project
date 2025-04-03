@@ -28,24 +28,7 @@
             <h2>Admin</h2>
         </div>
         
-        <div class="row" >
-            <!-- 📊 Big chart panel (fat) -->
-            <div class="col-12 col-md-5">
-                <div class="card">
-                    <div class="card-header">👤 User Creation</div>
-                    <div class="card-body">
-                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
-                            Create User
-                        </button>
-
-                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'GET'>
-                            <input type="text" id= 'SMTPEmail' name='SMTPEmail'>
-                            <button type="submit" class="fancy-button">Send Email</button>    
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
+        <div class="row" >  
             <div class="col-12 col-md-7">
                 <div class="card">
                     <div class="card-header">🌐 Network Users</div>
@@ -173,6 +156,24 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 📊 Big chart panel (fat) -->
+            <div class="col-12 col-md-5">
+                <div class="card">
+                    <div class="card-header">👤 User Creation</div>
+                    <div class="card-body">
+                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
+                            Create User
+                        </button>
+
+                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
+                            <input type="text" id= 'Email' name='Email'>
+                            <button type="submit" class="fancy-button">Send Email</button>    
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
             
             <!-- 🏙️ City councils diagram -->
             <div class="col-12 col-md-12">
@@ -301,47 +302,48 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Report Details</div>
+                    <div class="card-header">Additional Information</div>
                     <div class="card-body">
-                        <div style="float: left">
-                            <div class="SummaryContent">Filter options:</div>
-                        </div>
-                        <table>
-                               <?php 
-                                if ($_SERVER['REQUEST_METHOD'] == "GET" && (isset($_GET['AdminCityFilter']))) {
-                                    $Type = 'electricity';
-                                    $Year = '2016';
-                                    $Network = 'coteq';
-                                    
-                                    $Values = CSVData($Type,$Year,$Network);
-                                    
-                                    if (isset($Values) && (!$Values == [])){
-                                        echo 
-                                        '<tr>
-                                        <th>city</th>
-                                        <th>annual Cost</th>
-                                        <th>Type of connection</th>
-                                        <th>Num of connection</th>
-                                        </tr>';
-                                        
-                                        foreach ($Values as $Key => $City) {
-                                            echo '<tr>
-                                                  <td> ' . $Key . '</td>';
-                                            foreach ($City as $y) {
-                                                       
-                                               echo '<td>' . $y .'</td>';
-                                            }
-                                            echo '</tr>';
-                                        }
-                                    }
-                                }
-                                ?>
-                                
-                        </table>
+                        <div id="SummaryContent">Number of Connections: </div>
+                        <div id="SummaryContent">Amount of Electricity Used (kWh): </div>
+                        <div id="SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent">Delivery Percentage: </div>
+                        <div id="SummaryContent">Types of Connections: </div>
+                        <div id="SummaryContent">Types Connections Percentage: </div>
+                        <div id="SummaryContent"></div>
                     </div>
-                </div>
+                </div> 
+            </div>
+            
+            <div class="col-12 col-md-5">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Filter options:</div>
+                    <div class="card-body">
+                        
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
+                            <select id="ReportAdminFilter"> 
+                                <option value="all">All</option>
+                                <?php 
+                                    include('../Database_Php_Interactions/CitySelect.php');
+                                ?>
+                            </select>
+                        </div>
+                        
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
+                            <select id="Gas_Electricity_Both"> 
+                                <option value="Both">All</option>
+                                <option value="Gas">Gas</option>
+                                <option value="Electricity">Electricity</option>
+                            </select>
+                        </div> 
+                        
+                        <div id="SummaryContent">
+                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                        </div>
+                    </div>
+                </div> 
             </div>
             
         </div>
