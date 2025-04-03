@@ -36,7 +36,7 @@
                         
                         <form action="Admin.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_Network_Year">Select Year:</label> <br>
+                                <label for="Admin_Network_Year">Select year:</label> <br>
                                 <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -46,7 +46,7 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_Network_Type">Select Type:</label> <br>
+                                <label for="Admin_Network_Type">Select type:</label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>
