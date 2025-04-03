@@ -149,10 +149,11 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                <!-- 🌙 Manual dark/light mode controls (updates autmocatically) -->
+                                <!-- 🌙 Manual dark/light mode controls -->
                                 <label for="darkMode">Dark/light mode:</label>
                                 <div class="themed-dropdown">
                                     <select id="darkMode" class="form-select">
+                                        <option value="auto">Auto</option>
                                         <option value="dark">Dark</option>
                                         <option value="light">Light</option>
                                     </select>
