@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
                     <div class="card-header">Additional Information</div>
