@@ -79,7 +79,7 @@
         <div class="container">
             <h1>🚀 WELCOME TO THE ULTIMATE ENERGY ADMINISTRATION EXPERIENCE 🚀</h1>
             <p>Prepare yourself. Click below to enter the domain of EMNERGY wisdom. 💰</p>
-            <button class="epic-button" onclick="window.location.href='/Group_Project/GroupProject_Group12/pages/home.php'">💸 ENTER THE CHAOS 💸</button>
+            <button class="epic-button" onclick="window.location.href='/Group_Project/GroupProject_Group12/pages/home.php'">💸 UNLEASH THE CHAOS 💸</button>
         </div>
     </div>
 </body>
