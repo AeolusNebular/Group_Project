@@ -31,139 +31,133 @@
             
             }?></h2>
         </div>
-
+        
         <div class ="row">
-            
-            <div class="card">
-                 <div class="card-header">City Chart for Network : <?php 
-                 if ($RoleID == 2) {
-                     echo $RoleNetwork;
-                 } else {
-                     echo 'Admin User';
-                 }
-                 ?></div>
-                 <div class="card-body">
-                     <form action="Network.php" method = 'POST'>
-                         <div class="themed-dropdown" style = 'float : left'>
-                             <label for="TypeFilter">Filter by Type:</label>
-                             <select id="TypeFilter" name='TypeFilter'>
-                                 <option value="Gas">Gas</option>
-                                 <option value="Electricity">Electricity</option>
-                             </select>
-                         </div>
-                         <?php 
-                         if ($RoleID != 2){
-                             echo '<div class="themed-dropdown" style="float: left">
-                                     <label for="NetworkName">Select network:</label> <br>
-                                     <select class="form-select" name="NetworkName">
-                                         <option value="coteq"> Coteq </option>      
-                                         <option value="westland-infra"> Westlandia </option>
-                                         <option value="enexis"> Enexis </option>
-                                         <option value="stedin"> Stedin </option>
-                                         <option value="liander"> Liander </option>
-                                     </select>
-                                 </div>';
-                         }?>
-                          <div class="themed-dropdown" style = 'float : left'>
-                             <label for="TypeFilter">Filter by Year:</label>
-                             <select name='NetworkYearFilter'>
-                                 <option value="2016">2016</option>
-                                 <option value="2017">2017</option>
-                                 <option value="2017">2018</option>
-                                 <option value="2017">2019</option>
-                                 <option value="2017">2020</option>
-                             </select>
-                         </div>
-                         <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
-                             Apply Filter
-                         </button>
-                     </form>
-                     <canvas id="cityChart" width="400px" height="150px"></canvas>  
-                    <?php 
-                        if ($RoleID == 2) {
-                            $Network = $RoleNetwork;
-                        } else {
-                            $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
-                        }
-                        
-                        $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
-                        $Year = '2016';
-                        $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
-                        
-                        
-                            $NetworkValue = CSVData($Type, $Year, $Network);
-
-                            foreach ($NetworkValue as $City => $Data) {
-                                debug_to_console($City);
-                                if (!isset($TotalNetworkConsume[$City])) {
-                                    $TotalNetworkConsume[$City] = 0;
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">City Chart for Network : <?php 
+                    if ($RoleID == 2) {
+                        echo $RoleNetwork;
+                    } else {
+                        echo 'Admin User';
+                    }
+                    ?></div>
+                    <div class="card-body">
+                        <form action="Network.php" method='POST'>
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="TypeFilter">Filter by Type:</label>
+                                <select id="TypeFilter" name='TypeFilter'>
+                                    <option value="Gas">Gas</option>
+                                    <option value="Electricity">Electricity</option>
+                                </select>
+                            </div>
+                            <?php 
+                            if ($RoleID != 2){
+                                echo '<div class="themed-dropdown" style="float: left">
+                                        <label for="NetworkName">Select network:</label> <br>
+                                        <select class="form-select" name="NetworkName">
+                                            <option value="coteq"> Coteq </option>      
+                                            <option value="westland-infra"> Westlandia </option>
+                                            <option value="enexis"> Enexis </option>
+                                            <option value="stedin"> Stedin </option>
+                                            <option value="liander"> Liander </option>
+                                        </select>
+                                    </div>';
+                            }?>
+                            <div class="themed-dropdown" style = 'float : left'>
+                                <label for="TypeFilter">Filter by Year:</label>
+                                <select name='NetworkYearFilter'>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2017">2018</option>
+                                    <option value="2017">2019</option>
+                                    <option value="2017">2020</option>
+                                </select>
+                            </div>
+                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
+                                Apply Filter
+                            </button>
+                        </form>
+                        <canvas id="cityChart" width="400px" height="150px"></canvas>
+                            <?php 
+                                if ($RoleID == 2) {
+                                    $Network = $RoleNetwork;
+                                } else {
+                                    $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
                                 }
                                 
-                                $TotalNetworkConsume[$City] += $Data[0];
+                                $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
+                                $Year = '2016';
+                                $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
+                                
+                                $NetworkValue = CSVData($Type, $Year, $Network);
+                                
+                                foreach ($NetworkValue as $City => $Data) {
+                                    debug_to_console($City);
+                                    if (!isset($TotalNetworkConsume[$City])) {
+                                        $TotalNetworkConsume[$City] = 0;
+                                    }
+                                    
+                                    $TotalNetworkConsume[$City] += $Data[0];
+                                }
+                                $NetworkValueByType[$Type] = $TotalNetworkConsume;
+                            ?>
+                        <script>
+                            var data = <?php 
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['TypeFilter'])) {
+                                echo json_encode($NetworkValueByType[$_POST['TypeFilter']]);
+                            } else {
+                                echo json_encode($NetworkValueByType['Gas']);
                             }
-                            $NetworkValueByType[$Type] = $TotalNetworkConsume;
-                        
-                        
-                    ?>
-                     <script>
- 
- 
-                         var data = <?php 
-                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['TypeFilter'])) {
-                             echo json_encode($NetworkValueByType[$_POST['TypeFilter']]);
-                         } else {
-                             echo json_encode($NetworkValueByType['Gas']); 
-                         }
-                         ?>;
-                         console.log(data);
- 
-                         const ctx = document.getElementById('cityChart').getContext('2d');
-                         let cityChart = new Chart(ctx, {
-                             type: 'bar',
-                             data: {
-                                 labels: Object.keys(data),
-                                 datasets: [{
-                                     label: 'City Data',
-                                     data: Object.values(data),
-                                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                     borderColor: 'rgb(75, 192, 192)',
-                                     borderWidth: 1
-                                 }]
-                             },
-                             options: {
-                                 scales: {
-                                     y: {
-                                         beginAtZero: true,
-                                         ticks: {
-                                             color: 'white' // 📏 Y-axis text color
-                                         }
-                                     },
-                                     x: {
-                                         ticks: {
-                                             color: 'white' // 📏 X-axis text color
-                                         }
-                                     }
-                                 },
-                                 plugins: {
-                                     legend: {
-                                         labels: {
-                                             color: 'white' // 🏷️ Legend text color
-                                         }
-                                     }
-                                 }
-                             }
-                         });
- 
-                         function filterData() {
-                             const selectedCity = document.getElementById('cityFilter').value;
-                             cityChart.data.datasets[0].data = data[selectedCity];
-                             cityChart.update();
-                         }
-                     </script>
-                 </div>
-             </div>
-                
-           
+                            ?>;
+                            console.log(data);
+                            
+                            const ctx = document.getElementById('cityChart').getContext('2d');
+                            let cityChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: Object.keys(data),
+                                    datasets: [{
+                                        label: 'City Data',
+                                        data: Object.values(data),
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                color: 'white' // 📏 Y-axis text color
+                                            }
+                                        },
+                                        x: {
+                                            ticks: {
+                                                color: 'white' // 📏 X-axis text color
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            labels: {
+                                                color: 'white' // 🏷️ Legend text color
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                            
+                            function filterData() {
+                                const selectedCity = document.getElementById('cityFilter').value;
+                                cityChart.data.datasets[0].data = data[selectedCity];
+                                cityChart.update();
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
             
             <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
@@ -177,7 +171,7 @@
                         <div id="SummaryContent">Types Connections Percentage: </div>
                         <div id="SummaryContent"></div>
                     </div>
-                </div> 
+                </div>
             </div>
             
             <div class="col-12 col-md-5">
@@ -200,7 +194,7 @@
                                 <option value="Gas">Gas</option>
                                 <option value="Electricity">Electricity</option>
                             </select>
-                        </div> 
+                        </div>
                         
                         <div id="SummaryContent">
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>

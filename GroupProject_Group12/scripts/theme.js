@@ -1,44 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
     const darkModeSelect = document.getElementById("darkMode");
-    const icon = document.getElementById("darkModeIcon");
-    const defaultThemeMode = "purple-auto"; // 🟣 Default to purple theme, match device for mode
-
+    const themeSelect = document.getElementById("theme");
+    const defaultThemeMode = "purple-auto"; // 🟣 Default to purple theme, match device dark/light mode
+    
     // 📨 Retrieve stored themeMode
     const storedThemeMode = sessionStorage.getItem("themeMode") || defaultThemeMode;
     let [storedTheme, storedMode] = storedThemeMode.split("-");
-
+    
     // 🌗 Determine actual mode if auto
-    let resolvedMode = storedMode;
-    if (storedMode === "auto") {
-        resolvedMode = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-    }
+    let resolvedMode = storedMode === "auto" 
+    ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") 
+    : storedMode;
     
     // 🧹 Check if logout occurred and reset theme
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("logout")) {
         // 🔄 Reset theme, preserve mode
         sessionStorage.setItem("themeMode", `purple-${storedMode}`);
-        document.body.classList.forEach(cls => {
-            if (cls.endsWith("-theme")) document.body.classList.remove(cls);
-        });
-        document.body.classList.add("purple-theme"); // 🟣 Ensure purple is applied without flash
+        applyTheme("purple", storedMode); // 🟣 Ensure purple is applied without flash
         urlParams.delete("logout");
         window.history.replaceState({}, document.title, window.location.pathname + "?" + urlParams.toString());
         location.reload();
         return; // 👋 Exit to prevent further execution
     }
-
+    
     // 🎨 Apply stored theme & mode
     applyTheme(storedTheme, resolvedMode);
-
+    
     // 🔽 Set dropdown correctly
-    darkModeSelect.value = storedMode; // Ensure it reflects stored value
-
-    // 🎛️ Theme dropdown listener
-    darkModeSelect.addEventListener("change", function (event) {
-        updateDarkMode(event.target.value);
-    });
-
+    if (darkModeSelect) {
+        darkModeSelect.value = storedMode; // Ensure it reflects stored value
+    } else {
+        console.error("⚠️ Element with ID 'darkMode' not found.");
+    }
+    
+    // 🛑 Only modify dropdown if it exists (account.php only)
+    if (darkModeSelect) {
+        darkModeSelect.value = storedMode;
+        
+        // 🎛️ Listen for dropdown changes
+        darkModeSelect.addEventListener("change", function (event) {
+            updateDarkMode(event.target.value);
+        });
+    }
+    
+    if (themeSelect) {
+        themeSelect.addEventListener("change", function (event) {
+            applyTheme(event.target.value, document.body.classList.contains("light-mode") ? "light" : "dark");
+        });
+    }
+    
     // 🎧 Listen for system theme changes (if auto mode is selected)
     window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
         if (sessionStorage.getItem("themeMode")?.endsWith("auto")) {
@@ -47,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// 🎨 Function to apply a selected theme & mode
+// 🎨 Apply theme changes and start/stop theme-specific effects
 function applyTheme(newTheme, newMode) {
     console.log(`🔄 Switching theme to: ${newTheme} - ${newMode}`);
     
@@ -60,11 +71,13 @@ function applyTheme(newTheme, newMode) {
     document.body.classList.forEach(cls => {
         if (cls.endsWith("-theme")) document.body.classList.remove(cls);
     });
+    
+    // ✅ Apply the new theme
     document.body.classList.add(`${newTheme}-theme`);
-
+    
     // 🌙 Apply light/dark mode correctly
     document.body.classList.toggle("light-mode", newMode === "light");
-
+    
     // ⚙️ Update icon
     const icon = document.getElementById("darkModeIcon");
     if (icon) {
@@ -77,6 +90,7 @@ function applyTheme(newTheme, newMode) {
     // ✅ Start theme-specific effects
     if (newTheme === "matrix") startMatrix();
     if (newTheme === "desert") startTumbleweeds();
+    if (newTheme === "cosmic") startStars();
 }
 
 // 🌙 Update dark/light mode from dropdown
@@ -84,7 +98,7 @@ function updateDarkMode(mode) {
     let resolvedMode = mode === "auto"
         ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
         : mode;
-
+        
     const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     applyTheme(currentTheme, resolvedMode);
 }
@@ -93,21 +107,21 @@ function updateDarkMode(mode) {
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
-    const isDarkMode = !body.classList.contains("light-mode");
+    const isCurrentlyDarkMode = !body.classList.contains("light-mode");
     
     // 🌙 Toggle mode
-    body.classList.toggle("light-mode", isDarkMode);
+    const newMode = isCurrentlyDarkMode ? "light" : "dark";
+    body.classList.toggle("light-mode", newMode === "light");
     
     // 💾 Update mode in sessionStorage using the existing theme
-    const currentTheme = document.body.classList.value.match(/\b(\w+)-theme\b/)?.[1] || "purple";
-    const newMode = isDarkMode ? "light" : "dark";
+    const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     sessionStorage.setItem("themeMode", `${currentTheme}-${newMode}`);
     
     // ⚙️ Update icon
     if (icon) {
-        icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+        icon.innerHTML = newMode === "light" ? sunIcon() : moonIcon();
     }
-
+    
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);
 }
@@ -187,7 +201,7 @@ function startMatrix() {
             drops[i]++;
         }
     }
-
+    
     // 💾 Store interval globally so it can be cleared (50ms)
     matrixInterval = setInterval(drawMatrix, 50);
     
@@ -212,18 +226,30 @@ function stopMatrix() {
     document.querySelectorAll(".matrix-container").forEach((el) => el.remove());
 }
 
-// ⭐ Stars for cosmic theme
-document.addEventListener("DOMContentLoaded", function () {
-    const starContainer = document.createElement('div');
-    starContainer.id = 'star-container';
+// ⭐ Cosmic theme stars system
+let shootingStarsInterval; // 🕒 Store interval reference
+
+function startStars() {
+    console.log("✨ Starting stars...");
+    
+    // Check if the star container already exists to prevent duplicates
+    if (document.getElementById("star-container")) {
+        console.log("⚠️ Star container already exists, skipping creation.");
+        return;
+    }
+    
+    // 🌌 Create a new star container
+    const starContainer = document.createElement("div");
+    starContainer.id = "star-container";
     document.body.appendChild(starContainer);
     
     // ✨ Total number of stars on the screen
     const numberOfStars = 300;
     
     for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
+        const star = document.createElement("div");
+        star.classList.add("star");
+        
         const size = Math.random() * 3 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
@@ -231,50 +257,53 @@ document.addEventListener("DOMContentLoaded", function () {
         star.style.top = `${Math.random() * 100}vh`;
         star.style.animationDuration = `${Math.random() * 5 + 3}s`;
         star.style.animationDelay = `${Math.random() * 5}s`;
+        
         starContainer.appendChild(star);
-    }
-});
-
-// 🌠 Shooting stars for cosmic theme!!
-let shootingStarsInterval; // 🕒 Store interval reference
-
-document.addEventListener("DOMContentLoaded", function () {
-    const starContainer = document.getElementById("star-container");
-    
-    function createShootingStar() {
-        const shootingStar = document.createElement("div");
-        shootingStar.classList.add("shooting-star");
-        
-        // 🌍 Random starting position (top-right corner)
-        const startX = Math.random() * window.innerWidth * 0.6 + window.innerWidth * 0.4;
-        const startY = Math.random() * window.innerHeight * 0.4;
-        
-        shootingStar.style.left = `${startX}px`;
-        shootingStar.style.top = `${startY}px`;
-        
-        // 🌠 Assign animation
-        shootingStar.style.animation = `shooting 1s linear forwards`;
-        
-        starContainer.appendChild(shootingStar);
-        
-        // 🔄 Remove after animation to prevent utter computer destruction :)
-        setTimeout(() => {
-            shootingStar.remove();
-        }, 1000);
-    }
-    
-    // ⏳ Generate shooting star every 0.5-1.5 seconds
-    function startShootingStars() {
-        setInterval(() => {
-            if (Math.random() < 0.3) { // 🎲 30% chance of creation each time
-                createShootingStar();
-            }
-        }, Math.random() * 1000 + 500); // ⏱️ 0.5s - 1.5s random interval
     }
     
     // 🌠 Start shooting stars
     startShootingStars();
-});
+}
+
+function startShootingStars() {
+    console.log("🌠 Starting shooting stars...");
+    
+    if (shootingStarsInterval) {
+        console.log("⚠️ Shooting stars already running, skipping.");
+        return;
+    }
+    
+    shootingStarsInterval = setInterval(() => {
+        if (Math.random() < 0.3) { // 🎲 30% chance of creation each time
+            createShootingStar();
+        }
+    }, Math.random() * 1000 + 500); // ⏱️ 0.5s - 1.5s random interval
+}
+
+function createShootingStar() {
+    const starContainer = document.getElementById("star-container");
+    if (!starContainer) return; // 🚫 Prevent errors if container was removed
+    
+    const shootingStar = document.createElement("div");
+    shootingStar.classList.add("shooting-star");
+    
+    // 🌍 Random starting position (top-right corner)
+    const startX = Math.random() * window.innerWidth * 0.6 + window.innerWidth * 0.4;
+    const startY = Math.random() * window.innerHeight * 0.4;
+    
+    shootingStar.style.left = `${startX}px`;
+    shootingStar.style.top = `${startY}px`;
+    
+    // 🌠 Assign animation
+    shootingStar.style.animation = `shooting 1s linear forwards`;
+    
+    starContainer.appendChild(shootingStar);
+    
+    // 🔄 Remove after animation to prevent clutter
+    setTimeout(() => {
+        shootingStar.remove();
+    }, 1000);
+}
 
 function stopStars() {
     console.log("🛑 Stopping stars...");
@@ -285,11 +314,11 @@ function stopStars() {
         shootingStarsInterval = null;
     }
     
-    // ⛔ Remove all stars from the DOM
-    const starContainer = document.getElementById('star-container');
+    // ⛔ Remove star container entirely
+    const starContainer = document.getElementById("star-container");
     if (starContainer) {
-        starContainer.innerHTML = ''; // Clear all stars
-        starContainer.remove(); // Remove container itself
+        starContainer.remove();
+        console.log("🌌 Star container removed.");
     }
 }
 
@@ -307,9 +336,9 @@ function createTumbleweed() {
     tumbleweed.style.height = `${size}px`;
     tumbleweed.style.bottom = `${Math.random() * 90 + 5}vh`; // Between 5vh and 95vh
     
-    // Append to body
+    // 🩹 Append to body
     document.body.appendChild(tumbleweed);
-
+    
     // ⏳ Remove after 12 seconds to prevent buildup
     setTimeout(() => {
         if (document.body.contains(tumbleweed)) {

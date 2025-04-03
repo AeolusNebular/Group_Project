@@ -53,8 +53,8 @@
                                     <option value="2019"> 2019 </option>
                                     <option value="2020"> 2020 </option>
                                 </select>
-                            </div> 
-                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float : right'>
+                            </div>                         
+                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right'>
                                 Apply Filter
                             </button>
                         </form>
@@ -74,7 +74,6 @@
                                 $CityValues = [];
                                 $AllCityDataForType = array('Electricity' => [], 'Gas' => []);
                                 
-
                                 foreach ($Types as $Type) {
                                     $CityAdditions = array('Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0);
                                     $x = 0;
@@ -83,9 +82,9 @@
                                     } else {
                                         $CityGraphValues = CSVData($Type,$Years,$Network);
                                     }
-
+                                    
                                     foreach ($CityGraphValues as $Key => $City) {
-                                        $x += 1;                                  
+                                        $x += 1;
                                         $CityValues[$Key] =  $City[0];
                                         $CityAdditions['Annual'] += $City[0];
                                         $CityAdditions['Connection'] += $City[1];
@@ -93,26 +92,24 @@
                                        
                                     } 
                                     $CityAdditions['Delivery_Perc'] = $CityAdditions['Delivery_Perc']/$x;
-                                    $AllCityDataForType[$Type] = $CityAdditions;   
+                                    $AllCityDataForType[$Type] = $CityAdditions;
                                     $CityTypeValues[$Type] = $CityValues;
-                                    
                                 }
-
-                            }        
+                            }
                         ?>
-
+                        
                         <script> 
-                           var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
-                         
-                           document.addEventListener("DOMContentLoaded", function () {
-                                drawBarGraph();
-                                window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
-                            });
-
+                        var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+                        
+                        document.addEventListener("DOMContentLoaded", function () {
+                            drawBarGraph();
+                            window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
+                        });
+                        
                         function drawBarGraph() {
                             let font = { family: "Space Grotesk"};
                             let textColor = theme ? "#000" : "#fff";
-
+                            
                             const canvas = document.getElementById("CityCanvas");
                             
                             // ✅ Ensure the canvas context is fresh
@@ -124,20 +121,20 @@
                                 chartInstance.destroy();
                                 chartInstance = null; // 🧹 Clear instance reference
                             }
-
+                            
                             chartInstance = new Chart(ctx, {
                                 type: "bar",
                                 data: {
                                     labels: Object.keys(data),
                                     datasets: [{
                                         label: "Electricity",
-                                        data: Object.values(data) ,
+                                        data: Object.values(data),
                                         borderColor: "#975ae100",
                                         backgroundColor: [
                                             '#003f5c',
                                             '#374c80',
                                             '#58508d',
-                                            '#7a5195',                    
+                                            '#7a5195',
                                             '#bc5090',
                                             '#ff6361',
                                             '#ffa600'
@@ -184,7 +181,7 @@
                 <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
-                        <form action = '../modules/reportPDF.php' method= 'POST'>
+                        <form action='../modules/reportPDF.php' method='POST'>
                             <div id="SummaryContent">Number of Connections: <?php echo json_encode(($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
                             <div id="SummaryContent">Electricity Used (kWh) <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?></div>
                             <div id="SummaryContent">Gas Used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?></div>
@@ -195,8 +192,8 @@
                             <input type="hidden" id = 'ImageURLForPDF' name = 'ImageURLForPDF'>
                             <div id="SummaryContent">
                                 <button type="Submit" class="fancy-button" style="float: right">Print Summary</button>
-                            </div> 
-                        </form>                                          
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -208,7 +205,7 @@
                     <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
                 </div>
             </div>
-
+            
         </div>
     </div>
     
