@@ -13,8 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Email']) {
 
     try {
         // Server settings
-        $mail->isSMTP();                                        // Send using SMTP
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                  // Enable verbose debug output                                                  
+        $mail->isSMTP();                                        // Send using SMTP                                                                  
         $mail->Host       = 'smtp.gmail.com';                   // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                               // Enable SMTP authentication
         $mail->Username   = 'smartenergydashboard@gmail.com';   // SMTP username
@@ -30,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Email']) {
         $mail->Body    = 'An Account has been made for you';
         
         $mail->send();
-        echo $mail->Username;
-        echo $mail->Password;
-        
+  
+        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php') </script>";
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+   
 }
 ?>
