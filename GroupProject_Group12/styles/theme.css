@@ -182,7 +182,7 @@
 .cosmic-theme {
     --bg-dark: radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
     --bg-light: linear-gradient(to bottom right, #f2d6ff, #ffeaff);
-    --card-dark: linear-gradient(to bottom right, #2c0050bb, #5a0099bb);
+    --card-dark: linear-gradient(to bottom right, #2c005080, #5a009980);
     --card-light: linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
     --text-dark: #fef;
     --text-light: #206;
@@ -211,10 +211,12 @@
     opacity: 0;
     animation: twinkle 4s infinite ease-in-out;
 }
-.cosmic-theme:not(.light-mode) .star {
+.cosmic-theme:not(.light-mode) .star,
+.cosmic-theme:not(.light-mode) .shooting-star {
     background-color: #fff; /* ⚪ White in dark mode */
 }
-.cosmic-theme.light-mode .star {
+.cosmic-theme.light-mode .star,
+.cosmic-theme.light-mode .shooting-star {
     background-color: #cb0; /* 🟡 Gold in light mode */
 }
 /* ✨ Twinkling effect */
@@ -222,14 +224,29 @@
     0%, 100% { opacity: 0; }
     50% { opacity: 1; }
 }
+
 /* 🌠 Shooting stars */
 .shooting-star {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     opacity: 0;
-    animation: twinkle 4s infinite ease-in-out;
+    transform: rotate(-45deg);
+}
+@keyframes shooting {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50vw, 50vh) scale(2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-80vw, 80vh) scale(1);
+    }
 }
 
 /* 💰 Ridiculously Bling */

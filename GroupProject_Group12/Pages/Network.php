@@ -11,7 +11,7 @@
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
-    require('../Database_Php_Interactions/Database_Utilities.php');
+    require_once('../Database_Php_Interactions/Database_Utilities.php');
     include('../Database_Php_Interactions/CSVData.php'); ?>
     
     <!-- 🌐 Network page content -->
@@ -31,11 +31,6 @@
             
             }?></h2>
         </div>
-        
-
-
-     
-
 
         <div class ="row">
             
@@ -141,30 +136,26 @@
                                         beginAtZero: true,
                                         ticks: {
                                             color: 'white' // 📏 Y-axis text color
+
                                         }
                                     },
-                                    x: {
-                                        ticks: {
-                                            color: 'white' // 📏 X-axis text color
-                                        }
-                                    }
-                                },
-                                plugins: {
-                                    legend: {
-                                        labels: {
-                                            color: 'white' // 🏷️ Legend text color
+                                    plugins: {
+                                        legend: {
+                                            labels: {
+                                                color: 'white' // 🏷️ Legend text color
+                                            }
                                         }
                                     }
                                 }
+                            });
+                            
+                            function filterData() {
+                                const selectedCity = document.getElementById('cityFilter').value;
+                                cityChart.data.datasets[0].data = cityData[selectedCity];
+                                cityChart.update();
                             }
-                        });
-
-                        function filterData() {
-                            const selectedCity = document.getElementById('cityFilter').value;
-                            cityChart.data.datasets[0].data = data[selectedCity];
-                            cityChart.update();
-                        }
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
             
@@ -185,7 +176,7 @@
             
             <div class="col-12 col-md-5">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Filter Options:</div>
+                    <div class="card-header">Filter options:</div>
                     <div class="card-body">
                         
                         <div id="SummaryContent" class="themed-dropdown">Filter report by city: 

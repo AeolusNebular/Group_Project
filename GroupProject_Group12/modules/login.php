@@ -9,9 +9,9 @@
             
             <!-- 📝 Login form -->
             <div class="modal-body">
-                <form action="../Database_Php_Interactions/Login_Php_Code.php" method="POST"> 
+                <form action="../Database_Php_Interactions/Login_Php_Code.php" method="POST">
                     <div class="mb-3">
-                        <label for="Login_Email" class="form-label">Email Address:</label>
+                        <label for="Login_Email" class="form-label">Email address:</label>
                         <input type="email" class="form-control" id="Login_Email" name="Login_Email" placeholder="Example@gmail.com" required>
                     </div>
                     <div class="mb-3">
@@ -25,7 +25,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="fancy-button">Login</button>
                     </div>
-                </form>  
+                </form>
             </div>
         </div>
     </div>

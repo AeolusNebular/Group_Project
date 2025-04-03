@@ -11,7 +11,7 @@
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
-    require('../Database_Php_Interactions/Database_Utilities.php');
+    require_once('../Database_Php_Interactions/Database_Utilities.php');
     include('../Database_Php_Interactions/CSVData.php'); 
     debug_to_console($UserID); ?>
     
@@ -48,21 +48,38 @@
                         <!-- 👤 User summary -->
                         <div>
                             <hr>
-                            <p> <b>Phone Number:</b> <?php echo isset($UserPhoneNo) ? $UserPhoneNo : '####-###-###';?></p>
+                            <p><b>Phone number:</b> 
+                                <?php 
+                                    function formatPhoneNumber($number) {
+                                        // Check if number has at least 10 digits
+                                        if (strlen($number) === 10) {
+                                            return preg_replace('/(\d{4})(\d{6})/', '$1 $2', $number);
+                                        } elseif (strlen($number) === 11) {
+                                            return preg_replace('/(\d{5})(\d{6})/', '$1 $2', $number);
+                                        } elseif (strlen($number) === 12) {
+                                            return preg_replace('/(\d{2})(\d{4})(\d{6})/', '+$1 $2 $3', $number);
+                                        } else {
+                                            return $number; // Return unformatted if it doesn't fit
+                                        }
+                                    }
+                                    
+                                    echo isset($UserPhoneNo) ? formatPhoneNumber($UserPhoneNo) : '+44 #### ######';
+                                ?>
+                            </p>
                             <p> <b>Address:</b> <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?></p>
                             <p> <b>Role:</b> 
                             <?php 
                                 switch ($RoleID) {
                                     case 3 : {
-                                        echo 'City Council For ' . $CityFilter;
+                                        echo 'City council user for ' . $CityFilter;
                                         break;
                                     }
                                     case 2 : {
-                                        echo 'Network User For ' . $RoleNetwork;
+                                        echo 'Network user for ' . $RoleNetwork;
                                         break;
                                     }
                                     case 1 : {
-                                        echo 'Admin User';
+                                        echo 'Admin user';
                                         break;
                                     }
                                 } 
@@ -71,7 +88,7 @@
                             <hr>
                         </div>
                         
-                        <!-- 🏃‍♂️ Action buttons -->
+                        <!-- 🏃‍♂️ Account action buttons -->
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-danger">🗑️ Delete Account</button>
                             <button class="btn btn-warning">🔄 Reset Password</button>
@@ -132,10 +149,11 @@
                     <div class="card-body">
                         <ul>
                             <li>
-                                <!-- 🌙 Manual dark/light mode controls (updates autmocatically) -->
+                                <!-- 🌙 Manual dark/light mode controls -->
                                 <label for="darkMode">Dark/light mode:</label>
                                 <div class="themed-dropdown">
                                     <select id="darkMode" class="form-select">
+                                        <option value="auto">Auto</option>
                                         <option value="dark">Dark</option>
                                         <option value="light">Light</option>
                                     </select>
