@@ -7,13 +7,13 @@
     require ('../PHPMailer/src/PHPMailer.php');
     require ('../PHPMailer/src/SMTP.php');
     
-    if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['SMTPEmail']) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Email']) {
         $mail = new PHPMailer();
         
         try {
             // ⚙️ Server settings
-            $mail->isSMTP();                                        // 📨 Send using SMTP
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                  // Enable verbose debug output
+            $mail->isSMTP();                                        // Send using SMTP
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                  // Enable verbose debug output                                                  
             $mail->Host       = 'smtp.gmail.com';                   // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                               // Enable SMTP authentication
             $mail->Username   = 'smartenergydashboard@gmail.com';   // SMTP username
@@ -21,12 +21,12 @@
             $mail->SMTPSecure = 'tls';                              // Enable implicit TLS encryption
             $mail->Port       = 587;
             
-            $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard™');
-            $mail->addAddress($_GET['SMTPEmail']);                  // Name is optional
+            $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard');
+            $mail->addAddress($_POST['Email']);                     // Name is optional
             
             $mail->isHTML(true);                                    // Set email format to HTML
-            $mail->Subject = 'Account Created';
-            $mail->Body    = 'An account has been made for you with Smart Energy Dashboard™';
+            $mail->Subject    = 'Account Created';
+            $mail->Body       = 'An account has been made for you with Smart Energy Dashboard™';
             
             $mail->send();
             echo $mail->Username;

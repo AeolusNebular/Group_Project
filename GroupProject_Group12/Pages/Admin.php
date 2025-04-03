@@ -29,23 +29,6 @@
         </div>
         
         <div class="row" >
-            <!-- 📊 Big chart panel (fat) -->
-            <div class="col-12 col-md-5">
-                <div class="card">
-                    <div class="card-header">👤 User Creation</div>
-                    <div class="card-body">
-                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
-                            Create User
-                        </button>
-                        
-                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'GET'>
-                            <input type="text" id= 'SMTPEmail' name='SMTPEmail'>
-                            <button type="submit" class="fancy-button">Send Email</button>    
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
             <div class="col-12 col-md-7">
                 <div class="card">
                     <div class="card-header">🌐 Network Users</div>
@@ -76,33 +59,33 @@
                         
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
                         
-                            <?php 
-                                // ✅ Check if requested method has been run (eg form submit)
-                                if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                                    
-                                    // 📅 Check if year has been selected, else assigns default (2016)
-                                    $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-                                    // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
-                                    $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
-                                    
-                                    // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
-                                    $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
-                                    $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
-                                    
-                                    // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
-                                    foreach ($Networks as $Network) {
-                                        // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
-                                        $Values = CSVData($Type,$Year,$Network);
-                                        
-                                        // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
-                                        foreach ($Values as $Value) {
-                                            // 🔄 Assigns annual consume to the selected network in loop
-                                            $NetworkConsumeTotals[$Network] += $Value[0];
-                                        }
-                                    }
+                        <?php
+                            // ✅ Check if requested method has been run (eg form submit)
+                            if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 
+                                // 📅 Check if year has been selected, else assigns default (2016)
+                                $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+                                // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
+                                $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
+                                
+                                // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
+                                $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
+                                $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
+                                
+                                // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
+                                foreach ($Networks as $Network) {
+                                    // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
+                                    $Values = CSVData($Type,$Year,$Network);
+                                    
+                                    // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
+                                    foreach ($Values as $Value) {
+                                        // 🔄 Assigns annual consume to the selected network in loop
+                                        $NetworkConsumeTotals[$Network] += $Value[0];
+                                    }
                                 }
-                            ?>
+                            
+                            }
+                        ?>
                         
                         <script>
                             // 📡 Grabs the network consume from PHP code above using JSON encode function and assigns to data
@@ -161,8 +144,8 @@
                                             title: {
                                                 display: true,
                                                 text: "Networks Annual Usage",
-                                                color: textColor, 
-                                                font: font 
+                                                color: textColor,
+                                                font: font
                                             }
                                         },
                                     
@@ -170,6 +153,26 @@
                                 });
                             }
                         </script>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 📊 Big chart panel (fat) -->
+            <div class="col-12 col-md-5">
+                <div class="card">
+                    <div class="card-header">👤 User Creation</div>
+                    <div class="card-body">
+                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
+                            Create User
+                        </button>
+                        
+                        <!--
+                        // Email test button
+                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
+                            <input type="text" id= 'Email' name='Email'>
+                            <button type="submit" class="fancy-button">Send Email</button>
+                        </form>
+                        -->
                     </div>
                 </div>
             </div>
@@ -185,7 +188,7 @@
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminNetwork">Select network:</label> <br>
                                 <select class="form-select" name="AdminNetwork">
-                                    <option value="coteq"> Coteq </option>      
+                                    <option value="coteq"> Coteq </option>
                                     <option value="westland-infra"> Westlandia </option>
                                     <option value="enexis"> Enexis </option>
                                     <option value="stedin"> Stedin </option>
@@ -206,7 +209,7 @@
                                 <label for="Admin_City_Type">Select Type:</label> <br>
                                 <select class="form-select" name="Admin_City_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>                                      
+                                    <option value="gas"> Gas </option>
                                 </select>
                             </div>
                             <button type="Submit" class="fancy-button" style='float: right'>
@@ -217,9 +220,9 @@
                         <canvas id="AdminCityCouncilCanvas"></canvas>
                         
                         <?php
-                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';                         
+                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
                             $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'electricity';
-                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';                             
+                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
                             $CityValues = [];
                             
                             $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
@@ -300,45 +303,46 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-7">
                 <div class="card" style="height: 90%">
-                    <div class="card-header">Report Details</div>
+                    <div class="card-header">Additional Information</div>
                     <div class="card-body">
-                        <div style="float: left">
-                            <div class="SummaryContent">Filter options:</div>
-                        </div>
-                        <table>
-                               <?php 
-                                if ($_SERVER['REQUEST_METHOD'] == "GET" && (isset($_GET['AdminCityFilter']))) {
-                                    $Type = 'electricity';
-                                    $Year = '2016';
-                                    $Network = 'coteq';
-                                    
-                                    $Values = CSVData($Type,$Year,$Network);
-                                    
-                                    if (isset($Values) && (!$Values == [])){
-                                        echo 
-                                        '<tr>
-                                        <th>city</th>
-                                        <th>annual Cost</th>
-                                        <th>Type of connection</th>
-                                        <th>Num of connection</th>
-                                        </tr>';
-                                        
-                                        foreach ($Values as $Key => $City) {
-                                            echo '<tr>
-                                                  <td> ' . $Key . '</td>';
-                                            foreach ($City as $y) {
-                                                       
-                                               echo '<td>' . $y .'</td>';
-                                            }
-                                            echo '</tr>';
-                                        }
-                                    }
-                                }
+                        <div id="SummaryContent">Number of Connections: </div>
+                        <div id="SummaryContent">Amount of Electricity Used (kWh): </div>
+                        <div id="SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent">Delivery Percentage: </div>
+                        <div id="SummaryContent">Types of Connections: </div>
+                        <div id="SummaryContent">Types Connections Percentage: </div>
+                        <div id="SummaryContent"></div>
+                    </div>
+                </div> 
+            </div>
+            
+            <div class="col-12 col-md-5">
+                <div class="card" style="height: 90%">
+                    <div class="card-header">Filter options:</div>
+                    <div class="card-body">
+                        
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
+                            <select id="ReportAdminFilter">
+                                <option value="all">All</option>
+                                <?php
+                                    include('../Database_Php_Interactions/CitySelect.php');
                                 ?>
-                                
-                        </table>
+                            </select>
+                        </div>
+                        
+                        <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
+                            <select id="Gas_Electricity_Both">
+                                <option value="Both">All</option>
+                                <option value="Gas">Gas</option>
+                                <option value="Electricity">Electricity</option>
+                            </select>
+                        </div>
+                        
+                        <div id="SummaryContent">
+                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
             
             <!-- 📝 Create user form -->
             <div class="modal-body">
-                <form id="AdminPanelForm" action="../Database_Php_Interactions/Create_New_User.php" method="POST">
+                <form id="AdminPanelForm" method="POST">
                     <div id="AdminPanelFormContent">
                         <div id="AdminPanelFormContentInputs">
                             <label for="Email">Email address:</label><br>
@@ -66,11 +66,24 @@
                             }
                         ?>
                         <div id="AdminPanelAddUserBtn">
-                            <button type="submit" class="fancy-button" style="float: right">Add User</button> 
+                            <button type="button" onClick = 'submitForms()' class="fancy-button" style="float: right">Add User</button> 
                         </div>
                     </div>
                     
                 </form>
+                <script>
+                    function submitForms() {
+
+                    document.getElementById("AdminPanelForm").action = '"../Database_Php_Interactions/EmailSender.php"';
+                    document.getElementById("AdminPanelForm").submit();
+                
+             
+                    setTimeout(function() {
+                        document.getElementById("AdminPanelForm").action = "../Database_Php_Interactions/Create_New_User.php";
+                        document.getElementById("AdminPanelForm").submit();
+                    }, 1000); 
+                }
+            </script>
             </div>
         </div>
     </div>
