@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const darkModeSelect = document.getElementById("darkMode");
     const icon = document.getElementById("darkModeIcon");
     const defaultThemeMode = "purple-auto"; // 🟣 Default to purple theme, match device for mode
-
+    
     // 📨 Retrieve stored themeMode
     const storedThemeMode = sessionStorage.getItem("themeMode") || defaultThemeMode;
     let [storedTheme, storedMode] = storedThemeMode.split("-");
-
+    
     // 🌗 Determine actual mode if auto
     let resolvedMode = storedMode;
     if (storedMode === "auto") {
@@ -27,18 +27,18 @@ document.addEventListener("DOMContentLoaded", function () {
         location.reload();
         return; // 👋 Exit to prevent further execution
     }
-
+    
     // 🎨 Apply stored theme & mode
     applyTheme(storedTheme, resolvedMode);
-
+    
     // 🔽 Set dropdown correctly
     darkModeSelect.value = storedMode; // Ensure it reflects stored value
-
+    
     // 🎛️ Theme dropdown listener
     darkModeSelect.addEventListener("change", function (event) {
         updateDarkMode(event.target.value);
     });
-
+    
     // 🎧 Listen for system theme changes (if auto mode is selected)
     window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
         if (sessionStorage.getItem("themeMode")?.endsWith("auto")) {
@@ -60,11 +60,13 @@ function applyTheme(newTheme, newMode) {
     document.body.classList.forEach(cls => {
         if (cls.endsWith("-theme")) document.body.classList.remove(cls);
     });
+    
+    // ✅ Apply the new theme
     document.body.classList.add(`${newTheme}-theme`);
-
+    
     // 🌙 Apply light/dark mode correctly
     document.body.classList.toggle("light-mode", newMode === "light");
-
+    
     // ⚙️ Update icon
     const icon = document.getElementById("darkModeIcon");
     if (icon) {
@@ -84,7 +86,7 @@ function updateDarkMode(mode) {
     let resolvedMode = mode === "auto"
         ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
         : mode;
-
+        
     const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     applyTheme(currentTheme, resolvedMode);
 }
@@ -93,21 +95,21 @@ function updateDarkMode(mode) {
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
-    const isDarkMode = !body.classList.contains("light-mode");
+    const isCurrentlyDarkMode = !body.classList.contains("light-mode");
     
     // 🌙 Toggle mode
-    body.classList.toggle("light-mode", isDarkMode);
+    const newMode = isCurrentlyDarkMode ? "light" : "dark";
+    body.classList.toggle("light-mode", newMode === "light");
     
     // 💾 Update mode in sessionStorage using the existing theme
-    const currentTheme = document.body.classList.value.match(/\b(\w+)-theme\b/)?.[1] || "purple";
-    const newMode = isDarkMode ? "light" : "dark";
+    const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     sessionStorage.setItem("themeMode", `${currentTheme}-${newMode}`);
     
     // ⚙️ Update icon
     if (icon) {
-        icon.innerHTML = isDarkMode ? sunIcon() : moonIcon();
+        icon.innerHTML = newMode === "light" ? sunIcon() : moonIcon();
     }
-
+    
     // 📊 Redraw charts
     requestAnimationFrame(drawChart);
 }
@@ -187,7 +189,7 @@ function startMatrix() {
             drops[i]++;
         }
     }
-
+    
     // 💾 Store interval globally so it can be cleared (50ms)
     matrixInterval = setInterval(drawMatrix, 50);
     
@@ -309,7 +311,7 @@ function createTumbleweed() {
     
     // Append to body
     document.body.appendChild(tumbleweed);
-
+    
     // ⏳ Remove after 12 seconds to prevent buildup
     setTimeout(() => {
         if (document.body.contains(tumbleweed)) {
