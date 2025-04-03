@@ -103,12 +103,12 @@
                         ?>
 
                         <script> 
-                           var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
-                         
-                           document.addEventListener("DOMContentLoaded", function () {
-                                drawBarGraph();
-                                window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
-                            });
+                        var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+                        
+                        document.addEventListener("DOMContentLoaded", function () {
+                            drawBarGraph();
+                            window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
+                        });
 
                         function drawBarGraph() {
                             let font = { family: "Space Grotesk"};
@@ -175,14 +175,14 @@
                 <div class="card">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
-                        <form action = '../modules/reportPDF.php' method= 'POST'>
+                        <form action='../modules/reportPDF.php' method='POST'>
                             <div id="SummaryContent">Number of Connections: <?php echo json_encode(($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
                             <div id="SummaryContent">Electricity Used (kWh) <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?></div>
                             <div id="SummaryContent">Gas Used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?></div>
                             <div id="SummaryContent">Delivery Percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?> </div>
                             <div id="SummaryContent">Connections Types: </div>
                             <div id="SummaryContent">Connection Type Percentages: </div>
-                            <input type="hidden" id = 'CityValuesForPDF' name = 'CityValuesForPDF' value =" <?php  echo htmlentities(json_encode($CityTypeValues));  ?>">
+                            <input type="hidden" id = 'CityValuesForPDF' name='CityValuesForPDF' value ="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <div id="SummaryContent">
                                 <button type="Submit" class="fancy-button" style="float: right">Print Summary</button>
                             </div> 
