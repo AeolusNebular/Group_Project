@@ -5,9 +5,13 @@ session_start();
 
 if (!isset($_SESSION['UserID'])) {
     echo'
+        <!-- 🔲 Overlay -->
+        <div class="overlay"></div>
+
+        <!-- ⚠️ Alert Box -->
         <div class="alert alert-info" role="alert">
-        Please Login to view this page!
-        </div>';    
+            ⚠️ Please login to view this page!
+        </div>';
 } else {
     if (isset($_SESSION['RoleID'])) {
         $RoleID = $_SESSION['RoleID'];
@@ -35,7 +39,7 @@ if (!isset($_SESSION['UserID'])) {
     if ($RoleID == '2') {
         $RoleNetwork = $_SESSION['Network_Name'];
     } elseif ($RoleID == '3') {
-        $CityFilter = $_SESSION['City_Name'];  
+        $CityFilter = $_SESSION['City_Name'];
     }
 }
 
