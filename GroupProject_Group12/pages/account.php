@@ -48,7 +48,24 @@
                         <!-- 👤 User summary -->
                         <div>
                             <hr>
-                            <p> <b>Phone Number:</b> <?php echo isset($UserPhoneNo) ? $UserPhoneNo : '####-###-###';?></p>
+                            <p><b>Phone number:</b> 
+                                <?php 
+                                    function formatPhoneNumber($number) {
+                                        // Check if number has at least 10 digits
+                                        if (strlen($number) === 10) {
+                                            return preg_replace('/(\d{4})(\d{6})/', '$1 $2', $number);
+                                        } elseif (strlen($number) === 11) {
+                                            return preg_replace('/(\d{5})(\d{6})/', '$1 $2', $number);
+                                        } elseif (strlen($number) === 12) {
+                                            return preg_replace('/(\d{2})(\d{4})(\d{6})/', '+$1 $2 $3', $number);
+                                        } else {
+                                            return $number; // Return unformatted if it doesn't fit
+                                        }
+                                    }
+                                    
+                                    echo isset($UserPhoneNo) ? formatPhoneNumber($UserPhoneNo) : '+44 #### ######';
+                                ?>
+                            </p>
                             <p> <b>Address:</b> <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?></p>
                             <p> <b>Role:</b> 
                             <?php 
