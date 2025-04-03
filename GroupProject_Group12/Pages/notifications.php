@@ -23,10 +23,10 @@
         
         <div class="notification-list">
             <?php
-                // Connect to the database
+                // 🔗 Connect to the database
                 $conn = Open_Database();
                 
-                // Fetch notifications
+                // 📨 Fetch notifications
                 $notifStmt = $conn->prepare("SELECT NotifID, Notification FROM Notifications");
                 $notifResult = $notifStmt->execute();
 
@@ -34,7 +34,7 @@
                 while ($notification = $notifResult->fetchArray(SQLITE3_ASSOC)) {
                     echo '<div class="notification-item">';
                     echo '<p class="notification-text">' . htmlspecialchars($notification['Notification']) . '</p>';
-                    // delete
+                    // 🗑️ Delete
                     echo '<form method="POST" action="" style="display:inline;">
                             <input type="hidden" name="NotifID" value="' . $notification['NotifID'] . '" />
                             <button type="submit" name="deleteNotification" class="btn btn-danger delete-button">Delete</button>
@@ -48,11 +48,11 @@
 </body>
 
 <?php
-//  Delete notification
+// 🗑️ Delete notification
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
     $notificationId = $_POST['NotifID'];
     
-    // Delete notification from database
+    // 🗑️ Delete notification from database
     $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotifID");
     $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
     $deleteStmt->execute();

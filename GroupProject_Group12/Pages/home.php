@@ -40,7 +40,7 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'> 
-                                <label for="Dashboard_Networks">Select Network:</label> <br>
+                                <label for="Dashboard_Networks">Select network:</label> <br>
                                 <select class="form-select" name="Dashboard_Networks" >
                                     <option value="coteq"> Coteq </option>
                                     <option value="enexis"> Enexis </option>

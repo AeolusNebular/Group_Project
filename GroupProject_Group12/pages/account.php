@@ -54,7 +54,7 @@
                                 <b>Phone number:</b>
                                 <?php
                                     function formatPhoneNumber($number) {
-                                        // Check if number has at least 10 digits
+                                        // ✅ Check if number has at least 10 digits
                                         if (strlen($number) === 10) {
                                             return preg_replace('/(\d{4})(\d{6})/', '$1 $2', $number);
                                         } elseif (strlen($number) === 11) {
