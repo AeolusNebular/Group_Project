@@ -44,7 +44,7 @@
                                 </div>';
                             }
                             ?>
-                            <div class="themed-dropdown" style='float: right'>
+                            <div class="themed-dropdown" style='float: left'>
                                 <label for="CityYears">Select network:</label> <br>
                                 <select class="form-select" name="CityYears" >
                                     <option value="2016"> 2016 </option>      
@@ -55,7 +55,7 @@
                                 </select>
                             </div> 
 
-                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px'>
+                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float : right'>
                                 Apply Filter
                             </button>
                         </form>
