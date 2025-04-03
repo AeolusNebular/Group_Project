@@ -54,6 +54,7 @@ function applyTheme(newTheme, newMode) {
     // 🛑 Stop theme-specific effects before applying new theme
     stopMatrix();
     stopTumbleweeds();
+    stopStars();
     
     // 🧹 Clear previous theme
     document.body.classList.forEach(cls => {
@@ -80,12 +81,11 @@ function applyTheme(newTheme, newMode) {
 
 // 🌙 Update dark/light mode from dropdown
 function updateDarkMode(mode) {
-    let resolvedMode = mode;
-    if (mode === "auto") {
-        resolvedMode = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-    }
-    
-    const currentTheme = document.body.classList.value.match(/\b(\w+)-theme\b/)?.[1] || "purple";
+    let resolvedMode = mode === "auto"
+        ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
+        : mode;
+
+    const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     applyTheme(currentTheme, resolvedMode);
 }
 
@@ -159,7 +159,7 @@ function startMatrix() {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
+    
     // 🔡 Characters used for the falling matrix effect
     const characters = "AÁBCÇDEÉFGHIÍJKLMNÑOÓPQRSTUÚÜVWXYZaábcçdeéfghiíjklmnñoópqrstuúüvwxyz1234567890¡!@#$%^&*()_+=-~[]{}|;:'\",./<>¿?あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほみむめもやゆよらりるれろわをん";
     
@@ -167,12 +167,12 @@ function startMatrix() {
     const fontSize = 18;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = Array(columns).fill(1);
-
+    
     // 🖼️ Function to draw matrix effect
     function drawMatrix() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+        
         ctx.fillStyle = "#0f0";
         ctx.font = fontSize + "px 'Courier New'";
         
@@ -190,12 +190,12 @@ function startMatrix() {
 
     // 💾 Store interval globally so it can be cleared (50ms)
     matrixInterval = setInterval(drawMatrix, 50);
-
+    
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-
+    
     // 🛑 Stop if limitAnimations is enabled
     if (window.limitAnimationsEnabled) {
         stopMatrix();
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // ✨ Total number of stars on the screen
     const numberOfStars = 300;
-
+    
     for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
@@ -236,42 +236,62 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 🌠 Shooting stars for cosmic theme!!
+let shootingStarsInterval; // 🕒 Store interval reference
+
 document.addEventListener("DOMContentLoaded", function () {
     const starContainer = document.getElementById("star-container");
-
+    
     function createShootingStar() {
         const shootingStar = document.createElement("div");
         shootingStar.classList.add("shooting-star");
-
+        
         // 🌍 Random starting position (top-right corner)
         const startX = Math.random() * window.innerWidth * 0.6 + window.innerWidth * 0.4;
         const startY = Math.random() * window.innerHeight * 0.4;
         
         shootingStar.style.left = `${startX}px`;
         shootingStar.style.top = `${startY}px`;
-
+        
         // 🌠 Assign animation
         shootingStar.style.animation = `shooting 1s linear forwards`;
-
+        
         starContainer.appendChild(shootingStar);
-
+        
         // 🔄 Remove after animation to prevent utter computer destruction :)
         setTimeout(() => {
             shootingStar.remove();
         }, 1000);
     }
-
+    
     // ⏳ Generate shooting star every 0.5-1.5 seconds
     function startShootingStars() {
         setInterval(() => {
-            if (Math.random() < 0.3) { // 30% chance of creation each time
+            if (Math.random() < 0.3) { // 🎲 30% chance of creation each time
                 createShootingStar();
             }
-        }, Math.random() * 1000 + 500); // 0.5s - 1.5s random interval
+        }, Math.random() * 1000 + 500); // ⏱️ 0.5s - 1.5s random interval
     }
-
+    
+    // 🌠 Start shooting stars
     startShootingStars();
 });
+
+function stopStars() {
+    console.log("🛑 Stopping stars...");
+    
+    // ⛔ Stop shooting stars by clearing the interval
+    if (shootingStarsInterval) {
+        clearInterval(shootingStarsInterval);
+        shootingStarsInterval = null;
+    }
+    
+    // ⛔ Remove all stars from the DOM
+    const starContainer = document.getElementById('star-container');
+    if (starContainer) {
+        starContainer.innerHTML = ''; // Clear all stars
+        starContainer.remove(); // Remove container itself
+    }
+}
 
 // 🍂 Tumbleweed for desert theme
 let tumbleweedInterval = null;
