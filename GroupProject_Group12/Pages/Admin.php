@@ -166,10 +166,11 @@
                             Create User
                         </button>
 
+                      <!--  Email Tester
                         <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
                             <input type="text" id= 'Email' name='Email'>
                             <button type="submit" class="fancy-button">Send Email</button>    
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
