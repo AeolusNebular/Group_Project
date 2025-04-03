@@ -33,7 +33,7 @@
         </div>
         
         <div class ="row">
-            <div class="col-12 col-md-8">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header">City Chart for Network : <?php 
                     if ($RoleID == 2) {
