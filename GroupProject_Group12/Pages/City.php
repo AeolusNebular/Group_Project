@@ -32,21 +32,21 @@
                         <!-- 🧭 Network selection -->
                         <form action="City.php" method='GET'>
                             <?php if ($RoleID != 2) {
-                                echo '<div class="themed-dropdown" style="float: left">
-                                    <label for="CityNetworks">Select network:</label> <br>
-                                    <select class="form-select" name="CityNetworks">
-                                        <option value="coteq"> Coteq </option>      
-                                        <option value="westland-infra"> Westlandia </option>
-                                        <option value="enexis"> Enexis </option>
-                                        <option value="stedin"> Stedin </option>
-                                        <option value="liander"> Liander </option>
+                                echo "<div class='themed-dropdown' style='float: left'>
+                                    <label for='CityNetworks'>Select network:</label> <br>
+                                    <select class='form-select' name='CityNetworks' >
+                                        <option value='coteq'> Coteq </option>      
+                                        <option value='westland-infra'> Westlandia </option>
+                                        <option value='enexis'> Enexis </option>
+                                        <option value='stedin'> Stedin </option>
+                                        <option value='liander'> Liander </option>
                                     </select>
-                                </div>';
+                                </div>";
                             }
                             ?>
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="CityYears">Select network:</label> <br>
-                                <select class="form-select" name="CityYears" >
+                                <select class="form-select" name="CityYears">
                                     <option value="2016"> 2016 </option>      
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
@@ -54,7 +54,6 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div> 
-
                             <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float : right'>
                                 Apply Filter
                             </button>
@@ -152,6 +151,7 @@
                                         easing: 'easeOutQuad',
                                         onComplete : function(){    
                                             URI = chartInstance.toBase64Image('image/jpeg',1);
+
                                             document.getElementById('ImageURLForPDF').value = URI;
                                             console.log(URI);
                                         }

@@ -246,10 +246,5 @@
         </div>
     </div>
     
-    <!-- Report button -->
-    <div>
-        <a href="ReportPDF.php" target="_blank">Generate PDF</a>
-    </div>
-    
 </body>
 </html>

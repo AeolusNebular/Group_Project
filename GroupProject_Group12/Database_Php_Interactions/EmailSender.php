@@ -8,7 +8,7 @@ require ('../PHPMailer/src/Exception.php');
 require ('../PHPMailer/src/PHPMailer.php');
 require ('../PHPMailer/src/SMTP.php');
 
- if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['SMTPEmail']) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['Email']) {
     $mail = new PHPMailer();
 
     try {
@@ -23,7 +23,7 @@ require ('../PHPMailer/src/SMTP.php');
         $mail->Port       = 587;
         
         $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard');
-        $mail->addAddress($_GET['SMTPEmail']);                  // Name is optional
+        $mail->addAddress($_POST['Email']);                  // Name is optional
         
         $mail->isHTML(true);                                    // Set email format to HTML
         $mail->Subject = 'New Account Creation Notification';

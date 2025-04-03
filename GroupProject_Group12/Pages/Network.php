@@ -175,7 +175,7 @@
                         <div id="SummaryContent">Delivery Percentage: </div>
                         <div id="SummaryContent">Types of Connections: </div>
                         <div id="SummaryContent">Types Connections Percentage: </div>
-                        <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                        <div id="SummaryContent"></div>
                     </div>
                 </div> 
             </div>

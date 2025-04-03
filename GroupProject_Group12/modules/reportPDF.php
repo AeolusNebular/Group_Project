@@ -49,7 +49,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $pdf->Ln(25);
     $pdf->SetFont('Arial','',12);
     $header = array("City","Gas","Electricity");
+    $base64Image = $_POST['ImageURLForPDF'];
+
+    if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+        $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+        $imageType = $type[1];
+        $decodedImage = base64_decode($base64Image);
     
+        if ($decodedImage === false) {
+            die('Base64 decode failed');
+        } 
+
+        $imageFilePath = '../Images/Report.jpg';
+
+        file_put_contents($imageFilePath, $decodedImage);
+        
+    }
+    $pdf->Image($imageFilePath, 10, 10, 190);
+    $pdf->Ln(90);
     $pdf->BasicTable($header,json_decode($data));
     $pdf->Output();
 }
