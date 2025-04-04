@@ -30,15 +30,14 @@
                     case '2' : 
                         echo $RoleNetwork;
                         break;
-                    
                     }
                 ?>
             </h2>
         </div>
         
-        <div class ="row">
-            <div class="col-12">
-                <div class="card">
+        <div class ="row gx-1">
+            <div class="col-12 d-flex">
+                <div class="card h-90">
                     <div class="card-header">
                         City Chart for Network
                         <?php 
@@ -62,13 +61,13 @@
                             if ($RoleID != 2){
                                 echo 
                                     '<div class="themed-dropdown" style="float: left">
-                                        <label for="NetworkName">Select network:</label> <br>
+                                        <label for="NetworkName">Select network:</label><br>
                                         <select class="form-select" name="NetworkName">
-                                            <option value="coteq"> Coteq </option>
-                                            <option value="westland-infra"> Westlandia </option>
-                                            <option value="enexis"> Enexis </option>
-                                            <option value="stedin"> Stedin </option>
-                                            <option value="liander"> Liander </option>
+                                            <option value="coteq">Coteq</option>
+                                            <option value="westland-infra">Westlandia</option>
+                                            <option value="enexis">Enexis</option>
+                                            <option value="stedin">Stedin</option>
+                                            <option value="liander">Liander</option>
                                         </select>
                                     </div>';
                             }?>
@@ -86,12 +85,12 @@
                                 Apply Filter
                             </button>
                         </form>
-                        <canvas id="cityChart" width="400px" height="150px"></canvas>
+                        <canvas id="cityChart"></canvas>
                             <?php 
                                 if ($RoleID == 2) {
                                     $Network = $RoleNetwork;
                                 } else {
-                                    $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq' ;
+                                    $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq';
                                 }
                                 
                                 $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
@@ -167,8 +166,8 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-7">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-7 d-flex">
+                <div class="card h-90">
                     <div class="card-header">Additional Information</div>
                     <div class="card-body">
                         <div id="SummaryContent">Number of Connections: </div>
@@ -182,8 +181,8 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-5">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-5 d-flex">
+                <div class="card h-90">
                     <div class="card-header">Filter options:</div>
                     <div class="card-body">
                         
@@ -212,8 +211,8 @@
             </div>
             
             <!-- 🗺️ Heatmap -->
-            <div class="col-12 col-md-12">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-12 d-flex">
+                <div class="card h-90">
                     <div class="card-header">🗺️ Energy Use Heatmap</div>
                     <div id="heatmap" style="height: 500px;">
                         <!-- 🗺️ Heatmap container -->

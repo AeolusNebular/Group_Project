@@ -23,9 +23,9 @@
         </div>
         
         <!-- 📈 Network graph -->
-        <div class="row">
-            <div class="col-12 col-md-7">
-                <div class="card" >
+        <div class="row gx-1">
+            <div class="col-12 col-md-7 d-flex">
+                <div class="card h-90">
                     <div class="card-header">📊 Network Graph</div>
                     <div class="card-body">
                         
@@ -53,7 +53,7 @@
                                     <option value="2019"> 2019 </option>
                                     <option value="2020"> 2020 </option>
                                 </select>
-                            </div>                         
+                            </div>
                             <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right'>
                                 Apply Filter
                             </button>
@@ -61,7 +61,7 @@
                         
                         <canvas id="CityCanvas"></canvas>
                         
-                        <?php 
+                        <?php
                             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 if ($RoleID == 2){
                                     $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : $RoleNetwork;
@@ -98,87 +98,87 @@
                             }
                         ?>
                         
-                        <script> 
-                        var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
-                        
-                        document.addEventListener("DOMContentLoaded", function () {
-                            drawBarGraph();
-                            window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
-                        });
-                        
-                        function drawBarGraph() {
-                            let font = { family: "Space Grotesk"};
-                            let textColor = theme ? "#000" : "#fff";
+                        <script>
+                            var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
                             
-                            const canvas = document.getElementById("CityCanvas");
-                            
-                            // ✅ Ensure the canvas context is fresh
-                            if (!canvas) return; // 👋 Exit if canvas is missing
-                            const ctx = canvas.getContext("2d");
-                            
-                            // 💥 Destroy existing chart properly
-                            if (chartInstance) {
-                                chartInstance.destroy();
-                                chartInstance = null; // 🧹 Clear instance reference
-                            }
-                            
-                            chartInstance = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: Object.keys(data),
-                                    datasets: [{
-                                        label: "Electricity",
-                                        data: Object.values(data),
-                                        borderColor: "#975ae100",
-                                        backgroundColor: [
-                                            '#003f5c',
-                                            '#374c80',
-                                            '#58508d',
-                                            '#7a5195',
-                                            '#bc5090',
-                                            '#ff6361',
-                                            '#ffa600'
-                                        ],
-                                    
-                                    }]
-                                },
-                                options: {
-                                     animation: {
-                                        duration: 700,
-                                        easing: 'easeOutQuad',
-                                        onComplete : function(){    
-                                            URI = chartInstance.toBase64Image('image/jpeg',1);
-
-                                            document.getElementById('ImageURLForPDF').value = URI;
-                                            console.log(URI);
-                                        }
-                                    },               
-                                    responsive: true,
-                                    maintainAspectRatio: true,
-                                    plugins: {
-                                        legend: {
-                                            position: "bottom",
-                                            labels: { color: textColor, font: font }
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: "Networks Annual Usage",
-                                            color: textColor, 
-                                            font: font 
-                                        }
-                                    },
-                                
-                                }
+                            document.addEventListener("DOMContentLoaded", function () {
+                                drawBarGraph();
+                                window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
                             });
-                        }
+                            
+                            function drawBarGraph() {
+                                let font = { family: "Space Grotesk"};
+                                let textColor = theme ? "#000" : "#fff";
+                                
+                                const canvas = document.getElementById("CityCanvas");
+                                
+                                // ✅ Ensure the canvas context is fresh
+                                if (!canvas) return; // 👋 Exit if canvas is missing
+                                const ctx = canvas.getContext("2d");
+                                
+                                // 💥 Destroy existing chart properly
+                                if (chartInstance) {
+                                    chartInstance.destroy();
+                                    chartInstance = null; // 🧹 Clear instance reference
+                                }
+                                
+                                chartInstance = new Chart(ctx, {
+                                    type: "bar",
+                                    data: {
+                                        labels: Object.keys(data),
+                                        datasets: [{
+                                            label: "Electricity",
+                                            data: Object.values(data),
+                                            borderColor: "#975ae100",
+                                            backgroundColor: [
+                                                '#003f5c',
+                                                '#374c80',
+                                                '#58508d',
+                                                '#7a5195',
+                                                '#bc5090',
+                                                '#ff6361',
+                                                '#ffa600'
+                                            ],
+                                        
+                                        }]
+                                    },
+                                    options: {
+                                        animation: {
+                                            duration: 700,
+                                            easing: 'easeOutQuad',
+                                            onComplete : function(){
+                                                URI = chartInstance.toBase64Image('image/jpeg',1);
+                                                
+                                                document.getElementById('ImageURLForPDF').value = URI;
+                                                console.log(URI);
+                                            }
+                                        },
+                                        responsive: true,
+                                        maintainAspectRatio: true,
+                                        plugins: {
+                                            legend: {
+                                                position: "bottom",
+                                                labels: { color: textColor, font: font }
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: "Networks Annual Usage",
+                                                color: textColor,
+                                                font: font
+                                            }
+                                        },
+                                    
+                                    }
+                                });
+                            }
                         </script>
                     </div>
                 </div>
             </div>
             
             <!-- 📅 Annual summary -->
-            <div class="col-12 col-md-5">
-                <div class="card">
+            <div class="col-12 col-md-5 d-flex">
+                <div class="card h-90">
                     <div class="card-header">📅 Annual Summary</div>
                     <div class="card-body">
                         <form action='../modules/reportPDF.php' method='POST'>
@@ -199,8 +199,8 @@
             </div>
             
             <!-- 🗺️ Heatmap -->
-            <div class="col-12 col-md-12">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-12 d-flex">
+                <div class="card h-90">
                     <div class="card-header">🗺️ Energy Use Heatmap</div>
                     <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
                 </div>
