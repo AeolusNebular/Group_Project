@@ -19,21 +19,17 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>
-                Network - 
-                <?php 
-                    debug_to_console($RoleID);
-                    switch ($RoleID) {
-                    case '1' :
-                        echo 'Admin';
-                        break; 
-                    case '2' : 
-                        echo $RoleNetwork;
-                        break;
-                    
-                    }
-                ?>
-            </h2>
+            <h2><?php 
+            debug_to_console($RoleID);
+            switch ($RoleID) {
+            case '1' :
+                echo 'Network Page for : Admin User';
+                break; 
+            case '2' : 
+                echo 'Network Page for :' . $RoleNetwork;
+                break;
+            
+            }?></h2>
         </div>
         
         <div class ="row">

@@ -7,27 +7,27 @@ class PDF extends FPDF {
     // Table
     function BasicTable($header, $data)
     {
-        
+        $FirstHeader = true;
         $this->SetFont('Arial','B',12);
         // Header
         foreach($header as $col){
-            $this->Cell(35,7,$col,1);
+            if ($FirstHeader){
+                $this->Cell(80,7,$col,1);
+                $FirstHeader = false;
+            } else {
+                $this->Cell(35,7,$col,1);
+            }
         }
         $this->Ln(); // New line after print the header
         
         $this->SetFont('Arial','',12);
         // Data
-        foreach($data as $ConsumeType => $Cities)
+        foreach($data as $City => $CityConsumes)
         {   
-            $this->Cell(35, 7, 'Cities', 1);
-            foreach($Cities as $City =>  $data ) {                            
-                $this->Cell(35,7,$City,1);
-            }
-            $this->Ln();
-            $this->Cell(35, 7, $ConsumeType, 1);
-            foreach($Cities as $City =>  $data ) {
-                               
-                $this->Cell(35,7,$data,1);
+            
+            $this->Cell(80, 7, $City, 1);
+            foreach($CityConsumes as $ConsumeType =>  $Value ) {                            
+                $this->Cell(35,7,$Value,1);
             }
             $this->Ln();
         
@@ -40,7 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     if (isset($_POST['CityValuesForPDF'])) {
         $data = html_entity_decode($_POST['CityValuesForPDF']);
     }
-    
+    $DecodedData = json_decode($data);
+    $CityValuesinArray = [];
+    foreach ($DecodedData as $ConsumeType => $CityConsumes){
+        //['City','Electricity','Gas']
+        foreach ($CityConsumes as $City => $CityConsumeValue) {
+            if (!isset($CityValuesinArray[$City])) {
+                $CityValuesinArray[$City] = [];
+            } 
+            // EG [GOOR][ELECTRICITY,GAS][241241,321454]
+            $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue; 
+        }
+    }
+
     $pdf = new PDF(); // 📄 Create PDF object
     $pdf->SetFont('Arial','B',12);
     
@@ -67,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     }
     $pdf->Image($imageFilePath, 10, 10, 190);
     $pdf->Ln(90);
-    $pdf->BasicTable($header,json_decode($data));
+    $pdf->BasicTable($header,$CityValuesinArray);
     $pdf->Output();
 }
 ?>

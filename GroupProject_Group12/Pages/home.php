@@ -39,8 +39,9 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: left'> 
-                                <label for="Dashboard_Networks">Select network:</label> <br>
+                            <?php if ($RoleID != 2) {
+                            echo '<div class="themed-dropdown" style="float: left"> 
+                                <label for="Dashboard_Networks">Select Network:</label> <br>
                                 <select class="form-select" name="Dashboard_Networks" >
                                     <option value="coteq"> Coteq </option>
                                     <option value="enexis"> Enexis </option>
@@ -48,7 +49,9 @@
                                     <option value="stedin"> Stedin </option>
                                     <option value="liander"> Liander </option>
                                 </select>
-                            </div>
+                            </div>';
+                            }
+                            ?>
                             <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
                                 Apply Filter
                             </button>
