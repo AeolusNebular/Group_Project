@@ -20,18 +20,16 @@
         <!-- 📛 Title -->
         <div class="text-center">
             <h2>
-                Network - 
                 <?php 
-                    debug_to_console($RoleID);
-                    switch ($RoleID) {
-                    case '1' :
-                        echo 'Admin';
-                        break; 
-                    case '2' : 
-                        echo $RoleNetwork;
-                        break;
-                    }
-                ?>
+                debug_to_console($RoleID);
+                switch ($RoleID) {
+                case '1' :
+                    echo 'Network - Admin';
+                    break; 
+                case '2' : 
+                    echo 'Network - ' . $RoleNetwork;
+                    break;
+                }?>
             </h2>
         </div>
         
@@ -44,7 +42,7 @@
                             if ($RoleID == 2) {
                                 echo $RoleNetwork;
                             } else {
-                                echo ' - Admin User';
+                                echo ' - Admin';
                             }
                         ?>
                     </div>
@@ -57,20 +55,22 @@
                                     <option value="Electricity">Electricity</option>
                                 </select>
                             </div>
-                            <?php 
-                            if ($RoleID != 2){
-                                echo 
-                                    '<div class="themed-dropdown" style="float: left">
-                                        <label for="NetworkName">Select network:</label><br>
-                                        <select class="form-select" name="NetworkName">
-                                            <option value="coteq">Coteq</option>
-                                            <option value="westland-infra">Westlandia</option>
-                                            <option value="enexis">Enexis</option>
-                                            <option value="stedin">Stedin</option>
-                                            <option value="liander">Liander</option>
-                                        </select>
-                                    </div>';
-                            }?>
+                            <?php
+                                if ($RoleID != 2){
+                                    echo 
+                                        '<div class="themed-dropdown" style="float: left">
+                                            <label for="NetworkName">Select network:</label><br>
+                                            <select class="form-select" name="NetworkName">
+                                                <option value="coteq">Coteq</option>
+                                                <option value="westland-infra">Westlandia</option>
+                                                <option value="enexis">Enexis</option>
+                                                <option value="stedin">Stedin</option>
+                                                <option value="liander">Liander</option>
+                                            </select>
+                                        </div>'
+                                    ;
+                                }
+                            ?>
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="TypeFilter">Filter by year:</label>
                                 <select name='NetworkYearFilter'>

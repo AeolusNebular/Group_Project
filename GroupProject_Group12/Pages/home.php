@@ -39,16 +39,20 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="Dashboard_Networks">Select network:</label><br>
-                                <select class="form-select" name="Dashboard_Networks">
-                                    <option value="coteq"> Coteq </option>
-                                    <option value="enexis"> Enexis </option>
-                                    <option value="westland-infra"> Westland Infra </option>
-                                    <option value="stedin"> Stedin </option>
-                                    <option value="liander"> Liander </option>
-                                </select>
-                            </div>
+                            <?php
+                                if ($RoleID != 2) {
+                                echo '<div class="themed-dropdown" style="float: left">
+                                    <label for="Dashboard_Networks">Select Network:</label><br>
+                                    <select class="form-select" name="Dashboard_Networks">
+                                        <option value="coteq"> Coteq </option>
+                                        <option value="enexis"> Enexis </option>
+                                        <option value="westland-infra"> Westland Infra </option>
+                                        <option value="stedin"> Stedin </option>
+                                        <option value="liander"> Liander </option>
+                                    </select>
+                                </div>';
+                                }
+                            ?>
                             <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
                                 Apply Filter
                             </button>
@@ -68,8 +72,8 @@
                                     foreach ($TypesOfCSV as $TypeOfCSV) {
                                         // 👤 Checks user's RoleID to decide which information to show 
                                         if ($RoleID != '3' ) {
-                                            $CityConsumeTotals = []; 
-                                            if ($RoleID == 2) {  
+                                            $CityConsumeTotals = [];
+                                            if ($RoleID == 2) {
                                                 $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$RoleNetwork);
                                             } else {
                                                 $RoleNetworkCSVValues = CSVData($TypeOfCSV,$Year,$DashboardNetwork);
