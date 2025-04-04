@@ -10,10 +10,12 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php");
-    require_once('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php'); 
-    debug_to_console($UserID); ?>
+    <?php
+        include("../modules/navbar.php");
+        require_once('../Database_Php_Interactions/Database_Utilities.php');
+        include('../Database_Php_Interactions/CSVData.php');
+        debug_to_console($UserID);
+    ?>
     
     <!-- 👤 Account page content -->
     <div class="container mt-4">
@@ -28,7 +30,7 @@
             <div class="col-12 col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        📝 User Summary
+                        👤 User Summary
                     </div>
                     <div class="card-body" style="height:350px;">
                         <div class="d-flex align-items-center mb-3">
@@ -48,10 +50,11 @@
                         <!-- 👤 User summary -->
                         <div>
                             <hr>
-                            <p><b>Phone number:</b> 
-                                <?php 
+                            <p>
+                                <b>Phone number:</b>
+                                <?php
                                     function formatPhoneNumber($number) {
-                                        // Check if number has at least 10 digits
+                                        // ✅ Check if number has at least 10 digits
                                         if (strlen($number) === 10) {
                                             return preg_replace('/(\d{4})(\d{6})/', '$1 $2', $number);
                                         } elseif (strlen($number) === 11) {
@@ -66,24 +69,28 @@
                                     echo isset($UserPhoneNo) ? formatPhoneNumber($UserPhoneNo) : '+44 #### ######';
                                 ?>
                             </p>
-                            <p> <b>Address:</b> <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?></p>
-                            <p> <b>Role:</b> 
-                            <?php 
-                                switch ($RoleID) {
-                                    case 3 : {
-                                        echo 'City council user for ' . $CityFilter;
-                                        break;
-                                    }
-                                    case 2 : {
-                                        echo 'Network user for ' . $RoleNetwork;
-                                        break;
-                                    }
-                                    case 1 : {
-                                        echo 'Admin user';
-                                        break;
-                                    }
-                                } 
-                            ?>
+                            <p>
+                                <b>Address:</b>
+                                <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?>
+                            </p>
+                            <p>
+                                <b>Role:</b>
+                                <?php 
+                                    switch ($RoleID) {
+                                        case 3 : {
+                                            echo 'City council user for ' . $CityFilter;
+                                            break;
+                                        }
+                                        case 2 : {
+                                            echo 'Network user with ' . $RoleNetwork;
+                                            break;
+                                        }
+                                        case 1 : {
+                                            echo 'Admin user';
+                                            break;
+                                        }
+                                    } 
+                                ?>
                             </p>
                             <hr>
                         </div>
@@ -103,7 +110,7 @@
                     <div class="card-header">➕ Additional User Information</div>
                     <div class="card-body" style="height:400px;">
                         <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
-
+                            
                             <div class="mb-2">
                                 <label for="UserFName" class="form-label">First name:</label>
                                 <input type="text" id="UserFName" name="UserFName" class="form-control">
@@ -116,7 +123,7 @@
                                 <label for="UserPhoneNo" class="form-label">Phone number:</label>
                                 <input type="tel" id="UserPhoneNo" name="UserPhoneNo" class="form-control">
                             </div> 
-                            <input type="hidden" id='UserID' value=<?php $UserID ?>/>
+                            <input type="hidden" id='UserID' value=<?php $UserID ?>>
                             <div class="mb-2">
                                 <label for="UserHomeNo" class="form-label">Home address:</label>
                                 <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control">
@@ -145,9 +152,10 @@
             <div class="col-12 col-md-6">
                 <!-- 🎨 Customisability options -->
                 <div class="card">
-                    <div class="card-header">⚙️ Theme Settings</div>
+                    <div class="card-header">🎨 Theme Settings</div>
                     <div class="card-body">
                         <ul>
+
                             <li>
                                 <!-- 🌙 Manual dark/light mode controls -->
                                 <label for="darkMode">Dark/light mode:</label>
@@ -197,6 +205,7 @@
                     <div class="card-header">⚙️ Accessibility Settings</div>
                     <div class="card-body">
                         <ul>
+
                             <li>
                                 <label for="fontSize">Font size:</label>
                                 <div class="themed-dropdown">

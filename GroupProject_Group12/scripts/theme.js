@@ -86,8 +86,13 @@ function applyTheme(newTheme, newMode) {
     
     // 💾 Store theme and mode in sessionStorage
     sessionStorage.setItem("themeMode", `${newTheme}-${newMode}`);
+
+    // ✅ Ensure dropdown reflects applied theme
+    if (document.getElementById("theme")) {
+        document.getElementById("theme").value = newTheme;
+    }
     
-    // ✅ Start theme-specific effects
+    // 🚀 Start theme-specific effects
     if (newTheme === "matrix") startMatrix();
     if (newTheme === "desert") startTumbleweeds();
     if (newTheme === "cosmic") startStars();

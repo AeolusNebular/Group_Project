@@ -73,7 +73,7 @@ if (!$notifResult) {
         </button>
         
         <!-- 📛 Title -->
-        <h2>Smart Energy Dashboard</h2>
+        <h2>Smart Energy Dashboard™</h2>
         
         <div>
             <div class="icon-container">
@@ -178,26 +178,26 @@ if (!$notifResult) {
                     <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/home.php">Dashboard</a>
                 </li>
                 
-                <?php 
+                <?php
                 if (isset($RoleID)) {
                     if ($RoleID <= 3) {
-                        echo 
-                        ' <li class="nav-item">
+                        echo
+                        '<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
-                        </li> ';
+                        </li>';
                     } 
                     if ($RoleID <= 2) {
                         echo 
                         '<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
-                        </li> ';
+                        </li>';
                     } 
                     if ($RoleID == 1) {
-                        echo '
-                        <li class="nav-item">
+                        echo
+                        '<li class="nav-item">
                         <br>
                         <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                        </li> ';
+                        </li>';
                     }
                 }
                 ?>

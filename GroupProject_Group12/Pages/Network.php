@@ -35,17 +35,20 @@
         <div class ="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">City Chart for Network : <?php 
-                    if ($RoleID == 2) {
-                        echo $RoleNetwork;
-                    } else {
-                        echo 'Admin User';
-                    }
-                    ?></div>
+                    <div class="card-header">
+                        City Chart for Network
+                        <?php 
+                            if ($RoleID == 2) {
+                                echo $RoleNetwork;
+                            } else {
+                                echo ' - Admin User';
+                            }
+                        ?>
+                    </div>
                     <div class="card-body">
                         <form action="Network.php" method='POST'>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="TypeFilter">Filter by Type:</label>
+                                <label for="TypeFilter">Filter by type:</label>
                                 <select id="TypeFilter" name='TypeFilter'>
                                     <option value="Gas">Gas</option>
                                     <option value="Electricity">Electricity</option>
@@ -53,10 +56,11 @@
                             </div>
                             <?php 
                             if ($RoleID != 2){
-                                echo '<div class="themed-dropdown" style="float: left">
+                                echo 
+                                    '<div class="themed-dropdown" style="float: left">
                                         <label for="NetworkName">Select network:</label> <br>
                                         <select class="form-select" name="NetworkName">
-                                            <option value="coteq"> Coteq </option>      
+                                            <option value="coteq"> Coteq </option>
                                             <option value="westland-infra"> Westlandia </option>
                                             <option value="enexis"> Enexis </option>
                                             <option value="stedin"> Stedin </option>
@@ -64,8 +68,8 @@
                                         </select>
                                     </div>';
                             }?>
-                            <div class="themed-dropdown" style = 'float : left'>
-                                <label for="TypeFilter">Filter by Year:</label>
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="TypeFilter">Filter by year:</label>
                                 <select name='NetworkYearFilter'>
                                     <option value="2016">2016</option>
                                     <option value="2017">2017</option>
@@ -74,7 +78,7 @@
                                     <option value="2017">2020</option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style = 'margin-top : 15px; float: right;'>
+                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
                                 Apply Filter
                             </button>
                         </form>
@@ -180,7 +184,7 @@
                     <div class="card-body">
                         
                         <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
-                            <select id="ReportCityFilterNetwork"> 
+                            <select id="ReportCityFilterNetwork">
                                 <option value="all">All</option>
                                 <?php 
                                     include('../Database_Php_Interactions/CitySelect.php');
@@ -200,7 +204,7 @@
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             
             <!-- 🗺️ Heatmap -->

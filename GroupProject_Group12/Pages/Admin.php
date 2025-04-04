@@ -28,15 +28,15 @@
             <h2>Admin</h2>
         </div>
         
-        <div class="row" >  
+        <div class="row" >
             <div class="col-12 col-md-7">
                 <div class="card">
                     <div class="card-header">🌐 Network Users</div>
                     <div class="card-body">
                         
                         <form action="Admin.php" method='GET'>
-                            <div class="themed-dropdown" style='float: left'> 
-                                <label for="Admin_Network_Year">Select Year:</label> <br>
+                            <div class="themed-dropdown" style='float: left'>
+                                <label for="Admin_Network_Year">Select year:</label> <br>
                                 <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -46,46 +46,46 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_Network_Type">Select Type:</label> <br>
+                                <label for="Admin_Network_Type">Select type:</label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>                                      
+                                    <option value="gas"> Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                            <button type="Submit" class="fancy-button" style='float: right'>
                                 Apply Filter
                             </button>
                         </form>
                         
                         <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
                         
-                            <?php 
-                                // ✅ Check if requested method has been run (eg form submit)
-                                if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                                    
-                                    // 📅 Check if year has been selected, else assigns default (2016)
-                                    $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-                                    // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
-                                    $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
-                                    
-                                    // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
-                                    $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
-                                    $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
-                                    
-                                    // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
-                                    foreach ($Networks as $Network) {
-                                        // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
-                                        $Values = CSVData($Type,$Year,$Network);
-                                        
-                                        // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
-                                        foreach ($Values as $Value) {
-                                            // 🔄 Assigns annual consume to the selected network in loop
-                                            $NetworkConsumeTotals[$Network] += $Value[0];
-                                        }
-                                    }
+                        <?php
+                            // ✅ Check if requested method has been run (eg form submit)
+                            if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 
+                                // 📅 Check if year has been selected, else assigns default (2016)
+                                $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+                                // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
+                                $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
+                                
+                                // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
+                                $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
+                                $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
+                                
+                                // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
+                                foreach ($Networks as $Network) {
+                                    // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
+                                    $Values = CSVData($Type,$Year,$Network);
+                                    
+                                    // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
+                                    foreach ($Values as $Value) {
+                                        // 🔄 Assigns annual consume to the selected network in loop
+                                        $NetworkConsumeTotals[$Network] += $Value[0];
+                                    }
                                 }
-                            ?>
+                            
+                            }
+                        ?>
                         
                         <script>
                             // 📡 Grabs the network consume from PHP code above using JSON encode function and assigns to data
@@ -144,8 +144,8 @@
                                             title: {
                                                 display: true,
                                                 text: "Networks Annual Usage",
-                                                color: textColor, 
-                                                font: font 
+                                                color: textColor,
+                                                font: font
                                             }
                                         },
                                     
@@ -156,7 +156,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- 📊 Big chart panel (fat) -->
             <div class="col-12 col-md-5">
                 <div class="card">
@@ -165,16 +165,17 @@
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User
                         </button>
-
-                      <!--  Email Tester
+                        
+                        <!--
+                        // Email test button
                         <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
                             <input type="text" id= 'Email' name='Email'>
-                            <button type="submit" class="fancy-button">Send Email</button>    
-                        </form> -->
+                            <button type="submit" class="fancy-button">Send Email</button>
+                        </form>
+                        -->
                     </div>
                 </div>
             </div>
-           
             
             <!-- 🏙️ City councils diagram -->
             <div class="col-12 col-md-12">
@@ -183,18 +184,18 @@
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
-                        <form action="Admin.php" method="GET" >                         
+                        <form action="Admin.php" method="GET" >
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminNetwork">Select network:</label> <br>
                                 <select class="form-select" name="AdminNetwork">
-                                    <option value="coteq"> Coteq </option>      
+                                    <option value="coteq"> Coteq </option>
                                     <option value="westland-infra"> Westlandia </option>
                                     <option value="enexis"> Enexis </option>
                                     <option value="stedin"> Stedin </option>
                                     <option value="liander"> Liander </option>
                                 </select>    
                             </div>
-                            <div class="themed-dropdown" style='float: left'> 
+                            <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminNetworkYear">Select Year:</label> <br>
                                 <select class="form-select" name="AdminNetworkYear">
                                     <option value="2016"> 2016 </option>
@@ -208,10 +209,10 @@
                                 <label for="Admin_City_Type">Select Type:</label> <br>
                                 <select class="form-select" name="Admin_City_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>                                      
+                                    <option value="gas"> Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style = 'float : right'>
+                            <button type="Submit" class="fancy-button" style='float: right'>
                                 Apply Filter
                             </button>
                         </form>
@@ -219,84 +220,83 @@
                         <canvas id="AdminCityCouncilCanvas"></canvas>
                         
                         <?php
-                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';                         
+                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
                             $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'electricity';
-                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';                             
+                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
                             $CityValues = [];
-
+                            
                             $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
-
-                            foreach ($CityGraphValues as $Key => $City) {                                     
+                            
+                            foreach ($CityGraphValues as $Key => $City) {
                                 $CityValues[$Key] =  $City[0];
-                            }                         
+                            }
                             debug_to_console($CityValues);
-                        ?> 
-
-                      <script> 
+                        ?>
+                        
+                        <script> 
                            var citydata = <?php echo json_encode($CityValues); ?>;
                            console.log(Object.values(data));
                            document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
                             });
-
-                        function drawBarGraph() {
-                            let font = { family: "Space Grotesk"};
-                            let textColor = theme ? "#000" : "#fff";
-
-                            const citycanvas = document.getElementById("AdminCityCouncilCanvas");
                             
-                            // ✅ Ensure the canvas context is fresh
-                            if (!citycanvas) return; // Exit if canvas is missing
-                            const ctx = citycanvas.getContext("2d");
-                            
-                            /*
-                            // 💥 Destroy existing chart properly
-                            if (chartInstance) {
-                                chartInstance.destroy();
-                                chartInstance = null; // 🧹 Clear instance reference
-                            }
-                            */
-                            
-                            chartInstance = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: Object.keys(citydata),
-                                    datasets: [{
-                                        label: <?php echo json_encode($Type)?>,
-                                        data: Object.values(citydata) ,
-                                        borderColor: "#975ae100",
-                                        backgroundColor: [
-                                            '#003f5c',
-                                            '#374c80',
-                                            '#58508d',
-                                            '#7a5195',
-                                            '#bc5090',
-                                            '#ff6361',
-                                            '#ffa600'
-                                        ],
-                                    
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: true,
-                                    plugins: {
-                                        legend: {
-                                            position: "bottom",
-                                            labels: { color: textColor, font: font }
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: "Networks Annual Usage",
-                                            color: textColor,
-                                            font: font
-                                        }
-                                    },
+                            function drawBarGraph() {
+                                let font = { family: "Space Grotesk"};
+                                let textColor = theme ? "#000" : "#fff";
                                 
+                                const citycanvas = document.getElementById("AdminCityCouncilCanvas");
+                                
+                                // ✅ Ensure the canvas context is fresh
+                                if (!citycanvas) return; // Exit if canvas is missing
+                                const ctx = citycanvas.getContext("2d");
+                                
+                                /*
+                                // 💥 Destroy existing chart properly
+                                if (chartInstance) {
+                                    chartInstance.destroy();
+                                    chartInstance = null; // 🧹 Clear instance reference
                                 }
-                            });
-                        }
+                                */
+                                
+                                chartInstance = new Chart(ctx, {
+                                    type: "bar",
+                                    data: {
+                                        labels: Object.keys(citydata),
+                                        datasets: [{
+                                            label: <?php echo json_encode($Type)?>,
+                                            data: Object.values(citydata) ,
+                                            borderColor: "#975ae100",
+                                            backgroundColor: [
+                                                '#003f5c',
+                                                '#374c80',
+                                                '#58508d',
+                                                '#7a5195',
+                                                '#bc5090',
+                                                '#ff6361',
+                                                '#ffa600'
+                                            ],
+                                        
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: true,
+                                        plugins: {
+                                            legend: {
+                                                position: "bottom",
+                                                labels: { color: textColor, font: font }
+                                            },
+                                            title: {
+                                                display: true,
+                                                text: "Networks Annual Usage",
+                                                color: textColor,
+                                                font: font
+                                            }
+                                        },
+                                    }
+                                });
+                            }
                         </script>
                         
                     </div>
@@ -324,27 +324,27 @@
                     <div class="card-body">
                         
                         <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
-                            <select id="ReportAdminFilter"> 
+                            <select id="ReportAdminFilter">
                                 <option value="all">All</option>
-                                <?php 
+                                <?php
                                     include('../Database_Php_Interactions/CitySelect.php');
                                 ?>
                             </select>
                         </div>
                         
                         <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
-                            <select id="Gas_Electricity_Both"> 
+                            <select id="Gas_Electricity_Both">
                                 <option value="Both">All</option>
                                 <option value="Gas">Gas</option>
                                 <option value="Electricity">Electricity</option>
                             </select>
-                        </div> 
+                        </div>
                         
                         <div id="SummaryContent">
                             <button type="button" class="fancy-button" style="float: right">Print Summary</button>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             
         </div>
