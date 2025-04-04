@@ -25,10 +25,10 @@
             <h2>Account</h2>
         </div>
         
-        <div class="row">
+        <div class="row gx-1">
             <!-- 📝 User summary panel (fat) -->
-            <div class="col-12 col-md-8">
-                <div class="card">
+            <div class="col-12 col-md-8 d-flex">
+                <div class="card h-90">
                     <div class="card-header">
                         👤 User Summary
                     </div>
@@ -89,7 +89,7 @@
                                             echo 'Admin user';
                                             break;
                                         }
-                                    } 
+                                    }
                                 ?>
                             </p>
                             <hr>
@@ -105,8 +105,8 @@
             </div>
             
             <!-- ➕ Side panel (thin) -->
-            <div class="col-12 col-md-4">
-                <div class="card">
+            <div class="col-12 col-md-4 d-flex">
+                <div class="card h-90">
                     <div class="card-header">➕ Additional User Information</div>
                     <div class="card-body" style="height:400px;">
                         <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
@@ -149,13 +149,12 @@
             </div>
             
             <!-- ⚙️ Side panel (half-width) -->
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Customisability options -->
-                <div class="card">
+                <div class="card h-90">
                     <div class="card-header">🎨 Theme Settings</div>
                     <div class="card-body">
                         <ul>
-
                             <li>
                                 <!-- 🌙 Manual dark/light mode controls -->
                                 <label for="darkMode">Dark/light mode:</label>
@@ -192,20 +191,18 @@
                                     </select>
                                 </div>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>
             </div>
             
             <!-- ⚙️ Side panel (half-width) -->
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Accessibility options -->
-                <div class="card">
+                <div class="card h-90">
                     <div class="card-header">⚙️ Accessibility Settings</div>
                     <div class="card-body">
                         <ul>
-
                             <li>
                                 <label for="fontSize">Font size:</label>
                                 <div class="themed-dropdown">
@@ -235,7 +232,6 @@
                                     </select>
                                 </div>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>
@@ -243,6 +239,6 @@
             
         </div>
     </div>
-
+    
 </body>
 </html>

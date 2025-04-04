@@ -28,9 +28,9 @@
             <h2>Admin</h2>
         </div>
         
-        <div class="row" >
-            <div class="col-12 col-md-7">
-                <div class="card">
+        <div class="row gx-1">
+            <div class="col-12 col-md-7 d-flex">
+                <div class="card h-90">
                     <div class="card-header">🌐 Network Users</div>
                     <div class="card-body">
                         
@@ -57,7 +57,7 @@
                             </button>
                         </form>
                         
-                        <canvas id="NetworkCanvas" width="400px" height="150px"></canvas>
+                        <canvas id="NetworkCanvas"></canvas>
                         
                         <?php
                             // ✅ Check if requested method has been run (eg form submit)
@@ -158,8 +158,8 @@
             </div>
             
             <!-- 📊 Big chart panel (fat) -->
-            <div class="col-12 col-md-5">
-                <div class="card">
+            <div class="col-12 col-md-5 d-flex">
+                <div class="card h-90">
                     <div class="card-header">👤 User Creation</div>
                     <div class="card-body">
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
@@ -178,8 +178,8 @@
             </div>
             
             <!-- 🏙️ City councils diagram -->
-            <div class="col-12 col-md-12">
-                <div class="card">
+            <div class="col-12 col-md-12 d-flex">
+                <div class="card h-90">
                     <div class="card-header">🏙️ City Council Diagram</div>
                     <div class="card-body">
                         
@@ -196,7 +196,7 @@
                                 </select>    
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="AdminNetworkYear">Select Year:</label> <br>
+                                <label for="AdminNetworkYear">Select year:</label> <br>
                                 <select class="form-select" name="AdminNetworkYear">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -206,7 +206,7 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_City_Type">Select Type:</label> <br>
+                                <label for="Admin_City_Type">Select type:</label> <br>
                                 <select class="form-select" name="Admin_City_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>
@@ -216,6 +216,7 @@
                                 Apply Filter
                             </button>
                         </form>
+                        
                         <!-- 📊 City councils chart -->
                         <canvas id="AdminCityCouncilCanvas"></canvas>
                         
@@ -303,8 +304,8 @@
                 </div>
             </div>
             
-            <div class="col-12 col-md-7">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-7 d-flex">
+                <div class="card h-90">
                     <div class="card-header">Additional Information</div>
                     <div class="card-body">
                         <div id="SummaryContent">Number of Connections: </div>
@@ -318,8 +319,8 @@
                 </div> 
             </div>
             
-            <div class="col-12 col-md-5">
-                <div class="card" style="height: 90%">
+            <div class="col-12 col-md-5 d-flex">
+                <div class="card h-90">
                     <div class="card-header">Filter options:</div>
                     <div class="card-body">
                         

@@ -29,7 +29,7 @@
                 // 📨 Fetch notifications
                 $notifStmt = $conn->prepare("SELECT NotifID, Notification FROM Notifications");
                 $notifResult = $notifStmt->execute();
-
+                
                 // 🔄 Loop through the notifications and display them
                 while ($notification = $notifResult->fetchArray(SQLITE3_ASSOC)) {
                     echo '<div class="notification-item">';
@@ -44,7 +44,7 @@
             ?>
         </div>
     </div>
-
+    
 </body>
 
 <?php
