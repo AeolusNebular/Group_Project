@@ -1,91 +1,101 @@
 :root {
     /* 🌫️ Root theming (AGGRESSIVELY GREY) */
-    --bg-dark: linear-gradient(to bottom right, #333, #000);
-    --bg-light: linear-gradient(to bottom right, #fff, #ddd);
-    --card-dark: linear-gradient(to bottom right, #3f3f3fbb, #656565bb);
-    --card-light: linear-gradient(to bottom right, #eeeeeebb, #ccccccbb);
-    --text-dark: #fff;
-    --text-light: #000;
-    --shadow-main: #888;
-    --text-shadow: #bbb;
+    --bg-dark:        linear-gradient(to bottom right, #333, #000);
+    --bg-light:       linear-gradient(to bottom right, #fff, #ddd);
+    --card-dark:      linear-gradient(to bottom right, #3f3f3fbb, #656565bb);
+    --card-light:     linear-gradient(to bottom right, #eeeeeebb, #ccccccbb);
+    --text-dark:      #fff;
+    --text-light:     #000;
+    --shadow-main:    #888;
+    --text-shadow:    #bbb;
     --hover-dropdown: linear-gradient(to bottom right, #777, #888);
-    --border-colour: #eee;
+    --border-colour:  #eee;
+}                       
+
+.filter-deuteranopia {
+    filter: url(#deuteranopia);
+}
+.filter-tritanopia {
+    filter: url(#tritanopia);
+}
+.filter-achromatopsia {
+    filter: url(#achromatopsia);
 }
 
 /* ================= 🎨 THEMES ================= */
 
 /* 🟣 Purple (default) */
 .purple-theme {
-    --bg-dark: linear-gradient(to bottom right, #002, #305);
-    --bg-light: linear-gradient(to bottom right, #eef, #fef);
-    --card-dark: linear-gradient(to bottom right, #2a2d5bbb, #503264bb);
-    --card-light: linear-gradient(to bottom right, #cccceebb, #eecceebb);
-    --text-light: #103;
-    --shadow-main: #c08ab660;
-    --text-shadow: #948;
+    --bg-dark:        linear-gradient(to bottom right, #002, #305);
+    --bg-light:       linear-gradient(to bottom right, #eef, #fef);
+    --card-dark:      linear-gradient(to bottom right, #2a2d5bbb, #503264bb);
+    --card-light:     linear-gradient(to bottom right, #cccceebb, #eecceebb);
+    --text-light:     #103;
+    --shadow-main:    #c08ab660;
+    --text-shadow:    #948;
     --hover-dropdown: linear-gradient(to bottom right, #448, #748);
-    --border-colour: #ece;
+    --border-colour:  #ece;
 }
 /* 🟢 Green */
 .green-theme {
-    --bg-dark: linear-gradient(to bottom right, #0c0f0c, #232);
-    --bg-light: linear-gradient(to bottom right, #dfd, #bdb);
-    --card-dark: linear-gradient(to bottom right, #1f3b1fbb, #325d32bb);
-    --card-light: linear-gradient(to bottom right, #c8e6c9bb, #dff2dcbb);
+    --bg-dark:        linear-gradient(to bottom right, #0c0f0c, #232);
+    --bg-light:       linear-gradient(to bottom right, #dfd, #bdb);
+    --card-dark:      linear-gradient(to bottom right, #1f3b1fbb, #325d32bb);
+    --card-light:     linear-gradient(to bottom right, #c8e6c9bb, #dff2dcbb);
 }
 /* 🌊 Marine */
 .marine-theme {
-    --bg-dark: linear-gradient(to bottom right, #032, #066);
-    --bg-light: linear-gradient(to bottom right, #cee, #eff);
-    --card-dark: linear-gradient(to bottom right, #0d3139bb, #17584bbb);
-    --card-light: linear-gradient(to bottom right, #bbeeeebb, #ddffffbb);
-    --text-light: #043;
-    --shadow-main: #88ccc060;
-    --text-shadow: #0a9;
+    --bg-dark:        linear-gradient(to bottom right, #032, #066);
+    --bg-light:       linear-gradient(to bottom right, #cee, #eff);
+    --card-dark:      linear-gradient(to bottom right, #0d3139bb, #17584bbb);
+    --card-light:     linear-gradient(to bottom right, #bbeeeebb, #ddffffbb);
+    --text-light:     #043;
+    --shadow-main:    #88ccc060;
+    --text-shadow:    #0a9;
     --hover-dropdown: linear-gradient(to bottom right, #166, #098);
-    --border-colour: #cee;
+    --border-colour:  #cee;
 }
 /* 🔵 Blue */
 .blue-theme {
-    --bg-dark: linear-gradient(to bottom right, #001528, #00155c);
-    --bg-light: linear-gradient(to bottom right, #a7d7f7, #c7e7ff);
-    --card-dark: linear-gradient(to bottom right, #0e3a5cbb, #1b5580bb);
-    --card-light: linear-gradient(to bottom right, #bfe8ffbb, #e1f4ffbb);
-    --text-light: #024;
-    --shadow-main: #80b6f060;
-    --text-shadow: #19d;
+    --bg-dark:        linear-gradient(to bottom right, #001528, #00155c);
+    --bg-light:       linear-gradient(to bottom right, #a7d7f7, #c7e7ff);
+    --card-dark:      linear-gradient(to bottom right, #0e3a5cbb, #1b5580bb);
+    --card-light:     linear-gradient(to bottom right, #bfe8ffbb, #e1f4ffbb);
+    --text-light:     #024;
+    --shadow-main:    #80b6f060;
+    --text-shadow:    #19d;
     --hover-dropdown: linear-gradient(to bottom right, #048, #08c);
-    --border-colour: #adf;
+    --border-colour:  #adf;
 }
 /* 🟥 Red */
 .red-theme {
-    --bg-dark: linear-gradient(to bottom right, #100, #400);
-    --bg-light: linear-gradient(to bottom right, #fbb, #fdd);
-    --card-dark: linear-gradient(to bottom right, #5a0000bb, #920000bb);
-    --card-light: linear-gradient(to bottom right, #ffccccbb, #ffeeeebb);
-    --text-light: #300;
-    --shadow-main: #af5b5b60;
+    --bg-dark:        linear-gradient(to bottom right, #100, #400);
+    --bg-light:       linear-gradient(to bottom right, #fbb, #fdd);
+    --card-dark:      linear-gradient(to bottom right, #5a0000bb, #920000bb);
+    --card-light:     linear-gradient(to bottom right, #ffccccbb, #ffeeeebb);
+    --text-light:     #300;
+    --shadow-main:    #af5b5b60;
 }
 
 /* 🐺 Sigma */
 .sigma-theme {
-    --text-light: #600;
-    --shadow-main: #56121260;
-    --text-shadow: #500;
-    --border-colour: #922;
+    --text-light:     #600;
+    --shadow-main:    #56121260;
+    --text-shadow:    #500;
+    --border-colour:  #922;
 }
 
 /* 🧑‍💻 Matrix */
 .matrix-theme {
-    --bg-dark: linear-gradient(to bottom right, #040, #000);
-    --bg-light: #54c454bb;
-    --card-dark: #001a00bb;
-    --card-light: #54c454bb;
-    --text-light: #040;
-    --shadow-main: #00cc0060;
-    --text-shadow: #040;
+    --bg-dark:        linear-gradient(to bottom right, #040, #000);
+    --bg-light:       #54c454bb;
+    --card-dark:      #001a00bb;
+    --card-light:     #54c454bb;
+    --text-light:     #040;
+    --shadow-main:    #00cc0060;
+    --text-shadow:    #040;
     --hover-dropdown: #040;
-    --border-colour: #040;
+    --border-colour:  #040;
     font-family: 'Courier New', monospace;
 }
 /* 🌀 Falling code effect */
@@ -133,28 +143,28 @@
 
 /* 🌇 Sunset */
 .sunset-theme {
-    --bg-dark: linear-gradient(to bottom right, #4a001f, #ff4500, #ffaf00);
-    --bg-light: linear-gradient(to bottom right, #ffdd99, #ffd180, #ffab40);
-    --card-dark: linear-gradient(to bottom right, #8b1c1cbb, #ff5733bb);
-    --card-light: linear-gradient(to bottom right, #fc8, #fe9);
-    --text-light: #310;
-    --shadow-main: #ff6f5080;
-    --text-shadow: #d32;
+    --bg-dark:        linear-gradient(to bottom right, #4a001f, #ff4500, #ffaf00);
+    --bg-light:       linear-gradient(to bottom right, #ffdd99, #ffd180, #ffab40);
+    --card-dark:      linear-gradient(to bottom right, #8b1c1cbb, #ff5733bb);
+    --card-light:     linear-gradient(to bottom right, #fc8, #fe9);
+    --text-light:     #310;
+    --shadow-main:    #ff6f5080;
+    --text-shadow:    #d32;
     --hover-dropdown: linear-gradient(to bottom right, #c32, #f74);
-    --border-colour: #fc8;
+    --border-colour:  #fc8;
 }
 
 /* 🏜️ Desert Theme */
 .desert-theme {
-    --bg-dark: linear-gradient(to bottom right, #5c3b1a, #a86d3c);
-    --bg-light: linear-gradient(to bottom right, #ffdab9, #ffcc99);
-    --card-dark: linear-gradient(to bottom right, #8b5a2bbb, #c79c6bbb);
-    --card-light: linear-gradient(to bottom right, #f5deb3, #ffebcc);
-    --text-light: #421;
-    --shadow-main: #cc996060;
-    --text-shadow: #a63;
+    --bg-dark:        linear-gradient(to bottom right, #5c3b1a, #a86d3c);
+    --bg-light:       linear-gradient(to bottom right, #ffdab9, #ffcc99);
+    --card-dark:      linear-gradient(to bottom right, #8b5a2bbb, #c79c6bbb);
+    --card-light:     linear-gradient(to bottom right, #f5deb3, #ffebcc);
+    --text-light:     #421;
+    --shadow-main:    #cc996060;
+    --text-shadow:    #a63;
     --hover-dropdown: linear-gradient(to bottom right, #9c673a, #c78b5f);
-    --border-colour: #fdb;
+    --border-colour:  #fdb;
 }
 /* 🍂 Tumbleweed */
 .tumbleweed {
@@ -180,16 +190,16 @@
 
 /* 🌌 Cosmic */
 .cosmic-theme {
-    --bg-dark: radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
-    --bg-light: linear-gradient(to bottom right, #f2d6ff, #ffeaff);
-    --card-dark: linear-gradient(to bottom right, #2c005080, #5a009980);
-    --card-light: linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
-    --text-dark: #fef;
-    --text-light: #206;
-    --shadow-main: #d47fff80;
-    --text-shadow: #e9f;
+    --bg-dark:        radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
+    --bg-light:       linear-gradient(to bottom right, #f2d6ff, #ffeaff);
+    --card-dark:      linear-gradient(to bottom right, #2c005080, #5a009980);
+    --card-light:     linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
+    --text-dark:      #fef;
+    --text-light:     #206;
+    --shadow-main:    #d47fff80;
+    --text-shadow:    #e9f;
     --hover-dropdown: linear-gradient(to bottom right, #7d1ba1, #c04bdd);
-    --border-colour: #fdf;
+    --border-colour:  #fdf;
 }
 /* ⭐ Star container */
 #star-container {
@@ -251,20 +261,20 @@
 
 /* 💰 Ridiculously Bling */
 .bling-theme {
-    --bg-dark: linear-gradient(to bottom right, #c18c50, #5d4f00);
-    --bg-light: linear-gradient(to bottom right, #fffae6, #fff0b3);
-    --card-dark: linear-gradient(to bottom right, #e6a900bb, #ffd700bb);
-    --card-light: linear-gradient(to bottom right, #fff5cc, #ffeb99);
-    --shadow-main: #dbcb8580;
-    --text-shadow: #cadb85;
+    --bg-dark:        linear-gradient(to bottom right, #c18c50, #5d4f00);
+    --bg-light:       linear-gradient(to bottom right, #fffae6, #fff0b3);
+    --card-dark:      linear-gradient(to bottom right, #e6a900bb, #ffd700bb);
+    --card-light:     linear-gradient(to bottom right, #fff5cc, #ffeb99);
+    --shadow-main:    #dbcb8580;
+    --text-shadow:    #cadb85;
 }
 
 /* 🌈 Bonus */
 .bonus-theme {
-    --bg-dark: linear-gradient(70deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
-    --bg-light: linear-gradient(70deg, violet, indigo, blue, green, yellow, orange, red, violet);
-    --card-dark: linear-gradient(130deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
-    --card-light: linear-gradient(130deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    --bg-dark:        linear-gradient(70deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+    --bg-light:       linear-gradient(70deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    --card-dark:      linear-gradient(130deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
+    --card-light:     linear-gradient(130deg, violet, indigo, blue, green, yellow, orange, red, violet);
 }
 
 /* 🌈 Apply animation to background - Left to Right */
@@ -288,15 +298,15 @@ body.bonus-theme {
 
 /* 🎨 Theme selector  */
 .purple-option { color: #748; }
-.green-option { color: #353; }
+.green-option  { color: #353; }
 .marine-option { color: #266; }
-.blue-option { color: #19d; }
-.red-option { color: #900; }
-.sigma-option { color: #400; }
+.blue-option   { color: #19d; }
+.red-option    { color: #900; }
+.sigma-option  { color: #400; }
 .matrix-option { color: #182; }
 .sunset-option { color: #d75; }
 .cosmic-option { color: #63a; }
 .desert-option { color: #a63; }
-.bling-option { color: #c81; }
-.bonus-option { color: violet; }
-.root-option { color: #666; }
+.bling-option  { color: #c81; }
+.bonus-option  { color: #e8e; }
+.root-option   { color: #666; }
