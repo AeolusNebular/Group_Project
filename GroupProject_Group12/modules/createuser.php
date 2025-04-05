@@ -27,12 +27,12 @@
                     <!-- 🔗 Network and city assignment code -->
                     <div id="AdminPanelFormRight">
                         <div style="margin-top: 10px">
-                            <input class="form-check-input" type="checkbox" id="Network_User" name="Network_User" onChange="UserType()">
+                            <input class="form-check-input" type="checkbox" id="Network_User" name="Network_User" onChange="UserType(event)">
                             <label class="form-check-label" for="Network_User">Network user</label> 
                         </div>
                         
                         <div style="margin-top: 10px">
-                            <input class="form-check-input" type="checkbox" id="City_Council_User" name="City_Council_User" onChange="UserType()"> 
+                            <input class="form-check-input" type="checkbox" id="City_Council_User" name="City_Council_User" onChange="UserType(event)"> 
                             <label class="form-check-label" for="City_Council_User">City council user</label> 
                         </div> 
                         <!-- 📋 Network and city select statements -->
