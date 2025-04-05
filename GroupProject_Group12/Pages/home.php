@@ -9,10 +9,13 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php");
+    <?php 
+    include("../modules/navbar.php");
     require_once('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php'); 
+    include('../Database_Php_Interactions/CSVData.php');
+    include("../modules/login.php");
     ?>
+
     
     <!-- 🏠 Home page content (dashboard) -->
     <div class="container mt-4">

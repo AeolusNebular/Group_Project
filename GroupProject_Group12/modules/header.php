@@ -38,9 +38,5 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
-    
-    <!-- 🐘 PHP -->
-    <?php include("login.php");?>
-    
-    
+
 </head>
