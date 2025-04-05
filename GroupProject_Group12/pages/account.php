@@ -22,7 +22,7 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Account</h2>
+            <h2> Account </h2>
         </div>
         
         <div class="row gx-1">
@@ -97,8 +97,8 @@
                         
                         <!-- 🏃‍♂️ Account action buttons -->
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-danger">🗑️ Delete Account</button>
-                            <button class="btn btn-warning">🔄 Reset Password</button>
+                            <button class="btn btn-danger"> 🗑️ Delete Account </button>
+                            <button class="btn btn-warning"> 🔄 Reset Password </button>
                         </div>
                     </div>
                 </div>
@@ -107,25 +107,25 @@
             <!-- ➕ Side panel (thin) -->
             <div class="col-12 col-md-4 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">➕ Additional User Information</div>
+                    <div class="card-header"> ➕ Additional User Information </div>
                     <div class="card-body" style="height:400px;">
                         <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
                             
                             <div class="mb-2">
-                                <label for="UserFName" class="form-label">First name:</label>
+                                <label for="UserFName" class="form-label"> First name: </label>
                                 <input type="text" id="UserFName" name="UserFName" class="form-control">
                             </div>
                             <div class="mb-2">
-                                <label for="UserLName" class="form-label">Last name:</label>
+                                <label for="UserLName" class="form-label"> Last name: </label>
                                 <input type="text" id="UserLName" name="UserLName" class="form-control">
                             </div>
                             <div class="mb-2">
-                                <label for="UserPhoneNo" class="form-label">Phone number:</label>
+                                <label for="UserPhoneNo" class="form-label"> Phone number: </label>
                                 <input type="tel" id="UserPhoneNo" name="UserPhoneNo" class="form-control">
                             </div> 
                             <input type="hidden" id='UserID' value=<?php $UserID ?>>
                             <div class="mb-2">
-                                <label for="UserHomeNo" class="form-label">Home address:</label>
+                                <label for="UserHomeNo" class="form-label"> Home address: </label>
                                 <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control">
                             </div>
                             <button type="Submit" style='float: right' class="fancy-button">
@@ -145,49 +145,50 @@
             
             <!-- 📛 Title -->
             <div class="text-center">
-                <h2>Settings</h2>
+                <h2> Settings </h2>
             </div>
             
             <!-- ⚙️ Side panel (half-width) -->
             <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Customisability options -->
                 <div class="card h-90">
-                    <div class="card-header">🎨 Theme Settings</div>
+                    <div class="card-header"> 🎨 Theme Settings </div>
                     <div class="card-body">
                         <ul>
                             <li>
                                 <!-- 🌙 Manual dark/light mode controls -->
-                                <label for="darkMode">Dark/light mode:</label>
+                                <label for="darkMode"> Dark/light mode: </label>
                                 <div class="themed-dropdown">
-                                    <select id="darkMode" class="form-select">
-                                        <option value="auto">Auto</option>
-                                        <option value="dark">Dark</option>
-                                        <option value="light">Light</option>
+                                    <select class="form-select" id="darkMode">
+                                        <option value="auto">  Auto </option>
+                                        <option value="dark">  Dark </option>
+                                        <option value="light"> Light </option>
                                     </select>
                                 </div>
                             </li>
                             <li>
                                 <input type="checkbox" id="darkModeNavbar" class="form-check-input" checked>
-                                <label for="darkModeNavbar">Show dark mode toggle in navbar</label>
+                                <label for="darkModeNavbar"> Show dark mode toggle in navbar </label>
                             </li>
                             <br>
                             <li>
                                 <!-- 🎨 Theme selection menu -->
                                 <label for="theme">Theme selection:</label>
                                 <div class="themed-dropdown">
-                                    <select onchange="CheckTheme(this.value)" id="theme" class="form-select">
-                                        <option value="purple" class="purple-option">🟪 Purple (default)</option>
-                                        <option value="green" class="green-option">🟩 Green</option>
-                                        <option value="marine" class="marine-option">🌊 Marine</option>
-                                        <option value="blue" class="blue-option">🟦 Blue</option>
-                                        <option value="red" class="red-option">🟥 Red</option>
-                                        <option value="sigma" class="sigma-option">🐺 Sigma</option>
-                                        <option value="matrix" class="matrix-option">💻 Matrix</option>
-                                        <option value="sunset" class="sunset-option">🌇 Sunset</option>
-                                        <option value="desert" class="desert-option">🏜️ Desert</option>
-                                        <option value="cosmic" class="cosmic-option">🌌 Cosmic</option>
-                                        <option value="bling" class="bling-option">💰 Bling</option>
-                                        <option value="root" class="root-option">⚙️ Root</option>
+                                    <select class="form-select" onchange="CheckTheme(this.value)" id="theme">
+                                        <option value="purple" class="purple-option"> 🟪 Purple (default) </option>
+                                        <option value="green"  class="green-option">  🟩 Green </option>
+                                        <option value="marine" class="marine-option"> 🌊 Marine </option>
+                                        <option value="blue"   class="blue-option">   🟦 Blue </option>
+                                        <option value="red"    class="red-option">    🟥 Red </option>
+                                        <option value="sigma"  class="sigma-option">  🐺 Sigma </option>
+                                        <option value="matrix" class="matrix-option"> 💻 Matrix </option>
+                                        <option value="sunset" class="sunset-option"> 🌇 Sunset </option>
+                                        <option value="desert" class="desert-option"> 🏜️ Desert </option>
+                                        <option value="cosmic" class="cosmic-option"> 🌌 Cosmic </option>
+                                        <option value="bling"  class="bling-option">  💰 Bling </option>
+                                        <!-- <option value="bonus"  class="bonus-option">  🌈 Bonus</option> -->
+                                        <option value="root"   class="root-option">   ⚙️ Root </option>
                                     </select>
                                 </div>
                             </li>
@@ -200,38 +201,49 @@
             <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Accessibility options -->
                 <div class="card h-90">
-                    <div class="card-header">⚙️ Accessibility Settings</div>
+                    <div class="card-header"> ⚙️ Accessibility Settings </div>
                     <div class="card-body">
                         <ul>
+                            
+                            <!-- 🔤 Font options -->
                             <li>
-                                <label for="fontSize">Font size:</label>
+                                <label for="fontSize"> Font size: </label>
                                 <div class="themed-dropdown">
                                     <select id="fontSize" class="form-select">
-                                        <option value="default">Default</option>
-                                        <option value="large">Large</option>
-                                        <option value="extra-large">Extra large</option>
+                                        <option value="default">     Default </option>
+                                        <option value="large">       Large </option>
+                                        <option value="extra-large"> Extra large </option>
                                     </select>
                                 </div>
                             </li>
+                            
+                            <!-- 🌓 High contrast mode -->
                             <li>
                                 <input type="checkbox" id="highContrast" class="form-check-input">
-                                <label for="highContrast">High contrast</label>
+                                <label for="highContrast"> High contrast </label>
                             </li>
+                            
+                            <!-- 🎞️ Limit animations -->
                             <li>
                                 <input type="checkbox" id="limitAnimations" class="form-check-input">
-                                <label for="limitAnimations">Limit screen animations</label>
+                                <label for="limitAnimations"> Limit screen animations </label>
                             </li>
+                            
+                            <!-- 🌈 Colourblind options -->
                             <li>
-                                <label for="colourblind">Colour blindness:</label>
+                                <label for="colourblind"> Colour blindness: </label>
                                 <div class="themed-dropdown">
                                     <select id="colourblind" class="form-select">
-                                        <option value="default">Default</option>
-                                        <option value="deuteranopia">Deuteranopia</option>
-                                        <option value="tritanopia">Tritanopia</option>
-                                        <option value="achromatopsia">Achromatopsia</option>
+                                        <option value="default">       None </option>
+                                        <option value="deuteranopia">  Deuteranopia </option>
+                                        <option value="tritanopia">    Tritanopia </option>
+                                        <option value="achromatopsia"> Achromatopsia </option>
                                     </select>
                                 </div>
                             </li>
+                            
+                            <!-- 🌈 Colourblind filters -->
+                            <?php include("../modules/colourblind-filters.php"); ?>
                         </ul>
                     </div>
                 </div>
@@ -239,6 +251,9 @@
             
         </div>
     </div>
+    
+    <!-- 👣 Footer -->
+    <?php include("../modules/footer.php"); ?>
     
 </body>
 </html>

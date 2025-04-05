@@ -19,14 +19,15 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>City<?php 
-                if ($RoleID == 2) {
-                    echo ' - ' . $RoleNetwork;
-                } elseif($RoleID == 1) {
-                    echo ' - Admin';
-                } else {
-                    echo $CityFilter;
-                }
+            <h2> City 
+                <?php 
+                    if ($RoleID == 2) {
+                        echo ' - ' . $RoleNetwork;
+                    } elseif($RoleID == 1) {
+                        echo ' - Admin';
+                    } else {
+                        echo $CityFilter;
+                    }
                 ?>
             </h2>
         </div>
@@ -35,7 +36,7 @@
         <div class="row gx-1">
             <div class="col-12 col-md-7 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">📊 Network Graph</div>
+                    <div class="card-header"> 📊 Network Graph </div>
                     <div class="card-body">
                         
                         <!-- 🧭 Network selection -->
@@ -55,7 +56,7 @@
                                 }
                             ?>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="CityYears">Select network:</label><br>
+                                <label for="CityYears"> Select network: </label><br>
                                 <select class="form-select" name="CityYears">
                                     <option value="2016"> 2016 </option>      
                                     <option value="2017"> 2017 </option>
@@ -160,7 +161,6 @@
                                                 '#ff6361',
                                                 '#ffa600'
                                             ],
-                                        
                                         }]
                                     },
                                     options: {
@@ -200,28 +200,28 @@
             <!-- 📅 Annual summary -->
             <div class="col-12 col-md-5 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">📅 Annual Summary</div>
+                    <div class="card-header"> 📅 Annual Summary </div>
                     <div class="card-body">
-                        <form  id='ReportForm' method='POST'>
-                            <div id="SummaryContent">Number of connections: <?php echo json_encode(round($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?></div>
-                            <div id="SummaryContent">Electricity used (kWh): <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?></div>
-                            <div id="SummaryContent">Gas used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?></div>
-                            <div id="SummaryContent">Delivery percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?></div>
-                            <div id="SummaryContent"></div>
+                        <form id='ReportForm' method='POST'>
+                            <div id="SummaryContent"> Number of connections: <?php echo json_encode(round($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
+                            <div id="SummaryContent"> Electricity used (kWh): <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?> </div>
+                            <div id="SummaryContent"> Gas used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?> </div>
+                            <div id="SummaryContent"> Delivery percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?> </div>
+                            <div id="SummaryContent"> <br> </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="ReportType">Report type:</label> <br>
+                                <label for="ReportType"> Report type: </label> <br>
                                 <select class="form-select" id='ReportType' name="ReportType">
                                     <option value="PDF"> PDF </option>
                                     <option value="CSV"> CSV </option>
                                 </select>
                             </div>
                             
-                            <input type="hidden" id='CityValuesForPDF' name='CityValuesForPDF' value =" <?php  echo htmlentities(json_encode($CityTypeValues)); ?>">
-                            <input type="hidden" id='CityValuesForCSV' name='CityValuesForCSV' value =" <?php  echo htmlentities(json_encode($CityTypeValues)); ?>">
+                            <input type="hidden" id='CityValuesForPDF' name='CityValuesForPDF' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
+                            <input type="hidden" id='CityValuesForCSV' name='CityValuesForCSV' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <input type="hidden" id='ImageURLForPDF' name='ImageURLForPDF'>
                             
                             <div id="SummaryContent">
-                                <button type="button" onClick='submitReports()' class="fancy-button" style="float: right">Print Summary</button>
+                                <button type="button" onClick='submitReports()' class="fancy-button" style="float: right"> Print Summary </button>
                             </div>
                         </form>
                         
@@ -271,11 +271,10 @@
                                             <script>                                          
                                                 document.getElementById("my_iframe").src = "../Reports/Report.csv";
                                             </script>
-                                        ';
+                                        '
+                                    ;
                                 }
-                            
                             ?>
-                           
                     </div>
                 </div>
             </div>
@@ -283,13 +282,16 @@
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🗺️ Energy Use Heatmap</div>
-                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                    <div class="card-header"> 🗺️ Energy Use Heatmap </div>
+                    <div id="heatmap"></div> <!-- 🗺️ Heatmap container -->
                 </div>
             </div>
             
         </div>
     </div>
+    
+    <!-- 👣 Footer -->
+    <?php include("../modules/footer.php"); ?>
     
 </body>
 </html>

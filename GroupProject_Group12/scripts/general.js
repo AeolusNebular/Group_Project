@@ -1,13 +1,13 @@
 // 👤 Account icon click
 document.addEventListener("DOMContentLoaded", function () {
     const accountButton = document.getElementById("accountButton");
-
+    
     accountButton.addEventListener("click", function () {
         window.location.href = "/Group_Project/GroupProject_Group12/pages/account.php";
     });
 });
 
-// ✅ Limited animations checkbox status
+// 🎞️ Limited animations checkbox
 document.addEventListener("DOMContentLoaded", () => {
     let limitAnimationsEnabled = localStorage.getItem("limitAnimations") === "true";
     const checkbox = document.getElementById("limitAnimations");
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
+    
     // 🌍 Make accessible globally so other scripts can use it
     window.limitAnimationsEnabled = limitAnimationsEnabled;
 });
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const storedFontSize = sessionStorage.getItem("fontSize") || defaultFontSize;
     applyFontSize(storedFontSize);
     
-    // 🎛️ Ensure dropdown reflects the stored value
+    // 🎛️ Ensure dropdown reflects stored value
     if (fontSizeSelect) {
         fontSizeSelect.value = storedFontSize;
         
@@ -74,14 +74,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 🎨 Function to apply the selected font size
+// 🔠 Function to apply selected font size
 function applyFontSize(size) {
     console.log(`🔠 Applying font size: ${size}`);
     
     // 📜 Remove previous font size classes
     document.documentElement.classList.remove("font-large", "font-extra-large");
     
-    // 🔠 Apply new font size class if not "default"
+    // 🔠 Apply new font size class if not default
     if (size === "large") {
         document.documentElement.classList.add("font-large");
     } else if (size === "extra-large") {
@@ -91,3 +91,31 @@ function applyFontSize(size) {
     // 💾 Store the selected font size in sessionStorage
     sessionStorage.setItem("fontSize", size);
 }
+
+// 🎨 Function to apply selected colourblind filter size
+window.addEventListener("DOMContentLoaded", () => {
+    const dropdown = document.getElementById("colourblind");
+    const target = document.documentElement;
+    
+    // 💾 Get saved filter from localStorage or use default
+    const saved = localStorage.getItem("cb-filter") || "default";
+    dropdown.value = saved;
+    
+    // 🧩 Apply saved filter class
+    if (saved !== "default") {
+        target.classList.add("filter-" + saved);
+    }
+    
+    // 🔄 Update filter on dropdown change
+    dropdown.addEventListener("change", function () {
+        localStorage.setItem("cb-filter", this.value);
+        
+        // 🧹 Remove existing filter
+        target.classList.remove("filter-deuteranopia", "filter-tritanopia", "filter-achromatopsia");
+        
+        // 🎯 Apply new filter
+        if (this.value !== "default") {
+            target.classList.add("filter-" + this.value);
+        }
+    });
+});
