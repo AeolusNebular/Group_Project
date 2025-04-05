@@ -21,15 +21,16 @@
         <div class="text-center">
             <h2>
                 <?php 
-                debug_to_console($RoleID);
-                switch ($RoleID) {
-                case '1' :
-                    echo 'Network - Admin';
-                    break; 
-                case '2' : 
-                    echo 'Network - ' . $RoleNetwork;
-                    break;
-                }?>
+                    debug_to_console($RoleID);
+                    switch ($RoleID) {
+                    case '1' :
+                        echo 'Network - Admin';
+                        break; 
+                    case '2' : 
+                        echo 'Network - ' . $RoleNetwork;
+                        break;
+                    }
+                ?>
             </h2>
         </div>
         
@@ -48,37 +49,37 @@
                     </div>
                     <div class="card-body">
                         <form action="Network.php" method='POST'>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="TypeFilter">Filter by type:</label>
-                                <select id="TypeFilter" name='TypeFilter'>
-                                    <option value="Gas">Gas</option>
-                                    <option value="Electricity">Electricity</option>
+                            <div class="themed-dropdown" style="float: left">
+                                <label for="TypeFilter"> Filter by type: </label>
+                                <select class="form-select" id="TypeFilter" name="TypeFilter">
+                                    <option value="Gas">         Gas </option>
+                                    <option value="Electricity"> Electricity </option>
                                 </select>
                             </div>
                             <?php
                                 if ($RoleID != 2){
                                     echo 
                                         '<div class="themed-dropdown" style="float: left">
-                                            <label for="NetworkName">Select network:</label><br>
-                                            <select class="form-select" name="NetworkName">
-                                                <option value="coteq">Coteq</option>
-                                                <option value="westland-infra">Westlandia</option>
-                                                <option value="enexis">Enexis</option>
-                                                <option value="stedin">Stedin</option>
-                                                <option value="liander">Liander</option>
+                                            <label for="NetworkName"> Select network: </label><br>
+                                            <select class="form-select" id="NetworkName" name="NetworkName">
+                                                <option value="coteq">          Coteq </option>
+                                                <option value="westland-infra"> Westlandia </option>
+                                                <option value="enexis">         Enexis</option>
+                                                <option value="stedin">         Stedin </option>
+                                                <option value="liander">        Liander </option>
                                             </select>
                                         </div>'
                                     ;
                                 }
                             ?>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="TypeFilter">Filter by year:</label>
-                                <select name='NetworkYearFilter'>
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2017">2018</option>
-                                    <option value="2017">2019</option>
-                                    <option value="2017">2020</option>
+                            <div class="themed-dropdown" style="float: left">
+                                <label for="NetworkYearFilter"> Filter by year: </label>
+                                <select class="form-select" id="NetworkYearFilter" name="NetworkYearFilter">
+                                    <option value="2016"> 2016 </option>
+                                    <option value="2017"> 2017 </option>
+                                    <option value="2018"> 2018 </option>
+                                    <option value="2019"> 2019 </option>
+                                    <option value="2020"> 2020 </option>
                                 </select>
                             </div>
                             <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
@@ -86,7 +87,7 @@
                             </button>
                         </form>
                         <canvas id="cityChart"></canvas>
-                            <?php 
+                            <?php
                                 if ($RoleID == 2) {
                                     $Network = $RoleNetwork;
                                 } else {
@@ -168,43 +169,43 @@
             
             <div class="col-12 col-md-7 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">Additional Information</div>
+                    <div class="card-header"> Additional Information </div>
                     <div class="card-body">
-                        <div id="SummaryContent">Number of Connections: </div>
-                        <div id="SummaryContent">Amount of Electricity Used (kWh): </div>
-                        <div id="SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
-                        <div id="SummaryContent">Delivery Percentage: </div>
-                        <div id="SummaryContent">Types of Connections: </div>
-                        <div id="SummaryContent">Types Connections Percentage: </div>
-                        <div id="SummaryContent"></div>
+                        <div id="SummaryContent"> Number of connections: </div>
+                        <div id="SummaryContent"> Amount of electricity used (kWh): </div>
+                        <div id="SummaryContent"> Amount of gas used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent"> Delivery percentage: </div>
+                        <div id="SummaryContent"> Connection types: </div>
+                        <div id="SummaryContent"> Connection types percentage: </div>
+                        <div id="SummaryContent"> <br> </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-12 col-md-5 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">Filter options:</div>
+                    <div class="card-header"> Filter options: </div>
                     <div class="card-body">
                         
-                        <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
-                            <select id="ReportCityFilterNetwork">
-                                <option value="all">All</option>
+                        <div id="SummaryContent" class="themed-dropdown"> Filter report by city: 
+                            <select class="form-select" id="ReportCityFilterNetwork">
+                                <option value="all"> All </option>
                                 <?php 
                                     include('../Database_Php_Interactions/CitySelect.php');
                                 ?>
                             </select>
                         </div>
                         
-                        <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
-                            <select id="Gas_Electricity_Both"> 
-                                <option value="Both">All</option>
-                                <option value="Gas">Gas</option>
-                                <option value="Electricity">Electricity</option>
+                        <div id="SummaryContent" class="themed-dropdown"> Filter report by utility: 
+                            <select class="form-select" id="Gas_Electricity_Both"> 
+                                <option value="Both">        All </option>
+                                <option value="Gas">         Gas </option>
+                                <option value="Electricity"> Electricity </option>
                             </select>
                         </div>
                         
                         <div id="SummaryContent">
-                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                            <button type="button" class="fancy-button" style="float: right"> Print Summary </button>
                         </div>
                     </div>
                 </div>
@@ -213,7 +214,7 @@
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🗺️ Energy Use Heatmap</div>
+                    <div class="card-header"> 🗺️ Energy Use Heatmap </div>
                     <div id="heatmap" style="height: 500px;">
                         <!-- 🗺️ Heatmap container -->
                     </div>

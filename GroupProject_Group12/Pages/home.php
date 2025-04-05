@@ -27,10 +27,10 @@
             <div class="col-12 col-md-8 d-flex">
                 <div class="card h-90">
                     <div class="card-header">📊 Energy Usage Overview</div>
-                    <div class="card-body" style="height: 500px;">
+                    <div class="card-body">
                         <form action="home.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'> 
-                                <label for="Dashboard_Years">Select year:</label><br>
+                                <label for="Dashboard_Years"> Select year: </label><br>
                                 <select class="form-select" name="Dashboard_Years">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -42,13 +42,13 @@
                             <?php
                                 if ($RoleID != 2) {
                                 echo '<div class="themed-dropdown" style="float: left">
-                                    <label for="Dashboard_Networks">Select Network:</label><br>
+                                    <label for="Dashboard_Networks"> Select network: </label><br>
                                     <select class="form-select" name="Dashboard_Networks">
-                                        <option value="coteq"> Coteq </option>
-                                        <option value="enexis"> Enexis </option>
-                                        <option value="westland-infra"> Westland Infra </option>
-                                        <option value="stedin"> Stedin </option>
-                                        <option value="liander"> Liander </option>
+                                        <option value="coteq">          Coteq </option>
+                                        <option value="westland-infra"> Westlandia </option>
+                                        <option value="enexis">         Enexis </option>
+                                        <option value="stedin">         Stedin </option>
+                                        <option value="liander">        Liander </option>
                                     </select>
                                 </div>';
                                 }
@@ -85,7 +85,6 @@
                                                 }
                                                 
                                                 $CityConsumeTotals[$CityName] += $City[0];
-                                            
                                             }
                                             
                                             $AllCSVCityData[$TypeOfCSV] += $CityConsumeTotals;
@@ -237,7 +236,7 @@
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
                     <div class="card-header">🗺️ Energy Use Heatmap</div>
-                    <div id="heatmap" style="height: 500px;"></div> <!-- 🗺️ Heatmap container -->
+                    <div id="heatmap"></div> <!-- 🗺️ Heatmap container -->
                 </div>
             </div>
             

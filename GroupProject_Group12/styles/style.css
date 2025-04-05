@@ -62,14 +62,6 @@ body.light-mode {
     color: var(--text-light);
 }
 
-/* 🌟 Smooth fade-in effect on page load */
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* 🎑 Background transition layer */
 body::before {
     content: "";
@@ -102,7 +94,17 @@ h2, .card-header {
     text-shadow: 0 0 18px var(--text-shadow);
 }
 
-/* ================== 🏛️ Card & Panels ================== */
+/* =================== 🔄 Page Loading =================== */
+
+/* 🌟 Smooth fade-in effect on page load */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =================== 🏛️ Card & Panels =================== */
 .card, .notification-item {
     margin: 12px;
     background: var(--card-dark);
@@ -239,15 +241,15 @@ input[type="checkbox"]:checked::before {
 /* ================ 🔽 Dropdown Selectors ================ */
 .themed-dropdown {
     position: relative;
+    display: inline-block;
     width: 200px;
     margin-right: 16px;
-    display: inline-block;
 }
 
-.themed-dropdown select {
-    appearance: none;
+.themed-dropdown select.form-select {
+    appearance: none; /* Remove native select styling */
     background: var(--card-dark);
-    color: white;
+    color: var(--text-dark);
     border: 1px solid var(--border-colour);
     border-radius: 12px;
     padding: 12px 16px;
@@ -257,55 +259,55 @@ input[type="checkbox"]:checked::before {
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-.themed-dropdown select option {
-    background: #225;
-}
-.themed-dropdown select:hover {
+
+.themed-dropdown select.form-select:hover {
     box-shadow: 0px 0px 12px #f76;
 }
-.themed-dropdown select:focus {
+.themed-dropdown select.form-select:focus {
     border-color: #f76;
     box-shadow: 0px 0px 12px #ff46b3;
 }
 
-/* Dropdown arrow */
+/* Dropdown background */
+.themed-dropdown select option {
+    background: #225;
+}
+.light-mode .themed-dropdown select option {
+    background: #cce;
+}
+
+/* ⬇️ Dropdown arrow */
 .themed-dropdown::after {
     content: "";
     position: absolute;
-    bottom: 50%;
+    bottom: 17px;
     right: 16px;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     background-color: var(--border-colour);
-    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 8"><path d="M2 1l5 6 5-6z"/></svg>');
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 6"><path d="M0.5 1 L4 6 L7.5 1 Z"/></svg>');
+    mask-size: contain;
     mask-repeat: no-repeat;
-    transform: translateY(75%) rotate(0deg);
-    transition: transform 0.3s ease-in-out;
+    mask-position: center;
+    transition: transform 0.2s ease-in-out;
     pointer-events: none;
 }
-/* 🌀 Rotate arrow when dropdown is active */
+/* 🔄 Rotate arrow when dropdown is active */
 .themed-dropdown:focus-within::after {
-    transform: translateY(25%) rotate(-180deg);
+    transform: rotate(-180deg);
 }
 
-.themed-dropdown select:focus + ::after {
-    color: #f76;
-}
-
-/* Light mode adjustments */
+/* 🌞 Light mode adjustments */
 .light-mode .themed-dropdown select {
     background: var(--card-light);
     color: var(--text-light);
     border-color: var(--text-light);
 }
 .light-mode .themed-dropdown::after {
-    color: var(--text-light);
-}
-.light-mode .themed-dropdown select option {
-    background: #cce;
+    background-color: var(--text-light); /* Dropdown arrow */
 }
 
-/* ====================== 🌫️ Blur ====================== */
+/* ======================= 🌫️ Blur ======================= */
 .modal-content, .navbar, .sidebar {
     backdrop-filter: blur(3px);
 }
@@ -403,12 +405,18 @@ input[type="checkbox"]:checked::before {
 .icon-container::after {
     opacity: 0.5;
 }
+
 .sun-icon, .moon-icon, .bell-icon {
     fill: #fff;
     stroke: #fff;
     color: rgba(0, 0, 0, 0);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
+.light-mode .sun-icon, .light-mode .moon-icon, .light-mode .bell-icon {
+    fill: var(--text-light);
+    stroke: var(--text-light);
+}
+
 .icon-container:hover .sun-icon {
     fill: yellow;
     stroke: yellow;
@@ -580,17 +588,15 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 50px !important;
-    transition: all 0.3s ease;
-    transition: transform 0.2s ease !important;
+    transition: all 0.2s ease !important;
 }
 button:active {
     transform: translateY(2px);
 }
 
 /* ======================= 📈 Chart ======================= */
-#testChart {
-    width: 100%;
-    height: 400px;
+canvas {
+    min-height: 100px;
 }
 #citychart {
     color: #fff;

@@ -184,19 +184,19 @@
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
-                        <form action="Admin.php" method="GET" >
+                        <form action="Admin.php" method="GET">
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="AdminNetwork">Select network:</label> <br>
+                                <label for="AdminNetwork"> Select network: </label><br>
                                 <select class="form-select" name="AdminNetwork">
-                                    <option value="coteq"> Coteq </option>
+                                    <option value="coteq">          Coteq </option>
                                     <option value="westland-infra"> Westlandia </option>
-                                    <option value="enexis"> Enexis </option>
-                                    <option value="stedin"> Stedin </option>
-                                    <option value="liander"> Liander </option>
-                                </select>    
+                                    <option value="enexis">         Enexis </option>
+                                    <option value="stedin">         Stedin </option>
+                                    <option value="liander">        Liander </option>
+                                </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="AdminNetworkYear">Select year:</label> <br>
+                                <label for="AdminNetworkYear"> Select year: </label><br>
                                 <select class="form-select" name="AdminNetworkYear">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -206,7 +206,7 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_City_Type">Select type:</label> <br>
+                                <label for="Admin_City_Type">Select type:</label><br>
                                 <select class="form-select" name="Admin_City_Type">
                                     <option value="electricity"> Electricity </option>
                                     <option value="gas"> Gas </option>
@@ -306,38 +306,38 @@
             
             <div class="col-12 col-md-7 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">Additional Information</div>
+                    <div class="card-header"> Additional Information </div>
                     <div class="card-body">
-                        <div id="SummaryContent">Number of Connections: </div>
-                        <div id="SummaryContent">Amount of Electricity Used (kWh): </div>
-                        <div id="SummaryContent">Amount of Gas Used (m<sup>3</sup>): </div>
-                        <div id="SummaryContent">Delivery Percentage: </div>
-                        <div id="SummaryContent">Types of Connections: </div>
-                        <div id="SummaryContent">Types Connections Percentage: </div>
-                        <div id="SummaryContent"></div>
+                        <div id="SummaryContent"> Number of connections: </div>
+                        <div id="SummaryContent"> Amount of electricity used (kWh): </div>
+                        <div id="SummaryContent"> Amount of gas used (m<sup>3</sup>): </div>
+                        <div id="SummaryContent"> Delivery percentage: </div>
+                        <div id="SummaryContent"> Connection types: </div>
+                        <div id="SummaryContent"> Connection types percentage: </div>
+                        <div id="SummaryContent"> <br> </div>
                     </div>
                 </div> 
             </div>
             
             <div class="col-12 col-md-5 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">Filter options:</div>
+                    <div class="card-header"> Filter options: </div>
                     <div class="card-body">
                         
-                        <div id="SummaryContent" class="themed-dropdown">Filter report by city: 
-                            <select id="ReportAdminFilter">
-                                <option value="all">All</option>
+                        <div id="SummaryContent" class="themed-dropdown"> Filter report by city: 
+                            <select class="form-select" id="ReportAdminFilter">
+                                <option value="all"> All </option>
                                 <?php
                                     include('../Database_Php_Interactions/CitySelect.php');
                                 ?>
                             </select>
                         </div>
                         
-                        <div id="SummaryContent" class="themed-dropdown">Filter report by utility: 
-                            <select id="Gas_Electricity_Both">
-                                <option value="Both">All</option>
-                                <option value="Gas">Gas</option>
-                                <option value="Electricity">Electricity</option>
+                        <div id="SummaryContent" class="themed-dropdown"> Filter report by utility: 
+                            <select class="form-select" id="Gas_Electricity_Both">
+                                <option value="Both">        All</option>
+                                <option value="Gas">         Gas</option>
+                                <option value="Electricity"> Electricity</option>
                             </select>
                         </div>
                         
