@@ -22,9 +22,6 @@
                     <!-- ⚠️ Error message area -->
                     <div class="alert alert-danger d-none" id="LoginErrorMessage"></div>
                     
-                    <!-- 🔄 reCAPTCHA widget for 2FA -->
-                    <div class="g-recaptcha" data-sitekey="6LcWWQkrAAAAAKrv-Yq9r9h4sosY5dsHW-P9IGLF"></div>
-                    
                     <div class="modal-footer">
                         <button type="submit" class="fancy-button">Login</button>
                     </div>

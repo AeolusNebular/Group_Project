@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require('Database_Utilities.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST['Login_Password'])) {
