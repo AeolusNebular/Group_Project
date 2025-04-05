@@ -113,20 +113,20 @@
                             
                             <div class="mb-2">
                                 <label for="UserFName" class="form-label"> First name: </label>
-                                <input type="text" id="UserFName" name="UserFName" class="form-control">
+                                <input type="text" id="UserFName" name="UserFName" class="form-control" required>
                             </div>
                             <div class="mb-2">
                                 <label for="UserLName" class="form-label"> Last name: </label>
-                                <input type="text" id="UserLName" name="UserLName" class="form-control">
+                                <input type="text" id="UserLName" name="UserLName" class="form-control" required>
                             </div>
                             <div class="mb-2">
                                 <label for="UserPhoneNo" class="form-label"> Phone number: </label>
-                                <input type="tel" id="UserPhoneNo" name="UserPhoneNo" class="form-control">
+                                <input type="tel" id="UserPhoneNo" name="UserPhoneNo" class="form-control" required>
                             </div> 
                             <input type="hidden" id='UserID' value=<?php $UserID ?>>
                             <div class="mb-2">
                                 <label for="UserHomeNo" class="form-label"> Home address: </label>
-                                <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control">
+                                <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control" required>
                             </div>
                             <button type="Submit" style='float: right' class="fancy-button">
                                 Update User Info

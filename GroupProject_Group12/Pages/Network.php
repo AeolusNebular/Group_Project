@@ -95,13 +95,12 @@
                                 }
                                 
                                 $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
-                                $Year = '2016';
+                                $Year = isset($_POST['NetworkYearFilter']) ? $_POST['NetworkYearFilter'] : '2016';
                                 $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
                                 
                                 $NetworkValue = CSVData($Type, $Year, $Network);
                                 
                                 foreach ($NetworkValue as $City => $Data) {
-                                    debug_to_console($City);
                                     if (!isset($TotalNetworkConsume[$City])) {
                                         $TotalNetworkConsume[$City] = 0;
                                     }
@@ -150,7 +149,7 @@
                                     plugins: {
                                         legend: {
                                             labels: {
-                                                color: 'white' // 🏷️ Legend text color
+                                                color: 'white' // 🏷️ Legend tex t color
                                             }
                                         }
                                     }
