@@ -30,17 +30,17 @@ function Create_New_User() {
     var City = document.getElementById("Cities")
         ? document.getElementById("Cities").value
         : "";
-
+        
     var CorrectInfo =
         !Element_Empty(Email) &&
         !Element_Empty(Password) &&
         !Element_Empty(ConPass) &&
         ConfirmedPass(Password, ConPass);
-
+        
     console.log("Form valid:", CorrectInfo);
     
     if (CorrectInfo) {
-        // Posts information above into DB if CorrectInfo is true
+        // Post information above into DB if CorrectInfo is true
         alert("User Created");
     }
 }
@@ -48,14 +48,14 @@ function Create_New_User() {
 function UserType() {
     var NetworkUser = document.getElementById("Network_User").checked;
     var CityUser = document.getElementById("City_Council_User").checked;
-
+    
     document.getElementById("Network_Select").style.display = NetworkUser
         ? "block"
         : "none";
     document.getElementById("City_Select").style.display = CityUser
         ? "block"
         : "none";
-
+        
     if (NetworkUser) {
         document.getElementById("City_Council_User").checked = false;
     }

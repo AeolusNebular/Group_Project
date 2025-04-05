@@ -223,5 +223,13 @@
         </div>
     </div>
     
+    <!-- 🛸 Spacer -->
+    <div>
+        <br>
+    </div>
+    
+    <!-- 👣 Footer -->
+    <?php include("../modules/footer.php"); ?>
+    
 </body>
 </html>

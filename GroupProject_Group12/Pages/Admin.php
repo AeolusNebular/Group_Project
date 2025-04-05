@@ -21,11 +21,11 @@
     ?>
     
     <!-- 🛡️ Admin page content -->
-    <div class="container-lg mt-4" style="min-height: 800px;">
+    <div class="container-lg mt-4">
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Admin</h2>
+            <h2> Admin </h2>
         </div>
         
         <div class="row gx-1">
@@ -342,7 +342,7 @@
                         </div>
                         
                         <div id="SummaryContent">
-                            <button type="button" class="fancy-button" style="float: right">Print Summary</button>
+                            <button type="button" class="fancy-button" style="float: right"> Print Summary </button>
                         </div>
                     </div>
                 </div>
@@ -350,5 +350,9 @@
             
         </div>
     </div>
+    
+    <!-- 👣 Footer -->
+    <?php include("../modules/footer.php"); ?>
+
 </body>
 </html>

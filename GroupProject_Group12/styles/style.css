@@ -616,9 +616,9 @@ button:active {
 }
 #AdminPanelFormRight {
     float : right;
-    flex-direction: column; 
-    display: flex; 
-    height: 295px; 
+    flex-direction: column;
+    display: flex;
+    height: 295px;
     position: relative;
 }
 
@@ -634,8 +634,8 @@ button:active {
 }
 
 #AdminPanelAddUserBtn {
-    position: absolute; 
-    bottom: 0; 
+    position: absolute;
+    bottom: 0;
     right: 0;
 }
 
@@ -705,7 +705,7 @@ button:active {
     z-index: 3;
 }
 /* ⚠️ Login prompt alert */
-.alert {
+#login-alert {
     position: absolute;
     width: 52%;
     margin: 24%;
@@ -716,4 +716,72 @@ button:active {
     border-radius: 8px;
     text-align: center;
     font-weight: bold;
+}
+
+/* ====================== 👣 Footer ====================== */
+body, .container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+footer, .footer-link, footer h5, footer p {
+    color: var(--text-dark);
+}
+footer {
+    background: var(--card-dark);
+    box-shadow: 0 0 16px var(--shadow-main), 0 0 10px var(--text-shadow);
+    backdrop-filter: blur(2px) saturate(120%) contrast(160%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    margin-top: auto;
+}
+
+.footer-link {
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid var(--border-colour);
+    transition: all 0.3s ease;
+}
+.footer-link:hover {
+    color: var(--hover-dropdown);
+    text-shadow: var(--text-shadow);
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px var(--shadow-main), 0 0 15px var(--text-shadow);
+}
+
+footer p {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+footer ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Light mode */
+.light-mode footer,
+.light-mode .footer-link,
+.light-mode footer h5,
+.light-mode footer p {
+    color: var(--text-light);
+    border-color: var(--text-light);
+}
+.light-mode footer {
+    background: var(--card-light);
+    border-color: rgba(0, 0, 0, 0.175);
+}
+
+.light-mode .footer-link:hover {
+    color: var(--hover-dropdown);
+    border-color: var(--hover-dropdown);
 }

@@ -9,7 +9,7 @@ if (!isset($_SESSION['UserID'])) {
         <div class="overlay"></div>
 
         <!-- ⚠️ Alert Box -->
-        <div class="alert alert-info" role="alert">
+        <div id="login-alert" class="alert alert-info" role="alert">
             ⚠️ Please login to view this page!
         </div>';
 } else {
@@ -73,7 +73,7 @@ if (!$notifResult) {
         </button>
         
         <!-- 📛 Title -->
-        <h2>Smart Energy Dashboard™</h2>
+        <h2> Smart Energy Dashboard&trade; </h2>
         
         <div>
             <div class="icon-container">

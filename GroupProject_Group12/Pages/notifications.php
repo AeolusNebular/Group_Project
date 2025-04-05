@@ -10,7 +10,7 @@
 <body>
     
     <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php"); 
+    <?php include("../modules/navbar.php");
     require_once('../Database_Php_Interactions/Database_Utilities.php'); ?>
     
     <!-- 🔔 Notifications page content -->
@@ -18,7 +18,7 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Notifications</h2>
+            <h2> Notifications </h2>
         </div>
         
         <div class="notification-list">
@@ -45,22 +45,25 @@
         </div>
     </div>
     
+    <!-- 👣 Footer -->
+    <?php include("../modules/footer.php"); ?>
+    
 </body>
 
 <?php
-// 🗑️ Delete notification
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
-    $notificationId = $_POST['NotifID'];
-    
-    // 🗑️ Delete notification from database
-    $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotifID");
-    $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
-    $deleteStmt->execute();
-
-    // Redirect to the notifications page after deletion
-    header("Location: notifications.php");
-    exit();
-}
+    // 🗑️ Delete notification
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
+        $notificationId = $_POST['NotifID'];
+        
+        // 🗑️ Delete notification from database
+        $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotifID");
+        $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
+        $deleteStmt->execute();
+        
+        // Redirect to the notifications page after deletion
+        header("Location: notifications.php");
+        exit();
+    }
 ?>
 
 </html>
