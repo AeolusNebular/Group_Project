@@ -123,66 +123,11 @@
                         <script>
                             var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
                             
-                            const canvas = document.getElementById("CityCanvas");
-                            
-                            // ✅ Ensure the canvas context is fresh
-                            if (!canvas) return; // 👋 Exit if canvas is missing
-                            const ctx = canvas.getContext("2d");
-                            
-                            // 💥 Destroy existing chart properly
-                            if (chartInstance) {
-                                chartInstance.destroy();
-                                chartInstance = null; // 🧹 Clear instance reference
-                            }
-                            
-                            chartInstance = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: Object.keys(data),
-                                    datasets: [{
-                                        label: "Electricity",
-                                        data: Object.values(data),
-                                        borderColor: "#975ae100",
-                                        backgroundColor: [
-                                            '#003f5c',
-                                            '#374c80',
-                                            '#58508d',
-                                            '#7a5195',
-                                            '#bc5090',
-                                            '#ff6361',
-                                            '#ffa600'
-                                        ],
-                                    
-                                    }]
-                                },
-                                options: {
-                                     animation: {
-                                        duration: 700,
-                                        easing: 'easeOutQuad',
-                                        onComplete : function(){
-                                            URI = chartInstance.toBase64Image('image/jpeg',1);
-                                            
-                                            document.getElementById('ImageURLForPDF').value = URI;
-                                        }
-                                    },
-                                    responsive: true,
-                                    maintainAspectRatio: true,
-                                    plugins: {
-                                        legend: {
-                                            position: "bottom",
-                                            labels: { color: textColor, font: font }
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: "Networks Annual Usage",
-                                            color: textColor,
-                                            font: font
-                                        }
-                                    },
-                                
-                                }
-                            });
-                            
+                            document.addEventListener("DOMContentLoaded", function () {
+                                drawBarGraph();
+                                window.addEventListener("resize", drawBarGraph); // 🖼️ Attach resize event once
+                            });                           
+                           
                             function drawBarGraph() {
                                 let font = { family: "Space Grotesk"};
                                 let textColor = theme ? "#000" : "#fff";

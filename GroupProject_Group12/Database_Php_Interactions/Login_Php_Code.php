@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 require('Database_Utilities.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST['Login_Password'])) {
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST[
                     $_SESSION['City_Name'] = $roleDetails['City_Name'];
                 }
             }
-            
+
             // 🎉 Redirect to home page
             header("Location: /Group_Project/GroupProject_Group12/pages/home.php");
             exit();

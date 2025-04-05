@@ -1,4 +1,20 @@
 <!-- 🔐 Login modal -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+</script>
+
+<script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+          'sitekey' : '6LepUgsrAAAAAN7WFsXsuZmK-Ah789yy3Dtp5uij',
+          'callback' : function(response) {
+            document.getElementById('g-recaptcha-response').value = response;
+        }
+        });
+      };
+</script>
+
+
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -21,15 +37,16 @@
                     
                     <!-- ⚠️ Error message area -->
                     <div class="alert alert-danger d-none" id="LoginErrorMessage"></div>
-                    
-                    <!-- 🔄 reCAPTCHA widget for 2FA -->
-                    <div class="g-recaptcha" data-sitekey="6LcWWQkrAAAAAKrv-Yq9r9h4sosY5dsHW-P9IGLF"></div>
-                    
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                    <div id="html_element"></div>
+
                     <div class="modal-footer">
-                        <button type="submit" class="fancy-button">Login</button>
+                        <button action='submit' class="fancy-button">Login</button>
                     </div>
                 </form>
             </div>
+         
         </div>
     </div>
 </div>
+
