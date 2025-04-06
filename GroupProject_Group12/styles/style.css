@@ -406,13 +406,13 @@ input[type="checkbox"]:checked::before {
     opacity: 0.5;
 }
 
-.sun-icon, .moon-icon, .bell-icon {
+[class$='-icon'] {
     fill: #fff;
     stroke: #fff;
     color: rgba(0, 0, 0, 0);
     transition: all 0.3s ease;
 }
-.light-mode .sun-icon, .light-mode .moon-icon, .light-mode .bell-icon {
+.light-mode [class$='-icon'] {
     fill: var(--text-light);
     stroke: var(--text-light);
 }

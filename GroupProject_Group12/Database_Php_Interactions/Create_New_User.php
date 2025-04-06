@@ -38,7 +38,7 @@
             $City = null;
         }
         
-         // Assigns values of what type of user is created and then sets the variable of the role and the network
+        // Assigns values of what type of user is created and then sets the variable of the role and the network
         if (isset($_POST['Network_User'])) {
             $RoleID = '2';
             $Network = $_POST['Networks'];
@@ -46,7 +46,7 @@
             $Network = null;
         }
         
-        // Begin a transaction in order to commit code required for other transactions 
+        // Begin transaction in order to commit code required for other transactions
         $db->exec('BEGIN TRANSACTION');
         
         // Binds values from query to variables *important as values need to be input in order*
@@ -81,7 +81,7 @@
             $User_Query = $db-> prepare("SELECT USER_ID FROM User_Details WHERE Email = :Email");
             $User_Query-> bindValue(':Email',$_POST['Email']);
             
-            // Executes query and saves to a Result
+            // Executes query and saves to result
             $User_Query_Res = $User_Query->execute();
             
             // If result is true, saves user ID to a variable, else throws error and closes DB
@@ -160,6 +160,6 @@
         $db->close();
         
         // 📨 Sends success to page allowing for confirmation proof
-        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "') </script>";
+        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "')</script>";
     }
 ?>

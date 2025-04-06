@@ -14,7 +14,6 @@
       };
 </script>
 
-
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -49,4 +48,3 @@
         </div>
     </div>
 </div>
-

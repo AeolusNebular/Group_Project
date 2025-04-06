@@ -187,7 +187,7 @@
                                         <option value="desert" class="desert-option"> 🏜️ Desert </option>
                                         <option value="cosmic" class="cosmic-option"> 🌌 Cosmic </option>
                                         <option value="bling"  class="bling-option">  💰 Bling </option>
-                                        <!-- <option value="bonus"  class="bonus-option">  🌈 Bonus</option> -->
+                                        <!-- <option value="bonus"  class="bonus-option">  🌈 Bonus </option> -->
                                         <option value="root"   class="root-option">   ⚙️ Root </option>
                                     </select>
                                 </div>

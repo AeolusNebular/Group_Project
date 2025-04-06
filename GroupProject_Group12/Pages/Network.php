@@ -196,7 +196,7 @@
                         </div>
                         
                         <div id="SummaryContent" class="themed-dropdown"> Filter report by utility: 
-                            <select class="form-select" id="Gas_Electricity_Both"> 
+                            <select class="form-select" id="Gas_Electricity_Both">
                                 <option value="Both">        All </option>
                                 <option value="Gas">         Gas </option>
                                 <option value="Electricity"> Electricity </option>
@@ -221,11 +221,6 @@
             </div>
             
         </div>
-    </div>
-    
-    <!-- 🛸 Spacer -->
-    <div>
-        <br>
     </div>
     
     <!-- 👣 Footer -->

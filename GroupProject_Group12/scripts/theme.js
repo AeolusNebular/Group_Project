@@ -8,40 +8,30 @@ document.addEventListener("DOMContentLoaded", function () {
     let [storedTheme, storedMode] = storedThemeMode.split("-");
     
     // 🌗 Determine actual mode if auto
-    let resolvedMode = storedMode === "auto" 
-    ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") 
-    : storedMode;
+    let resolvedMode = storedMode === "auto" ? getSystemMode() : storedMode;
     
-    // 🧹 Check if logout occurred and reset theme
+    // 🔐 Check if logout occurred and reset theme
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has("logout")) {
         // 🔄 Reset theme, preserve mode
-        sessionStorage.setItem("themeMode", `purple-${storedMode}`);
         applyTheme("purple", storedMode); // 🟣 Ensure purple is applied without flash
-        urlParams.delete("logout");
-        window.history.replaceState({}, document.title, window.location.pathname + "?" + urlParams.toString());
-        location.reload();
+        sessionStorage.setItem("themeMode", `purple-${storedMode}`);
         return; // 👋 Exit to prevent further execution
     }
     
     // 🎨 Apply stored theme & mode
     applyTheme(storedTheme, resolvedMode);
     
-    // 🔽 Set dropdown correctly
+    // 🔽 Set dropdown correctly if it exists (account.php only)
     if (darkModeSelect) {
         darkModeSelect.value = storedMode; // Ensure it reflects stored value
-    } else {
-        console.error("⚠️ Element with ID 'darkMode' not found.");
-    }
-    
-    // 🛑 Only modify dropdown if it exists (account.php only)
-    if (darkModeSelect) {
-        darkModeSelect.value = storedMode;
         
-        // 🎛️ Listen for dropdown changes
+        // 🔽 Listen for dropdown changes
         darkModeSelect.addEventListener("change", function (event) {
             updateDarkMode(event.target.value);
         });
+    } else {
+        console.error("⚠️ Element with ID 'darkMode' not found.");
     }
     
     if (themeSelect) {
@@ -60,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 🎨 Apply theme changes and start/stop theme-specific effects
 function applyTheme(newTheme, newMode) {
-    console.log(`🔄 Switching theme to: ${newTheme} - ${newMode}`);
+    console.log(`🔄 Setting theme to: ${newTheme} - ${newMode}`);
     
     // 🛑 Stop theme-specific effects before applying new theme
     stopMatrix();
@@ -86,7 +76,7 @@ function applyTheme(newTheme, newMode) {
     
     // 💾 Store theme and mode in sessionStorage
     sessionStorage.setItem("themeMode", `${newTheme}-${newMode}`);
-
+    
     // ✅ Ensure dropdown reflects applied theme
     if (document.getElementById("theme")) {
         document.getElementById("theme").value = newTheme;
@@ -98,23 +88,26 @@ function applyTheme(newTheme, newMode) {
     if (newTheme === "cosmic") startStars();
 }
 
+// Function to retrieve system mode
+function getSystemMode() {
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
 // 🌙 Update dark/light mode from dropdown
 function updateDarkMode(mode) {
-    let resolvedMode = mode === "auto"
-        ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
-        : mode;
-        
+    let resolvedMode = mode === "auto" ? getSystemMode() : mode;
+    
     const currentTheme = sessionStorage.getItem("themeMode")?.split("-")[0] || "purple";
     applyTheme(currentTheme, resolvedMode);
 }
 
-// 🌙 Toggle dark/light mode
+// 🌓 Toggle dark/light mode
 function toggleDarkLight() {
     const body = document.body;
     const icon = document.getElementById("darkModeIcon");
     const isCurrentlyDarkMode = !body.classList.contains("light-mode");
     
-    // 🌙 Toggle mode
+    // 🔁 Toggle mode
     const newMode = isCurrentlyDarkMode ? "light" : "dark";
     body.classList.toggle("light-mode", newMode === "light");
     
@@ -237,7 +230,7 @@ let shootingStarsInterval; // 🕒 Store interval reference
 function startStars() {
     console.log("✨ Starting stars...");
     
-    // Check if the star container already exists to prevent duplicates
+    // ✅ Check if the star container already exists to prevent duplicates
     if (document.getElementById("star-container")) {
         console.log("⚠️ Star container already exists, skipping creation.");
         return;
@@ -354,15 +347,14 @@ function createTumbleweed() {
 
 // 🎲 Random spawning pattern
 function startTumbleweeds() {
-    if (tumbleweedInterval) return; // Prevent duplicate intervals
+    if (tumbleweedInterval) return; // ❌ Prevent duplicate intervals
     
     tumbleweedInterval = setInterval(() => {
-        if (!window.limitAnimationsEnabled && Math.random() < 0.6) { // 60% chance to spawn
+        if (!window.limitAnimationsEnabled && Math.random() < 0.6) { // 🎲 60% chance of creation each time
             createTumbleweed();
         }
-    }, 300); // Every 0.3 seconds
+    }, 300); // ⏱️ Every 0.3 seconds
 }
-
 function stopTumbleweeds() {
     console.log("🛑 Stopping tumbleweeds...");
     if (tumbleweedInterval) {

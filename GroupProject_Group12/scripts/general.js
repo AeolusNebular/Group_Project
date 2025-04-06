@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 🔄 Load stored preference
         checkbox.checked = limitAnimationsEnabled;
         
-        // ✅ Apply class on load
+        // 🎯 Apply class on load
         if (limitAnimationsEnabled) {
             document.body.classList.add("limitAnimations");
         }
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("limitAnimations", checkbox.checked);
             window.limitAnimationsEnabled = limitAnimationsEnabled;
             
-            // ✅ Toggle the class so styles apply
+            // 🔁 Toggle the class so styles apply
             if (limitAnimationsEnabled) {
                 document.body.classList.add("limitAnimations");
             } else {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const storedFontSize = sessionStorage.getItem("fontSize") || defaultFontSize;
     applyFontSize(storedFontSize);
     
-    // 🎛️ Ensure dropdown reflects stored value
+    // 🔽 Ensure dropdown reflects stored value
     if (fontSizeSelect) {
         fontSizeSelect.value = storedFontSize;
         

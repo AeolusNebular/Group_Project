@@ -32,11 +32,11 @@
     <!-- 📜 Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/theme.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/login.js"></script>
-    <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/graph.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
+    <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
-
+    
 </head>

@@ -42,6 +42,9 @@
     --bg-light:       linear-gradient(to bottom right, #dfd, #bdb);
     --card-dark:      linear-gradient(to bottom right, #1f3b1fbb, #325d32bb);
     --card-light:     linear-gradient(to bottom right, #c8e6c9bb, #dff2dcbb);
+    --text-shadow:    #494;
+    --hover-dropdown: linear-gradient(to bottom right, #252, #093);
+    --border-colour:  #ced;
 }
 /* 🌊 Marine */
 .marine-theme {
@@ -74,6 +77,7 @@
     --card-dark:      linear-gradient(to bottom right, #5a0000bb, #920000bb);
     --card-light:     linear-gradient(to bottom right, #ffccccbb, #ffeeeebb);
     --text-light:     #300;
+    --hover-dropdown: linear-gradient(to bottom right, #900, #b03);
     --shadow-main:    #af5b5b60;
 }
 
@@ -82,6 +86,7 @@
     --text-light:     #600;
     --shadow-main:    #56121260;
     --text-shadow:    #500;
+    --hover-dropdown: linear-gradient(to bottom right, #922, #500);
     --border-colour:  #922;
 }
 
@@ -96,7 +101,7 @@
     --text-shadow:    #040;
     --hover-dropdown: #040;
     --border-colour:  #040;
-    font-family: 'Courier New', monospace;
+    font-family:      'Courier New', monospace;
 }
 /* 🌀 Falling code effect */
 .matrix-theme .matrix-container {
@@ -163,7 +168,7 @@
     --text-light:     #421;
     --shadow-main:    #cc996060;
     --text-shadow:    #a63;
-    --hover-dropdown: linear-gradient(to bottom right, #9c673a, #c78b5f);
+    --hover-dropdown: linear-gradient(to bottom right, #963, #c85);
     --border-colour:  #fdb;
 }
 /* 🍂 Tumbleweed */
@@ -261,12 +266,12 @@
 
 /* 💰 Ridiculously Bling */
 .bling-theme {
-    --bg-dark:        linear-gradient(to bottom right, #c18c50, #5d4f00);
-    --bg-light:       linear-gradient(to bottom right, #fffae6, #fff0b3);
+    --bg-dark:        linear-gradient(to bottom right, #c85, #540);
+    --bg-light:       linear-gradient(to bottom right, #ffe, #ffb);
     --card-dark:      linear-gradient(to bottom right, #e6a900bb, #ffd700bb);
-    --card-light:     linear-gradient(to bottom right, #fff5cc, #ffeb99);
+    --card-light:     linear-gradient(to bottom right, #ffc, #fe9);
     --shadow-main:    #dbcb8580;
-    --text-shadow:    #cadb85;
+    --text-shadow:    #cd8;
 }
 
 /* 🌈 Bonus */
@@ -275,6 +280,7 @@
     --bg-light:       linear-gradient(70deg, violet, indigo, blue, green, yellow, orange, red, violet);
     --card-dark:      linear-gradient(130deg, red, orange, yellow, green, blue, indigo, violet, red, orange, yellow, green, blue, indigo, violet, red);
     --card-light:     linear-gradient(130deg, violet, indigo, blue, green, yellow, orange, red, violet);
+    font-family:      'Comic Sans MS';
 }
 
 /* 🌈 Apply animation to background - Left to Right */
@@ -296,7 +302,7 @@ body.bonus-theme {
     100% { background-position: 0% 50%; }
 }
 
-/* 🎨 Theme selector  */
+/* 🎨 Theme selector */
 .purple-option { color: #748; }
 .green-option  { color: #353; }
 .marine-option { color: #266; }
