@@ -124,6 +124,30 @@ function toggleDarkLight() {
     requestAnimationFrame(drawChart);
 }
 
+// 🔁 Toggle visibility of navbar mode toggle
+function toggleDarkModeNavbar() {
+    const checkbox = document.getElementById("darkModeNavbar");
+    const darkModeToggle = document.getElementById("darkModeToggle");
+
+    // ✅ Show of hide navbar mode toggle based on checkbox status
+    if (checkbox.checked) {
+        darkModeToggle.style.opacity = "1";
+        darkModeToggle.style.pointerEvents = "auto";
+    } else {
+        darkModeToggle.style.opacity = "0";
+        darkModeToggle.style.pointerEvents = "none";
+    }
+}
+
+// 📝 Set event listener for checkbox to toggle dark mode button visibility
+document.addEventListener("DOMContentLoaded", function() {
+    const checkbox = document.getElementById("darkModeNavbar");
+    checkbox.addEventListener("change", toggleDarkModeNavbar);
+
+    // 🎨 Set initial visibility of dark mode toggle button based on checkbox state
+    toggleDarkModeNavbar();
+});
+
 // ☀️ Sun Icon SVG
 function sunIcon() {
     return `
