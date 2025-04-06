@@ -48,6 +48,11 @@ input[type="checkbox"]::before {
 }
 
 /* =================== 🎨 Body & Modes =================== */
+html, body {
+    min-height: 100vh;
+    margin: 0;
+}
+
 body {
     background: var(--bg-dark);
     color: var(--text-dark);
@@ -55,6 +60,8 @@ body {
     padding-top: 76px;
     min-height: 100vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
     transition: opacity 0.6s ease-out, transform 0.4s ease-out, filter 0.3s ease-in-out;
 }
@@ -485,7 +492,7 @@ input[type="checkbox"]:checked::before {
     opacity: 0; /* Ready for fade in on hover */
     transform: translateY(-8px);
     z-index: 10;
-    pointer-events: none; /* Prevents interaction when invisible */
+    pointer-events: none; /* Prevent interaction when invisible */
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 

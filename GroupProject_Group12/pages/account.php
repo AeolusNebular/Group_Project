@@ -4,7 +4,7 @@
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
     
-    <title>Account - Smart Energy Dashboard</title>
+    <title> Account - Smart Energy Dashboard </title>
 </head>
 
 <body>
@@ -29,10 +29,8 @@
             <!-- 📝 User summary panel (fat) -->
             <div class="col-12 col-md-8 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">
-                        👤 User Summary
-                    </div>
-                    <div class="card-body" style="height:350px;">
+                    <div class="card-header"> 👤 User Summary </div>
+                    <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
                             <!-- 👤 Profile -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" fill="currentColor" viewBox="0 0 16 16">
@@ -43,7 +41,9 @@
                                     <?php echo isset($UserFName) ? $UserFName : 'Bob'; ?>
                                     <?php echo isset($UserSName) ? $UserSName : 'Smith'; ?>
                                 </h5>
-                                <small><?php echo isset($UserEmail) ? $UserEmail : 'bobsmith@boibsmith.com';?></small>
+                                <small>
+                                    <?php echo isset($UserEmail) ? $UserEmail : 'bobsmith@boibsmith.com';?>
+                                </small>
                             </div>
                         </div>
                         
@@ -51,7 +51,7 @@
                         <div>
                             <hr>
                             <p>
-                                <b>Phone number:</b>
+                                <b> Phone number: </b>
                                 <?php
                                     function formatPhoneNumber($number) {
                                         // ✅ Check if number has at least 10 digits
@@ -70,11 +70,11 @@
                                 ?>
                             </p>
                             <p>
-                                <b>Address:</b>
+                                <b> Address: </b>
                                 <?php echo isset($UserHouseNo) ? $UserHouseNo : '123 Demo Street' ?>
                             </p>
                             <p>
-                                <b>Role:</b>
+                                <b> Role: </b>
                                 <?php 
                                     switch ($RoleID) {
                                         case 3 : {
@@ -108,7 +108,7 @@
             <div class="col-12 col-md-4 d-flex">
                 <div class="card h-90">
                     <div class="card-header"> ➕ Additional User Information </div>
-                    <div class="card-body" style="height:400px;">
+                    <div class="card-body">
                         <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
                             
                             <div class="mb-2">
@@ -160,7 +160,7 @@
                                 <label for="darkMode"> Dark/light mode: </label>
                                 <div class="themed-dropdown">
                                     <select class="form-select" id="darkMode">
-                                        <option value="auto">  Auto </option>
+                                        <option value="auto">  Device </option>
                                         <option value="dark">  Dark </option>
                                         <option value="light"> Light </option>
                                     </select>

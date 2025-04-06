@@ -214,7 +214,7 @@
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
                     <div class="card-header"> 🗺️ Energy Use Heatmap </div>
-                    <div id="heatmap" style="height: 500px;">
+                    <div id="heatmap">
                         <!-- 🗺️ Heatmap container -->
                     </div>
                 </div>

@@ -11,7 +11,12 @@ function drawChart() {
     let theme = document.body.classList.contains("light-mode");
 
     let font = { family: "Space Grotesk"};
-    let textColor = theme ? "#103" : "#fff";
+                                
+    // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+    const storedThemeMode = sessionStorage.getItem("themeMode")
+    const [storedTheme, storedMode] = storedThemeMode.split("-");
+    let textColor = storedMode === "light" ? "#000" : "#fff";
+
     let lineColor = theme ? "#aaa" : "#777";
 
     const canvas = document.getElementById("testChart");
@@ -77,10 +82,14 @@ document.addEventListener("DOMContentLoaded", function () {
  Create chart
 function drawCouncilChart() {
     let isDarkMode = document.body.classList.contains("dark-mode");
-
-    let textColor = isDarkMode ? "#000" : "#fff";
+    
+    // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+    const storedThemeMode = sessionStorage.getItem("themeMode")
+    const [storedTheme, storedMode] = storedThemeMode.split("-");
+    let textColor = storedMode === "light" ? "#000" : "#fff";
+    
     let lineColor = isDarkMode ? "#888" : "#ccc";
-
+    
     const canvas = document.getElementById("AdminCityCoucilCanvas");
     
     // ✅ Ensure the canvas context is fresh
@@ -92,7 +101,7 @@ function drawCouncilChart() {
         chartInstance.destroy();
         chartInstance = null; // 🧹 Clear instance reference
     }
-
+    
     chartInstance = new Chart(ctx, {
         type: "scatter",
         data: {

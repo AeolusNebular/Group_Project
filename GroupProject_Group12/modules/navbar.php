@@ -66,8 +66,8 @@ if (!$notifResult) {
         
         <!-- 🔀 Sidebar toggle -->
         <button class="navbar-toggler
-            <?php echo isset($_SESSION['RoleID']) ? '' : 'invisible'; ?>" 
-            type="button" onclick="toggleNav()" 
+            <?php echo isset($_SESSION['RoleID']) ? '' : 'invisible'; ?>"
+            type="button" onclick="toggleNav()"
             aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span>
         </button>
@@ -78,7 +78,7 @@ if (!$notifResult) {
         <div>
             <div class="icon-container">
                 <!-- 🌙 Dark mode toggler (icon set by JS) -->
-                <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle dark mode"> 
+                <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle dark mode">
                     <svg id="darkModeIcon" width="24px" height="24px" viewBox="0 0 16 16"></svg>
                 </button>
             </div>
@@ -122,14 +122,14 @@ if (!$notifResult) {
                 <?php 
                     if (isset($UserID)) {
                         echo '
-                        <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false" >
+                        <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
                             </svg>
                         </button>';
                     } else {
                         echo'
-                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal" aria-label="Login" >
+                        <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#LoginModal" aria-label="Login">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M8 8a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM1 14s1-4 7-4 7 4 7 4H1z"/>
                             </svg> Login 

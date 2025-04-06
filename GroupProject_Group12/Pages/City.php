@@ -44,13 +44,13 @@
                             <?php
                                 if ($RoleID != 2) {
                                     echo "<div class='themed-dropdown' style='float: left'>
-                                        <label for='CityNetworks'>Select network:</label><br>
+                                        <label for='CityNetworks'> Select network:< /label><br>
                                         <select class='form-select' name='CityNetworks'>
-                                            <option value='coteq'> Coteq </option>      
+                                            <option value='coteq'>          Coteq </option>
                                             <option value='westland-infra'> Westlandia </option>
-                                            <option value='enexis'> Enexis </option>
-                                            <option value='stedin'> Stedin </option>
-                                            <option value='liander'> Liander </option>
+                                            <option value='enexis'>         Enexis </option>
+                                            <option value='stedin'>         Stedin </option>
+                                            <option value='liander'>        Liander </option>
                                         </select>
                                     </div>";
                                 }
@@ -58,7 +58,7 @@
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="CityYears"> Select network: </label><br>
                                 <select class="form-select" name="CityYears">
-                                    <option value="2016"> 2016 </option>      
+                                    <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
                                     <option value="2018"> 2018 </option>
                                     <option value="2019"> 2019 </option>
@@ -89,7 +89,7 @@
                                     $CityAdditions = array('Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0);
                                     $x = 1;
                                     if (isset($_SESSION['City_Name'])) {
-                                        $RoleNetworks = ['coteq' ,'enexis' ,  'liander' , 'stedin' , 'westland-infra'];                              
+                                        $RoleNetworks = ['coteq','enexis','liander','stedin','westland-infra'];
                                         
                                         foreach ($RoleNetworks as $Network) {
                                             $CityGraphValues = FilterByCityCSV($Type,$Years,$Network,$_SESSION['City_Name']);
@@ -106,7 +106,7 @@
                                         
                                         foreach ($CityGraphValues as $Key => $City) {
                                         $x += 1;
-                                        $CityValues[$Key] =  $City[0];
+                                        $CityValues[$Key] = $City[0];
                                         $CityAdditions['Annual'] += $City[0];
                                         $CityAdditions['Connection'] += $City[1];
                                         $CityAdditions['Delivery_Perc'] += $City[2]/100;
@@ -126,11 +126,15 @@
                             document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // 🖼️ Attach resize event once
-                            });                           
+                            });
                            
                             function drawBarGraph() {
                                 let font = { family: "Space Grotesk"};
-                                let textColor = theme ? "#000" : "#fff";
+                                
+                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+                                const storedThemeMode = sessionStorage.getItem("themeMode")
+                                const [storedTheme, storedMode] = storedThemeMode.split("-");
+                                let textColor = storedMode === "light" ? "#000" : "#fff";
                                 
                                 const canvas = document.getElementById("CityCanvas");
                                 
@@ -240,19 +244,19 @@
                                 if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
                                     $Headings = ['City','Gas','Electricity'];
                                     if (isset($_POST['ReportType']) && $_POST['ReportType'] == 'CSV') {
-                                        $JsonData =  html_entity_decode($_POST['CityValuesForCSV']);
+                                        $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
                                         $CityValues = json_decode($JsonData);
                                     }
                                     
                                     $CityValuesinArray = [];
                                     foreach ($CityValues as $ConsumeType => $CityConsumes){
-                                        //['City','Electricity','Gas']
+                                        // ['City','Electricity','Gas']
                                         foreach ($CityConsumes as $City => $CityConsumeValue) {
                                             if (!isset($CityValuesinArray[$City])) {
                                                 $CityValuesinArray[$City] = [];
-                                            } 
+                                            }
                                             // EG [GOOR][ELECTRICITY,GAS][241241,321454]
-                                            $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue; 
+                                            $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue;
                                         }
                                     }
                                     $fp = fopen('../Reports/Report.csv', 'w');
@@ -268,7 +272,7 @@
                                     
                                     echo 
                                         '<iframe id="my_iframe" style="display:none;"></iframe>
-                                            <script>                                          
+                                            <script>
                                                 document.getElementById("my_iframe").src = "../Reports/Report.csv";
                                             </script>
                                         '

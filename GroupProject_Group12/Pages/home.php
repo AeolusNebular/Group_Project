@@ -22,18 +22,18 @@
         
         <!-- 📛 Title -->
         <div class="text-center">
-            <h2>Dashboard</h2>
+            <h2> Dashboard </h2>
         </div>
         
         <div class="row gx-1">
             <!-- 📈 Big chart panel (fat) -->
             <div class="col-12 col-md-8 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">📊 Energy Usage Overview</div>
+                    <div class="card-header"> 📊 Energy Usage Overview </div>
                     <div class="card-body">
-                        <form action="home.php" method='GET'>
-                            <div class="themed-dropdown" style='float: left'> 
-                                <label for="Dashboard_Years"> Select year: </label><br>
+                        <form action="home.php" method="GET">
+                            <div class="themed-dropdown" style="float: left">
+                                <label for="Dashboard_Years"> Select year: </label> <br>
                                 <select class="form-select" name="Dashboard_Years">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -56,10 +56,11 @@
                                 </div>';
                                 }
                             ?>
-                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
+                            <button type="Submit" class="fancy-button" style="margin-top: 15px; float: right;">
                                 Apply Filter
                             </button>
                         </form>
+
                         <canvas id="DashboardCanvas"></canvas>
                         
                         <?php
@@ -94,7 +95,7 @@
                                             
                                         } elseif ($RoleID == '3' && isset($CityFilter)) {
                                             
-                                            $RoleNetworks = ['coteq' ,'enexis' ,  'liander' , 'stedin' , 'westland-infra'];
+                                            $RoleNetworks = ['coteq','enexis','liander','stedin','westland-infra'];
                                             
                                             $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
                                             foreach ($RoleNetworks as $Network) {
@@ -121,8 +122,9 @@
                         <script>
                             // 📝 Grabs network consume from PHP code above using JSON Encode function and assigns it to data
                             var pieChart, URI;
-                            var DashboardData = <?php echo json_encode($AllCSVCityData); ?>; 
+                            var DashboardData = <?php echo json_encode($AllCSVCityData); ?>;
                             console.log(DashboardData);
+                            
                             document.addEventListener("DOMContentLoaded", function () {
                                 drawMixedGraph();
                                 window.addEventListener("resize", drawMixedGraph); // 🖼️ Attach resize event once
@@ -130,12 +132,16 @@
                             
                             function drawMixedGraph() {
                                 let font = { family: "Space Grotesk"};
-                                let textColor = theme ? "#000" : "#fff";
+                                
+                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+                                const storedThemeMode = sessionStorage.getItem("themeMode")
+                                const [storedTheme, storedMode] = storedThemeMode.split("-");
+                                let textColor = storedMode === "light" ? "#000" : "#fff";
                                 
                                 const canvas = document.getElementById("DashboardCanvas");
                                 
                                 // ✅ Ensure canvas context is fresh
-                                if (!canvas) return; // Exit if canvas is missing
+                                if (!canvas) return; // 👋 Exit if canvas is missing
                                 const ctx = canvas.getContext("2d");
                                 
                                 // 💥 Destroy existing chart properly
@@ -146,20 +152,27 @@
                                 const data = {
                                     labels: Object.keys(DashboardData['Electricity']),
                                     datasets: [{
-                                        type: 'pie',
+                                        type: 'pie', // 🍩 Doughnut chart for gas
                                         label: 'Gas',
                                         data: Object.values(DashboardData['Gas']),
-                                        borderColor: 'rgb(255, 99, 132)',
-                                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                                        // 🟠 Solid colours for Gas
+                                        borderColor: '#00000000',
+                                        backgroundColor: [
+                                            '#003f5c', '#374c80', '#58508d', '#7a5195', '#bc5090', 
+                                            '#ff6361', '#ffa600'
+                                        ],
+                                        zIndex: 1
                                     }, {
-                                        type: 'line',
+                                        type: 'bar',  // Line chart for electricity
                                         label: 'Electricity',
                                         data: Object.values(DashboardData['Electricity']),
                                         fill: false,
-                                        borderColor: 'rgb(54, 162, 235)',
-                                        backgroundColor: 'rgba(255, 99, 132)'
+                                        backgroundColor: [
+                                            '#003f5c', '#374c80', '#58508d', '#7a5195', '#bc5090', 
+                                            '#ff6361', '#ffa600'
+                                        ],
+                                        zIndex: 2
                                     }]
-                                    
                                 };
                                 
                                 chartInstance = new Chart(ctx, {
@@ -180,7 +193,6 @@
                                                 font: font
                                             }
                                         },
-                                        
                                     }
                                 });
                             }
@@ -193,11 +205,11 @@
             <!-- Side panel (thin) -->
             <div class="col-12 col-md-4 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">⚡ Latest Energy Stats</div>
-                    <div class="card-body" style="height:350px;">
-                        <p><strong>Usage: </strong>1,250 kWh</p>
-                        <p><strong>Efficiency: </strong>85%</p>
-                        <p><strong>Cost: </strong>£120</p>
+                    <div class="card-header"> ⚡ Latest Energy Stats </div>
+                    <div class="card-body">
+                        <p> <b>Usage:</b> 1,250 kWh </p>
+                        <p> <b>Efficiency:</b> 85% </p>
+                        <p> <b>Cost:</b> £120 </p>
                     </div>
                 </div>
             </div>
@@ -205,9 +217,9 @@
             <!-- Two even cards -->
             <div class="col-12 col-md-6 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🔍 Analysis</div>
+                    <div class="card-header"> 🔍 Analysis </div>
                     <div class="card-body">
-                        <p>Last month saw a <strong>15% decrease</strong> in energy consumption.</p>
+                        <p> Last month saw a <b>15% decrease</b> in energy consumption. </p>
                     </div>
                 </div>
             </div>
@@ -217,7 +229,7 @@
                     <div class="card-header">⚙️ Recommendations</div>
                     <div class="card-body">
                         <ul>
-                            <li>Switch to <strong>LED lighting</strong>.</li>
+                            <li>Switch to <b>LED lighting</b>.</li>
                             <li>Optimise heating settings.</li>
                             <li>Use smart plugs.</li>
                         </ul>
@@ -230,7 +242,7 @@
                 <div class="card h-90">
                     <div class="card-header">⚠️ Warning</div>
                     <div class="card-body">
-                        Your energy consumption is <strong>15% above</strong> the expected range this month. Holy guacamole!!
+                        Your energy consumption is <b>15% above</b> the expected range this month. Holy guacamole!!
                     </div>
                 </div>
             </div>

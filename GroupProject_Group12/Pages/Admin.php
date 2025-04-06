@@ -8,19 +8,13 @@
 </head>
 
 <body>
-
-    <!-- 🔄 Loading screen -->
-    <div id="preloader">
-        <div class="overlay"></div>
-        <div class="spinner"></div>
-    </div>
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
     require_once('../Database_Php_Interactions/Database_Utilities.php');
     include('../Database_Php_Interactions/CSVData.php');
     try {
-        include("../modules/CreateUser.php"); 
+        include("../modules/CreateUser.php");
     } catch (Exception $e) {
         echo "error loading cities";
     } 
@@ -75,10 +69,10 @@
                                 $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
                                 
                                 // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
-                                $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];                                                                      
+                                $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];
                                 $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
                                 
-                                // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for the Graph Display
+                                // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for graph display
                                 foreach ($Networks as $Network) {
                                     // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
                                     $Values = CSVData($Type,$Year,$Network);
@@ -95,7 +89,7 @@
                         
                         <script>
                             // 📡 Grabs network consume from PHP code above using JSON encode function and assigns to data
-                            var data = <?php echo json_encode($NetworkConsumeTotals); ?>; 
+                            var data = <?php echo json_encode($NetworkConsumeTotals); ?>;
                             
                             document.addEventListener("DOMContentLoaded", function () {
                                 drawDoughnut();
@@ -105,7 +99,11 @@
                             // 🍩 Create doughnut chart displaying network consumption data
                             function drawDoughnut() {
                                 let font = { family: "Space Grotesk"};
-                                let textColor = theme ? "#000" : "#fff";
+                                
+                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+                                const storedThemeMode = sessionStorage.getItem("themeMode")
+                                const [storedTheme, storedMode] = storedThemeMode.split("-");
+                                let textColor = storedMode === "light" ? "#000" : "#fff";
                                 
                                 const canvas = document.getElementById("NetworkCanvas");
                                 
@@ -185,12 +183,12 @@
             <!-- 🏙️ City councils diagram -->
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🏙️ City Council Diagram</div>
+                    <div class="card-header"> 🏙️ City Council Diagram </div>
                     <div class="card-body">
                         
                         <!-- 🏙️ City filter -->
                         <form action="Admin.php" method="GET">
-                            <div class="themed-dropdown" style='float: left'>
+                            <div class="themed-dropdown" style="float: left">
                                 <label for="AdminNetwork"> Select network: </label><br>
                                 <select class="form-select" name="AdminNetwork">
                                     <option value="coteq">          Coteq </option>
@@ -200,7 +198,7 @@
                                     <option value="liander">        Liander </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: left'>
+                            <div class="themed-dropdown" style="float: left">
                                 <label for="AdminNetworkYear"> Select year: </label><br>
                                 <select class="form-select" name="AdminNetworkYear">
                                     <option value="2016"> 2016 </option>
@@ -210,14 +208,14 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_City_Type">Select type:</label><br>
+                            <div class="themed-dropdown" style="float: left">
+                                <label for="Admin_City_Type"> Select type: </label><br>
                                 <select class="form-select" name="Admin_City_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>
+                                    <option value="gas">         Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style='float: right'>
+                            <button type="Submit" class="fancy-button" style="float: right">
                                 Apply Filter
                             </button>
                         </form>
@@ -239,7 +237,7 @@
                             debug_to_console($CityValues);
                         ?>
                         
-                        <script> 
+                        <script>
                            var citydata = <?php echo json_encode($CityValues); ?>;
                            console.log(Object.values(data));
                            document.addEventListener("DOMContentLoaded", function () {
@@ -249,7 +247,11 @@
                             
                             function drawBarGraph() {
                                 let font = { family: "Space Grotesk"};
-                                let textColor = theme ? "#000" : "#fff";
+                                
+                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+                                const storedThemeMode = sessionStorage.getItem("themeMode")
+                                const [storedTheme, storedMode] = storedThemeMode.split("-");
+                                let textColor = storedMode === "light" ? "#000" : "#fff";
                                 
                                 const citycanvas = document.getElementById("AdminCityCouncilCanvas");
                                 
@@ -271,7 +273,7 @@
                                         labels: Object.keys(citydata),
                                         datasets: [{
                                             label: <?php echo json_encode($Type)?>,
-                                            data: Object.values(citydata) ,
+                                            data: Object.values(citydata),
                                             borderColor: "#975ae100",
                                             backgroundColor: [
                                                 '#003f5c',
