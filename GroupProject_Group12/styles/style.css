@@ -746,11 +746,14 @@ footer {
 }
 
 .footer-link {
+    display: inline-block;
+    margin-bottom: 10px;
     text-decoration: none;
     padding: 10px;
     border: 1px solid var(--border-colour);
     transition: all 0.3s ease;
 }
+
 .footer-link:hover {
     color: var(--hover-dropdown);
     text-shadow: var(--text-shadow);
