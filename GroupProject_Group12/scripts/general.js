@@ -92,6 +92,38 @@ function applyFontSize(size) {
     sessionStorage.setItem("fontSize", size);
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const highContrastCheckbox = document.getElementById("highContrast");
+    const body = document.body; // 🎯 Apply the filter to the entire body
+
+    // 🧩 Load stored high contrast preference from sessionStorage
+    const highContrastEnabled = sessionStorage.getItem("highContrast") === "true";
+
+    // 🎯 Apply high contrast filter based on the stored preference
+    if (highContrastEnabled) {
+        body.style.filter = "contrast(200%)"; // 🎯 Apply 200% contrast filter
+        highContrastCheckbox.checked = true;
+    } else {
+        body.style.filter = ""; // 🧹 Clear filter
+        highContrastCheckbox.checked = false;
+    }
+
+    // 🎧 Listen for changes to the High Contrast checkbox
+    highContrastCheckbox.addEventListener("change", function () {
+        const isChecked = highContrastCheckbox.checked;
+
+        // 🔁 Toggle high contrast filter on body
+        if (isChecked) {
+            body.style.filter = "contrast(200%)"; // 🎯 Apply 200% contrast filter
+        } else {
+            body.style.filter = ""; // 🧹 Clear filter
+        }
+
+        // 💾 Save the preference to sessionStorage
+        sessionStorage.setItem("highContrast", isChecked.toString());
+    });
+});
+
 // 🎨 Function to apply selected colourblind filter size
 window.addEventListener("DOMContentLoaded", () => {
     const dropdown = document.getElementById("colourblind");
