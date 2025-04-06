@@ -8,6 +8,12 @@
 </head>
 
 <body>
+
+    <!-- 🔄 Loading screen -->
+    <div id="preloader">
+        <div class="overlay"></div>
+        <div class="spinner"></div>
+    </div>
     
     <!-- 📍 Navbar -->
     <?php include("../modules/navbar.php");
@@ -31,12 +37,12 @@
         <div class="row gx-1">
             <div class="col-12 col-md-7 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🌐 Network Users</div>
+                    <div class="card-header"> 🌐 Network Users </div>
                     <div class="card-body">
                         
                         <form action="Admin.php" method='GET'>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_Network_Year">Select year:</label> <br>
+                                <label for="Admin_Network_Year"> Select year: </label> <br>
                                 <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
                                     <option value="2016"> 2016 </option>
                                     <option value="2017"> 2017 </option>
@@ -46,10 +52,10 @@
                                 </select>
                             </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="Admin_Network_Type">Select type:</label> <br>
+                                <label for="Admin_Network_Type"> Select type: </label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="electricity"> Electricity </option>
-                                    <option value="gas"> Gas </option>
+                                    <option value="gas">         Gas </option>
                                 </select>
                             </div>
                             <button type="Submit" class="fancy-button" style='float: right'>
@@ -79,7 +85,7 @@
                                     
                                     // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
                                     foreach ($Values as $Value) {
-                                        // 🔄 Assigns annual consume to the selected network in loop
+                                        // 🔄 Assigns annual consume to selected network in loop
                                         $NetworkConsumeTotals[$Network] += $Value[0];
                                     }
                                 }
@@ -88,7 +94,7 @@
                         ?>
                         
                         <script>
-                            // 📡 Grabs the network consume from PHP code above using JSON encode function and assigns to data
+                            // 📡 Grabs network consume from PHP code above using JSON encode function and assigns to data
                             var data = <?php echo json_encode($NetworkConsumeTotals); ?>; 
                             
                             document.addEventListener("DOMContentLoaded", function () {
@@ -148,10 +154,9 @@
                                                 font: font
                                             }
                                         },
-                                    
                                     }
                                 });
-                            }
+                            };
                         </script>
                     </div>
                 </div>
@@ -160,7 +165,7 @@
             <!-- 📊 Big chart panel (fat) -->
             <div class="col-12 col-md-5 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">👤 User Creation</div>
+                    <div class="card-header"> 👤 User Creation </div>
                     <div class="card-body">
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User

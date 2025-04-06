@@ -94,16 +94,6 @@ h2, .card-header {
     text-shadow: 0 0 18px var(--text-shadow);
 }
 
-/* =================== 🔄 Page Loading =================== */
-
-/* 🌟 Smooth fade-in effect on page load */
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* =================== 🏛️ Card & Panels =================== */
 .card, .notification-item {
     margin: 12px;
@@ -699,6 +689,47 @@ canvas {
     transform: none !important;
 }
 
+/* =================== 🔄 Page Loading =================== */
+/* 🌟 Smooth fade-in effect on page load */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ⬛ Fullscreen dark overlay */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark, #0b0b0b); /* respects theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+/* 🔄 Simple spinner (can animate SVG instead if you like) */
+.spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 0.4rem solid #ccc;
+    border-top: 0.4rem solid var(--text-shadow);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
+
+/* 🔁 Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* =================== ⬛ Screen Blocker ================== */
 .overlay {
     position: fixed;
@@ -725,13 +756,6 @@ canvas {
 }
 
 /* ====================== 👣 Footer ====================== */
-body, .container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%;
-}
-
 footer, .footer-link, footer h5, footer p {
     color: var(--text-dark);
 }
