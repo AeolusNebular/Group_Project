@@ -74,7 +74,7 @@
                 <script>
                     function submitForms() {
 
-                    document.getElementById("AdminPanelForm").action = '"../Database_Php_Interactions/EmailSender.php"';
+                    document.getElementById("AdminPanelForm").action = "../Database_Php_Interactions/EmailSender.php";
                     document.getElementById("AdminPanelForm").submit();
                 
              
