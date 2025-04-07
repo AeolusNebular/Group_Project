@@ -44,7 +44,7 @@
                             <?php
                                 if ($RoleID != 2) {
                                     echo "<div class='themed-dropdown' style='float: left'>
-                                        <label for='CityNetworks'> Select network:< /label><br>
+                                        <label for='CityNetworks'> Select network: </label><br>
                                         <select class='form-select' name='CityNetworks'>
                                             <option value='coteq'>          Coteq </option>
                                             <option value='westland-infra'> Westlandia </option>
@@ -134,7 +134,12 @@
                                 // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
                                 const storedThemeMode = sessionStorage.getItem("themeMode")
                                 const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                let textColor = storedMode === "light" ? "#000" : "#fff";
+                                
+                                // 🧠 Use computed styles to fetch CSS variable values
+                                const root = document.body;
+                                let textColor = storedMode === "light"
+                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
+                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
                                 
                                 const canvas = document.getElementById("CityCanvas");
                                 
@@ -192,7 +197,6 @@
                                                 font: font
                                             }
                                         },
-                                    
                                     }
                                 });
                             }

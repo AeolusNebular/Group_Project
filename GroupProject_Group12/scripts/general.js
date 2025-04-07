@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🎯 Apply high contrast filter based on the stored preference
     if (highContrastEnabled) {
-        body.style.filter = "contrast(200%)"; // 🎯 Apply 200% contrast filter
+        body.style.filter = "contrast(160%)"; // 🎯 Apply 160% contrast filter
         highContrastCheckbox.checked = true;
     } else {
         body.style.filter = ""; // 🧹 Clear filter
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 🔁 Toggle high contrast filter on body
         if (isChecked) {
-            body.style.filter = "contrast(200%)"; // 🎯 Apply 200% contrast filter
+            body.style.filter = "contrast(160%)"; // 🎯 Apply 160% contrast filter
         } else {
             body.style.filter = ""; // 🧹 Clear filter
         }

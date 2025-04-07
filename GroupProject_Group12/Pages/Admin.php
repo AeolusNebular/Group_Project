@@ -103,7 +103,12 @@
                                 // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
                                 const storedThemeMode = sessionStorage.getItem("themeMode")
                                 const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                let textColor = storedMode === "light" ? "#000" : "#fff";
+                                
+                                // 🧠 Use computed styles to fetch CSS variable values
+                                const root = document.body;
+                                let textColor = storedMode === "light"
+                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
+                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
                                 
                                 const canvas = document.getElementById("NetworkCanvas");
                                 
@@ -251,7 +256,12 @@
                                 // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
                                 const storedThemeMode = sessionStorage.getItem("themeMode")
                                 const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                let textColor = storedMode === "light" ? "#000" : "#fff";
+                                
+                                // 🧠 Use computed styles to fetch CSS variable values
+                                const root = document.body;
+                                let textColor = storedMode === "light"
+                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
+                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
                                 
                                 const citycanvas = document.getElementById("AdminCityCouncilCanvas");
                                 
@@ -272,7 +282,7 @@
                                     data: {
                                         labels: Object.keys(citydata),
                                         datasets: [{
-                                            label: <?php echo json_encode($Type)?>,
+                                            label: <?php echo json_encode(ucfirst($Type))?>,
                                             data: Object.values(citydata),
                                             borderColor: "#975ae100",
                                             backgroundColor: [
