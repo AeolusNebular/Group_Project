@@ -2,14 +2,6 @@
     // Import required utilities
     require('Database_Utilities.php');
     
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    use PHPMailer\PHPMailer\SMTP;
-    
-    require ('../PHPMailer/src/Exception.php');
-    require ('../PHPMailer/src/PHPMailer.php');
-    require ('../PHPMailer/src/SMTP.php');
-    
     // If correct method is used aka POST then will write to database
     if (($_SERVER["REQUEST_METHOD"] == "POST")) {
         
@@ -62,7 +54,7 @@
         $query ->bindValue(':Gender', ' ');
         $query ->bindValue(':EmergencyContact', ' ');
         
-        // Checks if insert is successful and debugs to console else fails and changes success variable to false and reverts transaction as well as closing and ending connection to DB
+        // ✅ Checks if insert is successful and debugs to console else fails and changes success variable to false and reverts transaction as well as closing and ending connection to DB
         if ($query -> execute()) {
             debug_to_console('Successfully Inserted Into User Details');
         }   else {
@@ -117,7 +109,7 @@
             $Ass_Query->bindValue(':CityName', $City);
             $Ass_Query -> bindValue(':UserAID', $UserID);
             
-            // Checks if query is successful and debugs to console success, else states error message and rolls back transactions
+            // ✅ Checks if query is successful and debugs to console success, else states error message and rolls back transactions
             if ($Ass_Query -> execute()) {
                 debug_to_console('Successfully Inserted Into Ass c:');
                 $Success = true;
@@ -127,32 +119,6 @@
                 $db->exec('ROLLBACK');
                 $db->close();
                 exit;
-            }
-            
-            if ($Success) {
-                $mail = new PHPMailer(true);
-                
-                try {
-                    // ⚙️ Server settings
-                    $mail->isSMTP();                                        // 📨 Send using SMTP
-                    $mail->SMTPDebug  = SMTP::DEBUG_SERVER;                 // Enable verbose debug output
-                    $mail->Host       = 'smtp.gmail.com';                   // Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                               // Enable SMTP authentication
-                    $mail->Username   = 'smartenergydashboard@gmail.com';   // SMTP username
-                    $mail->Password   = 'kugg mtgw lvbi fgpq';              // SMTP password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;        // Enable implicit TLS encryption
-                    $mail->Port       = 465;                       
-                    $mail->setFrom('smartenergydashboard@gmail.com', 'Smart Energy Dashboard');
-                    $mail->addAddress($_GET['Email']);                      // Name is optional
-                    
-                    $mail->isHTML(true);                                    // Set email format to HTML
-                    $mail->Subject = 'New Account Creation Notification';
-                    $mail->Body    = 'An Account has been made for you';
-                    
-                    $mail->send();
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
             }
             
         // 🖊️ Commits last 3 transactions and inserts into database
