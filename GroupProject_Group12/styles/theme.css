@@ -10,7 +10,7 @@
     --text-shadow:    #bbb;
     --hover-dropdown: linear-gradient(to bottom right, #777, #888);
     --border-colour:  #eee;
-}                       
+}
 
 .filter-deuteranopia {
     filter: url(#deuteranopia);

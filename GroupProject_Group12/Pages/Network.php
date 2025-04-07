@@ -120,6 +120,19 @@
                             console.log(data);
                             
                             const ctx = document.getElementById('cityChart').getContext('2d');
+                            
+                            let font = { family: "Space Grotesk"};
+                            
+                            // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
+                            const storedThemeMode = sessionStorage.getItem("themeMode")
+                            const [storedTheme, storedMode] = storedThemeMode.split("-");
+                            
+                            // 🧠 Use computed styles to fetch CSS variable values
+                            const root = document.body;
+                            let textColor = storedMode === "light"
+                                ? getComputedStyle(root).getPropertyValue("--text-light").trim()
+                                : getComputedStyle(root).getPropertyValue("--text-dark").trim();
+                            
                             let cityChart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
@@ -137,19 +150,22 @@
                                         y: {
                                             beginAtZero: true,
                                             ticks: {
-                                                color: 'white' // 📏 Y-axis text color
+                                                color: textColor, // 📏 Y-axis text color
+                                                // font: font // Runs over the edge when in use
                                             }
                                         },
                                         x: {
                                             ticks: {
-                                                color: 'white' // 📏 X-axis text color
+                                                color: textColor, // 📏 X-axis text color
+                                                font: font
                                             }
                                         }
                                     },
                                     plugins: {
                                         legend: {
                                             labels: {
-                                                color: 'white' // 🏷️ Legend tex t color
+                                                color: textColor, // 🏷️ Legend text color
+                                                font: font
                                             }
                                         }
                                     }

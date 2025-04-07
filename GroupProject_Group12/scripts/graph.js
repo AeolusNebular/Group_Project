@@ -1,4 +1,3 @@
-var theme = false; // Track dark mode state
 var chartInstance = null; // Store chart instance
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -9,16 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
 // Create chart
 function drawChart() {
     let theme = document.body.classList.contains("light-mode");
-
+    
     let font = { family: "Space Grotesk"};
-                                
+    
     // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
     const storedThemeMode = sessionStorage.getItem("themeMode")
     const [storedTheme, storedMode] = storedThemeMode.split("-");
-    let textColor = storedMode === "light" ? "#000" : "#fff";
-
-    let lineColor = theme ? "#aaa" : "#777";
-
+    
+    // 🧠 Use computed styles to fetch CSS variable values
+    const root = document.documentElement;
+    let textColor = storedMode === "light"
+        ? getComputedStyle(root).getPropertyValue("--text-dark").trim()
+        : getComputedStyle(root).getPropertyValue("--text-light").trim();
+    
     const canvas = document.getElementById("testChart");
     
     // ✅ Ensure the canvas context is fresh
@@ -30,11 +32,11 @@ function drawChart() {
         chartInstance.destroy();
         chartInstance = null; // 🧹 Clear instance reference
     }
-
+    
     chartInstance = new Chart(ctx, {
         type: "line",
         data: {
-            labels: ["2017","2018","2019","2020", "2021", "2022", "2023"],
+            labels: ["2017","2018","2019","2020","2021","2022","2023"],
             datasets: [{
                 label: "Energy Usage (kWh)",
                 data: [564, 585, 649, 1170, 990, 760, 830],
@@ -51,11 +53,11 @@ function drawChart() {
                     position: "bottom",
                     labels: { color: textColor, font: font },
                 },
-                title: { 
-                    display: true, 
-                    text: "Energy Usage Over Time", 
-                    color: textColor, 
-                    font: font 
+                title: {
+                    display: true,
+                    text: "Energy Usage Over Time",
+                    color: textColor,
+                    font: font
                 }
             },
             scales: {
@@ -72,7 +74,6 @@ function drawChart() {
     });
 }
 
-
 /*
 document.addEventListener("DOMContentLoaded", function () {
     drawCouncilChart();
@@ -87,8 +88,6 @@ function drawCouncilChart() {
     const storedThemeMode = sessionStorage.getItem("themeMode")
     const [storedTheme, storedMode] = storedThemeMode.split("-");
     let textColor = storedMode === "light" ? "#000" : "#fff";
-    
-    let lineColor = isDarkMode ? "#888" : "#ccc";
     
     const canvas = document.getElementById("AdminCityCoucilCanvas");
     
@@ -140,4 +139,5 @@ function drawCouncilChart() {
             }
         }
     });
-} */
+}
+*/

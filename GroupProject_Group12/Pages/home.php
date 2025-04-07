@@ -136,7 +136,12 @@
                                 // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
                                 const storedThemeMode = sessionStorage.getItem("themeMode")
                                 const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                let textColor = storedMode === "light" ? "#000" : "#fff";
+                                
+                                // 🧠 Use computed styles to fetch CSS variable values
+                                const root = document.body;
+                                let textColor = storedMode === "light"
+                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
+                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
                                 
                                 const canvas = document.getElementById("DashboardCanvas");
                                 
@@ -176,7 +181,7 @@
                                 };
                                 
                                 chartInstance = new Chart(ctx, {
-                                    type: "scatter",
+                                    // No single type
                                     data: data,
                                     options: {
                                         responsive: true,
