@@ -4,7 +4,7 @@
 }
 
 /* Unified corner rounding */
-.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .notification-item, .footer-link, input, #legend {
+.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .footer-link, input, #legend {
     border-radius: 8px !important;
 }
 
@@ -102,7 +102,7 @@ h2, .card-header {
 }
 
 /* =================== 🏛️ Card & Panels =================== */
-.card, .notification-item {
+.card {
     margin: 12px;
     background: var(--card-dark);
     backdrop-filter: blur(2px) saturate(120%) contrast(160%);
@@ -116,7 +116,7 @@ h2, .card-header {
 .card {
     width: 100%;
 }
-.light-mode .card, .light-mode .notification-item {
+.light-mode .card {
     background: var(--card-light);
     color: var(--text-light);
     border-color: rgba(0, 0, 0, 0.175);
@@ -138,7 +138,7 @@ h2, .card-header {
 }
 
 /* 💡 Card hover effect */
-.card:hover, .notification-item:hover {
+.card:hover {
     transform: translateY(-1px);
     box-shadow: 0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.3);
 }
@@ -431,14 +431,6 @@ input[type="checkbox"]:checked::before {
 }
 
 /* =================== 🔔 Notifications =================== */
-.notification-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
-}
-
 /* 🔔 Notifications icon and dropdown */
 .icon-container:hover .bell-icon {
     stroke: #fb0;
@@ -588,6 +580,16 @@ button {
 }
 button:active {
     transform: translateY(2px);
+}
+
+.btn-close {
+    --bs-btn-close-bg: "" !important;
+    background-color: var(--text-dark);
+    mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") no-repeat center;
+    mask-size: 1em;
+}
+.light-mode .btn-close {
+    background-color: var(--text-light);
 }
 
 /* ======================= 📈 Chart ======================= */
