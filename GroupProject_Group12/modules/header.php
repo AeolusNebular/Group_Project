@@ -37,7 +37,8 @@
     <script src="/Group_Project/GroupProject_Group12/scripts/heatmap.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sparks.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/Create_User.js"></script>
-    
+    <script src="/Group_Project/GroupProject_Group12/scripts/popup.js"></script>
+
     <!-- 🔄 Loading screen -->
     <div id="preloader">
         <div class="overlay"></div>

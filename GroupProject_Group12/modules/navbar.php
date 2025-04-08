@@ -71,7 +71,7 @@ if (!$notifResult) {
             aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span>
         </button>
-        
+        <button class="notifpopup fancy-button" onclick="createNotificationPopup('This is a popup ')">Please Click</button>
         <!-- 📛 Title -->
         <h2> Smart Energy Dashboard&trade; </h2>
         
