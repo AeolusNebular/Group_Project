@@ -101,7 +101,7 @@ if (!$notifResult) {
                             // 🔄 Loop through the results and display each notification
                             while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
                                 echo '<a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="notification-item">';
-                                echo '<p>' . htmlspecialchars($notif['Notification']) . '</p>'; // Display notification
+                                echo '<p>' . htmlspecialchars($notif['Body']) . '</p>'; // Display notification
                                 echo '</a>';
                             }
                             ?>

@@ -1,8 +1,4 @@
 <!-- 🔐 Login modal -->
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
-</script>
-
 <script type="text/javascript">
       var onloadCallback = function() {
         grecaptcha.render('html_element', {
@@ -26,21 +22,25 @@
             <div class="modal-body">
                 <form action="../Database_Php_Interactions/Login_Php_Code.php" method="POST">
                     <div class="mb-3">
-                        <label for="Login_Email" class="form-label">Email address:</label>
+                        <label for="Login_Email" class="form-label"> Email address: </label>
                         <input type="email" class="form-control" id="Login_Email" name="Login_Email" placeholder="Example@gmail.com" required>
                     </div>
                     <div class="mb-3">
-                        <label for="Login_Password" class="form-label">Password:</label>
+                        <label for="Login_Password" class="form-label"> Password: </label>
                         <input type="password" class="form-control" id="Login_Password" name="Login_Password" placeholder="Password" required>
                     </div>
                     
                     <!-- ⚠️ Error message area -->
                     <div class="alert alert-danger d-none" id="LoginErrorMessage"></div>
-                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                    <div id="html_element"></div>
-
+                    
+                    <!-- 🔄 reCAPTCHA -->
+                    <div class="d-flex justify-content-center my-3" style="margin: 12px">
+                        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                        <div id="html_element"></div>
+                    </div>
+                    
                     <div class="modal-footer">
-                        <button action='submit' class="fancy-button">Login</button>
+                        <button action='submit' class="fancy-button"> Login </button>
                     </div>
                 </form>
             </div>
