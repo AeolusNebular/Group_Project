@@ -31,7 +31,7 @@
     
     <!-- 🔄 reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-   
+    
     <!-- 📜 Scripts -->
     <script src="/Group_Project/GroupProject_Group12/scripts/general.js"></script>
     <script src="/Group_Project/GroupProject_Group12/scripts/sidebar.js"></script>

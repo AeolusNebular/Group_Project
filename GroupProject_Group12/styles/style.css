@@ -4,7 +4,7 @@
 }
 
 /* Unified corner rounding */
-.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .footer-link, input, #legend {
+.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .notification-item, .footer-link, input, #legend {
     border-radius: 8px !important;
 }
 
@@ -88,10 +88,6 @@ body::before {
 body.light-mode::before {
     background: var(--bg-light);
     opacity: 1;
-    filter: hue-rotate(10deg);
-}
-body:not(.light-mode)::before {
-    filter: hue-rotate(-10deg);
 }
 
 /* 📢 Headers */
@@ -102,7 +98,7 @@ h2, .card-header {
 }
 
 /* =================== 🏛️ Card & Panels =================== */
-.card {
+.card, .notification-item {
     margin: 12px;
     background: var(--card-dark);
     backdrop-filter: blur(2px) saturate(120%) contrast(160%);
@@ -116,7 +112,7 @@ h2, .card-header {
 .card {
     width: 100%;
 }
-.light-mode .card {
+.light-mode .card, .light-mode .notification-item {
     background: var(--card-light);
     color: var(--text-light);
     border-color: rgba(0, 0, 0, 0.175);
@@ -138,7 +134,7 @@ h2, .card-header {
 }
 
 /* 💡 Card hover effect */
-.card:hover {
+.card:hover, .notification-item:hover {
     transform: translateY(-1px);
     box-shadow: 0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.3);
 }
@@ -431,6 +427,14 @@ input[type="checkbox"]:checked::before {
 }
 
 /* =================== 🔔 Notifications =================== */
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
 /* 🔔 Notifications icon and dropdown */
 .icon-container:hover .bell-icon {
     stroke: #fb0;
