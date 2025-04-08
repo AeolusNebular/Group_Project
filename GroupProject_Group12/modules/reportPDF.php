@@ -1,85 +1,101 @@
 <?php
-require('../fpdf186/fpdf.php');
-include('../Database_Php_Interactions/Database_Utilities.php');
-
-class PDF extends FPDF {
+    require('../fpdf186/fpdf.php');
+    include('../Database_Php_Interactions/Database_Utilities.php');
     
-    // Table
-    function BasicTable($header, $data)
-    {
-        $FirstHeader = true;
-        $this->SetFont('Arial','B',12);
-        // Header
-        foreach($header as $col){
-            if ($FirstHeader){
-                $this->Cell(80,7,$col,1);
-                $FirstHeader = false;
-            } else {
-                $this->Cell(35,7,$col,1);
-            }
+    class PDF extends FPDF {
+        // 📦 Fill full-page background
+        function AddBackground($r, $g, $b) {
+            $this->SetFillColor($r, $g, $b);
+            $this->Rect(0, 0, 210, 297, 'F'); // A4 size
         }
-        $this->Ln(); // New line after print the header
         
-        $this->SetFont('Arial','',12);
-        // Data
-        foreach($data as $City => $CityConsumes)
-        {   
+        // 📋 Table renderer
+        function BasicTable($header, $data)
+        {
+            $this->SetFont('Arial','B',12);
+            $FirstHeader = true;
             
-            $this->Cell(80, 7, $City, 1);
-            foreach($CityConsumes as $ConsumeType =>  $Value ) {                            
-                $this->Cell(35,7,$Value,1);
+            // Header
+            foreach ($header as $col) {
+                if ($FirstHeader) {
+                    $this->Cell(80, 7, $col, 1);
+                    $FirstHeader = false;
+                } else {
+                    $this->Cell(35, 7, $col, 1);
+                }
             }
             $this->Ln();
-        
+            
+            $this->SetFont('Arial','',12);
+            // Data rows
+            foreach ($data as $City => $CityConsumes) {
+                $this->Cell(80, 7, $City, 1);
+                foreach ($CityConsumes as $ConsumeType => $Value) {
+                    $this->Cell(35, 7, $Value, 1);
+                }
+                $this->Ln();
+            }
         }
     }
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     
-    if (isset($_POST['CityValuesForPDF'])) {
-        $data = html_entity_decode($_POST['CityValuesForPDF']);
-    }
-    $DecodedData = json_decode($data);
-    $CityValuesinArray = [];
-    foreach ($DecodedData as $ConsumeType => $CityConsumes){
-        //['City','Electricity','Gas']
-        foreach ($CityConsumes as $City => $CityConsumeValue) {
-            if (!isset($CityValuesinArray[$City])) {
-                $CityValuesinArray[$City] = [];
-            } 
-            // EG [GOOR][ELECTRICITY,GAS][241241,321454]
-            $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue; 
-        }
-    }
-
-    $pdf = new PDF(); // 📄 Create PDF object
-    $pdf->SetFont('Arial','B',12);
-    
-    $pdf->AddPage();
-    $pdf->Cell(60,25,'Energy Costs');
-    $pdf->Ln(25);
-    $pdf->SetFont('Arial','',12);
-    $header = array("City","Gas","Electricity");
-    $base64Image = $_POST['ImageURLForPDF'];
-
-    if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
-        $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
-        $imageType = $type[1];
-        $decodedImage = base64_decode($base64Image);
-    
-        if ($decodedImage === false) {
-            die('Base64 decode failed');
-        } 
-
-        $imageFilePath = '../Images/Report.jpg';
-
-        file_put_contents($imageFilePath, $decodedImage);
+    // 🔁 Only run when form submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
+        // 📨 Get posted data
+        $data = isset($_POST['CityValuesForPDF']) ? html_entity_decode($_POST['CityValuesForPDF']) : '';
+        $DecodedData = json_decode($data, true);
+        $CityValuesinArray = [];
+        
+        foreach ($DecodedData as $ConsumeType => $CityConsumes) {
+            foreach ($CityConsumes as $City => $CityConsumeValue) {
+                if (!isset($CityValuesinArray[$City])) {
+                    $CityValuesinArray[$City] = [];
+                }
+                $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue;
+            }
+        }
+        
+        // 🎨 Detect theme mode from frontend
+        $themeMode = $_POST['ThemeModeForPDF'] ?? 'light';
+        
+        // 🎯 CSS var equivalents in RGB
+        $cssVars = [
+            'light' => [255, 255, 255],
+            'dark'  => [34, 34, 34]
+        ];
+        
+        $bgRGB = $cssVars[$themeMode] ?? [255, 255, 255];
+        
+        // 📝 Create and configure PDF
+        $pdf = new PDF();
+        $pdf->AddPage();
+        $pdf->AddBackground(...$bgRGB);
+        
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(60, 15, 'Energy Costs');
+        $pdf->Ln(20);
+        
+        // 🖼️ Embed chart image
+        $base64Image = $_POST['ImageURLForPDF'];
+        if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $type)) {
+            $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
+            $imageType = $type[1];
+            $decodedImage = base64_decode($base64Image);
+            
+            if ($decodedImage !== false) {
+                $imageFilePath = '../Images/Report.jpg';
+                file_put_contents($imageFilePath, $decodedImage);
+                $pdf->Image($imageFilePath, 10, 35, 190); // Fit to page width
+                $pdf->Ln(100);
+            }
+        }
+        
+        // 📊 Render table
+        $header = ['City', 'Gas', 'Electricity'];
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->BasicTable($header, $CityValuesinArray);
+        
+        // 💾 Output PDF
+        $pdf->Output();
     }
-    $pdf->Image($imageFilePath, 10, 10, 190);
-    $pdf->Ln(90);
-    $pdf->BasicTable($header,$CityValuesinArray);
-    $pdf->Output();
-}
 ?>

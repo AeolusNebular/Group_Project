@@ -70,137 +70,12 @@
                             </button>
                         </form>
                         
-                        <canvas id="CityCanvas"></canvas>
+                        <!-- 📨 Fetch graph scripts -->
+                        <?php include("../scripts/graph.php"); ?>
                         
-                        <?php
-                            if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'POST') {
-                                if ($RoleID == 2){
-                                    $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : $RoleNetwork;
-                                } else {
-                                    $Network = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : 'Coteq';
-                                }
-                                $Years = isset($_GET['CityYears']) ? $_GET['CityYears'] : '2016';
-                                $Types = ['Electricity','Gas'];
-                                $CityTypeValues = array('Electricity' => [], 'Gas' => []);
-                                $CityValues = [];
-                                $AllCityDataForType = array('Electricity' => [], 'Gas' => []);
-                                
-                                foreach ($Types as $Type) {
-                                    $CityAdditions = array('Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0);
-                                    $x = 1;
-                                    if (isset($_SESSION['City_Name'])) {
-                                        $RoleNetworks = ['coteq','enexis','liander','stedin','westland-infra'];
-                                        
-                                        foreach ($RoleNetworks as $Network) {
-                                            $CityGraphValues = FilterByCityCSV($Type,$Years,$Network,$_SESSION['City_Name']);
-                                            
-                                            foreach ($CityGraphValues as $Key => $City) {
-                                                $CityValues[$Key] = $City[11];
-                                                $CityAdditions['Annual'] += $City[11];
-                                                $CityAdditions['Connection'] += $City[9];
-                                                $CityAdditions['Delivery_Perc'] += $City[7];
-                                            }
-                                        }
-                                    } else {
-                                        $CityGraphValues = CSVData($Type,$Years,$Network);
-                                        
-                                        foreach ($CityGraphValues as $Key => $City) {
-                                        $x += 1;
-                                        $CityValues[$Key] = $City[0];
-                                        $CityAdditions['Annual'] += $City[0];
-                                        $CityAdditions['Connection'] += $City[1];
-                                        $CityAdditions['Delivery_Perc'] += $City[2]/100;
-                                        }
-                                    }
-                                    
-                                    $CityAdditions['Delivery_Perc'] = $CityAdditions['Delivery_Perc']/$x;
-                                    $AllCityDataForType[$Type] = $CityAdditions;
-                                    $CityTypeValues[$Type] = $CityValues;
-                                }
-                            }
-                        ?>
+                        <!-- ✏️ Draw desired graph -->
+                        <canvas id="cityCanvas"></canvas>
                         
-                        <script>
-                            var data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
-                            
-                            document.addEventListener("DOMContentLoaded", function () {
-                                drawBarGraph();
-                                window.addEventListener("resize", drawBarGraph); // 🖼️ Attach resize event once
-                            });
-                           
-                            function drawBarGraph() {
-                                let font = { family: "Space Grotesk"};
-                                
-                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
-                                const storedThemeMode = sessionStorage.getItem("themeMode")
-                                const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                
-                                // 🧠 Use computed styles to fetch CSS variable values
-                                const root = document.body;
-                                let textColor = storedMode === "light"
-                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
-                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
-                                
-                                const canvas = document.getElementById("CityCanvas");
-                                
-                                // ✅ Ensure the canvas context is fresh
-                                if (!canvas) return; // 👋 Exit if canvas is missing
-                                const ctx = canvas.getContext("2d");
-                                
-                                // 💥 Destroy existing chart properly
-                                if (chartInstance) {
-                                    chartInstance.destroy();
-                                    chartInstance = null; // 🧹 Clear instance reference
-                                }
-                                
-                                chartInstance = new Chart(ctx, {
-                                    type: "bar",
-                                    data: {
-                                        labels: Object.keys(data),
-                                        datasets: [{
-                                            label: "Electricity",
-                                            data: Object.values(data),
-                                            borderColor: "#975ae100",
-                                            backgroundColor: [
-                                                '#003f5c',
-                                                '#374c80',
-                                                '#58508d',
-                                                '#7a5195',
-                                                '#bc5090',
-                                                '#ff6361',
-                                                '#ffa600'
-                                            ],
-                                        }]
-                                    },
-                                    options: {
-                                        animation: {
-                                            duration: 700,
-                                            easing: 'easeOutQuad',
-                                            onComplete : function(){
-                                                URI = chartInstance.toBase64Image('image/jpeg',1);
-                                                
-                                                document.getElementById('ImageURLForPDF').value = URI;
-                                                console.log(URI);
-                                            }
-                                        },
-                                        responsive: true,
-                                        maintainAspectRatio: true,
-                                        plugins: {
-                                            legend: {
-                                                position: "bottom",
-                                                labels: { color: textColor, font: font }
-                                            },
-                                            title: {
-                                                display: true,
-                                                text: "Networks Annual Usage",
-                                                color: textColor,
-                                                font: font
-                                            }
-                                        },
-                                    }
-                                });
-                            }
-                        </script>
                     </div>
                 </div>
             </div>
@@ -244,45 +119,45 @@
                                 }
                             }
                         </script>
-                            <?php
-                                if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
-                                    $Headings = ['City','Gas','Electricity'];
-                                    if (isset($_POST['ReportType']) && $_POST['ReportType'] == 'CSV') {
-                                        $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
-                                        $CityValues = json_decode($JsonData);
-                                    }
-                                    
-                                    $CityValuesinArray = [];
-                                    foreach ($CityValues as $ConsumeType => $CityConsumes){
-                                        // ['City','Electricity','Gas']
-                                        foreach ($CityConsumes as $City => $CityConsumeValue) {
-                                            if (!isset($CityValuesinArray[$City])) {
-                                                $CityValuesinArray[$City] = [];
-                                            }
-                                            // EG [GOOR][ELECTRICITY,GAS][241241,321454]
-                                            $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue;
-                                        }
-                                    }
-                                    $fp = fopen('../Reports/Report.csv', 'w');
-                                    fputcsv($fp,$Headings); 
-                                    foreach ($CityValuesinArray as $City => $ConsumeValues){
-                                        $CSVRowData = [$City];
-                                        foreach ($ConsumeValues as $ConsumeType => $AnnualConsume) {
-                                            array_push($CSVRowData,$AnnualConsume);
-                                        }
-                                        fputcsv($fp,$CSVRowData);
-                                    }
-                                    fclose($fp);
-                                    
-                                    echo 
-                                        '<iframe id="my_iframe" style="display:none;"></iframe>
-                                            <script>
-                                                document.getElementById("my_iframe").src = "../Reports/Report.csv";
-                                            </script>
-                                        '
-                                    ;
+                        <?php
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
+                                $Headings = ['City','Gas','Electricity'];
+                                if (isset($_POST['ReportType']) && $_POST['ReportType'] == 'CSV') {
+                                    $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
+                                    $CityValues = json_decode($JsonData);
                                 }
-                            ?>
+                                
+                                $CityValuesinArray = [];
+                                foreach ($CityValues as $ConsumeType => $CityConsumes){
+                                    // ['City','Electricity','Gas']
+                                    foreach ($CityConsumes as $City => $CityConsumeValue) {
+                                        if (!isset($CityValuesinArray[$City])) {
+                                            $CityValuesinArray[$City] = [];
+                                        }
+                                        // EG [GOOR][ELECTRICITY,GAS][241241,321454]
+                                        $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue;
+                                    }
+                                }
+                                $fp = fopen('../Reports/Report.csv', 'w');
+                                fputcsv($fp,$Headings); 
+                                foreach ($CityValuesinArray as $City => $ConsumeValues){
+                                    $CSVRowData = [$City];
+                                    foreach ($ConsumeValues as $ConsumeType => $AnnualConsume) {
+                                        array_push($CSVRowData,$AnnualConsume);
+                                    }
+                                    fputcsv($fp,$CSVRowData);
+                                }
+                                fclose($fp);
+                                
+                                echo
+                                    '<iframe id="my_iframe" style="display:none;"></iframe>
+                                        <script>
+                                            document.getElementById("my_iframe").src = "../Reports/Report.csv";
+                                        </script>
+                                    '
+                                ;
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

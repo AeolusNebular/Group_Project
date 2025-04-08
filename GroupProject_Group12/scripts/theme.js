@@ -121,7 +121,7 @@ function toggleDarkLight() {
     }
     
     // 📊 Redraw charts
-    requestAnimationFrame(drawChart);
+    requestAnimationFrame(redrawAllCharts);
 }
 
 // 🔁 Toggle visibility of navbar mode toggle

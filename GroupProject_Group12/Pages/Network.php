@@ -48,136 +48,47 @@
                         ?>
                     </div>
                     <div class="card-body">
-                        <form action="Network.php" method='POST'>
+                        <form action="Network.php" method="POST">
                             <div class="themed-dropdown" style="float: left">
                                 <label for="TypeFilter"> Filter by type: </label>
                                 <select class="form-select" id="TypeFilter" name="TypeFilter">
-                                    <option value="Gas">         Gas </option>
-                                    <option value="Electricity"> Electricity </option>
+                                    <option value="Gas"         <?= ($_POST['TypeFilter'] ?? '') === 'Gas'         ? 'selected' : '' ?>> Gas </option>
+                                    <option value="Electricity" <?= ($_POST['TypeFilter'] ?? '') === 'Electricity' ? 'selected' : '' ?>> Electricity </option>
                                 </select>
                             </div>
-                            <?php
-                                if ($RoleID != 2){
-                                    echo 
-                                        '<div class="themed-dropdown" style="float: left">
-                                            <label for="NetworkName"> Select network: </label><br>
-                                            <select class="form-select" id="NetworkName" name="NetworkName">
-                                                <option value="coteq">          Coteq </option>
-                                                <option value="westland-infra"> Westlandia </option>
-                                                <option value="enexis">         Enexis</option>
-                                                <option value="stedin">         Stedin </option>
-                                                <option value="liander">        Liander </option>
-                                            </select>
-                                        </div>'
-                                    ;
-                                }
-                            ?>
+                            <?php if ($RoleID != 2): ?>
+                                <div class="themed-dropdown" style="float: left">
+                                    <label for="NetworkName"> Select network: </label><br>
+                                    <select class="form-select" id="NetworkName" name="NetworkName">
+                                        <option value="coteq"          <?= ($_POST['NetworkName'] ?? '') === 'coteq'          ? 'selected' : '' ?>> Coteq </option>
+                                        <option value="westland-infra" <?= ($_POST['NetworkName'] ?? '') === 'westland-infra' ? 'selected' : '' ?>> Westlandia </option>
+                                        <option value="enexis"         <?= ($_POST['NetworkName'] ?? '') === 'enexis'         ? 'selected' : '' ?>> Enexis </option>
+                                        <option value="stedin"         <?= ($_POST['NetworkName'] ?? '') === 'stedin'         ? 'selected' : '' ?>> Stedin </option>
+                                        <option value="liander"        <?= ($_POST['NetworkName'] ?? '') === 'liander'        ? 'selected' : '' ?>> Liander </option>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
                             <div class="themed-dropdown" style="float: left">
                                 <label for="NetworkYearFilter"> Filter by year: </label>
                                 <select class="form-select" id="NetworkYearFilter" name="NetworkYearFilter">
-                                    <option value="2016"> 2016 </option>
-                                    <option value="2017"> 2017 </option>
-                                    <option value="2018"> 2018 </option>
-                                    <option value="2019"> 2019 </option>
-                                    <option value="2020"> 2020 </option>
+                                    <?php
+                                        foreach ([2016, 2017, 2018, 2019, 2020] as $year) {
+                                            $selected = ($_POST['NetworkYearFilter'] ?? '') == $year ? 'selected' : '';
+                                            echo "<option value=\"$year\" $selected>$year</option>";
+                                        }
+                                    ?>
                                 </select>
                             </div>
                             <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
                                 Apply Filter
                             </button>
                         </form>
-                        <canvas id="cityChart"></canvas>
-                            <?php
-                                if ($RoleID == 2) {
-                                    $Network = $RoleNetwork;
-                                } else {
-                                    $Network = isset($_POST['NetworkName']) ? $_POST['NetworkName'] : 'coteq';
-                                }
-                                
-                                $Type = isset($_POST['TypeFilter']) ? $_POST['TypeFilter'] : 'Gas';
-                                $Year = isset($_POST['NetworkYearFilter']) ? $_POST['NetworkYearFilter'] : '2016';
-                                $NetworkValueByType = array('Gas' => [] , 'Electricity' => []);
-                                
-                                $NetworkValue = CSVData($Type, $Year, $Network);
-                                
-                                foreach ($NetworkValue as $City => $Data) {
-                                    if (!isset($TotalNetworkConsume[$City])) {
-                                        $TotalNetworkConsume[$City] = 0;
-                                    }
-                                    
-                                    $TotalNetworkConsume[$City] += $Data[0];
-                                }
-                                $NetworkValueByType[$Type] = $TotalNetworkConsume;
-                            ?>
-                        <script>
-                            var data = <?php 
-                            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['TypeFilter'])) {
-                                echo json_encode($NetworkValueByType[$_POST['TypeFilter']]);
-                            } else {
-                                echo json_encode($NetworkValueByType['Gas']);
-                            }
-                            ?>;
-                            console.log(data);
-                            
-                            const ctx = document.getElementById('cityChart').getContext('2d');
-                            
-                            let font = { family: "Space Grotesk"};
-                            
-                            // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
-                            const storedThemeMode = sessionStorage.getItem("themeMode")
-                            const [storedTheme, storedMode] = storedThemeMode.split("-");
-                            
-                            // 🧠 Use computed styles to fetch CSS variable values
-                            const root = document.body;
-                            let textColor = storedMode === "light"
-                                ? getComputedStyle(root).getPropertyValue("--text-light").trim()
-                                : getComputedStyle(root).getPropertyValue("--text-dark").trim();
-                            
-                            let cityChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: Object.keys(data),
-                                    datasets: [{
-                                        label: 'City Data',
-                                        data: Object.values(data),
-                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                        borderColor: 'rgb(75, 192, 192)',
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                color: textColor, // 📏 Y-axis text color
-                                                // font: font // Runs over the edge when in use
-                                            }
-                                        },
-                                        x: {
-                                            ticks: {
-                                                color: textColor, // 📏 X-axis text color
-                                                font: font
-                                            }
-                                        }
-                                    },
-                                    plugins: {
-                                        legend: {
-                                            labels: {
-                                                color: textColor, // 🏷️ Legend text color
-                                                font: font
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                            
-                            function filterData() {
-                                const selectedCity = document.getElementById('cityFilter').value;
-                                cityChart.data.datasets[0].data = data[selectedCity];
-                                cityChart.update();
-                            }
-                        </script>
+                        
+                        <!-- 📨 Fetch graph scripts -->
+                        <?php include("../scripts/graph.php"); ?>
+                        
+                        <!-- ✏️ Draw desired graph -->
+                        <canvas id="cityCanvasNetwork"></canvas>
                     </div>
                 </div>
             </div>
