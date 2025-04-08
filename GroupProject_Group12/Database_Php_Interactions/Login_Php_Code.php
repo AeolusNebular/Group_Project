@@ -23,13 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST[
     while ($Row = $result->fetchArray(SQLITE3_ASSOC)) {
         // ✅ Check password
         debug_to_console($Password);   
-        debug_to_console($Row['Password']);   
-        debug_to_console($Row['Email']);   
          
         if ($Password === $Row['Password']) {
             $_SESSION['Email'] = $Row['Email'];
             $LoginID = $Row['LoginID'];
-            debug_to_console($LoginID);  
+ 
             $UserDetailQuery = $db->prepare('SELECT User_ID, RoleID, FName, SName, PhoneNo, StreetName, HouseNo FROM User_Details WHERE LoginID = ' . $LoginID);
             $UserRes = $UserDetailQuery -> execute();
             if ($row = $UserRes -> fetchArray(SQLITE3_ASSOC)) {
@@ -62,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST[
                 }
 
                 // 🎉 Redirect to home page
-                //header("Location: /Group_Project/GroupProject_Group12/pages/home.php");
+                $db->close();
+                header("Location: /Group_Project/GroupProject_Group12/pages/home.php");
                 exit();
             }
         }
@@ -70,8 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['Login_Email'], $_POST[
     }
     
     // ⚠️ Give error if authentication fails
+    $db->close();
     $message = urlencode("Invalid email or password.");
-   // header("Location: /Group_Project/GroupProject_Group12/pages/home.php?error=" . $message);
+    header("Location: /Group_Project/GroupProject_Group12/pages/home.php?error=" . $message);
     exit();
 }
 ?>
