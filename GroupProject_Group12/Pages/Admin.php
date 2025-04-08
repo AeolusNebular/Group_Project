@@ -57,110 +57,12 @@
                             </button>
                         </form>
                         
-                        <canvas id="NetworkCanvas"></canvas>
+                        <!-- 📨 Fetch graph scripts -->
+                        <?php include("../scripts/graph.php"); ?>
                         
-                        <?php
-                            // ✅ Check if requested method has been run (eg form submit)
-                            if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                                
-                                // 📅 Check if year has been selected, else assigns default (2016)
-                                $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-                                // 🔄 Check if an electricity/gas selection has been made, else assigns default (electricity)
-                                $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
-                                
-                                // 🌐 Assigns network variable required for the CSV to display and use in the javascript graph
-                                $Networks = ['coteq' , 'enexis' , 'liander' , 'stedin' , 'westland-infra'];
-                                $NetworkConsumeTotals = array('coteq' => 0,'enexis' => 0,'liander' => 0,'stedin' => 0,'westland-infra' => 0);
-                                
-                                // 🔁 Iterates through the array of networks and grabs the value to be assigned to the NetworkConsumeTotals for graph display
-                                foreach ($Networks as $Network) {
-                                    // 📂 Runs CSVData with assigned variables and grabs data from said CSV file
-                                    $Values = CSVData($Type,$Year,$Network);
-                                    
-                                    // 🔑 Values = Key(City Name) + Annual Consume(0) + Num of Connections(1)  
-                                    foreach ($Values as $Value) {
-                                        // 🔄 Assigns annual consume to selected network in loop
-                                        $NetworkConsumeTotals[$Network] += $Value[0];
-                                    }
-                                }
-                            
-                            }
-                        ?>
+                        <!-- ✏️ Draw desired graph -->
+                        <canvas id="networkCanvas"></canvas>
                         
-                        <script>
-                            // 📡 Grabs network consume from PHP code above using JSON encode function and assigns to data
-                            var data = <?php echo json_encode($NetworkConsumeTotals); ?>;
-                            
-                            document.addEventListener("DOMContentLoaded", function () {
-                                drawDoughnut();
-                                window.addEventListener("resize", drawDoughnut); // ✅ Attach resize event once
-                            });
-                            
-                            // 🍩 Create doughnut chart displaying network consumption data
-                            function drawDoughnut() {
-                                let font = { family: "Space Grotesk"};
-                                
-                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
-                                const storedThemeMode = sessionStorage.getItem("themeMode")
-                                const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                
-                                // 🧠 Use computed styles to fetch CSS variable values
-                                const root = document.body;
-                                let textColor = storedMode === "light"
-                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
-                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
-                                
-                                const canvas = document.getElementById("NetworkCanvas");
-                                
-                                // ✅ Ensure the canvas context is fresh
-                                if (!canvas) return; // 👋 Exit if canvas is missing
-                                const ctx = canvas.getContext("2d");
-                                
-                                // 💥 Destroy existing chart properly
-                                if (chartInstance) {
-                                    chartInstance.destroy();
-                                    chartInstance = null; // 🧹 Clear instance reference
-                                }
-                                
-                                chartInstance = new Chart(ctx, {
-                                    type: "doughnut",
-                                    data: {
-                                        labels: ["Coteq", "Stedin", "Liander", "Westlandinfra", "Enexis"],
-                                        datasets: [{
-                                            label: "Networks",
-                                            data: Object.values(data) ,
-                                            borderColor: "#975ae100",
-                                            backgroundColor: [
-                                                '#003f5c',
-                                                '#374c80',
-                                                '#58508d',
-                                                '#7a5195',
-                                                '#bc5090',
-                                                '#ff6361',
-                                                '#ffa600'
-                                            ],
-                                        
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: true,
-                                        plugins: {
-                                            legend: {
-                                                position: "bottom",
-                                                labels: { color: textColor, font: font }
-                                            },
-                                            title: {
-                                                display: true,
-                                                text: "Networks Annual Usage",
-                                                color: textColor,
-                                                font: font
-                                            }
-                                        },
-                                    }
-                                });
-                            };
-                        </script>
                     </div>
                 </div>
             </div>
@@ -243,9 +145,9 @@
                         ?>
                         
                         <script>
-                           var citydata = <?php echo json_encode($CityValues); ?>;
-                           console.log(Object.values(data));
-                           document.addEventListener("DOMContentLoaded", function () {
+                            var citydata = <?php echo json_encode($CityValues); ?>;
+                            console.log(Object.values(data));
+                            document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
                             });

@@ -27,13 +27,13 @@
                 $conn = Open_Database();
                 
                 // 📨 Fetch notifications
-                $notifStmt = $conn->prepare("SELECT NotifID, Notification FROM Notifications");
+                $notifStmt = $conn->prepare("SELECT NotifID, Body FROM Notifications");
                 $notifResult = $notifStmt->execute();
                 
                 // 🔄 Loop through the notifications and display them
                 while ($notification = $notifResult->fetchArray(SQLITE3_ASSOC)) {
                     echo '<div class="notification-item">';
-                    echo '<p class="notification-text">' . htmlspecialchars($notification['Notification']) . '</p>';
+                    echo '<p class="notification-text">' . htmlspecialchars($notification['Body']) . '</p>';
                     // 🗑️ Delete
                     echo '<form method="POST" action="" style="display:inline;">
                             <input type="hidden" name="NotifID" value="' . $notification['NotifID'] . '" />

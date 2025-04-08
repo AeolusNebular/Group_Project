@@ -77,6 +77,25 @@
         $CityTypeValues[$Type] = $CityValues;
     }
     
+    // 🛡️ ADMIN VIEW BLOCK
+    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+        $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
+        
+        $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
+        $NetworkConsumeTotals = array_fill_keys($Networks, 0);
+        
+        foreach ($Networks as $Network) {
+            $Values = CSVData($Type, $Year, $Network);
+            foreach ($Values as $Value) {
+                $NetworkConsumeTotals[$Network] += $Value[0];
+            }
+        }
+        
+        // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
+        echo "<script>const networkGraphData = " . json_encode($NetworkConsumeTotals) . ";</script>";
+    }
+    
     // 🏭 NETWORK FILTER BLOCK
     $NetworkValue = CSVData($Type, $Year, $Network);
     $TotalNetworkConsume = [];
@@ -100,6 +119,7 @@
     let chartCity = null;
     let chartCityNetwork = null;
     let chartLine = null;
+    let chartAdminDoughnut = null;
     let URI = null;
     
     // 📊 PHP-injected data
@@ -150,7 +170,8 @@
                     data: Object.values(DashboardData['Gas']),
                     borderColor: '#00000000',
                     backgroundColor: sharedColours,
-                    zIndex: 1
+                    zIndex: 1,
+                    hoverOffset: 10
                 }, {
                     type: 'bar',
                     label: 'Electricity',
@@ -296,20 +317,6 @@
         console.log("✅ City chart loaded.")
     }
     
-    function filterData() {
-        console.log("▶️ Data filter triggered.")
-        const selectedCity = document.getElementById('cityFilter').value;
-        
-        // Check if the selected city exists in the data, then update the chart
-        if (data[selectedCity]) {
-            chartCityNetwork.data.datasets[0].data = data[selectedCity];
-            chartCityNetwork.update();
-            console.log("✅ Data filter completed.")
-        } else {
-            console.error("Selected city data not found.");
-        }
-    }
-    
     // 📈 Line Chart (Test Chart)
     function drawLineChart() {
         const canvas = document.getElementById("testChart");
@@ -317,7 +324,7 @@
         // ✅ Ensure the canvas context is fresh
         if (!canvas) return; // 👋 Exit if canvas is missing
         const ctx = canvas.getContext("2d");
-
+        
         console.log("▶️ Line chart triggered.")
         
         // 💥 Destroy existing chart properly
@@ -326,6 +333,7 @@
             chartLine = null; // 🧹 Clear instance reference
         }
         
+        // ✅ Create chart
         chartLine = new Chart(ctx, {
             type: "line",
             data: {
@@ -361,12 +369,84 @@
         console.log("✅ Line chart loaded.")
     }
     
-    // 🚀 Init all charts on DOM load
+    // 🍩 Network doughnut chart [Admin]
+    function drawNetworkDoughnut() {
+        const canvas = document.getElementById("networkCanvas");
+        
+        // ✅ Ensure the canvas context is fresh
+        if (!canvas) return; // 👋 Exit if canvas is missing
+        const ctx = canvas.getContext("2d");
+        
+        console.log("▶️ Admin doughnut chart triggered.")
+        
+        // 💥 Destroy existing chart properly
+        if (chartAdminDoughnut) {
+            chartAdminDoughnut.destroy();
+            chartAdminDoughnut = null; // 🧹 Clear instance reference
+        }
+        
+        // ✅ Create chart
+        chartAdminDoughnut = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Coteq", "Stedin", "Liander", "Westlandinfra", "Enexis"],
+                datasets: [{
+                    label: "Network Usage",
+                    data: Object.values(networkGraphData),
+                    borderColor: "#975ae100",
+                    backgroundColor: [
+                        "#003f5c",
+                        "#374c80",
+                        "#58508d",
+                        "#7a5195",
+                        "#bc5090",
+                    ],
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            color: getTextColor(),
+                            font: font
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: "Networks Annual Usage",
+                        color: getTextColor(),
+                        font: font
+                    },
+                },
+            },
+        });
+        console.log("✅ Admin doughnut chart loaded.")
+    }
+    
+    function filterData() {
+        console.log("▶️ Data filter triggered.")
+        const selectedCity = document.getElementById('cityFilter').value;
+        
+        // Check if the selected city exists in the data, then update the chart
+        if (data[selectedCity]) {
+            chartCityNetwork.data.datasets[0].data = data[selectedCity];
+            chartCityNetwork.update();
+            console.log("✅ Data filter completed.")
+        } else {
+            console.error("Selected city data not found.");
+        }
+    }
+    
+    // 🚀 Initialise all charts on DOM load
     document.addEventListener("DOMContentLoaded", function () {
         drawDashboardGraph();
         drawBarGraph();
         drawLineChart();
         drawNetworkCityChart();
+        drawNetworkDoughnut();
     });
     
     // 📏 Resize handler (debounced)
@@ -378,6 +458,7 @@
             drawBarGraph();
             drawLineChart();
             drawNetworkCityChart();
+            drawNetworkDoughnut();
         }, 250);
     });
     
@@ -387,6 +468,7 @@
         drawBarGraph();
         drawLineChart();
         drawNetworkCityChart();
+        drawNetworkDoughnut();
     }
     
     /*
