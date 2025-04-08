@@ -22,6 +22,11 @@
             exit;
         }
 
+        $_SESSION['FName'] = $_POST['UserFName'];
+        $_SESSION['LName'] = $_POST['UserLName'];
+        $_SESSION['PhoneNo'] = $_POST['UserPhoneNo'];
+        $_SESSION['HouseNo'] = $_POST['UserHomeNo'];
+
         echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/account.php?UpdateUser=". $Success . "') </script>";
     }
     ?>
