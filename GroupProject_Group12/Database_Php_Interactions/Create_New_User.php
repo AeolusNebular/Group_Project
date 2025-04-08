@@ -192,6 +192,6 @@
         $db->close();
         
         // 📨 Sends success to page allowing for confirmation proof
-      //  echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "')</script>";
+        echo "<script>window.location.replace('/Group_Project/GroupProject_Group12/Pages/Admin.php?CreateUser=". $Success . "')</script>";
     }
 ?>
