@@ -119,8 +119,47 @@
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
                 <div class="card h-90">
-                    <div class="card-header">🗺️ Energy Use Heatmap</div>
+                    <div class="card-header"> 🗺️ Energy Use Heatmap </div>
                     <div id="heatmap"></div> <!-- 🗺️ Heatmap container -->
+                    <div id="card" style="position: absolute; bottom: 8px; left: 8px; z-index: 2;">
+                        <div class="card-header">Intensity</div>
+                        <div class="card-body">
+                            <ul class="legend-labels">
+                            <li><span style="background:#ff0000;"></span>High</li>
+                            <li><span style="background:#ffff00;"></span>Medium</li>
+                            <li><span style="background:#00ff00;"></span>Low</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <style>
+                        #legend {
+                            position: absolute; bottom: 8px; left: 8px;
+                            background: var(--card-dark);
+                            padding: 8px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            
+                        }
+                        .legend-title {
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        }
+                        .legend-scale ul {
+                            list-style: none;
+                            padding: 0;
+                            margin: 0;
+                        }
+                        .legend-scale ul li {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 5px;
+                        }
+                        .legend-scale ul li span {
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            margin-right: 5px;
+                        }
+                    </style>
                 </div>
             </div>
             

@@ -4,7 +4,7 @@
 }
 
 /* Unified corner rounding */
-.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .notification-item, .footer-link, input {
+.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .notification-item, .footer-link, input, #legend {
     border-radius: 8px !important;
 }
 
