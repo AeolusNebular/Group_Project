@@ -49,7 +49,7 @@ if (!$conn) {
 }
 
 // 📨 Fetch the most recent 5 notifications
-$notifStmt = $conn->prepare("SELECT NotifID, Notification FROM Notifications ORDER BY NotifID DESC LIMIT 5");
+$notifStmt = $conn->prepare("SELECT NotifID, Body FROM Notifications ORDER BY NotifID DESC LIMIT 5");
 $notifResult = $notifStmt->execute();
 
 if (!$notifResult) {
