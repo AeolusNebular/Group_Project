@@ -42,19 +42,6 @@
             $CityFilter = $_SESSION['City_Name'];
         }
     }
-    
-    $conn = new SQLite3("../database/users.db");
-    if (!$conn) {
-        die('Connection failed: ' . $conn->lastErrorMsg());
-    }
-    
-    // 📨 Fetch the most recent 5 notifications
-    $notifStmt = $conn->prepare("SELECT NotifID, Body FROM Notifications ORDER BY NotifID DESC LIMIT 5");
-    $notifResult = $notifStmt->execute();
-    
-    if (!$notifResult) {
-        die('Query failed: ' . $conn->lastErrorMsg());
-    }
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +59,8 @@
             <span class="navbar-toggle-icon"></span>
         </button>
         
-        <button class="notifpopup fancy-button" onclick="createNotificationPopup('New Alert', 'A new energy usage spike has been detected!');">
+        <!-- 🔔 Notification popup test button -->
+        <button class="notifpopup fancy-button" onclick="createNotificationPopup('', 'Energy Spike Alert', 'A new energy usage spike has been detected! Panic!');">
             Notify!!
         </button>
         
@@ -102,12 +90,41 @@
                     <div id="notificationsDropdown" class="dropdown-menu">
                         <div id="notificationList" class="notification-list">
                             <?php
-                            // 🔄 Loop through the results and display each notification
-                            while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
-                                echo '<a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="notification-item">';
-                                echo '<p>' . htmlspecialchars($notif['Body']) . '</p>'; // Display notification
-                                echo '</a>';
-                            }
+                                // 🗃️ Database utilities
+                                require_once('../Database_Php_Interactions/Database_Utilities.php');
+                                
+                                // 🔗 Connect to database
+                                $conn = Open_Database();
+                                
+                                // 👤 Get current user ID
+                                $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
+                                echo '<script>console.log("UserID: ' . $userId . '");</script>';
+                                
+                                // 📨 Fetch 3 most recent notifications
+                                $notifStmt = $conn->prepare("
+                                    SELECT NotifID, UserID, Header, Body, Date
+                                    FROM Notifications
+                                    WHERE UserID = :userId OR UserID IS 0
+                                    ORDER BY Date DESC
+                                    LIMIT 3
+                                ");
+                                $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
+                                $notifResult = $notifStmt->execute();
+                                
+                                // 🔄 Loop through results and display each notification
+                                while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
+                                    // ✂️ Truncate header and body
+                                    $header = htmlspecialchars(mb_strimwidth($notif['Header'], 0, 36, '…'));
+                                    $body = htmlspecialchars(mb_strimwidth($notif['Body'], 0, 48, '…'));
+                                    
+                                    echo '<div class="col-12 d-flex">';
+                                    echo '<a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="card mb-2" style="text-decoration: none;">';
+                                    echo '  <div class="card-header">' . $header . '</div>';
+                                    echo '  <div class="card-body">' . $body . '</div>';
+                                    echo '</a>';
+                                    echo '</div>';
+                                    echo '<script>console.log("Pritning little notification");</script>';
+                                }
                             ?>
                         </div>
                         <!-- ➕ Plus icon to show all -->

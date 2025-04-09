@@ -1,3 +1,19 @@
+// 🔊 Play sound
+function playSound(url) {
+    const audio = new Audio(url);
+    audio.volume = 0.7;
+    audio.play().catch(err => console.warn("Sound error:", err));
+}
+
+// 🔄 Loading screen
+window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.remove(), 500); // ⏱️ Clean up after fade
+    }
+});
+
 // 👤 Account icon click
 document.addEventListener("DOMContentLoaded", function () {
     const accountButton = document.getElementById("accountButton");
@@ -150,13 +166,4 @@ window.addEventListener("DOMContentLoaded", () => {
             target.classList.add("filter-" + this.value);
         }
     });
-});
-
-// 🔄 Loading screen
-window.addEventListener("load", function () {
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => preloader.remove(), 500); // ⏱️ Clean up after fade
-    }
 });
