@@ -33,7 +33,7 @@
                 $Values[$city] = $TempCity;            
             }                
         } 
-        // Closes file and returns the array values
+        // 📁 Close file and return array values
         fclose ( $fp );
         return $Values;
     }

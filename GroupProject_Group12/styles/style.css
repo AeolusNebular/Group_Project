@@ -451,6 +451,21 @@ input[type="checkbox"]:checked::before {
     z-index: 10;
 }
 
+/* 🔔 Notification popup slide in aninmartiohn*/
+@keyframes slideInFade {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.slide-in {
+    animation: slideInFade 0.4s ease-out;
+}
+
 /* ================= 👤 Account Mini Menu ================= */
 .account-menu {
     position: relative;

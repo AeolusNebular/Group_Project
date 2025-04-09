@@ -1,6 +1,6 @@
 <?php
     
-    // Create database connection 
+    // 🔗 Create database connection 
     $db = Open_Database();
     
     // Query selects all city names from table city in DB and Orders by city Name
@@ -13,7 +13,7 @@
         // Echos into a option value *Note must be paired with select statement to work correctly*
         echo "<option value='$CityName' > " . $CityName . "</option>";
     }
-    // Close database
+    // 🔒 Close database
     $db -> close();
     
 ?>

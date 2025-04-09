@@ -1,60 +1,60 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-session_start();
-
-if (!isset($_SESSION['UserID'])) {
-    echo'
-        <!-- 🔲 Overlay -->
-        <div class="overlay"></div>
-
-        <!-- ⚠️ Alert Box -->
-        <div id="login-alert" class="alert alert-info" role="alert">
-            ⚠️ Please login to view this page!
-        </div>';
-} else {
-    if (isset($_SESSION['RoleID'])) {
-        $RoleID = $_SESSION['RoleID'];
-    } else {
-        $RoleID = null;
-    }
-    $UserID = $_SESSION['UserID'];
-    $UserEmail = $_SESSION['Email'];
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    session_start();
     
-    if (!is_null($_SESSION['FName'])) {
-        $UserFName = $_SESSION['FName'];
+    if (!isset($_SESSION['UserID'])) {
+        echo'
+            <!-- 🔲 Overlay -->
+            <div class="overlay"></div>
+            
+            <!-- ⚠️ Alert Box -->
+            <div id="login-alert" class="alert alert-info" role="alert">
+                ⚠️ Please login to view this page!
+            </div>';
+    } else {
+        if (isset($_SESSION['RoleID'])) {
+            $RoleID = $_SESSION['RoleID'];
+        } else {
+            $RoleID = null;
+        }
+        $UserID = $_SESSION['UserID'];
+        $UserEmail = $_SESSION['Email'];
+        
+        if (!is_null($_SESSION['FName'])) {
+            $UserFName = $_SESSION['FName'];
+        }
+        if (!is_null($_SESSION['SName'])) {
+            $UserSName = $_SESSION['SName'];
+        }
+        if (!is_null($_SESSION['PhoneNo'])) {
+            $UserPhoneNo = $_SESSION['PhoneNo'];
+        }
+        if (!is_null($_SESSION['HouseNo'])) {
+            $UserHouseNo = $_SESSION['HouseNo'];
+        }
+        if (!is_null($_SESSION['StreetName'])) {
+            $UserStreetName = $_SESSION['StreetName'];
+        }
+        if ($RoleID == '2') {
+            $RoleNetwork = $_SESSION['Network_Name'];
+        } elseif ($RoleID == '3') {
+            $CityFilter = $_SESSION['City_Name'];
+        }
     }
-    if (!is_null($_SESSION['SName'])) {
-        $UserSName = $_SESSION['SName'];
+    
+    $conn = new SQLite3("../database/users.db");
+    if (!$conn) {
+        die('Connection failed: ' . $conn->lastErrorMsg());
     }
-    if (!is_null($_SESSION['PhoneNo'])) {
-        $UserPhoneNo = $_SESSION['PhoneNo'];
+    
+    // 📨 Fetch the most recent 5 notifications
+    $notifStmt = $conn->prepare("SELECT NotifID, Body FROM Notifications ORDER BY NotifID DESC LIMIT 5");
+    $notifResult = $notifStmt->execute();
+    
+    if (!$notifResult) {
+        die('Query failed: ' . $conn->lastErrorMsg());
     }
-    if (!is_null($_SESSION['HouseNo'])) {
-        $UserHouseNo = $_SESSION['HouseNo'];
-    }
-    if (!is_null($_SESSION['StreetName'])) {
-        $UserStreetName = $_SESSION['StreetName'];
-    }
-    if ($RoleID == '2') {
-        $RoleNetwork = $_SESSION['Network_Name'];
-    } elseif ($RoleID == '3') {
-        $CityFilter = $_SESSION['City_Name'];
-    }
-}
-
-$conn = new SQLite3("../database/users.db");
-if (!$conn) {
-    die('Connection failed: ' . $conn->lastErrorMsg());
-}
-
-// 📨 Fetch the most recent 5 notifications
-$notifStmt = $conn->prepare("SELECT NotifID, Body FROM Notifications ORDER BY NotifID DESC LIMIT 5");
-$notifResult = $notifStmt->execute();
-
-if (!$notifResult) {
-    die('Query failed: ' . $conn->lastErrorMsg());
-}
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +71,11 @@ if (!$notifResult) {
             aria-label="Toggle navigation" aria-controls="mySidebar">
             <span class="navbar-toggle-icon"></span>
         </button>
-        <button class="notifpopup fancy-button" onclick="createNotificationPopup('This is a popup ')">Please Click</button>
+        
+        <button class="notifpopup fancy-button" onclick="createNotificationPopup('New Alert', 'A new energy usage spike has been detected!');">
+            Notify!!
+        </button>
+        
         <!-- 📛 Title -->
         <h2> Smart Energy Dashboard&trade; </h2>
         
