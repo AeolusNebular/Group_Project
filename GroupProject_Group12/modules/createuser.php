@@ -40,13 +40,13 @@
                         <div id="Network_Select" style="display: none;" class="themed-dropdown">
                             <label for="Networks"> Select network: </label> <br>
                             <select class = "form-select" name="Networks" id="Networks">
-                                <option value="coteq">          Coteq </option>
+                                <option value="Coteq">          Coteq </option>
                                 <option value="Enduris">        Enduris </option>
                                 <option value="Rendo">          Rendo </option>
-                                <option value="westland-infra"> Westlandia </option>
-                                <option value="enexis">         Enexis </option>
-                                <option value="stedin">         Stedin </option>
-                                <option value="liander">        Liander </option>
+                                <option value="Westlandinfra"> Westlandia </option>
+                                <option value="Enexis">         Enexis </option>
+                                <option value="Stedin">         Stedin </option>
+                                <option value="Liander">        Liander </option>
                             </select>
                         </div>
                         

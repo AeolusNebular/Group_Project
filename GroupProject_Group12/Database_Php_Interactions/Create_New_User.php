@@ -40,19 +40,51 @@
         
         // Begin transaction in order to commit code required for other transactions
         $db->exec('BEGIN TRANSACTION');
+
+        $LoginQuery = $db -> prepare("INSERT INTO LoginDetails( Email, Password) VALUES (:Email, :Password)");
+        $LoginQuery -> bindValue(':Email', $_POST['Email']);
+        $LoginQuery -> bindValue(':Password', $Pass);
         
+        if ($LoginQuery -> execute()){
+            debug_to_console('Success Inserted Into Login Details');
+        } else {
+            debug_to_console('Failed To Insert Into Login' . $db -> lastErrorMsg());
+            $Success = false;
+            $db->exec('ROLLBACK');
+            $db->close();
+            exit;
+        }
+        $db -> exec('COMMIT');
+
+        // Begin Next Transaction
+        $db->exec('BEGIN TRANSACTION');
+
+        $LoginIDQuery = $db -> prepare('SELECT LoginID FROM LoginDetails WHERE Email = :Email');
+        $LoginIDQuery -> bindValue(':Email', $_POST['Email']);
+        $Login_ID_Res = $LoginIDQuery->execute();
+
+        if ($Login_ID_Res) {
+            debug_to_console('Successfully Selected LoginID');
+            $LoginID = $Login_ID_Res->fetchArray(SQLITE3_ASSOC)['LoginID'];
+        }   else {
+            debug_to_console("Failed to Select LoginID" . $db -> lastErrorMsg());
+            $Success = false;
+            $db->close();
+            exit;
+        }
+
         // Binds values from query to variables *important as values need to be input in order*
-        $query = $db -> prepare("INSERT INTO User_Details( Fname, SName, RoleID, Email, PhoneNo, HouseNo, StreetName, Zipcode, Gender, EmergencyContact) VALUES ( :Fname, :SName, :RoleID, :Email, :PhoneNo, :HouseNo, :StreetName, :Zipcode, :Gender, :EmergencyContact)");
-        $query ->bindValue(':Fname', ' ');
-        $query ->bindValue(':SName', ' ');
+        $query = $db -> prepare("INSERT INTO User_Details( LoginID ,Fname, SName, RoleID, PhoneNo, HouseNo, StreetName, Zipcode, Gender, EC_ID) VALUES ( :LoginID, :Fname, :SName, :RoleID, :PhoneNo, :HouseNo, :StreetName, :Zipcode, :Gender, :EC_ID)");
+        $query ->bindValue(':LoginID', $LoginID);
+        $query ->bindValue(':Fname', null);
+        $query ->bindValue(':SName', null);
         $query ->bindValue(':RoleID', $RoleID);
-        $query ->bindValue(':Email', $_POST['Email']);
         $query ->bindValue(':PhoneNo', null);
-        $query ->bindValue(':HouseNo', ' ');
-        $query ->bindValue(':StreetName', ' ');
-        $query ->bindValue(':Zipcode', ' ');
-        $query ->bindValue(':Gender', ' ');
-        $query ->bindValue(':EmergencyContact', ' ');
+        $query ->bindValue(':HouseNo', null);
+        $query ->bindValue(':StreetName', null);
+        $query ->bindValue(':Zipcode', null);
+        $query ->bindValue(':Gender', null);
+        $query ->bindValue(':EmergencyContact', null);
         
         // ✅ Checks if insert is successful and debugs to console else fails and changes success variable to false and reverts transaction as well as closing and ending connection to DB
         if ($query -> execute()) {
@@ -69,9 +101,10 @@
         
         // Begin new transaction
         $db->exec('BEGIN TRANSACTION');
+
             // Sets up a new query to select user ID to see if one exists already 
-            $User_Query = $db-> prepare("SELECT USER_ID FROM User_Details WHERE Email = :Email");
-            $User_Query-> bindValue(':Email',$_POST['Email']);
+            $User_Query = $db-> prepare("SELECT USER_ID FROM User_Details WHERE LoginID = :LoginID");
+            $User_Query-> bindValue(':LoginID',$LoginID);
             
             // Executes query and saves to result
             $User_Query_Res = $User_Query->execute();
@@ -88,7 +121,7 @@
             }
             
             // Sets up new Query  To insert into LoginDetails Table
-            $sql = $db -> prepare("INSERT INTO LoginDetails(UserID,Password) VALUES (:UserLID,:Password)");
+           /* $sql = $db -> prepare("INSERT INTO LoginDetails(UserID,Password) VALUES (:UserLID,:Password)");
             $sql -> bindValue(':Password', $Pass);
             $sql -> bindValue(':UserLID', $UserID);
             
@@ -102,12 +135,45 @@
                 $db->close();
                 exit;
             }
-            
+                */
+            //Gets the Network Name From NetworkID
+            if ($RoleID == '2') {
+                $NetworkIDQuery = $db -> prepare("SELECT NetworkID FROM Network WHERE NetworkName = :Network");
+                $NetworkIDQuery-> bindValue(':Network', $Network);
+
+                $Network_Query_Res = $NetworkIDQuery->execute();
+                if ($Network_Query_Res) {
+                    debug_to_console('Successfully Selected NetworkID');
+                    $NetworkID = $Network_Query_Res->fetchArray(SQLITE3_ASSOC)['NetworkID'];
+                    $CityID = null;
+                }   else {
+                    debug_to_console("Failed to Select NetworkID " . $db -> lastErrorMsg());
+                    $Success = false;
+                    $db->close();
+                    exit;
+                }
+            }  elseif ($RoleID == '3') {
+
+                $CityIDQuery = $db -> prepare("SELECT CityID FROM City WHERE City_Name = :City");
+                $CityIDQuery->bindValue(':City',$City);
+
+                $City_Query_Res = $CityIDQuery->execute();
+                if ($City_Query_Res) {
+                    debug_to_console('Successfully Selected CityID');
+                    $CityID = $City_Query_Res->fetchArray(SQLITE3_ASSOC)['CityID'];
+                    $NetworkID = null;
+                }   else {
+                    debug_to_console("Failed to Select CityID " . $db -> lastErrorMsg());
+                    $Success = false;
+                    $db->close();
+                    exit;
+                }
+            }
             // Final query to insert into assignation table 
-            $Ass_Query = $db -> prepare("INSERT INTO Assignations(UserID,NetworkName,City_Name) VALUES (:UserAID,:NetworkName,:CityName)");
-            $Ass_Query->bindValue(':NetworkName', $Network);
-            $Ass_Query->bindValue(':CityName', $City);
-            $Ass_Query -> bindValue(':UserAID', $UserID);
+            $Ass_Query = $db -> prepare("INSERT INTO Assignations(UserID,CityID,NetworkID) VALUES (:UserAID,:CityID,:NetworkID)");
+            $Ass_Query->bindValue(':NetworkID', $NetworkID);
+            $Ass_Query->bindValue(':CityID', $CityID);
+            $Ass_Query -> bindValue(':UserID', $UserID);
             
             // ✅ Checks if query is successful and debugs to console success, else states error message and rolls back transactions
             if ($Ass_Query -> execute()) {
