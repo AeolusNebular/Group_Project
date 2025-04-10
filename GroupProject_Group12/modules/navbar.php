@@ -234,6 +234,16 @@
     
     <script>
         function toggleNotifications() {
+            const bell = document.querySelector('.bell-icon');
+            
+            // 🌀 Add the wiggle class
+            bell.classList.add('wiggle');
+            
+            // 🧽 Remove it after the animation ends so it can be re-triggered
+            bell.addEventListener('animationend', () => {
+                bell.classList.remove('wiggle');
+            }, { once: true });
+            
             var notificationsDropdown = document.getElementById("notificationsDropdown");
             console.log("Toggling notifications dropdown...");
             if (notificationsDropdown.style.display === "none" || notificationsDropdown.style.display === "") {
@@ -260,27 +270,27 @@
                 </li>
                 
                 <?php
-                if (isset($RoleID)) {
-                    if ($RoleID <= 3) {
-                        echo
-                        '<li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
-                        </li>';
+                    if (isset($RoleID)) {
+                        if ($RoleID <= 3) {
+                            echo
+                            '<li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
+                            </li>';
+                        }
+                        if ($RoleID <= 2) {
+                            echo 
+                            '<li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
+                            </li>';
+                        }
+                        if ($RoleID == 1) {
+                            echo
+                            '<li class="nav-item">
+                            <br>
+                            <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
+                            </li>';
+                        }
                     }
-                    if ($RoleID <= 2) {
-                        echo 
-                        '<li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
-                        </li>';
-                    }
-                    if ($RoleID == 1) {
-                        echo
-                        '<li class="nav-item">
-                        <br>
-                        <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/admin.php">Admin</a>
-                        </li>';
-                    }
-                }
                 ?>
                 
                 <!-- 🛸 Spacer -->
