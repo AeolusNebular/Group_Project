@@ -12,16 +12,6 @@
     --border-colour:  #eee;
 }
 
-.filter-deuteranopia {
-    filter: url(#deuteranopia);
-}
-.filter-tritanopia {
-    filter: url(#tritanopia);
-}
-.filter-achromatopsia {
-    filter: url(#achromatopsia);
-}
-
 /* ================= 🎨 THEMES ================= */
 
 /* 🟣 Purple (default) */
@@ -151,7 +141,7 @@
     --bg-dark:        linear-gradient(to bottom right, #4a001f, #ff4500, #ffaf00);
     --bg-light:       linear-gradient(to bottom right, #ffdd99, #ffd180, #ffab40);
     --card-dark:      linear-gradient(to bottom right, #8b1c1cbb, #ff5733bb);
-    --card-light:     linear-gradient(to bottom right, #fc8, #fe9);
+    --card-light:     linear-gradient(to bottom right, #ffcc88bb, #ffee99bb);
     --text-light:     #310;
     --shadow-main:    #ff6f5080;
     --text-shadow:    #d32;
@@ -164,7 +154,7 @@
     --bg-dark:        linear-gradient(to bottom right, #5c3b1a, #a86d3c);
     --bg-light:       linear-gradient(to bottom right, #ffdab9, #ffcc99);
     --card-dark:      linear-gradient(to bottom right, #8b5a2bbb, #c79c6bbb);
-    --card-light:     linear-gradient(to bottom right, #f5deb3, #ffebcc);
+    --card-light:     linear-gradient(to bottom right, #f5deb3bb, #ffebccbb);
     --text-light:     #421;
     --shadow-main:    #cc996060;
     --text-shadow:    #a63;
@@ -198,7 +188,7 @@
     --bg-dark:        radial-gradient(circle at 40% 20%, #2d0061, #15002f, #000018);
     --bg-light:       linear-gradient(to bottom right, #f2d6ff, #ffeaff);
     --card-dark:      linear-gradient(to bottom right, #2c005080, #5a009980);
-    --card-light:     linear-gradient(to bottom right, #e1c4ff, #f7e8ff);
+    --card-light:     linear-gradient(to bottom right, #e1c4ff80, #f7e8ff80);
     --text-dark:      #fef;
     --text-light:     #206;
     --shadow-main:    #d47fff80;
@@ -347,7 +337,7 @@
     --bg-dark:        linear-gradient(to bottom right, #c85, #540);
     --bg-light:       linear-gradient(to bottom right, #ffe, #ffb);
     --card-dark:      linear-gradient(to bottom right, #e6a900bb, #ffd700bb);
-    --card-light:     linear-gradient(to bottom right, #ffc, #fe9);
+    --card-light:     linear-gradient(to bottom right, #ffffccbb, #ffee99bb);
     --shadow-main:    #dbcb8580;
     --text-shadow:    #cd8;
 }
@@ -394,3 +384,8 @@ body.bonus-theme {
 .bling-option  { color: #c81; }
 .bonus-option  { color: #e8e; }
 .root-option   { color: #666; }
+
+/* ================= Colourblind Filters ================= */
+.filter-deuteranopia { filter: url(#deuteranopia); }
+.filter-tritanopia    { filter: url(#tritanopia); }
+.filter-achromatopsia { filter: url(#achromatopsia); }
