@@ -167,3 +167,37 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// 📖 Toggle notification read status (dot ↔ circle)
+function toggleReadStatus(notifId, element) {
+    // 📖 Determine new read status
+    let isRead = 0;
+    
+    // 🟣 Toggle classes on the clicked dot only
+    if (element.classList.contains('unread-dot')) {
+        element.classList.remove('unread-dot'); // 🟣 Mark as read
+        element.classList.add('read-dot');
+        isRead = 1;
+    } else if (element.classList.contains('read-dot')) {
+        element.classList.remove('read-dot');   // ⭕ Mark as unread
+        element.classList.add('unread-dot');
+        isRead = 0;
+    }
+    
+    // 📡 Send AJAX request to update the database
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'notifications.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            console.log('✅ Notification read status updated for NotifID:', notifId);
+        } else {
+            console.warn('⚠️ Failed to update read status for NotifID:', notifId);
+        }
+    };
+    xhr.send(
+        'markAsRead=true' +
+        '&NotifID=' + encodeURIComponent(notifId) +
+        '&isRead=' + encodeURIComponent(isRead)
+    );
+}

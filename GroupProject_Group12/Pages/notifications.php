@@ -35,11 +35,11 @@
                 
                 // 🗑️ Delete notification
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
-                    $notificationId = $_POST['NotifID'];
+                    $notifId = $_POST['NotifID'];
                     
                     // 🗑️ Delete notification from database
                     $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotifID");
-                    $deleteStmt->bindValue(':NotifID', $notificationId, SQLITE3_INTEGER);
+                    $deleteStmt->bindValue(':NotifID', $notifId, SQLITE3_INTEGER);
                     $deleteStmt->execute();
                     
                     // ↪️ Redirect to notifications page after deletion
@@ -55,49 +55,64 @@
                 $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
                 $notifResult = $notifStmt->execute();
                 
-                // ⏱️ Notifcation age calculator
-                function timeAgo($datetime) {
-                    $now = new DateTime();
-                    $past = new DateTime($datetime);
-                    $diff = $now->diff($past);
+                // 📖 Update read status via AJAX
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['markAsRead']) && isset($_POST['NotifID']) && isset($_POST['isRead'])) {
+                    $notifId = $_POST['NotifID'];
+                    $isRead = $_POST['isRead'] == '1' ? 1 : 0;
                     
-                    if ($diff->y > 0) return $diff->y . " year" . ($diff->y > 1 ? "s" : "") . " ago";
-                    if ($diff->m > 0) return $diff->m . " month" . ($diff->m > 1 ? "s" : "") . " ago";
-                    if ($diff->d > 6) return floor($diff->d / 7) . " week" . (floor($diff->d / 7) > 1 ? "s" : "") . " ago";
-                    if ($diff->d > 0) return $diff->d . " day" . ($diff->d > 1 ? "s" : "") . " ago";
-                    if ($diff->h > 0) return $diff->h . " hour" . ($diff->h > 1 ? "s" : "") . " ago";
-                    if ($diff->i > 0) return $diff->i . " minute" . ($diff->i > 1 ? "s" : "") . " ago";
-                    return "Just now";
+                    $updateStmt = $conn->prepare("UPDATE Notifications SET Read = :isRead WHERE NotifID = :notifId");
+                    $updateStmt->bindValue(':isRead', $isRead, SQLITE3_INTEGER);
+                    $updateStmt->bindValue(':notifId', $notifId, SQLITE3_INTEGER);
+                    $updateStmt->execute();
+                    
+                    error_log("📬 AJAX read update received: ID = $notifId, isRead = $isRead");
+                    
+                    // 🛑 Stop output (no HTML or echo)
+                    exit();
                 }
                 
                 // 🔄 Loop through notifications and display
-                while ($notification = $notifResult->fetchArray(SQLITE3_ASSOC)) {
-                    $notifBody = htmlspecialchars($notification['Body'] ?? '');
-                    $notifID = htmlspecialchars($notification['NotifID'] ?? '');
-                    $notifDate = $notification['Date'] ?? null;
+                while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
+                    $notifBody = htmlspecialchars($notif['Body'] ?? '');
+                    $notifID = htmlspecialchars($notif['NotifID'] ?? '');
+                    $notifDate = $notif['Date'] ?? null;
                     $ageLabel = $notifDate ? timeAgo($notifDate) : '';
                     $notifFullDate = $notifDate ? (new DateTime($notifDate))->format('j M Y H:i:s') : ''; // 📅 Full timestamp
                     
+                    // 🪄 Unread notifications highlight
+                    $unreadClass = ($notif['Read'] == 0) ? 'unread-notification' : '';
+                    
+                    // ⭐ Star if notification is targeted to current user
+                    $starClass = ($notif['UserID'] == $userId) ? 'filled-star' : '';
+                    
+                    // 📖 Mark as read toggle (dot to hollow circle effect)
+                    $markAsReadClass = ($notif['Read'] == 0) ? 'unread-dot' : 'read-dot';
+                    
                     echo '
-                        <div class="card mb-3 d-flex">
+                        <div class="card mb-3 d-flex ' . $unreadClass . '">
                             <form method="POST" action="">
                                 <div class="card-header">
-                                    ' . htmlspecialchars($notification['Header'] ?? '') . '
+                                    <!-- ⭐ Star for targeted notification -->
+                                    ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" title="This notification is targeted at you">&#9733;</span>' : '') . '
+                                    ' . htmlspecialchars($notif['Header'] ?? '') . '
                                     <span 
                                         style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
                                         title="' . htmlspecialchars($notifFullDate) . '"
                                     >' . htmlspecialchars($ageLabel) . '</span>
-                                    <button type="submit" name="deleteNotification" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 12px"></button>
+                                    <!-- 🗑️ Delete button -->
+                                    <button type="submit" name="deleteNotification" class="btn-close" aria-label="Close" style="position: absolute; right: 12px"></button>
+                                    <!-- 📖 Mark as read dot -->
+                                    <span class="' . $markAsReadClass . '" title="Toggle read status" style="cursor: pointer; margin-right: 1rem; float: right;" onclick="toggleReadStatus(' . $notif['NotifID'] . ', this)"></span>
                                 </div>
                                 <div class="card-body">
                                     <p>
-                                        ' . htmlspecialchars($notification['Body'] ?? '') . '
+                                        ' . htmlspecialchars($notif['Body'] ?? '') . '
                                     </p>
-                                    <input type="hidden" name="NotifID" value="' . htmlspecialchars($notification['NotifID'] ?? '') . '"/>
+                                    <input type="hidden" name="NotifID" value="' . htmlspecialchars($notif['NotifID'] ?? '') . '"/>
                                 </div>
                             </form>
                         </div>
-                        <script>console.log("Pritning big notification");</script>
+                        <script>console.log("Loaded body notif:", ' . json_encode($notif['NotifID']) . ');</script>
                     ';
                 }
             ?>

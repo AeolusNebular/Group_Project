@@ -77,32 +77,53 @@
             
             <!-- 🔔 Notifications button with dropdown -->
             <?php if (isset($_SESSION['RoleID'])): ?>
-                <div class="icon-container">
+                <div class="icon-container" style="position: relative;">
                     <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Open notifications dropdown" style="color: white;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" class="bell-icon" viewBox="0 1 16 17">
                             <path d="M8 2C5.5 2 3.5 4.5 3.5 7v3c0 .8-.5 1.5-1.2 2h11.4c-.7-.5-1.2-1.2-1.2-2V7c0-2.5-2-5-4.5-5z"/>
                             <path d="M2.5 12c-.8 0-1.5.7-1.5 1.5S1.7 15 2.5 15h11c.8 0 1.5-.7 1.5-1.5S14.3 12 13.5 12h-11z"/>
                             <circle cx="8" cy="15" r="2"/>
                         </svg>
+                        
+                        <!-- 🔴 Red dot for unread notifications -->
+                        <?php
+                            // 🗃️ Database utilities
+                            require_once('../Database_Php_Interactions/Database_Utilities.php');
+                            
+                            // 🔗 Connect to database
+                            $conn = Open_Database();
+                            
+                            // 👤 Get current user ID
+                            $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
+                            echo '<script>console.log("UserID: ' . $userId . '");</script>';
+                            
+                            // 📨 Check for unread notifications
+                            $unreadStmt = $conn->prepare("
+                                SELECT COUNT(*) AS unreadCount
+                                FROM Notifications
+                                WHERE UserID = :userId AND Read = 0
+                            ");
+                            $unreadStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
+                            $unreadResult = $unreadStmt->execute();
+                            $unreadCount = $unreadResult->fetchArray(SQLITE3_ASSOC)['unreadCount'];
+                            
+                            // 🔴 Show red dot if there are unread notifications
+                            if ($unreadCount > 0) {
+                                echo '<span class="red-dot" style="position: absolute; top: 4px; right: 8px; width: 8px; height: 8px; border-radius: 50%;"></span>';
+                                echo '<script>console.log("Unread notifications count: ' . $unreadCount . '");</script>';
+                            } else {
+                                echo '<script>console.log("No unread notifications.");</script>';
+                            }
+                        ?>
                     </button>
                     
                     <!-- 🔽 Dropdown notifications -->
                     <div id="notificationsDropdown" class="dropdown-menu">
                         <div id="notificationList" class="notification-list">
                             <?php
-                                // 🗃️ Database utilities
-                                require_once('../Database_Php_Interactions/Database_Utilities.php');
-                                
-                                // 🔗 Connect to database
-                                $conn = Open_Database();
-                                
-                                // 👤 Get current user ID
-                                $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
-                                echo '<script>console.log("UserID: ' . $userId . '");</script>';
-                                
-                                // 📨 Fetch 3 most recent notifications
+                                // 📨 Fetch 3 most recent notifications (including read status)
                                 $notifStmt = $conn->prepare("
-                                    SELECT NotifID, UserID, Header, Body, Date
+                                    SELECT NotifID, UserID, Header, Body, Date, Read
                                     FROM Notifications
                                     WHERE UserID = :userId OR UserID IS 0
                                     ORDER BY Date DESC
@@ -111,26 +132,62 @@
                                 $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
                                 $notifResult = $notifStmt->execute();
                                 
+                                // ⏱️ Notifcation age calculator
+                                function timeAgo($datetime) {
+                                    $now = new DateTime();
+                                    $past = new DateTime($datetime);
+                                    $diff = $now->diff($past);
+                                    
+                                    if ($diff->y > 0) return $diff->y . " year" . ($diff->y > 1 ? "s" : "") . " ago";
+                                    if ($diff->m > 0) return $diff->m . " month" . ($diff->m > 1 ? "s" : "") . " ago";
+                                    if ($diff->d > 6) return floor($diff->d / 7) . " week" . (floor($diff->d / 7) > 1 ? "s" : "") . " ago";
+                                    if ($diff->d > 0) return $diff->d . " day" . ($diff->d > 1 ? "s" : "") . " ago";
+                                    if ($diff->h > 0) return $diff->h . " hour" . ($diff->h > 1 ? "s" : "") . " ago";
+                                    if ($diff->i > 0) return $diff->i . " minute" . ($diff->i > 1 ? "s" : "") . " ago";
+                                    return "Just now";
+                                }
+                                
                                 // 🔄 Loop through results and display each notification
                                 while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {
                                     // ✂️ Truncate header and body
-                                    $header = htmlspecialchars(mb_strimwidth($notif['Header'], 0, 36, '…'));
-                                    $body = htmlspecialchars(mb_strimwidth($notif['Body'], 0, 48, '…'));
+                                    $header = htmlspecialchars(mb_strimwidth($notif['Header'], 0, 24, '…'));
+                                    $body = htmlspecialchars(mb_strimwidth($notif['Body'], 0, 42, '…'));
                                     
-                                    echo '<div class="col-12 d-flex">';
-                                    echo '<a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="card mb-2" style="text-decoration: none;">';
-                                    echo '  <div class="card-header">' . $header . '</div>';
-                                    echo '  <div class="card-body">' . $body . '</div>';
-                                    echo '</a>';
-                                    echo '</div>';
-                                    echo '<script>console.log("Pritning little notification");</script>';
+                                    $notifID = htmlspecialchars($notif['NotifID'] ?? '');
+                                    $notifDate = $notif['Date'] ?? null;
+                                    $ageLabel = $notifDate ? timeAgo($notifDate) : '';
+                                    $notifFullDate = $notifDate ? (new DateTime($notifDate))->format('j M Y H:i:s') : ''; // 📅 Full timestamp
+                                    
+                                    // Unread notifications highlight
+                                    $unreadClass = ($notif['Read'] == 0) ? 'unread-notification' : '';
+                                    
+                                    echo '  <div class="col-12 d-flex">
+                                                <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="card mb-3 d-flex ' . $unreadClass . '" style="text-decoration: none;">
+                                                    <div class="card-header">
+                                                        <!-- ⭐ Star for targeted notification -->
+                                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" title="This notification is targeted at you">&#9733;</span>' : '') . '
+                                                        ' . $header . '
+                                                        <span 
+                                                            style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
+                                                            title="' . htmlspecialchars($notifFullDate) . '"
+                                                        >' . htmlspecialchars($ageLabel) . '</span>
+                                                        <button type="submit" name="deleteNotification" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 12px"></button>
+                                                    </div>
+                                                    <div class="card-body">' . $body . '</div>
+                                                </a>
+                                            </div>
+                                            <script>console.log("Loaded notification:", ' . json_encode($notif['NotifID']) . ');</script>
+                                        '
+                                    ;
+                                    
+                                    // TBA: Clicking on notification here marks as read immediately?
                                 }
                             ?>
                         </div>
                         <!-- ➕ Plus icon to show all -->
-                        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="btn btn-link" style="padding: 0; display: flex; align-items: center; justify-content: center;">
+                        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" title="Show all notifications" class="btn btn-link" style="padding: 0; display: flex; align-items: center; justify-content: center;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 5v14M5 12h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 8 L15 12 L10 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                             </svg>
                         </a>
                     </div>
