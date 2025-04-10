@@ -391,6 +391,7 @@ input[type="checkbox"]:checked::before {
 
 /* 🌞 Light mode toggle button */
 .icon-container {
+    position: relative;
     display: inline-block;
     cursor: pointer;
 }
@@ -460,22 +461,15 @@ input[type="checkbox"]:checked::before {
 
 /* Red dot */
 .red-dot {
-    border: 0;
     background-color: red;
     animation: pulse 1.5s infinite ease-in-out;
 }
 
 /* Pulse animation for red dot */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); opacity: 1; }
+    25% { transform: scale(1.25); opacity: 0.8; }
+    50% { transform: scale(1); opacity: 1; }
 }
 
 /* Targeted notification star */
@@ -515,7 +509,7 @@ input[type="checkbox"]:checked::before {
     transition: all 0.2s ease-in-out;
 }
 
-.unread-dot:hover, .read-rot:hover {
+.unread-dot:hover, .read-dot:hover {
     box-shadow: 0 0 16px #f76;
 }
 
