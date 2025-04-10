@@ -18,20 +18,16 @@
         } else {
             $RoleID = null;
         }
-
-        $UserID = $_SESSION['UserID'];
-        $UserEmail = $_SESSION['Email'];
         
-        $UserFName = $_SESSION['FName'] ?? null;
-        $UserFName = $_SESSION['SName'] ?? null;
-        $UserFName = $_SESSION['PhoneNo'] ?? null;
-
-        if (!is_null($_SESSION['HouseNo'])) {
-            $UserHouseNo = $_SESSION['HouseNo'];
-        }
-        if (!is_null($_SESSION['StreetName'])) {
-            $UserStreetName = $_SESSION['StreetName'];
-        }
+        $UserID      = $_SESSION['UserID'];
+        $UserEmail   = $_SESSION['Email'];
+        
+        $UserFName   = $_SESSION['FName'] ?? null;
+        $UserSName   = $_SESSION['SName'] ?? null;
+        $UserPhoneNo = $_SESSION['PhoneNo'] ?? null;
+        $UserHouseNo = $_SESSION['HouseNo'] ?? null;
+        $UserStreet  = $_SESSION['StreetName'] ?? null;
+        
         if ($RoleID == '2') {
             $RoleNetwork = $_SESSION['Network_Name'];
         } elseif ($RoleID == '3') {
@@ -204,7 +200,7 @@
             <!-- 👤 Account button with dropdown -->
             <div class="account-menu">
                 
-                <?php 
+                <?php
                     if (isset($UserID)) {
                         echo '
                         <button id="accountButton" class="account-btn" aria-haspopup="true" aria-expanded="false">
@@ -270,13 +266,13 @@
                         '<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/city.php">City</a>
                         </li>';
-                    } 
+                    }
                     if ($RoleID <= 2) {
                         echo 
                         '<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/Group_Project/GroupProject_Group12/pages/network.php">Network</a>
                         </li>';
-                    } 
+                    }
                     if ($RoleID == 1) {
                         echo
                         '<li class="nav-item">

@@ -9,8 +9,10 @@
 
 <body>
     
-    <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php");
+    <!-- 📍 Navbar and login -->
+    <?php 
+        include("../modules/navbar.php");
+        include("../modules/login.php");
     ?>
     
     <!-- 🔔 Notifications page content -->

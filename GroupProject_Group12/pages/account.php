@@ -9,9 +9,10 @@
 
 <body>
     
-    <!-- 📍 Navbar -->
-    <?php
+    <!-- 📍 Navbar and login -->
+    <?php 
         include("../modules/navbar.php");
+        include("../modules/login.php");
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
         debug_to_console($UserID);

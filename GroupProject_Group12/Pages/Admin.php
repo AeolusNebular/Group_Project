@@ -9,15 +9,17 @@
 
 <body>
     
-    <!-- 📍 Navbar -->
-    <?php include("../modules/navbar.php");
-    require_once('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php');
-    try {
-        include("../modules/CreateUser.php");
-    } catch (Exception $e) {
-        echo "error loading cities";
-    } 
+    <!-- 📍 Navbar and login -->
+    <?php 
+        include("../modules/navbar.php");
+        include("../modules/login.php");
+        require_once('../Database_Php_Interactions/Database_Utilities.php');
+        include('../Database_Php_Interactions/CSVData.php');
+        try {
+            include("../modules/CreateUser.php");
+        } catch (Exception $e) {
+            echo "error loading cities";
+        } 
     ?>
     
     <!-- 🛡️ Admin page content -->

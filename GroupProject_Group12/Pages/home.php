@@ -8,12 +8,12 @@
 
 <body>
     
-    <!-- 📍 Navbar -->
+    <!-- 📍 Navbar and login -->
     <?php 
-    include("../modules/navbar.php");
-    require_once('../Database_Php_Interactions/Database_Utilities.php');
-    include('../Database_Php_Interactions/CSVData.php');
-    include("../modules/login.php");
+        include("../modules/navbar.php");
+        include("../modules/login.php");
+        require_once('../Database_Php_Interactions/Database_Utilities.php');
+        include('../Database_Php_Interactions/CSVData.php');
     ?>
 
     
