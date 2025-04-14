@@ -254,82 +254,22 @@
     }
 }
 
-.UFO {
+/* 🛸 Cosmic theme UFO easter egg */
+.ufo {
     position: fixed;
     top: 10px;
     left: 10px;
-    width: 250px;
-    height: 250px;
+    width: 48px;
+    height: 48px;
     background-image: url('https://cdn-icons-png.freepik.com/512/3306/3306571.png');
     background-size: cover;
-    animation: ufo-fly 20s linear infinite;
+    animation: ufo-whizz 3s linear infinite;
     pointer-events: none;
 }
-
-@keyframes ufo-fly {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    5% {
-        transform: translate(-20vw, 10vh) rotate(45deg);
-    }
-    10% {
-        transform: translate(50vw, -30vh) rotate(90deg);
-    }
-    15% {
-        transform: translate(-40vw, 40vh) rotate(135deg);
-    }
-    20% {
-        transform: translate(30vw, -50vh) rotate(180deg);
-    }
-    25% {
-        transform: translate(-10vw, 60vh) rotate(225deg);
-    }
-    30% {
-        transform: translate(70vw, -20vh) rotate(270deg);
-    }
-    35% {
-        transform: translate(-50vw, 30vh) rotate(315deg);
-    }
-    40% {
-        transform: translate(20vw, -40vh) rotate(360deg);
-    }
-    45% {
-        transform: translate(-30vw, 50vh) rotate(405deg);
-    }
-    50% {
-        transform: translate(60vw, -10vh) rotate(450deg);
-    }
-    55% {
-        transform: translate(-70vw, 20vh) rotate(495deg);
-    }
-    60% {
-        transform: translate(40vw, -60vh) rotate(540deg);
-    }
-    65% {
-        transform: translate(-20vw, 70vh) rotate(585deg);
-    }
-    70% {
-        transform: translate(50vw, -30vh) rotate(630deg);
-    }
-    75% {
-        transform: translate(-60vw, 40vh) rotate(675deg);
-    }
-    80% {
-        transform: translate(30vw, -50vh) rotate(720deg);
-    }
-    85% {
-        transform: translate(-10vw, 60vh) rotate(765deg);
-    }
-    90% {
-        transform: translate(70vw, -20vh) rotate(810deg);
-    }
-    95% {
-        transform: translate(-50vw, 30vh) rotate(855deg);
-    }
-    100% {
-        transform: translate(0, 0) rotate(900deg);
-    }
+@keyframes ufo-whizz {
+    0%   { transform: translate(0, 0); }
+    50%  { transform: translate(-120vw, 30vh); }
+    100% { transform: translate(200vw, 30vh); }
 }
 
 /* 💰 Ridiculously Bling */
@@ -385,7 +325,7 @@ body.bonus-theme {
 .bonus-option  { color: #e8e; }
 .root-option   { color: #666; }
 
-/* ================= Colourblind Filters ================= */
-.filter-deuteranopia { filter: url(#deuteranopia); }
+/* ================= 🕶️ Colourblind Filters ================= */
+.filter-deuteranopia  { filter: url(#deuteranopia); }
 .filter-tritanopia    { filter: url(#tritanopia); }
 .filter-achromatopsia { filter: url(#achromatopsia); }
