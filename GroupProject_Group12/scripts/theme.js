@@ -248,56 +248,53 @@ function stopMatrix() {
     document.querySelectorAll(".matrix-container").forEach((el) => el.remove());
 }
 
-// ⭐ Cosmic theme stars system
-let shootingStarsInterval; // 🕒 Store interval reference
-
-function ufosecret() {
+// 🛸 Cosmic theme UFO easter egg
+function startUFO() {
     let ufoproc = false;
-
-    // Set an interval to check for UFO chance every 10 seconds (or any desired delay)
+    
+    // 🕒 Set interval to check for UFO chance (every 10 seconds)
     const ufoInterval = setInterval(() => {
         if (!ufoproc) {
-            const ufochance = Math.random() * 100; // Random number between 0 and 100
-            console.log("UFO chance: " + ufochance);
-
-            if (ufochance > 99) { // 1% chance
-                console.log("🚀 UFO secret activated!");
+            const ufochance = Math.random() * 10; // 🎲 Random number between 0 and 10
+            console.log("🛸 UFO chance: 🎲 " + ufochance);
+            
+            if (ufochance > 8) { // 🎲 20% chance every ten seconds
+                console.log("🛸 UFO activated!");
                 ufoproc = true;
-
-                // Add UFO logic here
+                
+                // 🛸 UFO logic
                 const starContainer = document.getElementById("star-container");
                 if (!starContainer) return; // 🚫 Prevent errors if container was removed
-
-                const UFO = document.createElement("div");
-                UFO.classList.add("UFO");
-
+                
+                const ufo = document.createElement("div");
+                ufo.classList.add("ufo");
+                
                 // 🌍 Random starting position
-                const startX = Math.random() * window.innerWidth * 0.6 + window.innerWidth * 0.4;
+                const startX = window.innerWidth;
                 const startY = Math.random() * window.innerHeight * 0.4;
-
-                UFO.style.left = `${startX}px`;
-                UFO.style.top = `${startY}px`;
-
-                // 🌠 Assign animation
-                UFO.style.animation = `ufo-fly 20s linear infinite`;
-
-                starContainer.appendChild(UFO);
-
+                
+                ufo.style.left = `${startX}px`;
+                ufo.style.top = `${startY}px`;
+                
+                starContainer.appendChild(ufo);
+                
                 // 🔄 Remove after animation to prevent clutter
                 setTimeout(() => {
-                    UFO.remove();
-                    ufoproc = false; // Reset UFO process to allow future activations
-                }, 20000);
+                    ufo.remove();
+                    ufoproc = false; // ⛔ Reset UFO process to allow future activations
+                }, 3000);
             }
         }
-    }, 10000); // Check every 10 seconds
-
-    // Optional: Stop the interval after a certain amount of time (e.g., 5 minutes)
+    }, 10000); // 🕒 Check every 10 seconds
+    
     setTimeout(() => {
         clearInterval(ufoInterval);
         console.log("🛑 Stopped checking for UFOs.");
-    }, 300000); // Stop after 5 minutes (300,000 ms)
+    }, 300000); // 🛑 Stop after 5 minutes (300,000 ms)
 }
+
+// ⭐ Cosmic theme stars system
+let shootingStarsInterval; // 🕒 Store interval reference
 
 function startStars() {
     console.log("✨ Starting stars...");
@@ -333,7 +330,7 @@ function startStars() {
     
     // 🌠 Start shooting stars
     startShootingStars();
-    ufosecret();
+    startUFO();
 }
 
 function startShootingStars() {
