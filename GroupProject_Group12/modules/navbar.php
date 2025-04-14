@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+    
 <?php
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -36,10 +39,8 @@
     }
 ?>
 
-<!DOCTYPE html>
-<html lang="en-gb">
-
 <body>
+    
     <!-- 📍 Navbar content -->
     <nav class="navbar">
         
@@ -231,28 +232,6 @@
             
         </div>
     </nav>
-    
-    <script>
-        function toggleNotifications() {
-            const bell = document.querySelector('.bell-icon');
-            
-            // 🌀 Add the wiggle class
-            bell.classList.add('wiggle');
-            
-            // 🧽 Remove it after the animation ends so it can be re-triggered
-            bell.addEventListener('animationend', () => {
-                bell.classList.remove('wiggle');
-            }, { once: true });
-            
-            var notificationsDropdown = document.getElementById("notificationsDropdown");
-            console.log("Toggling notifications dropdown...");
-            if (notificationsDropdown.style.display === "none" || notificationsDropdown.style.display === "") {
-                notificationsDropdown.style.display = "block";
-            } else {
-                notificationsDropdown.style.display = "none";
-            }
-        }
-    </script>
     
     <!-- 🔀 Sidebar -->
     <nav id="main">

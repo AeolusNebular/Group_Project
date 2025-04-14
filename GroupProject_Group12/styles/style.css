@@ -9,7 +9,7 @@
 }
 
 /* Unified hover activity */
-.card:hover, button:hover, input:hover, svg:hover {
+.card:hover, button:hover, input:hover {
     filter: brightness(1.02);
     transform: scale(1.01);
 }
@@ -99,6 +99,7 @@ h2, .card-header {
 
 /* =================== 🏛️ Card & Panels =================== */
 .card {
+    width: 100%;
     margin: 12px;
     background: var(--card-dark);
     backdrop-filter: blur(1px) saturate(120%) contrast(160%);
@@ -107,10 +108,6 @@ h2, .card-header {
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     position: relative;
-    overflow: hidden;
-}
-.card {
-    width: 100%;
 }
 .light-mode .card {
     background: var(--card-light);

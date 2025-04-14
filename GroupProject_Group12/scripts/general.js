@@ -168,6 +168,27 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// 📖 Toggle notification navbar dropdown
+function toggleNotifications() {
+    const bell = document.querySelector('.bell-icon');
+    
+    // 🌀 Add the wiggle class
+    bell.classList.add('wiggle');
+    
+    // 🧽 Remove it after the animation ends so it can be re-triggered
+    bell.addEventListener('animationend', () => {
+        bell.classList.remove('wiggle');
+    }, { once: true });
+    
+    var notificationsDropdown = document.getElementById("notificationsDropdown");
+    console.log("Toggling notifications dropdown...");
+    if (notificationsDropdown.style.display === "none" || notificationsDropdown.style.display === "") {
+        notificationsDropdown.style.display = "block";
+    } else {
+        notificationsDropdown.style.display = "none";
+    }
+}
+
 // 📖 Toggle notification read status (dot ↔ circle)
 function toggleReadStatus(notifId, element) {
     // 📖 Determine new read status
