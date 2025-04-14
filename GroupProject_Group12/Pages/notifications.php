@@ -49,60 +49,64 @@
                     $markAsReadClass = ($notif['Read'] == 0) ? 'unread-dot' : 'read-dot';
                     
                     echo '
-                        <div class="card mb-3 d-flex">
-                            <form method="POST" action="">
-                                <div class="card-header">
-                                    <!-- ⭐ Star for targeted notification -->
-                                    ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
-                                    ' . htmlspecialchars($notif['Header'] ?? '') . '
-                                    <span 
-                                        style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
-                                        data-tooltip="' . htmlspecialchars($notifFullDate) . '"
-                                    >' . htmlspecialchars($ageLabel) . '</span>
-                                    <!-- 🗑️ Delete button -->
-                                    <span data-tooltip="Delete notification" style="position: absolute; right: 12px">
-                                        <button type="submit" name="deleteNotification" class="btn-close" aria-label="Delete notification"></button>
-                                    </span>
-                                    <!-- 📖 Mark as read dot -->
-                                    <span class="' . $markAsReadClass . '" data-tooltip="Toggle read status" style="cursor: pointer; margin-right: 1rem; float: right;" onclick="toggleReadStatus(' . $notif['NotifID'] . ', this)"></span>
-                                </div>
-                                <div class="card-body">
-                                    <p>
-                                        ' . htmlspecialchars($notif['Body'] ?? '') . '
-                                    </p>
-                                    <input type="hidden" name="NotifID" value="' . htmlspecialchars($notif['NotifID'] ?? '') . '"/>
-                                </div>
-                            </form>
+                        <div class="col-12 col-md-12 d-flex">
+                            <div class="card">
+                                <form method="POST" action="">
+                                    <div class="card-header">
+                                        <!-- ⭐ Star for targeted notification -->
+                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
+                                        ' . htmlspecialchars($notif['Header'] ?? '') . '
+                                        <span 
+                                            style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
+                                            data-tooltip="' . htmlspecialchars($notifFullDate) . '"
+                                        >' . htmlspecialchars($ageLabel) . '</span>
+                                        <!-- 🗑️ Delete button -->
+                                        <span data-tooltip="Delete notification" style="position: absolute; right: 12px">
+                                            <button type="submit" name="deleteNotification" class="btn-close" aria-label="Delete notification"></button>
+                                        </span>
+                                        <!-- 📖 Mark as read dot -->
+                                        <span class="' . $markAsReadClass . '" data-tooltip="Toggle read status" style="cursor: pointer; margin-right: 1rem; float: right;" onclick="toggleReadStatus(' . $notif['NotifID'] . ', this)"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>
+                                            ' . htmlspecialchars($notif['Body'] ?? '') . '
+                                        </p>
+                                        <input type="hidden" name="NotifID" value="' . htmlspecialchars($notif['NotifID'] ?? '') . '"/>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <script>console.log("Loaded body notif:", ' . json_encode($notif['NotifID']) . ');</script>
                     ';
                 }
             ?>
             
-            <div class="card mb-3 d-flex">
-                <div class="card-header">
-                    <h2> Create Notification </h2>
-                </div>
-                
-                <div class="card-body">
-                    <form action="../Database_Php_Interactions/create_notification.php" method="POST">
-                        <label for="user_id"> User ID (leave blank for all users): </label>
-                        <input type="number" name="user_id" id="user_id"><br><br>
-                        
-                        <label for="header"> Header: </label>
-                        <input type="text" name="header" id="header" required><br><br>
-                        
-                        <label for="body"> Body (optional): </label>
-                        <textarea name="body" id="body" rows="4"></textarea><br><br>
-                        
-                        <label for="date"> Date and time: </label>
-                        <input type="datetime-local" name="date" id="date" required><br><br>
-                        
-                        <label for="read"> Read: </label>
-                        <input type="checkbox" name="read" id="read"><br><br>
-                        
-                        <button type="submit" class="fancy-button"> Send Notification </button>
-                    </form>
+            <div class="col-12 col-md-12 d-flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h2> Create Notification </h2>
+                    </div>
+                    
+                    <div class="card-body">
+                        <form action="../Database_Php_Interactions/create_notification.php" method="POST">
+                            <label for="user_id"> User ID (leave blank for all users): </label>
+                            <input type="number" name="user_id" id="user_id"><br><br>
+                            
+                            <label for="header"> Header: </label>
+                            <input type="text" name="header" id="header" required><br><br>
+                            
+                            <label for="body"> Body (optional): </label>
+                            <textarea name="body" id="body" rows="4"></textarea><br><br>
+                            
+                            <label for="date"> Date and time: </label>
+                            <input type="datetime-local" name="date" id="date" required><br><br>
+                            
+                            <label for="read"> Read: </label>
+                            <input type="checkbox" name="read" id="read"><br><br>
+                            
+                            <button type="submit" class="fancy-button"> Send Notification </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             

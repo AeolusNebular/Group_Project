@@ -4,7 +4,7 @@
 }
 
 /* Unified corner rounding */
-.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .footer-link, input, #legend {
+.dropdown, .dropdown a, .dropdown-menu, .modal-content, .card, .card::before, .footer-link, input, #legend {
     border-radius: 8px !important;
 }
 
@@ -12,6 +12,36 @@
 .card:hover, button:hover, input:hover {
     filter: brightness(1.02);
     transform: scale(1.01);
+}
+
+/* Unified focus activity */
+button:focus, input:focus, select:focus {
+    outline: 2px solid #f76;
+    outline-offset: 2px;
+    box-shadow: 0px 0px 12px #ff46b3;
+}
+
+.card:focus-within {
+    box-shadow: 0 0 12px 2px var(--text-shadow);
+    animation: glowPulse 2s ease-in-out infinite alternate;
+}
+@keyframes glowPulse {
+    0% {
+        box-shadow: 
+            0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.3), /* Base hover */
+            0 0 12px rgba(255, 70, 179, 0); /* New glow */
+    }
+    100% {
+        box-shadow: 
+            0 0 22px var(--shadow-main), 0 0 15px rgba(255, 255, 255, 0.3), /* Base hover */
+            0 0 22px rgba(255, 70, 179, 0.8); /* New glow */
+    }
+}
+
+@keyframes quickWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
 }
 
 /* ===================== 🔤 Font Sizes ==================== */
@@ -106,7 +136,7 @@ h2, .card-header {
     color: var(--text-dark);
     box-shadow: 0 0 16px var(--shadow-main), 0 0 10px rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    transition: all 0.2s ease-in-out;
     position: relative;
 }
 .light-mode .card {
@@ -251,10 +281,6 @@ input[type="checkbox"]:checked::before {
 
 .themed-dropdown select.form-select:hover {
     box-shadow: 0px 0px 12px #f76;
-}
-.themed-dropdown select.form-select:focus {
-    border-color: #f76;
-    box-shadow: 0px 0px 12px #ff46b3;
 }
 
 /* Dropdown background */
@@ -912,7 +938,6 @@ footer ul li {
 }
 
 [data-tooltip]::after {
-    max-width: 300px;
     content: attr(data-tooltip);
     position: absolute;
     background: var(--text-shadow);

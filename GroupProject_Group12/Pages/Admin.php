@@ -72,12 +72,31 @@
             <!-- 📊 Big chart panel (fat) -->
             <div class="col-12 col-md-5 d-flex">
                 <div class="card h-90">
-                    <div class="card-header"> 👤 User Creation </div>
+                    <div class="card-header"> 👤 Additional Admin Options </div>
                     <div class="card-body">
+                        
+                        <!-- 👤 User creation modal -->
+                        <div class="col-md-10">
+                            <p> Create new dashboard user. </p>
+                        </div>
                         <button type="button" class="fancy-button" data-bs-toggle="modal" data-bs-target="#CreateModal" aria-label="Create a new user">
                             Create User
                         </button>
                         
+                        <br>
+                        <br>
+                        
+                        <!-- 🔔 Notification popup test button -->
+                        <div class="col-md-10">
+                            <h3> Debugging Options </h3>
+                            <p> Trigger test notification popup. </p>
+                        </div>
+                        <button class="notifpopup fancy-button" onclick="createNotificationPopup('', 'Energy Spike Alert', 'A new energy usage spike has been detected! Panic!');">
+                            Notification Popup
+                        </button>
+                        
+                        <!-- 🔔 Notification creation modal will go here -->
+                         
                         <!--
                         // Email test button
                         <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
@@ -85,6 +104,7 @@
                             <button type="submit" class="fancy-button">Send Email</button>
                         </form>
                         -->
+                        
                     </div>
                 </div>
             </div>

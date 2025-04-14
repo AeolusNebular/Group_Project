@@ -53,11 +53,6 @@
             <span class="navbar-toggle-icon"></span>
         </button>
         
-        <!-- 🔔 Notification popup test button -->
-        <button class="notifpopup fancy-button" onclick="createNotificationPopup('', 'Energy Spike Alert', 'A new energy usage spike has been detected! Panic!');">
-            Notify!!
-        </button>
-        
         <!-- 📛 Title -->
         <h2> Smart Energy Dashboard&trade; </h2>
         
