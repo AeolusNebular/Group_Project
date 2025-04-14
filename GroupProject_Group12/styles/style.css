@@ -905,3 +905,40 @@ footer ul li {
     color: var(--hover-dropdown);
     border-color: var(--hover-dropdown);
 }
+
+/* =================== 🖱️ Hover Tooltip =================== */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    max-width: 300px;
+    content: attr(data-tooltip);
+    position: absolute;
+    background: var(--text-shadow);
+    color: var(--text-dark);
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    
+    /* 👇 Position above and to the right a bit, by default */
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ✨ Visible state */
+[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* 📐 Responsive overflow fix */
+[data-tooltip] {
+    overflow: visible !important;
+}

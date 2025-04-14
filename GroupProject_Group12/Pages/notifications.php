@@ -92,16 +92,18 @@
                             <form method="POST" action="">
                                 <div class="card-header">
                                     <!-- ⭐ Star for targeted notification -->
-                                    ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" title="This notification is targeted at you">&#9733;</span>' : '') . '
+                                    ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
                                     ' . htmlspecialchars($notif['Header'] ?? '') . '
                                     <span 
                                         style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
-                                        title="' . htmlspecialchars($notifFullDate) . '"
+                                        data-tooltip="' . htmlspecialchars($notifFullDate) . '"
                                     >' . htmlspecialchars($ageLabel) . '</span>
                                     <!-- 🗑️ Delete button -->
-                                    <button type="submit" name="deleteNotification" class="btn-close" aria-label="Close" style="position: absolute; right: 12px"></button>
+                                    <span data-tooltip="Delete notification" style="position: absolute; right: 12px">
+                                        <button type="submit" name="deleteNotification" class="btn-close" aria-label="Delete notification"></button>
+                                    </span>
                                     <!-- 📖 Mark as read dot -->
-                                    <span class="' . $markAsReadClass . '" title="Toggle read status" style="cursor: pointer; margin-right: 1rem; float: right;" onclick="toggleReadStatus(' . $notif['NotifID'] . ', this)"></span>
+                                    <span class="' . $markAsReadClass . '" data-tooltip="Toggle read status" style="cursor: pointer; margin-right: 1rem; float: right;" onclick="toggleReadStatus(' . $notif['NotifID'] . ', this)"></span>
                                 </div>
                                 <div class="card-body">
                                     <p>

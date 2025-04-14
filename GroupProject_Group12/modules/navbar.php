@@ -48,7 +48,8 @@
         <button class="navbar-toggler
             <?php echo isset($_SESSION['RoleID']) ? '' : 'invisible'; ?>"
             type="button" onclick="toggleNav()"
-            aria-label="Toggle navigation" aria-controls="mySidebar">
+            aria-label="Toggle navigation" aria-controls="mySidebar"
+            data-tooltip="Toggle sidebar">
             <span class="navbar-toggle-icon"></span>
         </button>
         
@@ -63,7 +64,7 @@
         <div>
             <div class="icon-container">
                 <!-- 🌙 Dark mode toggler (icon set by JS) -->
-                <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle dark mode">
+                <button onclick="toggleDarkLight()" id="darkModeToggle" class="btn" style="margin-right: 8px;" aria-label="Toggle light/dark mode" data-tooltip="Toggle light/dark mode">
                     <svg id="darkModeIcon" width="24px" height="24px" viewBox="0 0 16 16"></svg>
                 </button>
             </div>
@@ -71,7 +72,7 @@
             <!-- 🔔 Notifications button with dropdown -->
             <?php if (isset($_SESSION['RoleID'])): ?>
                 <div class="icon-container">
-                    <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Open notifications dropdown">
+                    <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Open notifications dropdown" data-tooltip="You have ' . htmlspecialchars($unreadCount) . ' unread notifications">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" class="bell-icon" viewBox="0 1 16 17">
                             <path d="M8 2C5.5 2 3.5 4.5 3.5 7v3c0 .8-.5 1.5-1.2 2h11.4c-.7-.5-1.2-1.2-1.2-2V7c0-2.5-2-5-4.5-5z"/>
                             <path d="M2.5 12c-.8 0-1.5.7-1.5 1.5S1.7 15 2.5 15h11c.8 0 1.5-.7 1.5-1.5S14.3 12 13.5 12h-11z"/>
@@ -161,23 +162,22 @@
                                                 <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="card mb-3 d-flex ' . $unreadClass . '" style="text-decoration: none;">
                                                     <div class="card-header">
                                                         <!-- ⭐ Star for targeted notification -->
-                                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" title="This notification is targeted at you">&#9733;</span>' : '') . '
                                                         ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
                                                         
                                                         <span 
-                                                            title="' . htmlspecialchars($cleanHeader) . '" 
+                                                            data-tooltip="' . htmlspecialchars($cleanHeader) . '" 
                                                             style="font-weight: 600;"
                                                         >' . $header . '</span>
                                                         
                                                         <span 
                                                             style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
-                                                            title="' . htmlspecialchars($notifFullDate) . '"
+                                                            data-tooltip="' . htmlspecialchars($notifFullDate) . '"
                                                         >' . htmlspecialchars($ageLabel) . '</span>
                                                         
                                                         <button type="submit" name="deleteNotification" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 12px"></button>
                                                     </div>
                                                     <div class="card-body">
-                                                        <span title="' . htmlspecialchars($cleanBody) . '">' . $body . '</span>
+                                                        <span data-tooltip="' . htmlspecialchars($cleanBody) . '">' . $body . '</span>
                                                     </div>
                                                 </a>
                                             </div>
@@ -190,7 +190,7 @@
                             ?>
                         </div>
                         <!-- ➕ Plus icon to show all -->
-                        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" title="Show all notifications" class="btn btn-link" style="padding: 0; display: flex; align-items: center; justify-content: center;">
+                        <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" data-tooltip="Show all notifications" class="btn btn-link" style="padding: 0; display: flex; align-items: center; justify-content: center;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M10 7 L15 12 L10 17" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                             </svg>
