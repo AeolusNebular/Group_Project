@@ -81,9 +81,6 @@
                     $ageLabel = $notifDate ? timeAgo($notifDate) : '';
                     $notifFullDate = $notifDate ? (new DateTime($notifDate))->format('j M Y H:i:s') : ''; // 📅 Full timestamp
                     
-                    // 🪄 Unread notifications highlight
-                    $unreadClass = ($notif['Read'] == 0) ? 'unread-notification' : '';
-                    
                     // ⭐ Star if notification is targeted to current user
                     $starClass = ($notif['UserID'] == $userId) ? 'filled-star' : '';
                     
@@ -91,7 +88,7 @@
                     $markAsReadClass = ($notif['Read'] == 0) ? 'unread-dot' : 'read-dot';
                     
                     echo '
-                        <div class="card mb-3 d-flex ' . $unreadClass . '">
+                        <div class="card mb-3 d-flex">
                             <form method="POST" action="">
                                 <div class="card-header">
                                     <!-- ⭐ Star for targeted notification -->

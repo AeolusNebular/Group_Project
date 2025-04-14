@@ -495,7 +495,7 @@ input[type="checkbox"]:checked::before {
 }
 
 /* Unread notifications */
-.unread-notification {
+.card:has(.unread-dot) {
     border-left: 5px solid var(--text-shadow) !important;
     border-bottom: 5px solid var(--text-shadow) !important;
 }
