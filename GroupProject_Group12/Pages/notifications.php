@@ -29,7 +29,7 @@
                 require_once('../Database_Php_Interactions/Database_Utilities.php');
                 
                 // 🔗 Connect to database
-                $conn = Open_Database();
+                $db = Open_Database();
                 
                 // 👤 Get current user ID
                 $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
@@ -50,7 +50,7 @@
                 }
                 
                 // 📨 Fetch notifications
-                $notifStmt = $conn->prepare("SELECT NotifID, UserID, Header, Body, Date, Read
+                $notifStmt = $db->prepare("SELECT NotifID, UserID, Header, Body, Date, Read
                                              FROM Notifications
                                              WHERE UserID = :userId OR UserID = 0
                                              ORDER BY Date DESC");
@@ -62,7 +62,7 @@
                     $notifId = $_POST['NotifID'];
                     $isRead = $_POST['isRead'] == '1' ? 1 : 0;
                     
-                    $updateStmt = $conn->prepare("UPDATE Notifications SET Read = :isRead WHERE NotifID = :notifId");
+                    $updateStmt = $db->prepare("UPDATE Notifications SET Read = :isRead WHERE NotifID = :notifId");
                     $updateStmt->bindValue(':isRead', $isRead, SQLITE3_INTEGER);
                     $updateStmt->bindValue(':notifId', $notifId, SQLITE3_INTEGER);
                     $updateStmt->execute();

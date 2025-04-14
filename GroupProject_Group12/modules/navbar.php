@@ -84,14 +84,14 @@
                             require_once('../Database_Php_Interactions/Database_Utilities.php');
                             
                             // 🔗 Connect to database
-                            $conn = Open_Database();
+                            $db = Open_Database();
                             
                             // 👤 Get current user ID
                             $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
                             echo '<script>console.log("UserID: ' . $userId . '");</script>';
                             
                             // 📨 Check for unread notifications
-                            $unreadStmt = $conn->prepare("
+                            $unreadStmt = $db->prepare("
                                 SELECT COUNT(*) AS unreadCount
                                 FROM Notifications
                                 WHERE UserID = :userId AND Read = 0
@@ -115,7 +115,7 @@
                         <div id="notificationList" class="notification-list">
                             <?php
                                 // 📨 Fetch 3 most recent notifications (including read status)
-                                $notifStmt = $conn->prepare("
+                                $notifStmt = $db->prepare("
                                     SELECT NotifID, UserID, Header, Body, Date, Read
                                     FROM Notifications
                                     WHERE UserID = :userId OR UserID IS 0
@@ -162,6 +162,7 @@
                                                     <div class="card-header">
                                                         <!-- ⭐ Star for targeted notification -->
                                                         ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" title="This notification is targeted at you">&#9733;</span>' : '') . '
+                                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
                                                         
                                                         <span 
                                                             title="' . htmlspecialchars($cleanHeader) . '" 

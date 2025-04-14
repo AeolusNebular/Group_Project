@@ -23,10 +23,10 @@
         }
         
         // 🔗 Connect to database
-        $conn = Open_Database();
+        $db = Open_Database();
         
         // Insert into database
-        $stmt = $conn->prepare("INSERT INTO Notifications (UserID, Header, Body, Date, Read)
+        $stmt = $db->prepare("INSERT INTO Notifications (UserID, Header, Body, Date, Read)
                                 VALUES (:user_id, :header, :body, :date, :read)");
         
         // Bind parameters
