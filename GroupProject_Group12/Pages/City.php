@@ -4,7 +4,7 @@
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
     
-    <title>City Council - Smart Energy Dashboard</title>
+    <title> City Council - Smart Energy Dashboard </title>
 </head>
 
 <body>

@@ -3,7 +3,8 @@
 <head>
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
-    <title>Home - Smart Energy Dashboard</title>
+    
+    <title> Home - Smart Energy Dashboard </title>
 </head>
 
 <body>

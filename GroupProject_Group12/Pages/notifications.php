@@ -11,6 +11,7 @@
     
     <!-- 📍 Navbar and login -->
     <?php 
+        include("../modules/notification-functions.php");
         include("../modules/navbar.php");
         include("../modules/login.php");
     ?>
@@ -25,53 +26,13 @@
         
         <div class="row gx-1">
             <?php
-                // 🗃️ Database utilities
-                require_once('../Database_Php_Interactions/Database_Utilities.php');
-                
-                // 🔗 Connect to database
-                $db = Open_Database();
-                
-                // 👤 Get current user ID
-                $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
-                echo '<script>console.log("UserID: ' . $userId . '");</script>';
-                
-                // 🗑️ Delete notification
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteNotification'])) {
-                    $notifId = $_POST['NotifID'];
-                    
-                    // 🗑️ Delete notification from database
-                    $deleteStmt = $conn->prepare("DELETE FROM Notifications WHERE NotifID = :NotifID");
-                    $deleteStmt->bindValue(':NotifID', $notifId, SQLITE3_INTEGER);
-                    $deleteStmt->execute();
-                    
-                    // ↪️ Redirect to notifications page after deletion
-                    header("Location: notifications.php");
-                    exit();
-                }
-                
                 // 📨 Fetch notifications
                 $notifStmt = $db->prepare("SELECT NotifID, UserID, Header, Body, Date, Read
-                                             FROM Notifications
-                                             WHERE UserID = :userId OR UserID = 0
-                                             ORDER BY Date DESC");
+                                           FROM Notifications
+                                           WHERE UserID = :userId OR UserID = 0
+                                           ORDER BY Date DESC");
                 $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
                 $notifResult = $notifStmt->execute();
-                
-                // 📖 Update read status via AJAX
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['markAsRead']) && isset($_POST['NotifID']) && isset($_POST['isRead'])) {
-                    $notifId = $_POST['NotifID'];
-                    $isRead = $_POST['isRead'] == '1' ? 1 : 0;
-                    
-                    $updateStmt = $db->prepare("UPDATE Notifications SET Read = :isRead WHERE NotifID = :notifId");
-                    $updateStmt->bindValue(':isRead', $isRead, SQLITE3_INTEGER);
-                    $updateStmt->bindValue(':notifId', $notifId, SQLITE3_INTEGER);
-                    $updateStmt->execute();
-                    
-                    error_log("📬 AJAX read update received: ID = $notifId, isRead = $isRead");
-                    
-                    // 🛑 Stop output (no HTML or echo)
-                    exit();
-                }
                 
                 // 🔄 Loop through notifications and display
                 while ($notif = $notifResult->fetchArray(SQLITE3_ASSOC)) {

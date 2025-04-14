@@ -4,7 +4,7 @@
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
     
-    <title>Network - Smart Energy Dashboard</title>
+    <title> Network - Smart Energy Dashboard </title>
 </head>
 
 <body>

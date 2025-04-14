@@ -4,7 +4,7 @@
     <!-- 📢 Header -->
     <?php include("../modules/header.php"); ?>
     
-    <title>Admin - Smart Energy Dashboard</title>
+    <title> Admin - Smart Energy Dashboard </title>
 </head>
 
 <body>
