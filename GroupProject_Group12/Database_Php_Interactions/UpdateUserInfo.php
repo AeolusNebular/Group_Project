@@ -23,7 +23,7 @@
         }
 
         $_SESSION['FName'] = $_POST['UserFName'];
-        $_SESSION['LName'] = $_POST['UserLName'];
+        $_SESSION['SName'] = $_POST['UserLName'];
         $_SESSION['PhoneNo'] = $_POST['UserPhoneNo'];
         $_SESSION['HouseNo'] = $_POST['UserHomeNo'];
 
