@@ -42,7 +42,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // 📨 Get posted data
-        $data = isset($_POST['CityValuesForPDF']) ? html_entity_decode($_POST['CityValuesForPDF']) : '';
+        $data = isset($_POST['ValuesForPDF']) ? html_entity_decode($_POST['ValuesForPDF']) : '';
         $DecodedData = json_decode($data, true);
         $CityValuesinArray = [];
         

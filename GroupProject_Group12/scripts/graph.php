@@ -13,7 +13,12 @@
     $AllCSVCityData = ['Gas' => [], 'Electricity' => []];
     $CityTypeValues = ['Gas' => [], 'Electricity' => []];
     $AllCityDataForType = ['Gas' => [], 'Electricity' => []];
+    //Network Totals
     $NetworkValueByType = ['Gas' => [], 'Electricity' => []];
+    $AllNetworkValueByType = ['Gas' => [], 'Electricity' => []];
+    //Admin Totals
+    $AdminValueByType = ['Gas' => [], 'Electricity' => []];
+    $AllAdminNetworkValueByType = ['Gas' => [], 'Electricity' => []];
     
     // 📊 DASHBOARD DATA BLOCK
     foreach ($Types as $TypeOfCSV) {
@@ -78,32 +83,47 @@
     }
     
     // 🛡️ ADMIN VIEW BLOCK
-    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == "POST" ) { 
         $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-        $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'electricity';
-        
-        $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
-        $NetworkConsumeTotals = array_fill_keys($Networks, 0);
-        
-        foreach ($Networks as $Network) {
-            $Values = CSVData($Type, $Year, $Network);
-            foreach ($Values as $Value) {
-                $NetworkConsumeTotals[$Network] += $Value[0];
+        $AType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
+        foreach ($Types as $Type) {
+           
+            
+            $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
+            $NetworkConsumeTotals = array_fill_keys($Networks, 0);
+            $NetworkAdminTotals =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0]; 
+            
+            foreach ($Networks as $Network) {
+                $Values = CSVData($Type, $Year, $Network);
+                foreach ($Values as $Value) {
+                    $NetworkConsumeTotals[$Network] += $Value[0];
+                    $NetworkAdminTotals['Annual'] += $Value[0];
+                    $NetworkAdminTotals['Connection'] += $Value[1];
+                    $NetworkAdminTotals['Delivery_Perc'] += $Value[2];
+                }
             }
+            $AllAdminNetworkValueByType[$Type] = $NetworkAdminTotals;
+            $AdminValueByType[$Type] = $NetworkConsumeTotals;
         }
-        
         // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
-        echo "<script>const networkGraphData = " . json_encode($NetworkConsumeTotals) . ";</script>";
+        echo "<script>const networkGraphData = " . json_encode($AdminValueByType[$AType]) . ";</script>";
     }
     
     // 🏭 NETWORK FILTER BLOCK
-    $NetworkValue = CSVData($Type, $Year, $Network);
-    $TotalNetworkConsume = [];
-    
-    foreach ($NetworkValue as $City => $Data) {
-        $TotalNetworkConsume[$City] = ($TotalNetworkConsume[$City] ?? 0) + $Data[0];
+    foreach ($Types as $Type) {
+        $NetworkValue = CSVData($Type, $Year, $Network);
+        $TotalNetworkConsume = [];    
+        $NetworkAdditions = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
+
+        foreach ($NetworkValue as $City => $Data) {
+            $TotalNetworkConsume[$City] = ($TotalNetworkConsume[$City] ?? 0) + $Data[0];
+            $NetworkAdditions['Annual'] += $Data[0];
+            $NetworkAdditions['Connection'] += $Data[1];
+            $NetworkAdditions['Delivery_Perc'] += $Data[2]/100;
+        }
+        $AllNetworkValueByType[$Type] = $NetworkAdditions;
+        $NetworkValueByType[$Type] = $TotalNetworkConsume;
     }
-    $NetworkValueByType[$Type] = $TotalNetworkConsume;
 ?>
 
 <script>
@@ -125,6 +145,7 @@
     // 📊 PHP-injected data
     const DashboardData = <?php echo json_encode($AllCSVCityData); ?>;
     const CityData = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+    const NetworkData = <?php echo json_encode($NetworkValueByType[$Type]); ?>;
     
     // 🎨 Utility: get text colour based on theme
     function getTextColor() {
@@ -274,7 +295,7 @@
         console.log("▶️ City chart triggered.")
         
         // ⚠️ Provide actual data here
-        const data = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+       
         
         /*
         // 💥 Destroy existing chart properly
@@ -287,16 +308,26 @@
         let chartCityNetwork = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: Object.keys(data),
+                labels: Object.keys(NetworkData),
                 datasets: [{
                     label: 'City Data',
-                    data: Object.values(data),
+                    data: Object.values(NetworkData),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgb(75, 192, 192)',
                     borderWidth: 1
                 }]
             },
             options: {
+                animation: {
+                    duration: 700,
+                    easing: 'easeOutQuad',
+                    onComplete: function () {
+                        URI = chartCityNetwork.toBase64Image("image/jpeg", 1);
+                        const imageField = document.getElementById('ImageURLForPDF');
+                        if (imageField) imageField.value = URI;
+                        console.log(URI);
+                    }
+                },
                 plugins: {
                     legend: {
                         position: "bottom",
@@ -314,7 +345,7 @@
                 }
             }
         });
-        console.log("✅ City chart loaded.")
+        console.log("✅ Network chart loaded.")
     }
     
     // 📈 Line Chart (Test Chart)
@@ -404,6 +435,16 @@
                 }],
             },
             options: {
+                animation: {
+                    duration: 700,
+                    easing: 'easeOutQuad',
+                    onComplete: function () {
+                        URI = chartInstance.toBase64Image("image/jpeg", 1);
+                        const imageField = document.getElementById('ImageURLForPDFN');
+                        if (imageField) imageField.value = URI;
+                        console.log(URI);
+                    }
+                },
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
