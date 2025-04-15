@@ -2,7 +2,7 @@
 <html lang="en-gb">
 <head>
     <!-- 📢 Header -->
-    <?php include("../modules/header.php"); ?>
+    <?php include_once "../modules/header.php"; ?>
     
     <title> Account - Smart Energy Dashboard </title>
 </head>

@@ -123,12 +123,11 @@
                             }
                         </script>
                         <?php
-                            if ($_SERVER['REQUEST_METHOD'] == 'POST' ){
-                                $Headings = ['City','Gas','Electricity'];
-                                if (isset($_POST['ReportType']) && $_POST['ReportType'] == 'CSV') {
-                                    $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
-                                    $CityValues = json_decode($JsonData);
-                                }
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['CityReportType']) && $_POST['CityReportType'] == 'CSV')){
+                                $Headings = ['City','Gas','Electricity'];      
+                                $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
+                                $CityValues = json_decode($JsonData);
+                                
                                 
                                 $CityValuesinArray = [];
                                 foreach ($CityValues as $ConsumeType => $CityConsumes){
@@ -141,7 +140,7 @@
                                         $CityValuesinArray[$City][$ConsumeType] = $CityConsumeValue;
                                     }
                                 }
-                                $fp = fopen('../Reports/Report.csv', 'w');
+                                $fp = fopen('../Reports/CityReport.csv', 'w');
                                 fputcsv($fp,$Headings); 
                                 foreach ($CityValuesinArray as $City => $ConsumeValues){
                                     $CSVRowData = [$City];
