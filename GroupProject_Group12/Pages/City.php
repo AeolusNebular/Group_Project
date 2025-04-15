@@ -88,37 +88,37 @@
                 <div class="card h-90">
                     <div class="card-header"> 📅 Annual Summary </div>
                     <div class="card-body">
-                        <form id='ReportForm' method='POST'>
+                        <form id='CityReportForm' method='POST'>
                             <div id="SummaryContent"> Number of connections: <?php echo json_encode(round($AllCityDataForType['Electricity']['Connection'] + $AllCityDataForType['Electricity']['Connection'])) ?> </div>
                             <div id="SummaryContent"> Electricity used (kWh): <?php echo json_encode(($AllCityDataForType['Electricity']['Annual'])) ?> </div>
                             <div id="SummaryContent"> Gas used (m<sup>3</sup>): <?php echo json_encode(($AllCityDataForType['Gas']['Annual']))?> </div>
                             <div id="SummaryContent"> Delivery percentage: <?php echo json_encode(round($AllCityDataForType['Electricity']['Delivery_Perc'] + $AllCityDataForType['Electricity']['Delivery_Perc'])) ?> </div>
                             <div id="SummaryContent"> <br> </div>
                             <div class="themed-dropdown" style='float: left'>
-                                <label for="ReportType"> Report type: </label> <br>
-                                <select class="form-select" id='ReportType' name="ReportType">
+                                <label for="CityReportType"> Report type: </label> <br>
+                                <select class="form-select" id='CityReportType' name="CityReportType">
                                     <option value="PDF"> PDF </option>
                                     <option value="CSV"> CSV </option>
                                 </select>
                             </div>
                             
-                            <input type="hidden" id='CityValuesForPDF' name='CityValuesForPDF' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
+                            <input type="hidden" id='CityValuesForPDF' name='ValuesForPDF' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <input type="hidden" id='CityValuesForCSV' name='CityValuesForCSV' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <input type="hidden" id='ImageURLForPDF' name='ImageURLForPDF'>
                             
                             <div id="SummaryContent">
-                                <button type="button" onClick='submitReports()' class="fancy-button" style="float: right"> Print Summary </button>
+                                <button type="button" onClick='submitCityReports()' class="fancy-button" style="float: right"> Print Summary </button>
                             </div>
                         </form>
                         
                         <script>
-                            function submitReports() {
-                                if (document.getElementById('ReportType').value == 'PDF') {
-                                    document.getElementById("ReportForm").action = '../modules/reportPDF.php';
-                                    document.getElementById("ReportForm").submit();
+                            function submitCityReports() {
+                                if (document.getElementById('CityReportType').value == 'PDF') {
+                                    document.getElementById("CityReportForm").action = '../modules/reportPDF.php';
+                                    document.getElementById("CityReportForm").submit();
                                 } else {
-                                    document.getElementById("ReportForm").action = 'City.php';
-                                    document.getElementById("ReportForm").submit();
+                                    document.getElementById("CityReportForm").action = 'City.php';
+                                    document.getElementById("CityReportForm").submit();
                                 }
                             }
                         </script>
@@ -155,7 +155,7 @@
                                 echo
                                     '<iframe id="my_iframe" style="display:none;"></iframe>
                                         <script>
-                                            document.getElementById("my_iframe").src = "../Reports/Report.csv";
+                                            document.getElementById("my_iframe").src = "../Reports/CityReport.csv";
                                         </script>
                                     '
                                 ;
