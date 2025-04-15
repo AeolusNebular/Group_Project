@@ -13,8 +13,12 @@
     $AllCSVCityData = ['Gas' => [], 'Electricity' => []];
     $CityTypeValues = ['Gas' => [], 'Electricity' => []];
     $AllCityDataForType = ['Gas' => [], 'Electricity' => []];
+    //Network Totals
     $NetworkValueByType = ['Gas' => [], 'Electricity' => []];
     $AllNetworkValueByType = ['Gas' => [], 'Electricity' => []];
+    //Admin Totals
+    $AdminValueByType = ['Gas' => [], 'Electricity' => []];
+    $AllAdminNetworkValueByType = ['Gas' => [], 'Electricity' => []];
     
     // 📊 DASHBOARD DATA BLOCK
     foreach ($Types as $TypeOfCSV) {
@@ -79,22 +83,30 @@
     }
     
     // 🛡️ ADMIN VIEW BLOCK
-    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == "POST" ) { 
         $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-        $Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
-        
-        $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
-        $NetworkConsumeTotals = array_fill_keys($Networks, 0);
-        
-        foreach ($Networks as $Network) {
-            $Values = CSVData($Type, $Year, $Network);
-            foreach ($Values as $Value) {
-                $NetworkConsumeTotals[$Network] += $Value[0];
+        $AType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
+        foreach ($Types as $Type) {
+           
+            
+            $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
+            $NetworkConsumeTotals = array_fill_keys($Networks, 0);
+            $NetworkAdminTotals =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0]; 
+            
+            foreach ($Networks as $Network) {
+                $Values = CSVData($Type, $Year, $Network);
+                foreach ($Values as $Value) {
+                    $NetworkConsumeTotals[$Network] += $Value[0];
+                    $NetworkAdminTotals['Annual'] += $Value[0];
+                    $NetworkAdminTotals['Connection'] += $Value[1];
+                    $NetworkAdminTotals['Delivery_Perc'] += $Value[2];
+                }
             }
+            $AllAdminNetworkValueByType[$Type] = $NetworkAdminTotals;
+            $AdminValueByType[$Type] = $NetworkConsumeTotals;
         }
-        
         // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
-        echo "<script>const networkGraphData = " . json_encode($NetworkConsumeTotals) . ";</script>";
+        echo "<script>const networkGraphData = " . json_encode($AdminValueByType[$AType]) . ";</script>";
     }
     
     // 🏭 NETWORK FILTER BLOCK
@@ -423,6 +435,16 @@
                 }],
             },
             options: {
+                animation: {
+                    duration: 700,
+                    easing: 'easeOutQuad',
+                    onComplete: function () {
+                        URI = chartInstance.toBase64Image("image/jpeg", 1);
+                        const imageField = document.getElementById('ImageURLForPDFN');
+                        if (imageField) imageField.value = URI;
+                        console.log(URI);
+                    }
+                },
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
