@@ -1,5 +1,7 @@
 <?php
-    if (!isset($RoleID)) return;
+    if (!isset($RoleID)) {
+        return;
+    }
     
     $RequestMethod = $_SERVER['REQUEST_METHOD'];
     $Year = $_REQUEST['Dashboard_Years'] ?? $_REQUEST['CityYears'] ?? $_POST['NetworkYearFilter'] ?? '2016';
@@ -51,14 +53,14 @@
     }
     
     // 🌆 CITY VIEW BLOCK
-    foreach ($Types as $Type) {
+    foreach ($Types as $CType) {
         $CityAdditions = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
         $x = 1;
         $CityValues = [];
         
         if ($CityName) {
             foreach (['coteq','enexis','liander','stedin','westland-infra'] as $Net) {
-                $CityGraphValues = FilterByCityCSV($Type, $Year, $Net, $CityName);
+                $CityGraphValues = FilterByCityCSV($CType, $Year, $Net, $CityName);
                 foreach ($CityGraphValues as $Key => $City) {
                     $CityValues[$Key] = $City[11];
                     $CityAdditions['Annual'] += $City[11];
@@ -67,7 +69,7 @@
                 }
             }
         } else {
-            $CityGraphValues = CSVData($Type, $Year, $Network);
+            $CityGraphValues = CSVData($CType, $Year, $Network);
             foreach ($CityGraphValues as $Key => $City) {
                 $x++;
                 $CityValues[$Key] = $City[0];
@@ -78,41 +80,42 @@
         }
         
         $CityAdditions['Delivery_Perc'] /= $x;
-        $AllCityDataForType[$Type] = $CityAdditions;
-        $CityTypeValues[$Type] = $CityValues;
+        $AllCityDataForType[$CType] = $CityAdditions;
+        $CityTypeValues[$CType] = $CityValues;
     }
     
     // 🛡️ ADMIN VIEW BLOCK
-    if ($_SERVER['REQUEST_METHOD'] == "GET" || $_SERVER['REQUEST_METHOD'] == "POST" ) { 
-        $Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
-        $AType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
-        foreach ($Types as $Type) {
-           
-            
-            $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
-            $NetworkConsumeTotals = array_fill_keys($Networks, 0);
-            $NetworkAdminTotals =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0]; 
-            
-            foreach ($Networks as $Network) {
-                $Values = CSVData($Type, $Year, $Network);
-                foreach ($Values as $Value) {
-                    $NetworkConsumeTotals[$Network] += $Value[0];
-                    $NetworkAdminTotals['Annual'] += $Value[0];
-                    $NetworkAdminTotals['Connection'] += $Value[1];
-                    $NetworkAdminTotals['Delivery_Perc'] += $Value[2];
-                }
+
+    $AYear = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+    $AdType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
+    foreach ($Types as $AType) {
+        
+        
+        $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
+        $NetworkConsumeTotals = array_fill_keys($Networks, 0);
+        $NetworkAdminTotals =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0]; 
+        
+        foreach ($Networks as $ANetwork) {
+            $Values = CSVData($AType, $AYear, $ANetwork);
+            foreach ($Values as $Value) {
+                $NetworkConsumeTotals[$ANetwork] += $Value[0];
+                $NetworkAdminTotals['Annual'] += $Value[0];
+                $NetworkAdminTotals['Connection'] += $Value[1];
+                $NetworkAdminTotals['Delivery_Perc'] += $Value[2];
             }
-            $AllAdminNetworkValueByType[$Type] = $NetworkAdminTotals;
-            $AdminValueByType[$Type] = $NetworkConsumeTotals;
         }
-        // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
-        echo "<script>const networkGraphData = " . json_encode($AdminValueByType[$AType]) . ";</script>";
+        $AllAdminNetworkValueByType[$AType] = $NetworkAdminTotals;
+        $AdminValueByType[$AType] = $NetworkConsumeTotals;
     }
+    // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
+    echo "<script>const networkGraphData = " . json_encode($AdminValueByType[$AdType]) . ";</script>";
+
     
     // 🏭 NETWORK FILTER BLOCK
-    foreach ($Types as $Type) {
-        $NetworkValue = CSVData($Type, $Year, $Network);
-        $TotalNetworkConsume = [];    
+
+    foreach ($Types as $NType) {
+        $NetworkValue = CSVData($NType, $Year, $Network);
+        $TotalNetworkConsume = [];
         $NetworkAdditions = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
 
         foreach ($NetworkValue as $City => $Data) {
@@ -120,10 +123,14 @@
             $NetworkAdditions['Annual'] += $Data[0];
             $NetworkAdditions['Connection'] += $Data[1];
             $NetworkAdditions['Delivery_Perc'] += $Data[2]/100;
+            
         }
-        $AllNetworkValueByType[$Type] = $NetworkAdditions;
-        $NetworkValueByType[$Type] = $TotalNetworkConsume;
+        $AllNetworkValueByType[$NType] = $NetworkAdditions;
+        $NetworkValueByType[$NType] = $TotalNetworkConsume;
     }
+
+    
+    
 ?>
 
 <script>
@@ -287,7 +294,7 @@
     // 🏙️ Big city electricity bar chart [Network]
     function drawNetworkCityChart() {
         const canvas = document.getElementById("cityCanvasNetwork");
-        
+        console.log(NetworkData);
         // ✅ Ensure the canvas context is fresh
         if (!canvas) return; // 👋 Exit if canvas is missing
         const ctx = canvas.getContext("2d");
@@ -325,7 +332,6 @@
                         URI = chartCityNetwork.toBase64Image("image/jpeg", 1);
                         const imageField = document.getElementById('ImageURLForPDF');
                         if (imageField) imageField.value = URI;
-                        console.log(URI);
                     }
                 },
                 plugins: {
