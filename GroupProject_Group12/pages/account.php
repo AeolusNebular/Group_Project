@@ -29,7 +29,7 @@
         <div class="row gx-1">
             <!-- 📝 User summary panel (fat) -->
             <div class="col-12 col-md-8 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 👤 User Summary </div>
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-3">
@@ -107,7 +107,7 @@
             
             <!-- ➕ Side panel (thin) -->
             <div class="col-12 col-md-4 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> ➕ Additional User Information </div>
                     <div class="card-body">
                         <form action='../Database_Php_Interactions/UpdateUserInfo.php' method='POST'>
@@ -129,7 +129,7 @@
                                 <label for="UserHomeNo" class="form-label"> Home address: </label>
                                 <input type="text" id="UserHomeNo" name="UserHomeNo" class="form-control" required>
                             </div>
-                            <button type="Submit" style='float: right' class="fancy-button">
+                            <button type="submit" style='float: right' class="fancy-button">
                                 Update User Info
                             </button>
                             
@@ -152,7 +152,7 @@
             <!-- ⚙️ Side panel (half-width) -->
             <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Customisability options -->
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🎨 Theme Settings </div>
                     <div class="card-body">
                         <ul>
@@ -201,7 +201,7 @@
             <!-- ⚙️ Side panel (half-width) -->
             <div class="col-12 col-md-6 d-flex">
                 <!-- 🎨 Accessibility options -->
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> ⚙️ Accessibility Settings </div>
                     <div class="card-body">
                         <ul>

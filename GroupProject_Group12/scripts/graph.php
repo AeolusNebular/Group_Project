@@ -195,6 +195,7 @@
                     label: 'Gas',
                     data: Object.values(DashboardData['Gas']),
                     backgroundColor: sharedColours,
+                    borderColor: "#00000000",
                     zIndex: 1,
                     hoverOffset: 10
                 }, {
@@ -251,7 +252,6 @@
                 datasets: [{
                     label: "Electricity",
                     data: Object.values(CityData),
-                    borderColor: "#975ae100",
                     backgroundColor: sharedColours,
                 }]
             },
@@ -422,8 +422,8 @@
                 datasets: [{
                     label: "Network Usage",
                     data: Object.values(networkGraphData),
-                    borderColor: "#00000000",
                     backgroundColor: sharedColours,
+                    borderColor: "#00000000",
                     zIndex: 1,
                     hoverOffset: 10
                 }],

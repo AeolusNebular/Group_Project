@@ -29,10 +29,12 @@
         <div class="row gx-1">
             <!-- 📈 Big chart panel (fat) -->
             <div class="col-12 col-md-8 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 📊 Energy Usage Overview </div>
                     <div class="card-body">
-                        <form action="home.php" method="GET">
+                        <form action="" method="GET">
+                            
+                            <!-- 📅 Year dropdown -->
                             <div class="themed-dropdown" style="float: left">
                                 <label for="Dashboard_Years"> Select year: </label> <br>
                                 <select class="form-select" name="Dashboard_Years">
@@ -57,7 +59,9 @@
                                 </div>';
                                 }
                             ?>
-                            <button type="Submit" class="fancy-button" style="margin-top: 15px; float: right;">
+                            
+                            <!-- ✅ Submit button -->
+                            <button type="submit" class="fancy-button" style="margin-top: 15px; float: right;">
                                 Apply Filter
                             </button>
                         </form>
@@ -74,7 +78,7 @@
             
             <!-- Side panel (thin) -->
             <div class="col-12 col-md-4 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> ⚡ Latest Energy Stats </div>
                     <div class="card-body">
                         <p> <b>Usage:</b> 1,250 kWh </p>
@@ -86,7 +90,7 @@
             
             <!-- Two even cards -->
             <div class="col-12 col-md-6 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🔍 Analysis </div>
                     <div class="card-body">
                         <p> Last month saw a <b>15% decrease</b> in energy consumption. </p>
@@ -95,7 +99,7 @@
             </div>
             
             <div class="col-12 col-md-6 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header">⚙️ Recommendations</div>
                     <div class="card-body">
                         <ul>
@@ -109,7 +113,7 @@
             
             <!-- Full-width bottom card -->
             <div class="col-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header">⚠️ Warning</div>
                     <div class="card-body">
                         Your energy consumption is <b>15% above</b> the expected range this month. Holy guacamole!!
@@ -119,7 +123,7 @@
             
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🗺️ Energy Use Heatmap </div>
                     <div id="heatmap"></div> <!-- 🗺️ Heatmap container -->
                     <div id="card" style="position: absolute; bottom: 8px; left: 8px; z-index: 2;">

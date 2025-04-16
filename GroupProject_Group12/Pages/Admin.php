@@ -32,7 +32,7 @@
         
         <div class="row gx-1">
             <div class="col-12 col-md-7 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🌐 Network Users </div>
                     <div class="card-body">
                         
@@ -47,14 +47,18 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <div class="themed-dropdown" style='float: left'>
+                            
+                            <!-- 🔌 Utility dropdown -->
+                            <div class="themed-dropdown" style="float: left">
                                 <label for="Admin_Network_Type"> Select type: </label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
                                     <option value="Electricity"> Electricity </option>
                                     <option value="Gas">         Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style='float: right'>
+                            
+                            <!-- ✅ Submit button -->
+                            <button type="submit" class="fancy-button" style="float: right">
                                 Apply Filter
                             </button>
                         </form>
@@ -71,7 +75,7 @@
             
             <!-- 📊 Big chart panel (fat) -->
             <div class="col-12 col-md-5 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 👤 Additional Admin Options </div>
                     <div class="card-body">
                         
@@ -99,8 +103,8 @@
                          
                         <!--
                         // Email test button
-                        <form action="../Database_Php_Interactions/EmailSender.php" method = 'POST'>
-                            <input type="text" id= 'Email' name='Email'>
+                        <form action="../Database_Php_Interactions/EmailSender.php" method="POST">
+                            <input type="text" id="Email" name="Email">
                             <button type="submit" class="fancy-button">Send Email</button>
                         </form>
                         -->
@@ -111,7 +115,7 @@
             
             <!-- 🏙️ City councils diagram -->
             <div class="col-12 col-md-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🏙️ City Council Diagram </div>
                     <div class="card-body">
                         
@@ -127,6 +131,8 @@
                                     <option value="liander">        Liander </option>
                                 </select>
                             </div>
+                            
+                            <!-- 🌐 Network dropdown -->
                             <div class="themed-dropdown" style="float: left">
                                 <label for="AdminNetworkYear"> Select year: </label><br>
                                 <select class="form-select" name="AdminNetworkYear">
@@ -137,6 +143,8 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
+                            
+                            <!-- 🔌 Utility dropdown -->
                             <div class="themed-dropdown" style="float: left">
                                 <label for="Admin_City_Type"> Select type: </label><br>
                                 <select class="form-select" name="Admin_City_Type">
@@ -144,9 +152,9 @@
                                     <option value="Gas">         Gas </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style="float: right">
-                                Apply Filter
-                            </button>
+                            
+                            <!-- ✅ Submit button -->
+                            <button type="submit" class="fancy-button" style="float: right"> Apply Filter </button>
                         </form>
                         
                         <!-- 📊 City councils chart -->
@@ -154,23 +162,23 @@
                         
                         <?php
                             $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
-                            $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'Electricity'; 
+                            $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'Electricity';
                             $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
                             $Types = ['Gas', 'Electricity'];
-
+                            
                             $AllAdminCityAnnualTypes = ['Gas' => [], 'Electricity' => []];
                             $AllAdminCityValueTypes = ['Gas' => [], 'Electricity' => []];
                             foreach ($Types as $Type) {
                                 $CityValues = [];
-                                $AllCityValuesAdmin =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];  
+                                $AllCityValuesAdmin = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
                                 $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
                                 
                                 foreach ($CityGraphValues as $Key => $City) {
-                                    $CityValues[$Key] =  $City[0];
+                                    $CityValues[$Key] = $City[0];
                                     $AllCityValuesAdmin['Annual'] += $City[0];
                                     $AllCityValuesAdmin['Connection'] += $City[1];
                                     $AllCityValuesAdmin['Delivery_Perc'] += $City[2];
-
+                                    
                                 }
                                 $AllAdminCityAnnualTypes[$Type] = $CityValues;
                                 $AllAdminCityValueTypes[$Type] = $AllCityValuesAdmin;
@@ -179,7 +187,7 @@
                         
                         <script>
                             var citydata = <?php echo json_encode($AllAdminCityAnnualTypes[$CityType]); ?>;
-                            console.log(Object.values(data));
+                            console.log(Object.values(citydata));
                             document.addEventListener("DOMContentLoaded", function () {
                                 drawBarGraph();
                                 window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
@@ -204,20 +212,20 @@
                                 if (!citycanvas) return; // Exit if canvas is missing
                                 const ctx = citycanvas.getContext("2d");
                                 
-                                /*
+                                let chartInstance;
+                                
                                 // 💥 Destroy existing chart properly
                                 if (chartInstance) {
                                     chartInstance.destroy();
                                     chartInstance = null; // 🧹 Clear instance reference
                                 }
-                                */
                                 
                                 chartInstance = new Chart(ctx, {
                                     type: "bar",
                                     data: {
                                         labels: Object.keys(citydata),
                                         datasets: [{
-                                            label: <?php echo json_encode(ucfirst($Type))?>,
+                                            label: <?php echo json_encode($CityType); ?>,
                                             data: Object.values(citydata),
                                             borderColor: "#975ae100",
                                             backgroundColor: [
@@ -267,11 +275,11 @@
             </div>
             
             <div class="col-12 col-md-7 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> Additional Information: <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? $_GET['AdminAdditionalInfo'] : 'City'?> </div>
-                    <div class="card-body">   
-                    <form action = 'Admin.php' Method = 'GET'>
-                        <div id="SummaryContent"> Number of connections:  <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? json_encode(round($AllAdminNetworkValueByType['Electricity']['Connection']+$AllAdminNetworkValueByType['Gas']['Connection'])) : json_encode(round($AllAdminCityValueTypes['Electricity']['Connection'] + $AllAdminCityValueTypes['Gas']['Connection']));?></div>
+                    <div class="card-body">
+                    <form action="" Method="GET">
+                        <div id="SummaryContent"> Number of connections: <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? json_encode(round($AllAdminNetworkValueByType['Electricity']['Connection']+$AllAdminNetworkValueByType['Gas']['Connection'])) : json_encode(round($AllAdminCityValueTypes['Electricity']['Connection'] + $AllAdminCityValueTypes['Gas']['Connection']));?></div>
                         <div id="SummaryContent"> Amount of electricity used (kWh): <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? json_encode($AllAdminNetworkValueByType['Electricity']['Annual']) : json_encode($AllAdminCityValueTypes['Electricity']['Annual']);?> </div>
                         <div id="SummaryContent"> Amount of gas used (m<sup>3</sup>): <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? json_encode($AllAdminNetworkValueByType['Gas']['Annual']) : json_encode($AllAdminCityValueTypes['Gas']['Annual']);?>  </div>
                         <div id="SummaryContent"> Delivery percentage: <?php echo (isset($_GET['AdminAdditionalInfo']) && $_GET['AdminAdditionalInfo'] == 'Network') ? json_encode(round($AllAdminNetworkValueByType['Electricity']['Delivery_Perc'] + $AllAdminNetworkValueByType['Gas']['Delivery_Perc'])) : json_encode(round($AllAdminCityValueTypes['Electricity']['Delivery_Perc'] + $AllAdminCityValueTypes['Gas']['Delivery_Perc']));?>  </div>
@@ -284,7 +292,7 @@
                             </select>
                         </div>
                         <div id="SummaryContent">
-                            <button type="Submit" class="fancy-button" style="float: right"> Change Summary </button>
+                            <button type="submit" class="fancy-button" style="float: right"> Change Summary </button>
                         </div>
                     </form>
                     </div>
@@ -292,10 +300,10 @@
             </div>
             
             <div class="col-12 col-md-5 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> Filter options: </div>
                     <div class="card-body">
-                        <form id = 'AdminReportForm' method = 'POST'>
+                        <form id='AdminReportForm' method='POST'>
                         
                             <div class="themed-dropdown" style='float: left'>
                                 <label for="AdminReportType"> Report type: </label> <br>
@@ -305,13 +313,13 @@
                                 </select>
                             </div>
                             <div id="SummaryContent"> <br> </div>
-                            <input type="hidden" id='AdminValuesForPDF' name='ValuesForPDF' value="<?php echo htmlentities(json_encode($AllAdminCityAnnualTypes))  ; ?>">
+                            <input type="hidden" id='AdminValuesForPDF' name='ValuesForPDF' value="<?php echo htmlentities(json_encode($AllAdminCityAnnualTypes)); ?>">
                             <input type="hidden" id='AdminValuesForCSV' name='AdminValuesForCSV' value="<?php echo htmlentities(json_encode($AllAdminCityAnnualTypes)); ?>">
                             <input type="hidden" id='ImageURLForPDF' name='ImageURLForPDF'>
-
-                            <div id="SummaryContent"> <br> </div>                        
+                            
+                            <div id="SummaryContent"> <br> </div>
                             <div id="SummaryContent">
-                                <button type="button" onClick = 'submitAdminReports()' class="fancy-button" style="float: right"> Print Summary </button>
+                                <button type="button" onClick="submitAdminReports()" class="fancy-button" style="float: right"> Print Summary </button>
                             </div>
                         </form>
                     </div>
@@ -321,20 +329,20 @@
                             if (document.getElementById('AdminReportType').value == 'PDF') {
                                 document.getElementById("AdminReportForm").action = '../modules/reportPDF.php';
                                 document.getElementById("AdminReportForm").submit();
-
+                                
                             } else {
                                 document.getElementById("AdminReportForm").action = 'Admin.php';
                                 document.getElementById("AdminReportForm").submit();
                             }
                         }
                     </script>
-
+                    
                     <?php 
                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['AdminReportType']) && $_POST['AdminReportType'] == 'CSV')) {
-                            $Headings =  ($_POST['AdminReportInfo'] == 'City') ? ['City','Gas','Electricity'] : ['Network','Gas','Electricity'];    
+                            $Headings = ($_POST['AdminReportInfo'] == 'City') ? ['City','Gas','Electricity'] : ['Network','Gas','Electricity'];
                             $JsonData = html_entity_decode($_POST['AdminValuesForCSV']);
                             $AdminValues = json_decode($JsonData);
-
+                            
                             $AdminCityValuesInArray = [];
                             foreach ($AdminValues as $ConsumeType => $NetworkConsumes){
                                 // ['City','Electricity','Gas']
@@ -356,7 +364,7 @@
                                 fputcsv($fp,$CSVRowData);
                             }
                             fclose($fp);
-
+                            
                             echo
                                 '<iframe id="my_iframe" style="display:none;"></iframe>
                                     <script>
@@ -375,6 +383,6 @@
     
     <!-- 👣 Footer -->
     <?php include("../modules/footer.php"); ?>
-
+    
 </body>
 </html>

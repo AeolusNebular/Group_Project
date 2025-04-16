@@ -38,12 +38,12 @@
         <!-- 📈 Network graph -->
         <div class="row gx-1">
             <div class="col-12 col-md-7 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 📊 Network Graph </div>
                     <div class="card-body">
                         
                         <!-- 🧭 Network selection -->
-                        <form action="City.php" method='GET'>
+                        <form action="" method='GET'>
                             <?php
                                 if ($RoleID != 2) {
                                     echo "<div class='themed-dropdown' style='float: left'>
@@ -85,7 +85,7 @@
             
             <!-- 📅 Annual summary -->
             <div class="col-12 col-md-5 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 📅 Annual Summary </div>
                     <div class="card-body">
                         <form id='CityReportForm' method='POST'>
@@ -166,7 +166,7 @@
             
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🗺️ Energy Use Heatmap </div>
                     <div id="heatmap"></div> <!-- 🗺️ Heatmap container -->
                 </div>

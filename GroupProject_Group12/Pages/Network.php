@@ -39,7 +39,7 @@
         
         <div class ="row gx-1">
             <div class="col-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header">
                         City Chart for Network
                         <?php 
@@ -82,7 +82,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right;'>
+                            <button type="submit" class="fancy-button" style='margin-top: 15px; float: right;'>
                                 Apply Filter
                             </button>
                         </form>
@@ -97,7 +97,7 @@
             </div>
             
             <div class="col-12 col-md-7 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> Additional Information </div>
                     <div class="card-body">                     
                         <div id="SummaryContent"> Number of connections: <?php echo json_encode(round($AllNetworkValueByType['Electricity']['Connection'] + $AllNetworkValueByType['Gas']['Connection'] )) ?> </div>
@@ -110,7 +110,7 @@
             </div>
             
             <div class="col-12 col-md-5 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> Filter options: </div>
                     <div class="card-body">
                     <form id='NetworkReportForm'method = 'POST'>
@@ -147,7 +147,7 @@
                                 $Headings = ['City','Gas','Electricity'];
                                 $JsonData = html_entity_decode($_POST['NetworkValuesForCSV']);
                                 $NetworkValues = json_decode($JsonData);
-
+                                
                                 $NetworkValuesInArray = [];
                                 foreach ($NetworkValues as $ConsumeType => $NetworkConsumes){
                                     // ['City','Electricity','Gas']
