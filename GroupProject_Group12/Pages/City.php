@@ -13,6 +13,7 @@
     <?php 
         include("../modules/navbar.php");
         include("../modules/login.php");
+        include('../modules/dropdowns.php');
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
     ?>
@@ -42,32 +43,33 @@
                     <div class="card-header"> 📊 Network Graph </div>
                     <div class="card-body">
                         
-                        <!-- 🧭 Network selection -->
                         <form action="" method='GET'>
+                            
+                            <!-- ⚙️ Define dropdown options -->
                             <?php
-                                if ($RoleID != 2) {
-                                    echo "<div class='themed-dropdown' style='float: left'>
-                                        <label for='CityNetworks'> Select network: </label><br>
-                                        <select class='form-select' name='CityNetworks'>
-                                            <option value='coteq'>          Coteq </option>
-                                            <option value='westland-infra'> Westlandia </option>
-                                            <option value='enexis'>         Enexis </option>
-                                            <option value='stedin'>         Stedin </option>
-                                            <option value='liander'>        Liander </option>
-                                        </select>
-                                    </div>";
-                                }
+                                $CityYears = isset($_GET['CityYears']) ? $_GET['CityYears'] : '2016';
+                                $CityNetworks = isset($_GET['CityNetworks']) ? $_GET['CityNetworks'] : 'Electricity';
                             ?>
-                            <div class="themed-dropdown" style='float: left'>
-                                <label for="CityYears"> Select network: </label><br>
-                                <select class="form-select" name="CityYears">
-                                    <option value="2016"> 2016 </option>
-                                    <option value="2017"> 2017 </option>
-                                    <option value="2018"> 2018 </option>
-                                    <option value="2019"> 2019 </option>
-                                    <option value="2020"> 2020 </option>
+                            
+                            <!-- 📅 Year dropdown -->
+                            <div class="themed-dropdown" style="float: left">
+                                <label for="CityYears"> Select year: </label> <br>
+                                <select class="form-select" name="CityYears" id="CityYears">
+                                    <?php populateYearDropdown($CityYears); ?>
                                 </select>
                             </div>
+                            
+                            <!-- 🌐 Network dropdown (for admin users) -->
+                            <?php if ($RoleID != 2): ?>
+                                <div class="themed-dropdown" style="float: left">
+                                    <label for="CityNetworks"> Select network: </label><br>
+                                    <select class="form-select" name="CityNetworks" id="CityNetworks">
+                                        <?php populateNetworkDropdown($CityNetworks, "counciltype"); ?>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <!-- ✅ Submit button -->
                             <button type="submit" class="fancy-button" style='margin-top: 15px; float: right'>
                                 Apply Filter
                             </button>

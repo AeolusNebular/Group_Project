@@ -13,6 +13,7 @@
     <?php 
         include("../modules/navbar.php");
         include("../modules/login.php");
+        include('../modules/dropdowns.php');
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
     ?>
@@ -34,31 +35,29 @@
                     <div class="card-body">
                         <form action="" method="GET">
                             
+                            <!-- ⚙️ Define dropdown options -->
+                            <?php
+                                $Dashboard_Years = isset($_GET['Dashboard_Years']) ? $_GET['Dashboard_Years'] : '2016';
+                                $Dashboard_Networks = isset($_GET['Dashboard_Networks']) ? $_GET['Dashboard_Networks'] : 'Electricity';
+                            ?>
+                            
                             <!-- 📅 Year dropdown -->
                             <div class="themed-dropdown" style="float: left">
                                 <label for="Dashboard_Years"> Select year: </label> <br>
-                                <select class="form-select" name="Dashboard_Years">
-                                    <option value="2016"> 2016 </option>
-                                    <option value="2017"> 2017 </option>
-                                    <option value="2018"> 2018 </option>
-                                    <option value="2019"> 2019 </option>
-                                    <option value="2020"> 2020 </option>
+                                <select class="form-select" name="Dashboard_Years" id="Dashboard_Years">
+                                    <?php populateYearDropdown($Dashboard_Years); ?>
                                 </select>
                             </div>
-                            <?php
-                                if ($RoleID != 2) {
-                                echo '<div class="themed-dropdown" style="float: left">
+                            
+                            <!-- 🌐 Network dropdown (for admin users) -->
+                            <?php if ($RoleID != 2): ?>
+                                <div class="themed-dropdown" style="float: left">
                                     <label for="Dashboard_Networks"> Select network: </label><br>
-                                    <select class="form-select" name="Dashboard_Networks">
-                                        <option value="coteq">          Coteq </option>
-                                        <option value="westland-infra"> Westlandia </option>
-                                        <option value="enexis">         Enexis </option>
-                                        <option value="stedin">         Stedin </option>
-                                        <option value="liander">        Liander </option>
+                                    <select class="form-select" name="Dashboard_Networks" id="Dashboard_Networks">
+                                        <?php populateNetworkDropdown($Dashboard_Networks, "counciltype"); ?>
                                     </select>
-                                </div>';
-                                }
-                            ?>
+                                </div>
+                            <?php endif; ?>
                             
                             <!-- ✅ Submit button -->
                             <button type="submit" class="fancy-button" style="margin-top: 15px; float: right;">

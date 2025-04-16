@@ -4,21 +4,22 @@
     }
     
     $RequestMethod = $_SERVER['REQUEST_METHOD'];
-    $Year = $_REQUEST['Dashboard_Years'] ?? $_REQUEST['CityYears'] ?? $_POST['NetworkYearFilter'] ?? '2016';
-    $Network = $_REQUEST['Dashboard_Networks'] ?? $_REQUEST['CityNetworks'] ?? $_POST['NetworkName'] ?? 'coteq';
-    $Type = $_POST['TypeFilter'] ?? 'Gas';
+    $Year = $_REQUEST['Dashboard_Years'] ?? $_REQUEST['CityYears'] ?? $_GET['NetworkYearFilter'] ?? '2016';
+    $Network = $_REQUEST['Dashboard_Networks'] ?? $_REQUEST['CityNetworks'] ?? $_GET['NetworkName'] ?? 'coteq';
+    $Type = $_GET['TypeFilter'] ?? 'Gas';
     $Types = ['Gas', 'Electricity'];
     $DashboardNetwork = $Network;
     $CityName = $_SESSION['City_Name'] ?? null;
+    $CityFilter = $_REQUEST['CityFilter'] ?? $_SESSION['City_Name'] ?? null;
     
     // Unified data containers
     $AllCSVCityData = ['Gas' => [], 'Electricity' => []];
     $CityTypeValues = ['Gas' => [], 'Electricity' => []];
     $AllCityDataForType = ['Gas' => [], 'Electricity' => []];
-    //Network Totals
+    // Network Totals
     $NetworkValueByType = ['Gas' => [], 'Electricity' => []];
     $AllNetworkValueByType = ['Gas' => [], 'Electricity' => []];
-    //Admin Totals
+    // Admin Totals
     $AdminValueByType = ['Gas' => [], 'Electricity' => []];
     $AllAdminNetworkValueByType = ['Gas' => [], 'Electricity' => []];
     
@@ -85,7 +86,6 @@
     }
     
     // 🛡️ ADMIN VIEW BLOCK
-
     $AYear = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
     $AdType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
     foreach ($Types as $AType) {
@@ -106,13 +106,35 @@
         }
         $AllAdminNetworkValueByType[$AType] = $NetworkAdminTotals;
         $AdminValueByType[$AType] = $NetworkConsumeTotals;
+        
+    // 🛡️ 2ND ADMIN CHART BLOCK
+    $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
+    $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'Electricity';
+    $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
+    $Types = ['Gas', 'Electricity'];
+    
+    $AllAdminCityAnnualTypes = ['Gas' => [], 'Electricity' => []];
+    $AllAdminCityValueTypes = ['Gas' => [], 'Electricity' => []];
+    foreach ($Types as $Type) {
+        $CityValues = [];
+        $AllCityValuesAdmin = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
+        $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
+        
+        foreach ($CityGraphValues as $Key => $City) {
+            $CityValues[$Key] = $City[0];
+            $AllCityValuesAdmin['Annual'] += $City[0];
+            $AllCityValuesAdmin['Connection'] += $City[1];
+            $AllCityValuesAdmin['Delivery_Perc'] += $City[2];
+            
+        }
+        $AllAdminCityAnnualTypes[$Type] = $CityValues;
+        $AllAdminCityValueTypes[$Type] = $AllCityValuesAdmin;
+    }
     }
     // 🟢 Output data for JavaScript use (ensure this is safely placed where JS can access)
     echo "<script>const networkGraphData = " . json_encode($AdminValueByType[$AdType]) . ";</script>";
-
     
     // 🏭 NETWORK FILTER BLOCK
-
     foreach ($Types as $NType) {
         $NetworkValue = CSVData($NType, $Year, $Network);
         $TotalNetworkConsume = [];
@@ -145,6 +167,7 @@
     let chartCityNetwork = null;
     let chartLine = null;
     let chartAdminDoughnut = null;
+    let chartAdminBar = null;
     let URI = null;
     
     // 📊 PHP-injected data
@@ -196,14 +219,14 @@
                     data: Object.values(DashboardData['Gas']),
                     backgroundColor: sharedColours,
                     borderColor: "#00000000",
-                    zIndex: 1,
                     hoverOffset: 10
                 }, {
                     type: 'bar',
                     label: 'Electricity',
                     data: Object.values(DashboardData['Electricity']),
-                    backgroundColor: sharedColours,
-                    zIndex: 2
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgb(75, 192, 192)', // ‼️ Better using brighter outlined bars to differentiate from stacked pie chart
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -292,6 +315,7 @@
     function drawNetworkCityChart() {
         const canvas = document.getElementById("cityCanvasNetwork");
         console.log(NetworkData);
+        
         // ✅ Ensure the canvas context is fresh
         if (!canvas) return; // 👋 Exit if canvas is missing
         const ctx = canvas.getContext("2d");
@@ -461,6 +485,66 @@
         console.log("✅ Admin doughnut chart loaded.")
     }
     
+    // 🏙️ City councils bar chart [admin page]
+    function drawAdminBarGraph() {
+        const citycanvas = document.getElementById("AdminCityCouncilCanvas");
+        
+        // ✅ Ensure the canvas context is fresh
+        if (!citycanvas) return; // 👋 Exit if canvas is missing
+        const ctx = citycanvas.getContext("2d");
+        
+        console.log("▶️ Admin bar chart triggered.")
+        
+        // 💥 Destroy existing chart properly
+        if (chartAdminBar) {
+            chartAdminBar.destroy();
+            chartAdminBar = null; // 🧹 Clear instance reference
+        }
+        
+        chartAdminBar = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: Object.keys(citydata),
+                datasets: [{
+                    label: <?php echo json_encode($CityType); ?>,
+                    data: Object.values(citydata),
+                    backgroundColor: sharedColours,
+                    borderColor: "#00000000",
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 700,
+                    easing: 'easeOutQuad',
+                    onComplete: function () {
+                        URI = chartInstance.toBase64Image("image/jpeg", 1);
+                        const imageField = document.getElementById('ImageURLForPDF');
+                        if (imageField) imageField.value = URI;
+                        console.log(URI);
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            color: getTextColor(),
+                            font: font
+                        },
+                    },
+                    title: {
+                        display: true,
+                        text: "Networks Annual Usage",
+                        color: getTextColor(),
+                        font: font
+                    }
+                },
+            }
+        });
+        console.log("✅ Admin bar chart loaded.")
+    }
+    
     function filterData() {
         console.log("▶️ Data filter triggered.")
         const selectedCity = document.getElementById('cityFilter').value;
@@ -482,6 +566,7 @@
         drawLineChart();
         drawNetworkCityChart();
         drawNetworkDoughnut();
+        drawAdminBarGraph();
     });
     
     // 📏 Resize handler (debounced)
@@ -494,6 +579,7 @@
             drawLineChart();
             drawNetworkCityChart();
             drawNetworkDoughnut();
+            drawAdminBarGraph();
         }, 250);
     });
     
@@ -504,6 +590,7 @@
         drawLineChart();
         drawNetworkCityChart();
         drawNetworkDoughnut();
+        drawAdminBarGraph();
     }
     
     /*

@@ -13,6 +13,7 @@
     <?php 
         include("../modules/navbar.php");
         include("../modules/login.php");
+        include('../modules/dropdowns.php');
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
         try {
@@ -36,15 +37,20 @@
                     <div class="card-header"> 🌐 Network Users </div>
                     <div class="card-body">
                         
-                        <form action="Admin.php" method='GET'>
-                            <div class="themed-dropdown" style='float: left'>
+                        <!-- ⚙️ Admin utilities by network -->
+                        <form action="" Method="GET">
+                            
+                            <!-- ⚙️ Define dropdown options -->
+                            <?php
+                                $Admin_Network_Year = isset($_GET['Admin_Network_Year']) ? $_GET['Admin_Network_Year'] : '2016';
+                                $Admin_Network_Type = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
+                            ?>
+                            
+                            <!-- 📅 Year dropdown -->
+                            <div class="themed-dropdown" style="float: left">
                                 <label for="Admin_Network_Year"> Select year: </label> <br>
                                 <select class="form-select" name="Admin_Network_Year" id="Admin_Network_Year">
-                                    <option value="2016"> 2016 </option>
-                                    <option value="2017"> 2017 </option>
-                                    <option value="2018"> 2018 </option>
-                                    <option value="2019"> 2019 </option>
-                                    <option value="2020"> 2020 </option>
+                                    <?php populateYearDropdown($Admin_Network_Year); ?>
                                 </select>
                             </div>
                             
@@ -52,8 +58,7 @@
                             <div class="themed-dropdown" style="float: left">
                                 <label for="Admin_Network_Type"> Select type: </label> <br>
                                 <select class="form-select" name="Admin_Network_Type" id="Admin_Network_Type">
-                                    <option value="Electricity"> Electricity </option>
-                                    <option value="Gas">         Gas </option>
+                                    <?php populateUtilityDropdown($Admin_Network_Type, "counciltype"); ?>
                                 </select>
                             </div>
                             
@@ -119,37 +124,37 @@
                     <div class="card-header"> 🏙️ City Council Diagram </div>
                     <div class="card-body">
                         
-                        <!-- 🏙️ City filter -->
-                        <form action="Admin.php" method="GET">
+                        <!-- 🏙️ City councils filters -->
+                        <form action="" Method="GET">
+                            
+                            <!-- ⚙️ Define dropdown options -->
+                            <?php
+                                $AdminNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
+                                $AdminNetworkYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
+                                $Admin_City_Type = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'Electricity';
+                            ?>
+                            
+                            <!-- 📅 Year dropdown -->
                             <div class="themed-dropdown" style="float: left">
-                                <label for="AdminNetwork"> Select network: </label><br>
-                                <select class="form-select" name="AdminNetwork">
-                                    <option value="coteq">          Coteq </option>
-                                    <option value="westland-infra"> Westlandia </option>
-                                    <option value="enexis">         Enexis </option>
-                                    <option value="stedin">         Stedin </option>
-                                    <option value="liander">        Liander </option>
+                                <label for="AdminNetworkYear"> Select year: </label><br>
+                                <select name="AdminNetworkYear" class="form-select">
+                                    <?php populateYearDropdown($AdminNetworkYear); ?>
                                 </select>
                             </div>
                             
                             <!-- 🌐 Network dropdown -->
                             <div class="themed-dropdown" style="float: left">
-                                <label for="AdminNetworkYear"> Select year: </label><br>
-                                <select class="form-select" name="AdminNetworkYear">
-                                    <option value="2016"> 2016 </option>
-                                    <option value="2017"> 2017 </option>
-                                    <option value="2018"> 2018 </option>
-                                    <option value="2019"> 2019 </option>
-                                    <option value="2020"> 2020 </option>
+                                <label for="AdminNetwork"> Select network: </label> <br>
+                                <select class="form-select" name="AdminNetwork" id="AdminNetwork">
+                                    <?php populateNetworkDropdown($AdminNetwork, "councilnetwork"); ?>
                                 </select>
                             </div>
                             
                             <!-- 🔌 Utility dropdown -->
                             <div class="themed-dropdown" style="float: left">
-                                <label for="Admin_City_Type"> Select type: </label><br>
-                                <select class="form-select" name="Admin_City_Type">
-                                    <option value="Electricity"> Electricity </option>
-                                    <option value="Gas">         Gas </option>
+                                <label for="Admin_City_Type"> Select type: </label> <br>
+                                <select class="form-select" name="Admin_City_Type" id="Admin_City_Type">
+                                    <?php populateUtilityDropdown($Admin_City_Type, "counciltype"); ?>
                                 </select>
                             </div>
                             
@@ -157,117 +162,15 @@
                             <button type="submit" class="fancy-button" style="float: right"> Apply Filter </button>
                         </form>
                         
+                        <!-- 📨 Fetch graph scripts -->
+                        <?php include("../scripts/graph.php"); ?>
+                        
                         <!-- 📊 City councils chart -->
                         <canvas id="AdminCityCouncilCanvas"></canvas>
-                        
-                        <?php
-                            $CityYear = isset($_GET['AdminNetworkYear']) ? $_GET['AdminNetworkYear'] : '2016';
-                            $CityType = isset($_GET['Admin_City_Type']) ? $_GET['Admin_City_Type'] : 'Electricity';
-                            $CityNetwork = isset($_GET['AdminNetwork']) ? $_GET['AdminNetwork'] : 'coteq';
-                            $Types = ['Gas', 'Electricity'];
-                            
-                            $AllAdminCityAnnualTypes = ['Gas' => [], 'Electricity' => []];
-                            $AllAdminCityValueTypes = ['Gas' => [], 'Electricity' => []];
-                            foreach ($Types as $Type) {
-                                $CityValues = [];
-                                $AllCityValuesAdmin = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
-                                $CityGraphValues = CSVData($CityType,$CityYear,$CityNetwork);
-                                
-                                foreach ($CityGraphValues as $Key => $City) {
-                                    $CityValues[$Key] = $City[0];
-                                    $AllCityValuesAdmin['Annual'] += $City[0];
-                                    $AllCityValuesAdmin['Connection'] += $City[1];
-                                    $AllCityValuesAdmin['Delivery_Perc'] += $City[2];
-                                    
-                                }
-                                $AllAdminCityAnnualTypes[$Type] = $CityValues;
-                                $AllAdminCityValueTypes[$Type] = $AllCityValuesAdmin;
-                            }
-                        ?>
                         
                         <script>
                             var citydata = <?php echo json_encode($AllAdminCityAnnualTypes[$CityType]); ?>;
                             console.log(Object.values(citydata));
-                            document.addEventListener("DOMContentLoaded", function () {
-                                drawBarGraph();
-                                window.addEventListener("resize", drawBarGraph); // ✅ Attach resize event once
-                            });
-                            
-                            function drawBarGraph() {
-                                let font = { family: "Space Grotesk"};
-                                
-                                // 🎨 Retrieve the current mode (light or dark) from sessionStorage for text colour
-                                const storedThemeMode = sessionStorage.getItem("themeMode")
-                                const [storedTheme, storedMode] = storedThemeMode.split("-");
-                                
-                                // 🧠 Use computed styles to fetch CSS variable values
-                                const root = document.body;
-                                let textColor = storedMode === "light"
-                                    ? getComputedStyle(root).getPropertyValue("--text-light").trim()
-                                    : getComputedStyle(root).getPropertyValue("--text-dark").trim();
-                                
-                                const citycanvas = document.getElementById("AdminCityCouncilCanvas");
-                                
-                                // ✅ Ensure the canvas context is fresh
-                                if (!citycanvas) return; // Exit if canvas is missing
-                                const ctx = citycanvas.getContext("2d");
-                                
-                                let chartInstance;
-                                
-                                // 💥 Destroy existing chart properly
-                                if (chartInstance) {
-                                    chartInstance.destroy();
-                                    chartInstance = null; // 🧹 Clear instance reference
-                                }
-                                
-                                chartInstance = new Chart(ctx, {
-                                    type: "bar",
-                                    data: {
-                                        labels: Object.keys(citydata),
-                                        datasets: [{
-                                            label: <?php echo json_encode($CityType); ?>,
-                                            data: Object.values(citydata),
-                                            borderColor: "#975ae100",
-                                            backgroundColor: [
-                                                '#003f5c',
-                                                '#374c80',
-                                                '#58508d',
-                                                '#7a5195',
-                                                '#bc5090',
-                                                '#ff6361',
-                                                '#ffa600'
-                                            ],
-                                        
-                                        }]
-                                    },
-                                    options: {
-                                        animation: {
-                                            duration: 700,
-                                            easing: 'easeOutQuad',
-                                            onComplete: function () {
-                                                URI = chartInstance.toBase64Image("image/jpeg", 1);
-                                                const imageField = document.getElementById('ImageURLForPDF');
-                                                if (imageField) imageField.value = URI;
-                                                console.log(URI);
-                                            }
-                                        },
-                                        responsive: true,
-                                        maintainAspectRatio: true,
-                                        plugins: {
-                                            legend: {
-                                                position: "bottom",
-                                                labels: { color: textColor, font: font }
-                                            },
-                                            title: {
-                                                display: true,
-                                                text: "Networks Annual Usage",
-                                                color: textColor,
-                                                font: font
-                                            }
-                                        },
-                                    }
-                                });
-                            }
                         </script>
                         
                     </div>

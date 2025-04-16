@@ -13,6 +13,7 @@
     <?php 
         include("../modules/navbar.php");
         include("../modules/login.php");
+        include('../modules/dropdowns.php');
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
     ?>
@@ -51,37 +52,42 @@
                         ?>
                     </div>
                     <div class="card-body">
-                        <form action="Network.php" method="POST">
+                        <form action="" method="GET">
+                            
+                            <!-- ⚙️ Define dropdown options -->
+                            <?php
+                                $NetworkYearFilter = isset($_GET['NetworkYearFilter']) ? $_GET['NetworkYearFilter'] : '2016';
+                                $NetworkName = isset($_GET['NetworkName']) ? $_GET['NetworkName'] : 'coteq';
+                                $TypeFilter = isset($_GET['TypeFilter']) ? $_GET['TypeFilter'] : 'Electricity';
+                            ?>
+                            
+                            <!-- 📅 Year dropdown -->
                             <div class="themed-dropdown" style="float: left">
-                                <label for="TypeFilter"> Filter by type: </label>
-                                <select class="form-select" id="TypeFilter" name="TypeFilter">
-                                    <option value="Gas"         <?= ($_POST['TypeFilter'] ?? '') === 'Gas'         ? 'selected' : '' ?>> Gas </option>
-                                    <option value="Electricity" <?= ($_POST['TypeFilter'] ?? '') === 'Electricity' ? 'selected' : '' ?>> Electricity </option>
+                                <label for="NetworkYearFilter"> Select year: </label> <br>
+                                <select class="form-select" name="NetworkYearFilter" id="NetworkYearFilter">
+                                    <?php populateYearDropdown($NetworkYearFilter); ?>
                                 </select>
                             </div>
+                            
+                            <!-- 🌐 Network dropdown (for admin users) -->
                             <?php if ($RoleID != 2): ?>
                                 <div class="themed-dropdown" style="float: left">
                                     <label for="NetworkName"> Select network: </label><br>
-                                    <select class="form-select" id="NetworkName" name="NetworkName">
-                                        <option value="coteq"          <?= ($_POST['NetworkName'] ?? '') === 'coteq'          ? 'selected' : '' ?>> Coteq </option>
-                                        <option value="westland-infra" <?= ($_POST['NetworkName'] ?? '') === 'westland-infra' ? 'selected' : '' ?>> Westlandia </option>
-                                        <option value="enexis"         <?= ($_POST['NetworkName'] ?? '') === 'enexis'         ? 'selected' : '' ?>> Enexis </option>
-                                        <option value="stedin"         <?= ($_POST['NetworkName'] ?? '') === 'stedin'         ? 'selected' : '' ?>> Stedin </option>
-                                        <option value="liander"        <?= ($_POST['NetworkName'] ?? '') === 'liander'        ? 'selected' : '' ?>> Liander </option>
+                                    <select class="form-select" name="NetworkName" id="NetworkName">
+                                        <?php populateNetworkDropdown($NetworkName, "counciltype"); ?>
                                     </select>
                                 </div>
                             <?php endif; ?>
+                            
+                            <!-- 🔌 Utility dropdown -->
                             <div class="themed-dropdown" style="float: left">
-                                <label for="NetworkYearFilter"> Filter by year: </label>
-                                <select class="form-select" id="NetworkYearFilter" name="NetworkYearFilter">
-                                    <?php
-                                        foreach ([2016, 2017, 2018, 2019, 2020] as $year) {
-                                            $selected = ($_POST['NetworkYearFilter'] ?? '') == $year ? 'selected' : '';
-                                            echo "<option value=\"$year\" $selected>$year</option>";
-                                        }
-                                    ?>
+                                <label for="TypeFilter"> Select type: </label> <br>
+                                <select class="form-select" name="TypeFilter" id="TypeFilter">
+                                    <?php populateUtilityDropdown($TypeFilter, "counciltype"); ?>
                                 </select>
                             </div>
+                            
+                            <!-- ✅ Submit button -->
                             <button type="submit" class="fancy-button" style='margin-top: 15px; float: right;'>
                                 Apply Filter
                             </button>
@@ -113,10 +119,10 @@
                 <div class="card">
                     <div class="card-header"> Filter options: </div>
                     <div class="card-body">
-                    <form id='NetworkReportForm'method = 'POST'>
+                    <form id="NetworkReportForm" method = "POST">
                         <div class="themed-dropdown" style='float: left'>
                             <label for="NetworkReportType"> Report type: </label> <br>
-                            <select class="form-select" id='NetworkReportType' name="NetworkReportType">
+                            <select class="form-select" id="NetworkReportType" name="NetworkReportType">
                                 <option value="PDF"> PDF </option>
                                 <option value="CSV"> CSV </option>
                             </select>
@@ -133,7 +139,7 @@
                         
                         <script>
                             function submitNetworkReports() {
-                                if (document.getElementById('NetworkReportType').value == 'PDF') {
+                                if (document.getElementById("NetworkReportType").value == 'PDF') {
                                     document.getElementById("NetworkReportForm").action = '../modules/reportPDF.php';
                                     document.getElementById("NetworkReportForm").submit();
                                 } else {
@@ -155,7 +161,7 @@
                                         if (!isset($NetworkValuesinArray[$City])) {
                                             $NetworkValuesinArray[$City] = [];
                                         }
-                                        // EG [GOOR][ELECTRICITY,GAS][241241,321454]
+                                        // eg [GOOR][ELECTRICITY,GAS][241241,321454]
                                         $NetworkValuesinArray[$City][$ConsumeType] = $NetworkConsumeValue;
                                     }
                                 }
@@ -169,7 +175,7 @@
                                     fputcsv($fp,$CSVRowData);
                                 }
                                 fclose($fp);
-
+                                
                                 echo
                                 '<iframe id="my_iframe" style="display:none;"></iframe>
                                     <script>
@@ -186,7 +192,7 @@
             
             <!-- 🗺️ Heatmap -->
             <div class="col-12 col-md-12 d-flex">
-                <div class="card h-90">
+                <div class="card">
                     <div class="card-header"> 🗺️ Energy Use Heatmap </div>
                     <div id="heatmap">
                         <!-- 🗺️ Heatmap container -->
