@@ -117,7 +117,7 @@
         $NetworkValue = CSVData($NType, $Year, $Network);
         $TotalNetworkConsume = [];
         $NetworkAdditions = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
-
+        
         foreach ($NetworkValue as $City => $Data) {
             $TotalNetworkConsume[$City] = ($TotalNetworkConsume[$City] ?? 0) + $Data[0];
             $NetworkAdditions['Annual'] += $Data[0];
@@ -128,8 +128,6 @@
         $AllNetworkValueByType[$NType] = $NetworkAdditions;
         $NetworkValueByType[$NType] = $TotalNetworkConsume;
     }
-
-    
     
 ?>
 
@@ -173,9 +171,9 @@
     
     // <---------------------------------------- 📊 CHARTS ---------------------------------------->
     
-    // 📊 Dashboard mixed chart [Dashboard]
+    // 📊 Dashboard mixed chart [dashboard - home page]
     function drawDashboardGraph() {
-        const canvas = document.getElementById("DashboardCanvas");
+        const canvas = document.getElementById("dashboardCanvas");
         
         // ✅ Ensure the canvas context is fresh
         if (!canvas) return; // 👋 Exit if canvas is missing
@@ -196,7 +194,6 @@
                     type: 'pie',
                     label: 'Gas',
                     data: Object.values(DashboardData['Gas']),
-                    borderColor: '#00000000',
                     backgroundColor: sharedColours,
                     zIndex: 1,
                     hoverOffset: 10
@@ -231,7 +228,7 @@
         console.log("✅ Dashboard chart loaded.")
     }
     
-    // 🏙️ City electricity bar chart [City]
+    // 🏙️ City electricity bar chart [city page]
     function drawBarGraph() {
         const canvas = document.getElementById("cityCanvas");
         
@@ -291,7 +288,7 @@
         console.log("✅ City chart loaded.")
     }
     
-    // 🏙️ Big city electricity bar chart [Network]
+    // 🏙️ Big city electricity bar chart [network page]
     function drawNetworkCityChart() {
         const canvas = document.getElementById("cityCanvasNetwork");
         console.log(NetworkData);
@@ -301,18 +298,13 @@
         
         console.log("▶️ City chart triggered.")
         
-        // ⚠️ Provide actual data here
-       
-        
-        /*
         // 💥 Destroy existing chart properly
         if (chartCityNetwork) {
             chartCityNetwork.destroy();
             chartCityNetwork = null; // 🧹 Clear instance reference
         }
-        */
         
-        let chartCityNetwork = new Chart(ctx, {
+        chartCityNetwork = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: Object.keys(NetworkData),
@@ -320,7 +312,7 @@
                     label: 'City Data',
                     data: Object.values(NetworkData),
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgb(75, 192, 192)', // ‼️ Better using brighter outlined bars due to being thinner
                     borderWidth: 1
                 }]
             },
@@ -406,7 +398,7 @@
         console.log("✅ Line chart loaded.")
     }
     
-    // 🍩 Network doughnut chart [Admin]
+    // 🍩 Network doughnut chart [admin page]
     function drawNetworkDoughnut() {
         const canvas = document.getElementById("networkCanvas");
         
@@ -430,14 +422,10 @@
                 datasets: [{
                     label: "Network Usage",
                     data: Object.values(networkGraphData),
-                    borderColor: "#975ae100",
-                    backgroundColor: [
-                        "#003f5c",
-                        "#374c80",
-                        "#58508d",
-                        "#7a5195",
-                        "#bc5090",
-                    ],
+                    borderColor: "#00000000",
+                    backgroundColor: sharedColours,
+                    zIndex: 1,
+                    hoverOffset: 10
                 }],
             },
             options: {
@@ -445,7 +433,7 @@
                     duration: 700,
                     easing: 'easeOutQuad',
                     onComplete: function () {
-                        URI = chartInstance.toBase64Image("image/jpeg", 1);
+                        URI = chartAdminDoughnut.toBase64Image("image/jpeg", 1);
                         const imageField = document.getElementById('ImageURLForPDFN');
                         if (imageField) imageField.value = URI;
                         console.log(URI);

@@ -66,7 +66,7 @@
                         <?php include("../scripts/graph.php"); ?>
                         
                         <!-- ✏️ Draw desired graph -->
-                        <canvas id="DashboardCanvas"></canvas>
+                        <canvas id="dashboardCanvas"></canvas>
                         
                     </div>
                 </div>

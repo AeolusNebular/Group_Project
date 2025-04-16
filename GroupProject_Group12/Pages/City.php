@@ -68,7 +68,7 @@
                                     <option value="2020"> 2020 </option>
                                 </select>
                             </div>
-                            <button type="Submit" class="fancy-button" style='margin-top: 15px; float: right'>
+                            <button type="submit" class="fancy-button" style='margin-top: 15px; float: right'>
                                 Apply Filter
                             </button>
                         </form>
