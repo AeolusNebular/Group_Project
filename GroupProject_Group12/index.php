@@ -4,11 +4,18 @@
     <!-- 📢 Header -->
     <?php include("modules/header.php"); ?>
     
-    <meta charset="UTF-8" http-equiv="refresh" content="0; url=/Group_Project/GroupProject_Group12/Pages/home.php">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚀 ULTIMATE BUDGET TRACKING EXPERIENCE 🚀</title>
-    <link rel="shortcut icon" href="/Group_Project/GroupProject_Group12/images/favicon.png">
-   <!-- <style>
+</head>
+<body>
+    
+    <!-- ↪️ Redirect to home page immediately on load -->
+    <?php
+        header("Location: pages/home.php");
+        exit();
+    ?>
+    
+    <!--
+    <style>
         .bananas {
             margin: 0 ;
             height: 100vh ;
@@ -72,10 +79,7 @@
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
-    </style> -->
-</head>
-<body>
-   <!--
+    </style>
      <div class="bananas">
         <div class="container">
             <h1>🚀 WELCOME TO THE ULTIMATE ENERGY ADMINISTRATION EXPERIENCE 🚀</h1>
@@ -84,5 +88,6 @@
         </div>
     </div>
     -->
+    
 </body>
 </html>
