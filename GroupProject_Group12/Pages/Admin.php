@@ -20,7 +20,8 @@
             include("../modules/CreateUser.php");
         } catch (Exception $e) {
             echo "error loading cities";
-        } 
+        }
+        include("../scripts/graph.php");
     ?>
     
     <!-- 🛡️ Admin page content -->
@@ -67,9 +68,6 @@
                                 Apply Filter
                             </button>
                         </form>
-                        
-                        <!-- 📨 Fetch graph scripts -->
-                        <?php include("../scripts/graph.php"); ?>
                         
                         <!-- ✏️ Draw desired graph -->
                         <canvas id="networkCanvas"></canvas>
@@ -162,16 +160,8 @@
                             <button type="submit" class="fancy-button" style="float: right"> Apply Filter </button>
                         </form>
                         
-                        <!-- 📨 Fetch graph scripts -->
-                        <?php include("../scripts/graph.php"); ?>
-                        
                         <!-- 📊 City councils chart -->
                         <canvas id="AdminCityCouncilCanvas"></canvas>
-                        
-                        <script>
-                            var citydata = <?php echo json_encode($AllAdminCityAnnualTypes[$CityType]); ?>;
-                            console.log(Object.values(citydata));
-                        </script>
                         
                     </div>
                 </div>
