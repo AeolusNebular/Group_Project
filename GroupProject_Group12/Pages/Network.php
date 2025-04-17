@@ -16,6 +16,7 @@
         include('../modules/dropdowns.php');
         require_once('../Database_Php_Interactions/Database_Utilities.php');
         include('../Database_Php_Interactions/CSVData.php');
+        include("../scripts/graph.php");
     ?>
     
     <!-- 🌐 Network page content -->
@@ -92,9 +93,6 @@
                                 Apply Filter
                             </button>
                         </form>
-                        
-                        <!-- 📨 Fetch graph scripts -->
-                        <?php include("../scripts/graph.php"); ?>
                         
                         <!-- ✏️ Draw desired graph -->
                         <canvas id="cityCanvasNetwork"></canvas>

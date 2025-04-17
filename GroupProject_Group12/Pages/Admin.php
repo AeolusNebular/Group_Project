@@ -137,7 +137,7 @@
                             <!-- 📅 Year dropdown -->
                             <div class="themed-dropdown" style="float: left">
                                 <label for="AdminNetworkYear"> Select year: </label><br>
-                                <select name="AdminNetworkYear" class="form-select">
+                                <select class="form-select" name="AdminNetworkYear" id="AdminNetworkYear">
                                     <?php populateYearDropdown($AdminNetworkYear); ?>
                                 </select>
                             </div>

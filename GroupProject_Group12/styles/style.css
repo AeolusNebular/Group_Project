@@ -935,6 +935,7 @@ footer ul li {
 /* =================== 🖱️ Hover Tooltip =================== */
 [data-tooltip] {
     position: relative;
+    overflow: visible !important;
 }
 
 [data-tooltip]::after {
@@ -951,7 +952,7 @@ footer ul li {
     pointer-events: none;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     
-    /* 👇 Position above and to the right a bit, by default */
+    /* 👇 Position below */
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
@@ -961,9 +962,4 @@ footer ul li {
 [data-tooltip]:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(-4px);
-}
-
-/* 📐 Responsive overflow fix */
-[data-tooltip] {
-    overflow: visible !important;
 }

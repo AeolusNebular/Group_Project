@@ -29,9 +29,9 @@
                 // 📨 Fetch notifications
                 $notifStmt = $db->prepare("SELECT NotifID, UserID, Header, Body, Date, Read
                                            FROM Notifications
-                                           WHERE UserID = :userId OR UserID = 0
+                                           WHERE UserID = :userID OR UserID = 0
                                            ORDER BY Date DESC");
-                $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
+                $notifStmt->bindValue(':userID', $userID, SQLITE3_TEXT);
                 $notifResult = $notifStmt->execute();
                 
                 // 🔄 Loop through notifications and display
@@ -43,7 +43,7 @@
                     $notifFullDate = $notifDate ? (new DateTime($notifDate))->format('j M Y H:i:s') : ''; // 📅 Full timestamp
                     
                     // ⭐ Star if notification is targeted to current user
-                    $starClass = ($notif['UserID'] == $userId) ? 'filled-star' : '';
+                    $starClass = ($notif['UserID'] == $userID) ? 'filled-star' : '';
                     
                     // 📖 Mark as read toggle (dot to hollow circle effect)
                     $markAsReadClass = ($notif['Read'] == 0) ? 'unread-dot' : 'read-dot';
@@ -54,7 +54,7 @@
                                 <form method="POST" action="">
                                     <div class="card-header">
                                         <!-- ⭐ Star for targeted notification -->
-                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
+                                        ' . ($notif['UserID'] == $userID ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
                                         ' . htmlspecialchars($notif['Header'] ?? '') . '
                                         <span 
                                             style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"

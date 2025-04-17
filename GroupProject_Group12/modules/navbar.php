@@ -2,12 +2,19 @@
 <html lang="en-gb">
     
 <?php
+    
+    // Start session
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        echo '<script>console.log("Session started");</script>';
+    }
+    
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
-    session_start();
     
+    // 👤 Session checks
     if (!isset($_SESSION['UserID'])) {
-        echo'
+        echo '
             <!-- 🔲 Overlay -->
             <div class="overlay"></div>
             
@@ -34,7 +41,7 @@
         if ($RoleID == '2') {
             $RoleNetwork = $_SESSION['Network_Name'];
         } elseif ($RoleID == '3') {
-            $CityFilter = $_SESSION['City_Name'];
+            $CityFilter = $_SESSION['City_Name'] ?? null;
         }
     }
 ?>
@@ -43,6 +50,8 @@
     
     <!-- 📍 Navbar content -->
     <nav class="navbar">
+        
+        <script>console.log("Navbar triggered");</script>
         
         <!-- 🔀 Sidebar toggle -->
         <button class="navbar-toggler
@@ -67,7 +76,7 @@
             <!-- 🔔 Notifications button with dropdown -->
             <?php if (isset($_SESSION['RoleID'])): ?>
                 <div class="icon-container">
-                    <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Open notifications dropdown" data-tooltip="You have ' . htmlspecialchars($unreadCount) . ' unread notifications">
+                    <button id="notificationsButton" class="btn" onclick="toggleNotifications()" aria-label="Open notifications dropdown" data-tooltip="<?php echo 'You have ' . htmlspecialchars($unreadCount) . ' unread notifications'; ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" class="bell-icon" viewBox="0 1 16 17">
                             <path d="M8 2C5.5 2 3.5 4.5 3.5 7v3c0 .8-.5 1.5-1.2 2h11.4c-.7-.5-1.2-1.2-1.2-2V7c0-2.5-2-5-4.5-5z"/>
                             <path d="M2.5 12c-.8 0-1.5.7-1.5 1.5S1.7 15 2.5 15h11c.8 0 1.5-.7 1.5-1.5S14.3 12 13.5 12h-11z"/>
@@ -83,16 +92,16 @@
                             $db = Open_Database();
                             
                             // 👤 Get current user ID
-                            $userId = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
-                            echo '<script>console.log("UserID: ' . $userId . '");</script>';
+                            $userID = $_SESSION['UserID'] ?? null; // Get current user ID, if logged in
+                            echo '<script>console.log("(nav) UserID: ' . $userID . '");</script>';
                             
                             // 📨 Check for unread notifications
                             $unreadStmt = $db->prepare("
                                 SELECT COUNT(*) AS unreadCount
                                 FROM Notifications
-                                WHERE UserID = :userId AND Read = 0
+                                WHERE UserID = :userID AND Read = 0
                             ");
-                            $unreadStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
+                            $unreadStmt->bindValue(':userID', $userID, SQLITE3_TEXT);
                             $unreadResult = $unreadStmt->execute();
                             $unreadCount = $unreadResult->fetchArray(SQLITE3_ASSOC)['unreadCount'];
                             
@@ -114,11 +123,11 @@
                                 $notifStmt = $db->prepare("
                                     SELECT NotifID, UserID, Header, Body, Date, Read
                                     FROM Notifications
-                                    WHERE UserID = :userId OR UserID IS 0
+                                    WHERE UserID = :userID OR UserID IS 0
                                     ORDER BY Date DESC
                                     LIMIT 3
                                 ");
-                                $notifStmt->bindValue(':userId', $userId, SQLITE3_TEXT);
+                                $notifStmt->bindValue(':userID', $userID, SQLITE3_TEXT);
                                 $notifResult = $notifStmt->execute();
                                 
                                 // ⏱️ Notifcation age calculator
@@ -157,14 +166,14 @@
                                                 <a href="/Group_Project/GroupProject_Group12/pages/notifications.php" class="card mb-3 d-flex ' . $unreadClass . '" style="text-decoration: none;">
                                                     <div class="card-header">
                                                         <!-- ⭐ Star for targeted notification -->
-                                                        ' . ($notif['UserID'] == $userId ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
+                                                        ' . ($notif['UserID'] == $userID ? '<span class="filled-star" style="cursor: pointer;" data-tooltip="This notification is targeted at you">&#9733;</span>' : '') . '
                                                         
-                                                        <span 
-                                                            data-tooltip="' . htmlspecialchars($cleanHeader) . '" 
+                                                        <span
+                                                            data-tooltip="' . htmlspecialchars($cleanHeader) . '"
                                                             style="font-weight: 600;"
                                                         >' . $header . '</span>
                                                         
-                                                        <span 
+                                                        <span
                                                             style="font-size: 0.9em; margin-right: 2rem; float: right; opacity: 0.9;"
                                                             data-tooltip="' . htmlspecialchars($notifFullDate) . '"
                                                         >' . htmlspecialchars($ageLabel) . '</span>

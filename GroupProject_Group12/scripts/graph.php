@@ -90,7 +90,6 @@
     $AdType = isset($_GET['Admin_Network_Type']) ? $_GET['Admin_Network_Type'] : 'Electricity';
     foreach ($Types as $AType) {
         
-        
         $Networks = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
         $NetworkConsumeTotals = array_fill_keys($Networks, 0);
         $NetworkAdminTotals =  ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0]; 
@@ -504,10 +503,10 @@
         chartAdminBar = new Chart(ctx, {
             type: "bar",
             data: {
-                labels: Object.keys(citydata),
+                labels: Object.keys(CityData),
                 datasets: [{
                     label: <?php echo json_encode($CityType); ?>,
-                    data: Object.values(citydata),
+                    data: Object.values(CityData),
                     backgroundColor: sharedColours,
                     borderColor: "#00000000",
                 }]

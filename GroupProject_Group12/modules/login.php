@@ -1,13 +1,15 @@
 <!-- 🔐 Login modal -->
 <script type="text/javascript">
-      var onloadCallback = function() {
+    var onloadCallback = function() {
         grecaptcha.render('html_element', {
-          'sitekey' : '6LepUgsrAAAAAN7WFsXsuZmK-Ah789yy3Dtp5uij',
-          'callback' : function(response) {
-            document.getElementById('g-recaptcha-response').value = response;
-        }
+            'sitekey' : '6LepUgsrAAAAAN7WFsXsuZmK-Ah789yy3Dtp5uij',
+            'callback' : function(response) {
+                document.getElementById('g-recaptcha-response').value = response;
+            }
         });
-      };
+    };
+    
+    console.log("Login triggered");
 </script>
 
 <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
@@ -40,7 +42,7 @@
                     </div>
                     
                     <div class="modal-footer">
-                        <button action='submit' class="fancy-button"> Login </button>
+                        <button type="submit" class="fancy-button"> Login </button>
                     </div>
                 </form>
             </div>

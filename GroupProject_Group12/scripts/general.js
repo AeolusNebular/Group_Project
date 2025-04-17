@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
     const preloader = document.getElementById("preloader");
     if (preloader) {
         preloader.style.opacity = '0';
-        setTimeout(() => preloader.remove(), 500); // ⏱️ Clean up after fade
+        setTimeout(() => preloader.remove(), 100); // ⏱️ Clean up after fade
     }
 });
 
