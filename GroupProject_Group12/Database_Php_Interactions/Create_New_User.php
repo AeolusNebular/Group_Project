@@ -3,11 +3,11 @@
     require('Database_Utilities.php');
     
     // If correct method is used aka POST then will write to database
-    if (($_SERVER["REQUEST_METHOD"] == "POST")) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Grabs variables via the post and saves them into PHP variables
         $Password = $_POST['Password'];
-        $ConPassword = $_POST['ConPass'];  
+        $ConPassword = $_POST['ConPass'];
         
         // Opens database connection
         $db = Open_Database();
@@ -169,11 +169,11 @@
                     exit;
                 }
             }
-            // Final query to insert into assignation table 
+            // Final query to insert into assignation table
             $Ass_Query = $db -> prepare("INSERT INTO Assignations(UserID,CityID,NetworkID) VALUES (:UserAID,:CityID,:NetworkID)");
             $Ass_Query->bindValue(':NetworkID', $NetworkID);
             $Ass_Query->bindValue(':CityID', $CityID);
-            $Ass_Query -> bindValue(':UserID', $UserID);
+            $Ass_Query -> bindValue(':UserAID', $UserID);
             
             // ✅ Checks if query is successful and debugs to console success, else states error message and rolls back transactions
             if ($Ass_Query -> execute()) {
