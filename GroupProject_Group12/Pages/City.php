@@ -101,7 +101,6 @@
                                     <option value="CSV"> CSV </option>
                                 </select>
                             </div>
-                            
                             <input type="hidden" id='CityValuesForPDF' name='ValuesForPDF' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <input type="hidden" id='CityValuesForCSV' name='CityValuesForCSV' value="<?php echo htmlentities(json_encode($CityTypeValues)); ?>">
                             <input type="hidden" id='ImageURLForPDF' name='ImageURLForPDF'>
@@ -124,7 +123,7 @@
                         </script>
                         <?php
                             if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['CityReportType']) && $_POST['CityReportType'] == 'CSV')){
-                                $Headings = ['City','Gas','Electricity'];      
+                                $Headings = ['City','Gas','Electricity'];
                                 $JsonData = html_entity_decode($_POST['CityValuesForCSV']);
                                 $CityValues = json_decode($JsonData);
                                 
