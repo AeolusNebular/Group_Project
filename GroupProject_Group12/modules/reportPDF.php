@@ -1,6 +1,5 @@
 <?php
     require('../fpdf186/fpdf.php');
-    include('../Database_Php_Interactions/Database_Utilities.php');
     
     class PDF extends FPDF {
         // 📦 Fill full-page background
@@ -30,9 +29,21 @@
             // Data rows
             foreach ($data as $City => $CityConsumes) {
                 $this->Cell(80, 7, $City, 1);
-                foreach ($CityConsumes as $ConsumeType => $Value) {
-                    $this->Cell(35, 7, $Value, 1);
+                if (isset($CityConsumes['Gas'])) {
+                    $this->Cell(35, 7, $CityConsumes['Gas'], 1);
+                } else {
+                    $this->Cell(35, 7, 0, 1);
                 }
+
+                if (isset($CityConsumes['Electricity'])) {
+                    $this->Cell(35, 7, $CityConsumes['Electricity'], 1);
+                } else {
+                    $this->Cell(35, 7, 0, 1);
+                }
+                
+                // foreach ($CityConsumes as $ConsumeType => $Value) {
+                //     $this->Cell(35, 7, $Value, 1);
+                // }
                 $this->Ln();
             }
         }
@@ -98,4 +109,3 @@
         // 💾 Output PDF
         $pdf->Output();
     }
-?>

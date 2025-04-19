@@ -51,7 +51,7 @@
                             </div>
                             
                             <!-- 🌐 Network dropdown (for admin users) -->
-                            <?php if ($RoleID != 2): ?>
+                            <?php if ($RoleID != 2 && $RoleID != 3): ?>
                                 <div class="themed-dropdown" style="float: left">
                                     <label for="Dashboard_Networks"> Select network: </label><br>
                                     <select class="form-select" name="Dashboard_Networks" id="Dashboard_Networks">

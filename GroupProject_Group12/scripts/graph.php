@@ -5,14 +5,14 @@
     
     $RequestMethod      = $_SERVER['REQUEST_METHOD'];
     $Year               = $_REQUEST['Dashboard_Years']      ?? $_REQUEST['CityYears']       ?? $_GET['NetworkYearFilter']   ?? '2016';
-    $Network            = $_REQUEST['Dashboard_Networks']   ?? $_REQUEST['CityNetworks']    ?? $_GET['NetworkName']         ?? 'coteq';
+    $Network            = $_REQUEST['Dashboard_Networks']   ?? $_REQUEST['CityNetworks']    ?? $RoleNetwork ?? $_GET['NetworkName']         ?? 'coteq';
     $Type               = $_GET['TypeFilter']                                                                               ?? 'Gas';
 
     $Types              = ['Gas', 'Electricity'];
     $Networks           = ['coteq', 'enexis', 'liander', 'stedin', 'westland-infra'];
 
-    $DashboardNetwork   = $Network;
-    $CityName           = $_SESSION['City_Name']                                                                            ?? null;
+    $DashboardNetwork   = $Network ;
+    $CityName           = $CityFilter                                                                            ?? null;
     $CityFilter         = $_REQUEST['CityFilter']           ?? $_SESSION['City_Name']                                       ?? null;
     
     // Unified data containers
@@ -30,6 +30,7 @@
     foreach ($Types as $TypeOfCSV) {
         if ($RoleID != 3) {
             $CityConsumeTotals = [];
+            debug_to_console($Network);
             
             $Values = ($RoleID == 2)
                 ? CSVData($TypeOfCSV, $Year, $Network)
@@ -63,6 +64,7 @@
         
         if ($CityName) {
             foreach ($Networks as $Net) {
+                $CityCount = 1;
                 $CityGraphValues = FilterByCityCSV($CType, $Year, $Net, $CityName);
                 foreach ($CityGraphValues as $Key => $City) {
                     $CityValues[$Key] = $City[11];
@@ -110,28 +112,28 @@
         }
         $AllAdminNetworkValueByType[$AType] = $NetworkAdminTotals;
         $AdminValueByType[$AType]           = $NetworkConsumeTotals;
-        
-        // 🛡️ 2nd ADMIN CHART BLOCK
-        $CityYear       = $_GET['AdminNetworkYear'] ?? '2016';
-        $CityType       = $_GET['Admin_City_Type']  ?? 'Electricity';
-        $CityNetwork    = $_GET['AdminNetwork']     ?? 'coteq';
-        
-        $CityGraphValues = CSVData($CityType, $CityYear, $CityNetwork);
-        
-        foreach ($Types as $Type) {
-            $CityValues = [];
-            $AllCityValuesAdmin = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
-            
-            foreach ($CityGraphValues as $Key => $City) {
-                $CityValues[$Key] = $City[0];
-                $AllCityValuesAdmin['Annual'] += $City[0];
-                $AllCityValuesAdmin['Connection'] += $City[1];
-                $AllCityValuesAdmin['Delivery_Perc'] += $City[2];
-            }
-            $AllAdminCityAnnualTypes[$Type] = $CityValues;
-            $AllAdminCityValueTypes[$Type]  = $AllCityValuesAdmin;
-        }
     }
+
+    // 🛡️ 2nd ADMIN CHART BLOCK
+    $CityYear       = $_GET['AdminNetworkYear'] ?? '2016';
+    $ACityFilter     = $_GET['Admin_City_Type']  ?? 'Electricity';
+    $CityNetwork    = $_GET['AdminNetwork']     ?? 'coteq';
+ 
+    foreach ($Types as $CityType) {
+        $CityValues = [];
+        $AllCityValuesAdmin = ['Annual' => 0, 'Connection' => 0, 'Delivery_Perc' => 0];
+        $CityGraphValues = CSVData($CityType, $CityYear, $CityNetwork);
+
+        foreach ($CityGraphValues as $Key => $City) {
+            $CityValues[$Key] = $City[0];
+            $AllCityValuesAdmin['Annual'] += $City[0];
+            $AllCityValuesAdmin['Connection'] += $City[1];
+            $AllCityValuesAdmin['Delivery_Perc'] += $City[2];
+        }
+        $AllAdminCityAnnualTypes[$CityType] = $CityValues;
+        $AllAdminCityValueTypes[$CityType]  = $AllCityValuesAdmin;
+    }
+
     
     // 🟢 Output data for JavaScript use
     if (isset($AdminValueByType[$AdType])) {
@@ -176,6 +178,7 @@
     // 📊 PHP-injected data
     const DashboardData = <?php echo json_encode($AllCSVCityData); ?>;
     const CityData = <?php echo json_encode($CityTypeValues['Electricity']); ?>;
+    const AdminCityData = <?php echo json_encode($AllAdminCityAnnualTypes[$ACityFilter]);?>;
     const NetworkData = <?php echo json_encode($NetworkValueByType[$Type]); ?>;
     
     // 🎨 Utility: get text colour based on theme
@@ -289,7 +292,7 @@
                         URI = chartCity.toBase64Image("image/jpeg", 1);
                         const imageField = document.getElementById('ImageURLForPDF');
                         if (imageField) imageField.value = URI;
-                        console.log(URI);
+                       
                     }
                 },
                 responsive: true,
@@ -463,7 +466,7 @@
                         URI = chartAdminDoughnut.toBase64Image("image/jpeg", 1);
                         const imageField = document.getElementById('ImageURLForPDFN');
                         if (imageField) imageField.value = URI;
-                        console.log(URI);
+                        
                     }
                 },
                 responsive: true,
@@ -507,10 +510,10 @@
         chartAdminBar = new Chart(ctx, {
             type: "bar",
             data: {
-                labels: Object.keys(CityData),
+                labels: Object.keys(AdminCityData),
                 datasets: [{
                     label: <?php echo json_encode($CityType); ?>,
-                    data: Object.values(CityData),
+                    data: Object.values(AdminCityData),
                     backgroundColor: sharedColours,
                     borderColor: "#00000000",
                 }]
@@ -523,7 +526,7 @@
                         URI = chartAdminBar.toBase64Image("image/jpeg", 1);
                         const imageField = document.getElementById('ImageURLForPDF');
                         if (imageField) imageField.value = URI;
-                        console.log(URI);
+                     
                     }
                 },
                 responsive: true,
